@@ -1,0 +1,45 @@
+// Settings
+
+$root: 1rem !default;
+
+/**
+ * Table
+ */
+
+.table {
+  margin-bottom: $root;
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  th,
+  td {
+    padding: $root * .75;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    vertical-align: bottom;
+  }
+}
+
+.table-lined {
+  tbody tr {
+    border-top: 1px solid rgba(0, 0, 0, .075);
+  }
+  thead th {
+    border-bottom: 2px solid rgba(0, 0, 0, .075);
+  }
+}
+
+.table--sm th,
+.table--sm td {
+  padding: $root * .25;
+}
+
+.table--lg th,
+.table--lg td {
+  padding: $root;
+}

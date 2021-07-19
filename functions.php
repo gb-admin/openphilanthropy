@@ -1,0 +1,51 @@
+<?php
+if ( ! function_exists( 'oph_setup' ) ) {
+	function oph_setup() {
+		load_theme_textdomain( 'oph', get_template_directory() . '/languages' );
+
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'customize-selective-refresh-widgets' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'title-tag' );
+
+		add_theme_support( 'html5', array(
+			'caption',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'search-form'
+		) );
+
+		register_nav_menus( array(
+			'accessory' => esc_html__( 'Accessory', 'oph' ),
+			'primary' => esc_html__( 'Primary', 'oph' ),
+			'secondary' => esc_html__( 'Secondary', 'oph' )
+		) );
+	}
+}
+
+add_action( 'after_setup_theme', 'oph_setup' );
+
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function oph_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'oph_content_width', 1140 );
+}
+
+add_action( 'after_setup_theme', 'oph_content_width', 0 );
+
+require get_template_directory() . '/inc/private-function.php';
+require get_template_directory() . '/inc/template-function.php';
+require get_template_directory() . '/inc/asset.php';
+require get_template_directory() . '/inc/setup.php';
+require get_template_directory() . '/inc/acf-customize.php';
+require get_template_directory() . '/inc/acf-option.php';
+require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/register-post-type.php';
+require get_template_directory() . '/inc/register-taxonomy.php';
+require get_template_directory() . '/inc/shortcode.php';

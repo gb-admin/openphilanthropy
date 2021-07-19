@@ -1,0 +1,147 @@
+/**
+ * Media Query: Maximum Width
+ */
+@mixin max-width($breakpoint) {
+  $breakpoint: $breakpoint - .02px;
+
+  @if unitless($breakpoint) {
+    $breakpoint: $breakpoint + px;
+  }
+
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+/**
+ * Media Query: Maximum Height
+ */
+@mixin max-height($breakpoint) {
+  $breakpoint: $breakpoint - .02px;
+
+  @if unitless($breakpoint) {
+    $breakpoint: $breakpoint + px;
+  }
+
+  @media screen and (max-height: $breakpoint) {
+    @content;
+  }
+}
+
+/**
+ * Media Query: Minimum Width
+ */
+@mixin min-width($breakpoint) {
+  @if unitless($breakpoint) {
+    $breakpoint: $breakpoint + px;
+  }
+
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+/**
+ * Media Query: Minimum Height
+ */
+@mixin min-height($breakpoint) {
+  @if unitless($breakpoint) {
+    $breakpoint: $breakpoint + px;
+  }
+
+  @media screen and (min-height: $breakpoint) {
+    @content;
+  }
+}
+
+/**
+ * Media Query: Range Width
+ */
+@mixin range-width($min, $max) {
+  @if unitless($min) {
+    $min: $min + px;
+  }
+
+  @if unitless($max) {
+    $max: $max + px;
+  }
+
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+/**
+ * Media Query: Range Height
+ */
+@mixin range-height($min, $max) {
+  @if unitless($min) {
+    $min: $min + px;
+  }
+
+  @if unitless($max) {
+    $max: $max + px;
+  }
+
+  @media screen and (min-height: $min) and (max-height: $max) {
+    @content;
+  }
+}
+
+/**
+ * Position
+ */
+
+@mixin center-margin($axis: null) {
+  @if ($axis == null) {
+    margin: auto;
+  }
+
+  @if ($axis == 'x') {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @if ($axis == 'y') {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+@mixin center-transform($axis: null) {
+  @if ($axis == null) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @if ($axis == 'x') {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @if ($axis == 'y') {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  position: absolute;
+}
+
+/**
+ * Utility
+ */
+
+@mixin clearfix() {
+  &::after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+}

@@ -1,0 +1,86 @@
+// Settings
+
+$root: 1rem !default;
+
+/**
+ * Form
+ */
+
+.form {
+  input,
+  select,
+  textarea {
+    padding: 0 $root;
+    width: 100%;
+    height: $root * 2.5;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    display: block;
+  }
+  textarea {
+    padding: $root;
+    height: 6rem;
+  }
+  input[type="button"],
+  input[type="submit"] {
+    height: auto;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: auto;
+    height: auto;
+    display: inline-block;
+  }
+  input[type="checkbox"] {
+    &,
+    & + label {
+      vertical-align: middle;
+    }
+  }
+  input[type="file"] {
+    padding: 0;
+    width: auto;
+    border: 0;
+  }
+  label {
+    display: inline-block;
+  }
+}
+
+.form-inline {
+  input,
+  select,
+  textarea,
+  label {
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.form--sm {
+  input,
+  select,
+  textarea {
+    padding: 0 ($root * .5);
+    height: $root * 2;
+  }
+  textarea {
+    padding: $root * .5;
+  }
+}
+
+.form--lg {
+  input,
+  select,
+  textarea {
+    padding: 0 $root;
+    height: $root * 3;
+  }
+  textarea {
+    padding: $root;
+  }
+}

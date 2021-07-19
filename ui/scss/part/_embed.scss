@@ -1,0 +1,45 @@
+/**
+ * Embed
+ */
+
+.embed-media {
+  padding: 0;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.embed-media::before {
+  content: "";
+  display: block;
+}
+
+.embed-media embed,
+.embed-media iframe,
+.embed-media object,
+.embed-media video {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: absolute;
+}
+
+.embed-media-1x1::before {
+  padding-top: 100%;
+}
+
+.embed-media-3x4::before {
+  padding-top: 133.333333%;
+}
+
+.embed-media-16x9::before {
+  padding-top: 56.25%;
+}
+
+.embed-media-21x9::before {
+  padding-top: 42.857143%;
+}

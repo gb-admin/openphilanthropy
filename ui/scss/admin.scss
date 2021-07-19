@@ -1,0 +1,33 @@
+@import "part/root";
+@import "wp/admin";
+
+/**
+ * Hide Gutenberg Blocks Welcome
+ */
+.nux-dot-tip {
+	display: none !important;
+}
+
+#wp-auth-check-wrap {
+    #wp-auth-check {
+        background-color: $periwinkle-4;
+        .wp-auth-check-close {
+            color: #fff;
+        }
+    }
+}
+
+// todo: but this may already be done by setting _variables.scss (check acf)
+// .wp-core-ui {
+// 	.button-primary,
+// 	.is-button.is-primary {
+// 		@include button(#d8b069);
+// 	}
+// }
+
+// .acf-field[data-type="image"][data-width] {
+// 	min-height: 210px;
+// 	& + .acf-field {
+// 		min-height: 210px;
+// 	}
+// }
