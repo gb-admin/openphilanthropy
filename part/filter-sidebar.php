@@ -5,7 +5,46 @@
 
 	global $wpdb;
 
-	$research_updates_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research-updates' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+	$research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research-updates' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+
+	$content_type = get_terms( array(
+		'taxonomy' => 'content-type'
+	) );
+
+	$focus_area = get_terms( array(
+		'taxonomy' => 'focus-area'
+	) );
+
+	$funding_type = get_terms( array(
+		'taxonomy' => 'funding-type'
+	) );
+
+	$organization_name = get_terms( array(
+		'taxonomy' => 'organization-name'
+	) );
+
+	$grants = '';
+
+	$grants_years = [];
+
+	$grants = new WP_Query( array(
+		'post_type' => 'grants',
+		'posts_per_page' => -1,
+		'order' => 'desc',
+		'orderby' => 'date'
+	) );
+
+	if ( $grants && $grants->posts ) {
+		$grants_posts = $grants->posts;
+
+		foreach ( $grants_posts as $i ) {
+			$post_year = get_the_date( 'Y', $i->ID );
+
+			array_push( $grants_years, $post_year );
+		}
+	}
+
+	$grants_years = array_unique( $grants_years );
 ?>
 
 <div class="sidebar-filter is-active">
@@ -19,120 +58,96 @@
 		<div class="sidebar-filter__content">
 			<nav aria-label="Sidebar Filter Options" data-filter-anchor="categories">
 				<div class="sidebar-filter__search">
-					<input type="search" placeholder="Search">
-
-					<svg viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M16.478 13.675c2.273-3.305 1.94-7.862-.998-10.801-3.314-3.314-8.687-3.314-12 0-3.314 3.314-3.314 8.686 0 12 3.207 3.208 8.345 3.31 11.676.308l4.429 4.429 1.414-1.414-4.521-4.522zm-2.413-9.387c2.533 2.533 2.533 6.64 0 9.172-2.532 2.533-6.639 2.533-9.171 0-2.533-2.533-2.533-6.64 0-9.172 2.532-2.533 6.639-2.533 9.171 0z"/></svg>
+					<?php get_template_part( 'searchform', 'grants' ); ?>
 				</div>
 
 				<div class="sidebar-filter__option">
 					<?php foreach ( $sidebar_filter as $filter ) : ?>
-						<?php if ( $filter['filter_type'] == 'auto' ) : ?>
+						<?php if ( $filter['filter'] == 'amount' ) : ?>
+							<select data-filter="amount" data-input-placeholder="Type here to search ..." data-placeholder="Amount">
+								<option value=""></option>
 
-							<?php if ( $filter['filter_by'] == 'author' ) : ?>
+								<option class="<?php if ( in_array( 'less-than-1hundthous', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="less-than-1hundthous" value="Less than $100,000">Less than $100,000</option>
+								<option class="<?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="between-1hundthous-1mil" value="Between $100,000 and $1,000,000">Between $100,000 and $1,000,000</option>
+								<option class="<?php if ( in_array( 'greater-than-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="greater-than-1mil" value="Greater than $1,000,000">Greater than $1,000,000</option>
+							</select>
+						<?php elseif ( $filter['filter'] == 'author' ) : ?>
 
-								<?php
-									/**
-									 * Exclude authors from array.
-									 */
-									if ( $filter['filter_author_exclude'] ) {
-										foreach ( $filter['filter_author_exclude'] as $exclude ) {
-											foreach ( $research_updates_authors as $key => $author ) {
-												if ( $exclude['name'] == $author->display_name ) {
-													unset( $research_updates_authors[ $key ] );
-												} elseif ( $exclude['name'] == $author->user_nicename ) {
-													unset( $research_updates_authors[ $key ] );
-												}
+							<?php
+								/**
+								 * Exclude authors from array.
+								 */
+								if ( $filter['filter_author_exclude'] ) {
+									foreach ( $filter['filter_author_exclude'] as $exclude ) {
+										foreach ( $research_authors as $key => $author ) {
+											if ( $exclude['name'] == $author->display_name ) {
+												unset( $research_authors[ $key ] );
+											} elseif ( $exclude['name'] == $author->user_nicename ) {
+												unset( $research_authors[ $key ] );
 											}
 										}
 									}
-								?>
+								}
+							?>
 
-								<select data-filter="author" data-input-placeholder="Type here to search ..." data-placeholder="Author">
+							<select data-filter="author" data-input-placeholder="Type here to search ..." data-placeholder="Author">
+								<option value=""></option>
+
+								<?php foreach ( $research_authors as $author ) : ?>
+									<option class="<?php if ( in_array( $author->user_nicename, $params['author'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $author->user_nicename; ?>" value="<?php echo $author->display_name; ?>"><?php echo $author->display_name; ?></option>
+								<?php endforeach; ?>
+							</select>
+						<?php elseif ( $filter['filter'] == 'content-type' ) : ?>
+
+							<?php if ( $content_type ) : ?>
+								<select data-filter="content-type" data-input-placeholder="Type here to search ..." data-placeholder="Content Type">
 									<option value=""></option>
 
-									<?php foreach ( $research_updates_authors as $author ) : ?>
-										<option class="<?php if ( in_array( $author->user_nicename, $params['author'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $author->user_nicename; ?>" value="<?php echo $author->display_name; ?>"><?php echo $author->display_name; ?></option>
+									<?php foreach ( $content_type as $i ) : ?>
+										<option class="<?php if ( in_array( $i->slug, $params['content-type'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
 									<?php endforeach; ?>
 								</select>
-							<?php elseif ( $filter['filter_by'] == 'year' ) : ?>
+							<?php endif; ?>
+						<?php elseif ( $filter['filter'] == 'focus-area' ) : ?>
 
-								<?php
-									$filter_year_range_begin = $filter['filter_year_range_begin'];
-									$filter_year_range_end = $filter['filter_year_range_end'];
+							<?php if ( $focus_area ) : ?>
+								<select data-filter="focus-area" data-input-placeholder="Type here to search ..." data-placeholder="Focus Area">
+									<option value=""></option>
 
-									if ( $filter_year_range_begin && $filter_year_range_end ) {
-										$filter_years = range( $filter_year_range_begin, $filter_year_range_end );
-									}
-								?>
+									<?php foreach ( $focus_area as $i ) : ?>
+										<option class="<?php if ( in_array( $i->slug, $params['focus-area'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+									<?php endforeach; ?>
+								</select>
+							<?php endif; ?>
+						<?php elseif ( $filter['filter'] == 'funding-type' ) : ?>
 
+							<?php if ( $funding_type ) : ?>
+								<select data-filter="funding-type" data-input-placeholder="Type here to search ..." data-placeholder="Funding Type">
+									<option value=""></option>
+
+									<?php foreach ( $funding_type as $i ) : ?>
+										<option class="<?php if ( in_array( $i->slug, $params['funding-type'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+									<?php endforeach; ?>
+								</select>
+							<?php endif; ?>
+						<?php elseif ( $filter['filter'] == 'organization-name' ) : ?>
+
+							<?php if ( $organization_name ) : ?>
+								<select data-filter="organization-name" data-input-placeholder="Type here to search ..." data-placeholder="Organization Name">
+									<option value=""></option>
+
+									<?php foreach ( $organization_name as $i ) : ?>
+										<option class="<?php if ( in_array( $i->slug, $params['organization-name'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+									<?php endforeach; ?>
+								</select>
+							<?php endif; ?>
+						<?php elseif ( $filter['filter'] == 'year' ) : ?>
+							<?php if ( $grants_years ) : ?>
 								<select data-filter="yr" data-input-placeholder="Type here to search ..." data-placeholder="Year">
 									<option value=""></option>
 
-									<?php foreach ( $filter_years as $year ) : ?>
+									<?php foreach ( $grants_years as $year ) : ?>
 										<option class="<?php if ( in_array( $year, $params['yr'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $year; ?>" value="<?php echo $year; ?>"><?php echo $year; ?></option>
-									<?php endforeach; ?>
-								</select>
-							<?php endif; ?>
-						<?php elseif ( $filter['filter_type'] == 'custom' ) : ?>
-
-							<?php
-								$filter_custom = [];
-								$filter_custom_key = '';
-								$filter_custom_no_multiple = false;
-								$filter_custom_title = '';
-
-								if ( $filter['filter_custom'] ) {
-									$filter_custom = $filter['filter_custom'];
-								}
-
-								if ( $filter['filter_custom_key'] ) {
-									$filter_custom_key = $filter['filter_custom_key'];
-								}
-
-								if ( $filter['filter_custom_title'] ) {
-									$filter_custom_title = $filter['filter_custom_title'];
-								}
-
-								if ( $filter['filter_custom_no_multiple'] ) {
-									$filter_custom_no_multiple = true;
-								}
-							?>
-
-							<?php if ( ! empty( $filter_custom ) && $filter_custom_key != '' ) : ?>
-								<select data-filter="<?php echo $filter_custom_key; ?>" data-input-placeholder="Type here to search ..." data-placeholder="<?php echo $filter_custom_title; ?>" data-select-multiple="<?php echo $filter_custom_no_multiple ? 'false' : 'true'; ?>">
-									<option value=""></option>
-
-									<?php foreach ( $filter_custom as $filter ) : ?>
-										<?php if ( $filter['name'] && $filter['value'] ) : ?>
-											<option class="<?php if ( in_array( $filter['value'], $params[ $filter_custom_key ] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $filter['value']; ?>" value="<?php echo $filter['value']; ?>"><?php echo $filter['name']; ?></option>
-										<?php endif; ?>
-									<?php endforeach; ?>
-								</select>
-							<?php endif; ?>
-						<?php elseif ( $filter['filter_type'] == 'taxonomy' ) : ?>
-
-							<?php
-								$filter_taxonomy = get_taxonomy( $filter['filter_taxonomy'] );
-
-								if ( $filter_taxonomy ) {
-									if ( $filter_taxonomy->rewrite && $filter_taxonomy->rewrite['slug'] ) {
-										$filter_taxonomy_slug = $filter_taxonomy->rewrite['slug'];
-									} else {
-										$filter_taxonomy_slug = $filter_taxonomy->name;
-									}
-								}
-
-								$filter_terms = get_terms( array(
-									'taxonomy' => $filter['filter_taxonomy']
-								) );
-							?>
-
-							<?php if ( $filter_taxonomy_slug ) : ?>
-								<select data-filter="<?php echo $filter_taxonomy_slug; ?>" data-input-placeholder="Type here to search ..." data-placeholder="<?php echo $filter_taxonomy->label; ?>">
-									<option value=""></option>
-
-									<?php foreach ( $filter_terms as $term ) : ?>
-										<option class="<?php if ( in_array( $term->slug, $params[ $filter_taxonomy_slug ] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $term->slug; ?>" value="<?php echo $term->name; ?>"><?php echo $term->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php endif; ?>

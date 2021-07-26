@@ -11,6 +11,12 @@
 
 	$params = get_url_params();
 
+	$view_list = false;
+
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
+		$view_list = true;
+	}
+
 	$featured_research_updates = get_field( 'featured_research_updates' );
 
 	$featured_research_updates_id = [];
@@ -20,18 +26,50 @@
 	}
 
 	$date_query = array(
-		'relation' => 'or',
+		'relation' => 'or'
 	);
 
 	$meta_query = array(
 		'relation' => 'and'
 	);
 
-	$tax_query = array();
+	$order_query = 'desc';
+
+	$tax_query = array(
+		'relation' => 'or'
+	);
+
+	$orderby_query = 'date';
+	$meta_key = '';
+	$param_amount_meta_query = '';
+	$posts_per_page = 9;
+	$taxonomy = '';
 
 	foreach ( $params as $key => $param ) {
-
-		if ( $key == 'yr' ) {
+		if ( $key == 'items' ) {
+			foreach ( $param as $value ) {
+				if ( $value == '25' ) {
+					$posts_per_page = 25;
+				} elseif ( $value == '50' ) {
+					$posts_per_page = 50;
+				} elseif ( $value == '100' ) {
+					$posts_per_page = 100;
+				}
+			}
+		} elseif ( $key == 'sort' ) {
+			foreach ( $param as $value ) {
+				if ( $value == 'a-z' ) {
+					$order_query = 'asc';
+					$orderby_query = 'title';
+				} elseif ( $value == 'high-to-low' ) {
+					$meta_key = 'grant_amount';
+					$orderby_query = 'meta_value_num';
+				} elseif ( $value == 'recent' ) {
+					$order_query = 'desc';
+					$orderby_query = 'date';
+				}
+			}
+		} elseif ( $key == 'yr' ) {
 			foreach ( $param as $value ) {
 				$param_date_query = array(
 					'year' => $value
@@ -40,14 +78,7 @@
 				array_push( $date_query, $param_date_query );
 			}
 		} else {
-
-			// Get taxonomy by $key which is the rewrite
 			$taxonomy = get_taxonomy( $key );
-
-			// Check if get taxonomy with post type prepended in case it was rewrite
-			if ( ! $taxonomy ) {
-				$taxonomy = get_taxonomy( 'research-updates-' . $key );
-			}
 		}
 
 		if ( $taxonomy ) {
@@ -63,11 +94,11 @@
 		}
 	}
 
-	$research_updates = new WP_Query( array(
-		'post_type' => 'research-updates',
-		'posts_per_page' => 9,
-		'order' => 'desc',
-		'orderby' => 'date',
+	$research = new WP_Query( array(
+		'post_type' => 'research',
+		'posts_per_page' => $posts_per_page,
+		'order' => $order_query,
+		'orderby' => $orderby_query,
 		'paged' => $paged,
 		'post__not_in' => $featured_research_updates_id,
 		'date_query' => $date_query,
@@ -80,105 +111,21 @@
 <?php get_template_part( 'part/page', 'header-categories' ); ?>
 
 <div class="feed-section">
-	<div class="feed-options-bar">
-		<div class="wrap">
-			<nav aria-label="Feed Options Bar">
-				<div class="dropdown">
-					<button class="button" href="#">
-						Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-					</button>
-
-					<ul class="dropdown-content">
-						<li>
-							<a href="#high-to-low">Highest to lowest</a>
-						</li>
-						<li>
-							<a href="#a-to-z">A to Z</a>
-						</li>
-						<li>
-							<a href="#recent">Newest to oldest</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="dropdown dropdown--inline-content">
-					<button class="button" href="#">
-						Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-					</button>
-
-					<ul class="dropdown-content">
-						<li>
-							<a href="#25">25</a>
-						</li>
-						<li>
-							<a href="#50">50</a>
-						</li>
-						<li>
-							<a href="#100">100</a>
-						</li>
-					</ul>
-				</div>
-
-				<button class="button button--solid">View all as list</button>
-			</nav>
-		</div>
-	</div>
+	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
 		<?php get_template_part( 'part/filter', 'sidebar' ); ?>
 
-		<div class="feed-options-bar feed-options-bar--mobile">
-			<div class="wrap">
-				<nav aria-label="Feed Options Bar">
-					<div class="dropdown">
-						<button class="button" href="#">
-							Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-						</button>
-
-						<ul class="dropdown-content">
-							<li>
-								<a href="#high-to-low">Highest to lowest</a>
-							</li>
-							<li>
-								<a href="#a-to-z">A to Z</a>
-							</li>
-							<li>
-								<a href="#recent">Newest to oldest</a>
-							</li>
-						</ul>
-					</div>
-
-					<div class="dropdown dropdown--inline-content">
-						<button class="button" href="#">
-							Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-						</button>
-
-						<ul class="dropdown-content">
-							<li>
-								<a href="#25">25</a>
-							</li>
-							<li>
-								<a href="#50">50</a>
-							</li>
-							<li>
-								<a href="#100">100</a>
-							</li>
-						</ul>
-					</div>
-
-					<button class="button button--solid">View all as list</button>
-				</nav>
-			</div>
-		</div>
+		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
-			<?php if ( $research_updates->have_posts() ) : ?>
-				<div class="block-feed">
-					<?php while ( $research_updates->have_posts() ) : $research_updates->the_post(); ?>
+			<?php if ( $research->have_posts() ) : ?>
+				<div class="block-feed<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
+					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
-							$research_updates_content_type = get_the_terms( $post->ID, 'research-updates-content-type' );
-							$research_updates_focus_area = get_the_terms( $post->ID, 'research-updates-focus-area' );
+							$research_content_type = get_the_terms( $post->ID, 'content-type' );
+							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
 						?>
 
 						<div class="block-feed-post">
@@ -187,12 +134,12 @@
 							</h4>
 
 							<h5>
-								<?php echo get_the_date( 'F j, Y', $research_updates->ID ); ?>
+								<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
 							</h5>
 
-							<?php if ( $research_updates_focus_area ) : ?>
+							<?php if ( $research_focus_area ) : ?>
 								<h5>
-									<a href="?focus-area=<?php echo $research_updates_focus_area[0]->slug; ?>#categories"><?php echo $research_updates_focus_area[0]->name; ?></a>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
 								</h5>
 							<?php endif; ?>
 
@@ -223,7 +170,7 @@
 							'mid_size' => 2,
 							'format' => '?paged=%#%',
 							'current' => max( 1, get_query_var('paged') ),
-							'total' => $research_updates->max_num_pages,
+							'total' => $research->max_num_pages,
 							'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
 						) );
 					?>

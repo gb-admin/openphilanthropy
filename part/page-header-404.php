@@ -1,39 +1,23 @@
 <?php
-	$page_header_button = get_field( 'page_header_button' );
-	$page_header_content = get_field( 'page_header_content' );
-	$page_header_image = get_field( 'page_header_image' );
-	$page_header_title = get_field( 'page_header_title' );
+	$page_404 = get_page_by_title( '404' );
+
+	$page_404_id = get_the_ID();
+
+	if ( $page_404 && ! is_wp_error( $page_404 ) && $page_404->ID ) {
+		$page_404_id = $page_404->ID;
+	}
+
+	$page_header_button = get_field( 'page_header_button', $page_404_id );
+	$page_header_content = get_field( 'page_header_content', $page_404_id );
+	$page_header_image = get_field( 'page_header_image', $page_404_id );
+	$page_header_title = get_field( 'page_header_title', $page_404_id );
 
 	if ( ! $page_header_title ) {
 		$page_header_title = get_the_title();
 	}
-
-	$focus_area_image = '';
-
-	$post_type = get_post_type();
-
-	$terms_focus_area = get_the_terms( $post->ID, $post_type . '-focus-area' );
-
-	if ( ! is_wp_error( $terms_focus_area ) ) {
-		$focus_area_image = get_field( 'category_image', 'grants-focus-area_' . $terms_focus_area[0]->term_id );
-	}
-
-	if ( ! $page_header_image && $focus_area_image ) {
-		$page_header_image = $focus_area_image;
-	}
-
-	$page_header_class = [];
-
-	if ( $page_header_image ) {
-		array_push( $page_header_class, 'has-image' );
-	}
-
-	if ( is_single() ) {
-		array_push( $page_header_class, 'is-single' );
-	}
 ?>
 
-<div class="page-header<?php echo ' ' . inline_list( $page_header_class, ' ' ); ?>">
+<div class="page-header page-header--404">
 	<div class="wrap">
 		<div class="page-header__content">
 			<?php if ( $page_header_image ) : ?>

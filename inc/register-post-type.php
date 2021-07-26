@@ -85,7 +85,7 @@ function post_type_careers() {
 	$args = array(
 		'labels'             => $labels,
 		'public'             => true,
-		'publicly_queryable' => false,
+		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'query_var'          => true,
@@ -156,21 +156,21 @@ function post_type_grants() {
 add_action( 'init', 'post_type_grants' );
 
 /**
- * Post Type: Research and Updates
+ * Post Type: Research
  */
-function post_type_research_updates() {
+function post_type_research() {
 	$labels = array(
-		'name'                  => _x( 'Research and Updates', 'Post type general name', 'oph' ),
-		'singular_name'         => _x( 'Research and Updates', 'Post type singular name', 'oph' ),
+		'name'                  => _x( 'Research', 'Post type general name', 'oph' ),
+		'singular_name'         => _x( 'Research', 'Post type singular name', 'oph' ),
 		'menu_name'             => _x( 'Research', 'Admin Post text', 'oph' ),
-		'name_admin_bar'        => _x( 'Research and Updates', 'Add New on Toolbar', 'oph' ),
-		'add_new'               => __( 'New Post', 'oph' ),
-		'add_new_item'          => __( 'New Post', 'oph' ),
-		'new_item'              => __( 'New Post', 'oph' ),
-		'edit_item'             => __( 'Edit Post', 'oph' ),
-		'view_item'             => __( 'View Post', 'oph' ),
-		'all_items'             => __( 'All Research and Updates', 'oph' ),
-		'search_items'          => __( 'Search Research and Updates', 'oph' ),
+		'name_admin_bar'        => _x( 'Research', 'Add New on Toolbar', 'oph' ),
+		'add_new'               => __( 'New Research', 'oph' ),
+		'add_new_item'          => __( 'New Research', 'oph' ),
+		'new_item'              => __( 'New Research', 'oph' ),
+		'edit_item'             => __( 'Edit Research', 'oph' ),
+		'view_item'             => __( 'View Research', 'oph' ),
+		'all_items'             => __( 'All Research', 'oph' ),
+		'search_items'          => __( 'Search Research', 'oph' ),
 		'parent_item_colon'     => __( 'Parent Posts:', 'oph' ),
 		'not_found'             => __( 'No posts found.', 'oph' ),
 		'not_found_in_trash'    => __( 'No posts found in Trash.', 'oph' ),
@@ -178,12 +178,12 @@ function post_type_research_updates() {
 		'set_featured_image'    => _x( 'Set featured image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'oph' ),
 		'remove_featured_image' => _x( 'Remove featured image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'oph' ),
 		'use_featured_image'    => _x( 'Use as featured image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'oph' ),
-		'archives'              => _x( 'Research and Updates archives', 'The post type archive label used in nav post. Default “Post Archives”. Added in 4.4', 'oph' ),
+		'archives'              => _x( 'Research archives', 'The post type archive label used in nav post. Default “Post Archives”. Added in 4.4', 'oph' ),
 		'insert_into_item'      => _x( 'Insert into post', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'oph' ),
 		'uploaded_to_this_item' => _x( 'Uploaded to this post', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'oph' ),
 		'filter_items_list'     => _x( 'Filter post list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'oph' ),
-		'items_list_navigation' => _x( 'Research and Updates list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'oph' ),
-		'items_list'            => _x( 'Research and Updates list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'oph' )
+		'items_list_navigation' => _x( 'Research list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'oph' ),
+		'items_list'            => _x( 'Research list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'oph' )
 	);
 
 	$args = array(
@@ -193,7 +193,7 @@ function post_type_research_updates() {
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'research-updates' ),
+		'rewrite'            => array( 'slug' => 'research' ),
 		'capability_type'    => 'post',
 		'has_archive'        => false,
 		'hierarchical'       => false,
@@ -202,10 +202,10 @@ function post_type_research_updates() {
 		'supports'           => array( 'author', 'editor', 'excerpt', 'revisions', 'title' )
 	);
 
-	register_post_type( 'research-updates', $args );
+	register_post_type( 'research', $args );
 }
 
-add_action( 'init', 'post_type_research_updates' );
+add_action( 'init', 'post_type_research' );
 
 /**
  * Post Type: Team

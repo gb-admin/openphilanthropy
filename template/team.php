@@ -43,13 +43,13 @@
 								</a>
 							</div>
 						</li>
-					<?php endwhile; ?>
+					<?php endwhile; wp_reset_postdata(); ?>
 				</ul>
 			<?php endif; ?>
 		</div>
 	</div>
 </div>
 
-<?php get_template_part( 'part/cta', 'button' ); ?>
+<?php get_template_part( 'part/cta-button' ); ?>
 
 <?php get_footer(); ?>

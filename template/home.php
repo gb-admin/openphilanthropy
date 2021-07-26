@@ -11,9 +11,9 @@
 	$about_content = get_field( 'about_content' );
 	$about_title = get_field( 'about_title' );
 
-	$highlighted_grants = get_field( 'highlighted_grants' );
-	$highlighted_grants_button = get_field( 'highlighted_grants_button' );
-	$highlighted_grants_title = get_field( 'highlighted_grants_title' );
+	$homepage_grants = get_field( 'homepage_grants' );
+	$homepage_grants_button = get_field( 'homepage_grants_button' );
+	$homepage_grants_title = get_field( 'homepage_grants_title' );
 
 	$homepage_research = get_field( 'homepage_research' );
 	$homepage_research_button = get_field( 'homepage_research_button' );
@@ -22,25 +22,35 @@
 
 <?php get_template_part( 'part/hero' ); ?>
 
-<?php if ( $highlighted_grants ) : ?>
+<?php if ( $homepage_grants ) : ?>
 	<div id="highlighted-grants">
 		<div class="wrap">
-			<?php if ( $highlighted_grants_title ) : ?>
+			<?php if ( $homepage_grants_title ) : ?>
 				<div class="line-heading">
 					<h2>Highlighted Grants</h2>
 				</div>
 			<?php endif; ?>
 
 			<ul class="list-3-col" id="highlighted-grants-list">
-				<?php foreach ( $highlighted_grants as $grant ) : ?>
+				<?php foreach ( $homepage_grants as $grant ) : ?>
 
 					<?php
 						$grant_post = $grant['grant'][0];
 
 						if ( $grant_post ) {
-							$grants_funding_type = get_the_terms( $grant_post->ID, 'grants-funding-type' );
+							$focus_area = get_the_terms( $grant_post->ID, 'focus-area' );
 
-							$grant_image = get_field( 'category_image', 'grants-funding-type_' . $grants_funding_type[0]->term_id )['sizes']['lg'];
+							$grant_image = '';
+
+							// Get category image
+							if ( ! empty( $focus_area ) && $focus_area[0]->term_id ) {
+								$grant_image = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id );
+							}
+
+							// If category image found get url
+							if ( ! empty( $grant_image && $grant_image['sizes'] && $grant_image['sizes']['lg'] ) ) {
+								$grant_image = $grant_image['sizes']['lg'];
+							}
 
 							$grant_link = get_permalink( $grant_post->ID );
 							$grant_title = get_the_title( $grant_post->ID );
@@ -96,9 +106,9 @@
 				<?php endforeach; ?>
 			</ul>
 
-			<?php if ( $highlighted_grants_button ) : ?>
+			<?php if ( $homepage_grants_button ) : ?>
 				<div class="button-group">
-					<?php foreach ( $highlighted_grants_button as $i ) : ?>
+					<?php foreach ( $homepage_grants_button as $i ) : ?>
 						<?php if ( $i['link']['url'] ) : ?>
 							<a class="button" href="<?php echo $i['link']['url']; ?>"<?php if ( $i['link']['target'] == '_blank' ) { echo ' target="_blank"'; } ?>><?php echo $i['link']['title']; ?></a>
 						<?php endif; ?>
@@ -136,7 +146,7 @@
 </div>
 
 <?php if ( $homepage_research ) : ?>
-	<div id="research-updates-preview">
+	<div id="research-preview">
 		<div class="wrap">
 			<?php if ( $homepage_research_title ) : ?>
 				<div class="line-heading">
@@ -144,15 +154,15 @@
 				</div>
 			<?php endif; ?>
 
-			<div class="research-updates-preview-content">
-				<ul class="list-related-posts list-3-col" id="research-updates-preview-list">
+			<div class="research-preview-content">
+				<ul class="list-related-posts list-3-col" id="research-preview-list">
 					<?php foreach ( $homepage_research as $i ) : ?>
 
 						<?php
 							$research_post = $i['post'][0];
 
 							if ( $research_post ) {
-								$research_focus_area = get_the_terms( $research_post->ID, 'research-updates-focus-area' );
+								$research_focus_area = get_the_terms( $research_post->ID, 'focus-area' );
 
 								$research_link = get_permalink( $research_post->ID );
 								$research_title = get_the_title( $research_post->ID );
@@ -172,7 +182,7 @@
 							if ( $research_focus_area ) {
 								$research_eyebrow_copy = $research_focus_area[0]->name;
 
-								$research_eyebrow_link = '/research-updates?focus-area=' . $research_focus_area[0]->slug;
+								$research_eyebrow_link = '/research?focus-area=' . $research_focus_area[0]->slug;
 							}
 
 							if ( $i['description'] ) {
@@ -200,10 +210,8 @@
 							}
 						?>
 
-						<li>
-							<?php if ( $research_eyebrow_copy ) : ?>
-								<h5><?php if ( $research_eyebrow_link ) { echo '<a href="' . $research_eyebrow_link . '">'; } echo $research_eyebrow_copy; if ( $research_eyebrow_link ) { echo '</a>'; } ?></h5>
-							<?php endif; ?>
+						<li<?php if ( ! $research_eyebrow_copy ) { echo ' class="has-no-eyebrow-copy"'; } ?>>
+							<h5><?php if ( $research_eyebrow_link ) { echo '<a href="' . $research_eyebrow_link . '">'; } echo $research_eyebrow_copy; if ( $research_eyebrow_link ) { echo '</a>'; } ?></h5>
 
 							<h4>
 								<a href="<?php echo $research_link; ?>"><?php echo $research_title; ?></a>
@@ -225,7 +233,7 @@
 				</ul>
 
 				<div class="button-group">
-					<a class="button" href="/research-updates">View All Research &amp; Updates</a>
+					<a class="button" href="/research">View All Research &amp; Updates</a>
 				</div>
 			</div>
 		</div>

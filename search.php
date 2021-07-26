@@ -1,53 +1,59 @@
 <?php
-/**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package OPH
- */
+	$post_type = $_GET['post_type'];
 
-get_header();
+	get_header();
+
+	get_template_part( 'part/page', 'header-search' );
+
+	if ( $post_type ) {
+		$post_type = get_post_type_object( $post_type );
+	}
 ?>
 
-	<main id="primary" class="site-main">
+<div class="content-search-results">
+	<div class="wrap">
+		<div class="content-search-results__main">
+			<?php if ( have_posts() ) : ?>
+				<div class="search-results">
+					<?php while ( have_posts() ) : the_post(); ?>
 
-		<?php if ( have_posts() ) : ?>
+						<?php
+							if ( has_excerpt() ) {
+								$search_excerpt_source = get_the_excerpt();
+							} else {
+								$search_excerpt_source = get_post_field( 'post_content' );
+							}
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'oph' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+							$search_excerpt = array(
+								'append' => '...',
+								'limit' => 28,
+								'limitby' => 'word',
+								'source' => $search_excerpt_source
+							);
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+							$search_description = excerpt( $search_excerpt );
+						?>
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+						<article id="post--<?php the_ID(); ?>">
+							<h4><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h4>
 
-			endwhile;
+							<p><?php echo $search_description; ?></p>
 
-			the_posts_navigation();
+							<div class="search-results__link">
+								<a href="<?php the_permalink(); ?>">Read More</a>
+							</div>
+						</article>
+					<?php endwhile; ?>
+				</div>
+			<?php endif; ?>
 
-		else :
+			<?php if ( $post_type ) : ?>
+				<div class="search-results__back">
+					<a href="/<?php echo $post_type->name; ?>"><span aria-hidden="true">&larr; </span>Back to <?php echo $post_type->label; ?></a>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+</div>
 
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+<?php get_footer(); ?>

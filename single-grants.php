@@ -143,7 +143,7 @@
 							if ( has_excerpt( $related_post->ID ) ) {
 								$related_excerpt_source = get_the_excerpt( $related_post->ID );
 							} else {
-								$related_excerpt_source = get_the_content( $related_post->ID );
+								$related_excerpt_source = get_post_field( 'post_content', $related_post->ID );
 							}
 
 							$related_excerpt = array(

@@ -38,9 +38,11 @@ $gray-text-heading: #3b3b3b;
  * Font
  */
 $system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$sans-serif: "Montserrat", $system;
+$sans-serif: "Avenir", "Montserrat", $system;
 $serif: serif;
 $mono: Menlo, Consolas, monospace;
+
+$font-number: "Archer", $sans-serif;
 
 /**
  * Responsive

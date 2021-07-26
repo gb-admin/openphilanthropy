@@ -14,6 +14,34 @@ add_image_size( 'lg-square', 1440, 1440, true );
 add_image_size( 'xl-square', 2048, 2048, true );
 
 /**
+ * Rewrite rules setup.
+ *
+ * Helps prevent 404 when parent page slug same as post type.
+ */
+
+function setup_use_verbose_page_rules() {
+	$GLOBALS['wp_rewrite']->use_verbose_page_rules = true;
+}
+
+add_action( 'init', 'setup_use_verbose_page_rules' );
+
+function setup_collect_page_rewrite_rules( $page_rewrite_rules ) {
+	$GLOBALS['setup_page_rewrite_rules'] = $page_rewrite_rules;
+
+	return array();
+}
+
+add_filter( 'page_rewrite_rules', 'setup_collect_page_rewrite_rules' );
+
+function setup_prepend_page_rewrite_rules( $rewrite_rules ) {
+	return $GLOBALS['setup_page_rewrite_rules'] + $rewrite_rules;
+}
+
+add_filter( 'rewrite_rules_array', 'setup_prepend_page_rewrite_rules' );
+
+/* End rewrite rules setup */
+
+/**
  * Rewrite post type for pagination.
  */
 function setup_rewrite_post_type_pagination() {
@@ -22,7 +50,7 @@ function setup_rewrite_post_type_pagination() {
 	foreach ( $wp_post_types as $wp_post_type ) {
 		$slug = isset( $wp_post_type->rewrite['slug'] ) ? $wp_post_type->rewrite['slug'] : $wp_post_type->name;
 
-		add_rewrite_rule('^' . $slug . '/page/([0-9]+)','index.php?pagename=' . $slug . '&paged=$matches[1]', 'top');
+		add_rewrite_rule( '^' . $slug . '/page/([0-9]+)','index.php?pagename=' . $slug . '&paged=$matches[1]', 'top' );
 	}
 };
 
