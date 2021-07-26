@@ -1,48 +1,55 @@
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-Light.woff2') format('woff2'), url('../font/archer/Archer-Light.woff') format('woff');
+	src: url('../font/archer/Archer-Light.eot');
+	src: url('../font/archer/Archer-Light.woff2') format('woff2'), url('../font/archer/Archer-Light.woff') format('woff'), url('../font/archer/Archer-Light.ttf') format('truetype'), url('../font/archer/Archer-Light.svg#Archer-Light') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-LightItalic.woff2') format('woff2'), url('../font/archer/Archer-LightItalic.woff') format('woff');
+	src: url('../font/archer/Archer-LightItalic.eot');
+	src: url('../font/archer/Archer-LightItalic.woff2') format('woff2'), url('../font/archer/Archer-LightItalic.woff') format('woff'), url('../font/archer/Archer-LightItalic.ttf') format('truetype'), url('../font/archer/Archer-LightItalic.svg#Archer-LightItalic') format('svg');
 	font-weight: 300;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-Book.woff2') format('woff2'), url('../font/archer/Archer-Book.woff') format('woff');
+	src: url('../font/archer/Archer-Book.eot');
+	src: url('../font/archer/Archer-Book.woff2') format('woff2'), url('../font/archer/Archer-Book.woff') format('woff'), url('../font/archer/Archer-Book.ttf') format('truetype'), url('../font/archer/Archer-Book.svg#Archer-Book') format('svg');
 	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-BookItalic.woff2') format('woff2'), url('../font/archer/Archer-BookItalic.woff') format('woff');
+	src: url('../font/archer/Archer-BookItalic.eot');
+	src: url('../font/archer/Archer-BookItalic.woff2') format('woff2'), url('../font/archer/Archer-BookItalic.woff') format('woff'), url('../font/archer/Archer-BookItalic.ttf') format('truetype'), url('../font/archer/Archer-BookItalic.svg#Archer-BookItalic') format('svg');
 	font-weight: 400;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-Medium.woff2') format('woff2'), url('../font/archer/Archer-Medium.woff') format('woff');
+	src: url('../font/archer/Archer-Medium.eot');
+	src: url('../font/archer/Archer-Medium.woff2') format('woff2'), url('../font/archer/Archer-Medium.woff') format('woff'), url('../font/archer/Archer-Medium.ttf') format('truetype'), url('../font/archer/Archer-Medium.svg#Archer-Medium') format('svg');
 	font-weight: 500;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-MediumItalic.woff2') format('woff2'), url('../font/archer/Archer-MediumItalic.woff') format('woff');
+	src: url('../font/archer/Archer-MediumItalic.eot');
+	src: url('../font/archer/Archer-MediumItalic.woff2') format('woff2'), url('../font/archer/Archer-MediumItalic.woff') format('woff'), url('../font/archer/Archer-MediumItalic.ttf') format('truetype'), url('../font/archer/Archer-MediumItalic.svg#Archer-MediumItalic') format('svg');
 	font-weight: 500;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-Semibold.woff2') format('woff2'), url('../font/archer/Archer-Semibold.woff') format('woff');
+	src: url('../font/archer/Archer-Semibold.eot');
+	src: url('../font/archer/Archer-Semibold.woff2') format('woff2'), url('../font/archer/Archer-Semibold.woff') format('woff'), url('../font/archer/Archer-Semibold.ttf') format('truetype'), url('../font/archer/Archer-Semibold.svg#Archer-Semibold') format('svg');
 	font-weight: 600;
 	font-style: normal;
 }
@@ -56,41 +63,48 @@
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-Bold.woff2') format('woff2'), url('../font/archer/Archer-Bold.woff') format('woff');
+	src: url('../font/archer/Archer-Bold.eot');
+	src: url('../font/archer/Archer-Bold.woff2') format('woff2'), url('../font/archer/Archer-Bold.woff') format('woff'), url('../font/archer/Archer-Bold.ttf') format('truetype'), url('../font/archer/Archer-Bold.svg#Archer-Bold') format('svg');
 	font-weight: 700;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Archer';
-	src: url('../font/archer/Archer-BoldItalic.woff2') format('woff2'), url('../font/archer/Archer-BoldItalic.woff') format('woff');
+	src: url('../font/archer/Archer-BoldItalic.eot');
+	src: url('../font/archer/Archer-BoldItalic.woff2') format('woff2'), url('../font/archer/Archer-BoldItalic.woff') format('woff'), url('../font/archer/Archer-BoldItalic.ttf') format('truetype'), url('../font/archer/Archer-BoldItalic.svg#Archer-BoldItalic') format('svg');
 	font-weight: 700;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'Avenir';
-	src: url('../font/avenir/AvenirLTPro-Book.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Book.woff') format('woff');
+	src: url('../font/avenir/AvenirLTPro-Book.eot');
+	src: url('../font/avenir/AvenirLTPro-Book.eot?#iefix') format('embedded-opentype'), url('../font/avenir/AvenirLTPro-Book.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Book.woff') format('woff'), url('../font/avenir/AvenirLTPro-Book.ttf') format('truetype'), url('../font/avenir/AvenirLTPro-Book.svg#AvenirLTPro-Book') format('svg');
 	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Avenir';
-	src: url('../font/avenir/AvenirLTPro-Medium.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Medium.woff') format('woff');
+	src: url('../font/avenir/AvenirLTPro-Medium.eot');
+	src: url('../font/avenir/AvenirLTPro-Medium.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Medium.woff') format('woff'), url('../font/avenir/AvenirLTPro-Medium.ttf') format('truetype'), url('../font/avenir/AvenirLTPro-Medium.svg#AvenirLTPro-Medium') format('svg');
 	font-weight: 500;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'Avenir';
-	src: url('../font/avenir/AvenirLTPro-Heavy.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Heavy.woff') format('woff');
+	src: url('../font/avenir/AvenirLTPro-Heavy.eot');
+	src: url('../font/avenir/AvenirLTPro-Heavy.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Heavy.woff') format('woff'), url('../font/avenir/AvenirLTPro-Heavy.ttf') format('truetype'), url('../font/avenir/AvenirLTPro-Heavy.svg#AvenirLTPro-Heavy') format('svg');
 	font-weight: 800;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Avenir';
-	src: url('../font/avenir/AvenirLTPro-Black.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Black.woff') format('woff');
+	src: url('../font/avenir/AvenirLTPro-Black.eot');
+	src: url('../font/avenir/AvenirLTPro-Black.woff2') format('woff2'), url('../font/avenir/AvenirLTPro-Black.woff') format('woff'), url('../font/avenir/AvenirLTPro-Black.ttf') format('truetype'), url('../font/avenir/AvenirLTPro-Black.svg#AvenirLTPro-Black') format('svg');
 	font-weight: 900;
 	font-style: normal;
 }
