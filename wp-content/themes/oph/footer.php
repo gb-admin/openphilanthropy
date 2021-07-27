@@ -1,4 +1,3 @@
-				<span class="mask-page mask-main"></span>
 			</main>
 
 			<?php
@@ -92,8 +91,6 @@
 						</div>
 					</div>
 				</div>
-
-				<span class="mask-page mask-footer"></span>
 			</footer>
 		</div>
 

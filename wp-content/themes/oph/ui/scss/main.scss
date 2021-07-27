@@ -13,51 +13,29 @@
 
 body {
   &.is-open {
-    .mask-page {
-      opacity: .25;
+    #accessory {
+      opacity: 1;
       pointer-events: auto;
     }
-    #page {
-      transform: translate3d(-252px, 0, 0);
-    }
   }
-}
-
-.mask-page {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  opacity: 0;
-  position: absolute;
-  z-index: 900;
-  transition: $smooth-ease;
-  cursor: e-resize;
-  pointer-events: none;
 }
 
 #accessory {
   top: 0;
   right: 0;
-  width: 252px;
+  width: 100%;
   height: 100%;
   background-color: $periwinkle-2;
   color: #fff;
-  display: none;
   overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
-  z-index: 10;
+  z-index: 30;
+  transition: $fast;
   &.is-closing,
   &.is-open {
     display: block;
-  }
-}
-
-#header,
-#page {
-  &.is-open {
-    transform: translate3d(-252px, 0, 0);
   }
 }
 
@@ -3872,19 +3850,24 @@ button,
 }
 
 #accessory {
-  box-shadow: 8px 0 12px -8px rgba(0, 0, 0, .5) inset;
   a {
     color: #fff;
-    font-size: 16px;
-    font-weight: 900;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 30px;
+    text-transform: uppercase;
   }
   li {
     display: block;
     transition: $fast;
-    &:hover,
     &.is-open {
       > a {
-        background: hsla(0, 0%, 100%, .125);
+        .menu-icon {
+          &::after {
+            opacity: 0;
+          }
+        }
       }
     }
     &.menu-item-has-children {
@@ -3898,9 +3881,7 @@ button,
       }
       &.is-open {
         > a {
-          .menu-icon {
-            transform: rotate(90deg);
-          }
+          .menu-icon {}
         }
       }
       ul {
@@ -3912,7 +3893,6 @@ button,
         }
       }
       > a {
-        padding-left: 34px;
         span:first-child {
           padding: 0
         }
@@ -3922,7 +3902,9 @@ button,
       }
     }
     a {
-      padding: 16px 16px 15px 16px;
+      margin: 0 20px 1px;
+      padding: 13px 0 10px;
+      border-bottom: 2px solid #adb6c7;
       display: block;
       position: relative;
       transition: $fast;
@@ -3935,9 +3917,45 @@ button,
       margin-bottom: 0;
     }
   }
+  .accessory-header {
+    padding: 0 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    position: absolute;
+    .accessory-header__content {
+      border-bottom: 3px solid #adb6c7;
+      height: 100%;
+    }
+  }
   .close {
+    top: 23px;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    &:focus,
+    &:hover {
+      background: none;
+    }
     svg {
+      width: 25px;
+      height: 25px;
       fill: #fff;
+    }
+  }
+  .logo {
+    top: 18px;
+    left: 20px;
+    position: absolute;
+    img,
+    svg {
+      width: 151px;
+      height: 49px;
+      fill: #fff;
+      path {
+        fill: #fff;
+      }
     }
   }
   .share {
@@ -3958,29 +3976,45 @@ button,
 
 #accessory-menu {
   margin: 0;
-  padding-top: 3rem;
+  padding-top: 110px;
   ul {
     display: none;
     a {
       padding: 12px 16px;
       font-size: 16px;
     }
-    .menu-icon {
-      top: 16px;
-      left: 24px;
-    }
   }
   .menu-icon {
     top: 21px;
-    left: 16px;
-    width: 12px;
-    height: 12px;
+    right: 16px;
+    width: 18px;
+    height: 18px;
     font-size: 16px;
     color: #fff;
     display: none;
     position: absolute;
     z-index: 20;
     transition: $fast;
+    &::after,
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      background: #fff;
+      position: absolute;
+      transition: $fast;
+    }
+    &::after {
+      top: -4px;
+      left: 8px;
+      width: 2px;
+      height: 18px;
+    }
+    &::before {
+      top: 4px;
+      width: 18px;
+      height: 2px;
+    }
     svg {
       width: 12px;
       height: 12px;
@@ -3996,11 +4030,11 @@ button,
 
 #accessory-toggle {
   margin: 0;
-  padding: 8px 10px;
-  top: 18px;
-  right: 10px;
-  width: 28px;
-  height: 32px;
+  padding: 8px;
+  top: 21px;
+  right: 12px;
+  width: 27px;
+  height: 21px;
   min-width: 0;
   background: none;
   border: 0;
@@ -4023,6 +4057,8 @@ button,
   i,
   svg {
     margin: 0;
+    width: 27px;
+    height: 21px;
     fill: $periwinkle-2;
     vertical-align: top;
     transition: $smooth;
