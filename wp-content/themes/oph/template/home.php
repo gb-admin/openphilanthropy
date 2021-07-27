@@ -23,7 +23,7 @@
 <?php get_template_part( 'part/hero' ); ?>
 
 <?php if ( $homepage_grants ) : ?>
-	<div class="new-class" id="highlighted-grants">
+	<div id="highlighted-grants">
 		<div class="wrap">
 			<?php if ( $homepage_grants_title ) : ?>
 				<div class="line-heading">
