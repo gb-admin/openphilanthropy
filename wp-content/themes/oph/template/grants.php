@@ -157,7 +157,7 @@
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
-			<ul class="block-feed-title-head">
+			<ul class="block-feed-title-head<?php if ( $view_list ) { echo ' is-active'; } ?>">
 				<li>
 					<h6>Grant<br> Type</h6>
 				</li>
