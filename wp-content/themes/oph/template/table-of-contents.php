@@ -19,21 +19,31 @@
 				<div class="content-table-of-contents__aside pagenav-aside">
 					<h3>Navigate this page with the links below</h3>
 
-					<ul aria-label="Steps Navigation List" class="aside-steps-navigation" id="steps-navigation-list">
-						<?php foreach ( $content_sections as $k => $i ) : $k = $k + 1; ?>
-							<li>
-								<h6>
-									<a data-goto="#<?php echo $title_href; ?>" href="#<?php echo $title_href; ?>" title="Stage <?php echo $k; ?>">Stage <?php echo $k; ?>:</a>
-								</h6>
+					<nav aria-label="Content Navigation" id="content-navigation">
+						<ul class="list-content-navigation" id="content-navigation-list">
+							<?php foreach ( $content_sections as $k => $i ) : $k = $k + 1; ?>
+								<li>
+									<h4>
+										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['section_title']; ?>">
+											<?php echo $k . '. ' . $i['section_title']; ?> <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+										</a>
+									</h4>
 
-								<h4>
-									<a data-goto="#<?php echo $title_href; ?>" href="#<?php echo $title_href; ?>" title="<?php echo $i['title']; ?>">
-										<?php echo $i['title']; ?> <svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
-								</h4>
-							</li>
-						<?php endforeach; ?>
-					</ul>
+									<?php if ( $i['content'] ) : ?>
+										<ul>
+											<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
+												<li>
+													<h5>
+														<a data-goto="#content-<?php echo $n; ?>" href="#content-<?php echo $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
+													</h5>
+												</li>
+											<?php endforeach; ?>
+										</ul>
+									<?php endif; ?>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</nav>
 				</div>
 			<?php endif; ?>
 
@@ -47,14 +57,9 @@
 										<h2 id="section-<?php echo $k; ?>"><?php echo $k . '. ' . $i['section_title']; ?></h2>
 									</div>
 
-									<?php foreach ( $i['content'] as $n => $c ) : ?>
-
-										<?php
-											$n = $n + 1;
-										?>
-
+									<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
 										<div class="section-content">
-											<h4 id="content-<?php echo $k . '.' . $n; ?>"><?php echo $k . '.' . $n . $c['title']; ?></h4>
+											<h4 id="content-<?php echo $k . '.' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
 
 											<div>
 												<?php echo $c['entry']; ?>

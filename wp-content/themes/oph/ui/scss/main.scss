@@ -2383,7 +2383,18 @@ button,
       max-width: 221px;
     }
   }
-  .content-table-of-contents__entry {}
+  .content-table-of-contents__entry {
+    h2 {
+      margin-bottom: 27px;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 42px;
+    }
+    h4 {
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+  }
   .content-table-of-contents__main {}
   @media only screen and (min-width: $md) {
     padding: 60px 0 100px;
@@ -2809,6 +2820,42 @@ button,
     }
     > h2 {
       padding: 0 32px;
+    }
+  }
+}
+
+.list-content-navigation {
+  > li {
+    a {
+      display: inline-flex;
+      align-items: center;
+    }
+    h4 {
+      margin-bottom: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.375;
+      & + ul {
+        margin-top: -8px;
+      }
+    }
+    ul {
+      margin-bottom: 20px;
+      padding-left: 18px;
+      display: none;
+      > li {
+        h5 {
+          margin-bottom: 8px;
+          color: #000;
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+    svg {
+      margin-left: 10px;
+      width: 12px;
+      height: 8px;
     }
   }
 }
