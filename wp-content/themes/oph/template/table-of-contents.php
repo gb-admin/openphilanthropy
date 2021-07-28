@@ -24,9 +24,11 @@
 							<?php foreach ( $content_sections as $k => $i ) : $k = $k + 1; ?>
 								<li>
 									<h4>
-										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['section_title']; ?>">
-											<?php echo $k . '. ' . $i['section_title']; ?> <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-										</a>
+										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['section_title']; ?>"><?php echo $k . '. ' . $i['section_title']; ?></a>
+
+										<div class="content-navigation-icon">
+											<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+										</div>
 									</h4>
 
 									<?php if ( $i['content'] ) : ?>
@@ -34,7 +36,7 @@
 											<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
 												<li>
 													<h5>
-														<a data-goto="#content-<?php echo $n; ?>" href="#content-<?php echo $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
+														<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
 													</h5>
 												</li>
 											<?php endforeach; ?>
@@ -49,27 +51,25 @@
 
 			<?php if ( $content_sections ) : ?>
 				<div class="content-table-of-contents__entry pagenav-content">
-					<div class="content-table-of-contents__content">
-						<?php foreach ( $content_sections as $k => $i ) : ?>
-							<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; ?>
-								<div class="content-table-of-contents__section">
-									<div class="section-title">
-										<h2 id="section-<?php echo $k; ?>"><?php echo $k . '. ' . $i['section_title']; ?></h2>
-									</div>
-
-									<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
-										<div class="section-content">
-											<h4 id="content-<?php echo $k . '.' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
-
-											<div>
-												<?php echo $c['entry']; ?>
-											</div>
-										</div>
-									<?php endforeach; ?>
+					<?php foreach ( $content_sections as $k => $i ) : ?>
+						<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; ?>
+							<div class="content-table-of-contents__section">
+								<div class="section-title">
+									<h2 id="section-<?php echo $k; ?>"><?php echo $k . '. ' . $i['section_title']; ?></h2>
 								</div>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</div>
+
+								<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
+									<div class="section-content">
+										<h4 id="content-<?php echo $k . '-' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
+
+										<div class="section-content__entry">
+											<?php echo $c['entry']; ?>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
 		</div>

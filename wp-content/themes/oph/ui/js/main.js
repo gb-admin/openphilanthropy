@@ -2306,4 +2306,15 @@ jQuery(function($) {
       $(this).attr('href', linkUrl.href);
     });
   });
+
+  /**
+   * Content navigation.
+   */
+  $('.content-navigation-icon').on('click', function(e) {
+    e.preventDefault();
+
+    var childList = $(this).closest('li').children('ul:first');
+
+    childList.slideToggle(200);
+  });
 });
