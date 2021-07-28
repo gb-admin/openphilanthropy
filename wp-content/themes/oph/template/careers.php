@@ -8,8 +8,7 @@
 	get_header();
 
 	$careers_content = get_field( 'careers_content' );
-
-	// pr( $careers_content );
+	$footnotes = get_field( 'footnotes' );
 
 	$careers = new WP_Query( array(
 		'post_type' => 'careers',
@@ -72,6 +71,40 @@
 			</div>
 
 			<div class="content-careers__entry pagenav-content">
+				<?php if ( $careers->have_posts() ) : ?>
+					<div class="careers-positions">
+						<h2>Open Positions</h2>
+
+						<ul class="list-career-positions">
+							<?php while ( $careers->have_posts() ) : $careers->the_post(); ?>
+
+								<?php
+									$application_link_text = get_field( 'application_link_text' );
+									$application_link_url = get_field( 'application_link_url' );
+
+									if ( ! $application_link_text ) {
+										$application_link_text = 'Apply here';
+									}
+								?>
+
+								<?php if ( $application_link_url ) : ?>
+									<li>
+										<h3><a href="<?php echo $application_link_url; ?>"><?php the_title(); ?></a></h3>
+
+										<p>
+											<a class="application-link" href="<?php echo $application_link_url; ?>">
+												<?php echo $application_link_text; ?>
+
+												<svg aria-hidden="true" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
+											</a>
+										</p>
+									</li>
+								<?php endif; ?>
+							<?php endwhile; wp_reset_postdata(); ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+
 				<?php if ( have_rows( 'careers_content' ) ) : ?>
 					<div class="flexible-content-careers">
 						<?php while ( have_rows( 'careers_content' ) ) : the_row(); ?>
@@ -186,6 +219,14 @@
 								<?php endif; ?>
 							</div>
 						<?php endwhile; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ( $footnotes ) : ?>
+					<div class="content-careers__footnotes">
+						<div class="footnotes">
+							<?php echo $footnotes; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 			</div>
