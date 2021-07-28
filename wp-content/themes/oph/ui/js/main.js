@@ -1550,7 +1550,7 @@ jQuery(function($) {
     arrows: false,
     dots: true,
     rows: 0,
-    speed: 275,
+    speed: 250,
     asNavFor: $('.hero-caption-slider, .hero-photo-credit-slider')
   });
 
@@ -1559,7 +1559,7 @@ jQuery(function($) {
     draggable: false,
     fade: true,
     rows: 0,
-    speed: 275,
+    speed: 250,
     asNavFor: $('.hero-image-slider, .hero-photo-credit-slider')
   });
 
@@ -1568,7 +1568,7 @@ jQuery(function($) {
     draggable: false,
     fade: true,
     rows: 0,
-    speed: 275,
+    speed: 250,
     asNavFor: $('.hero-caption-slider, .hero-image-slider')
   });
 
@@ -1584,7 +1584,7 @@ jQuery(function($) {
     nextArrow: $('#quote-slideshow-next'),
     prevArrow: $('#quote-slideshow-prev'),
     rows: 0,
-    speed: 275,
+    speed: 250,
     asNavFor: $('.quote-slideshow__author.is-reel')
   });
 
@@ -1593,7 +1593,7 @@ jQuery(function($) {
     draggable: false,
     fade: true,
     rows: 0,
-    speed: 275,
+    speed: 250,
     asNavFor: $('.quote-slideshow__slider.is-reel')
   });
 
