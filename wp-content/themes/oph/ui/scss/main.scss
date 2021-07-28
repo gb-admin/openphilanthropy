@@ -143,7 +143,7 @@ body {
       content: "\2022";
       width: 16px;
       color: #000;
-      font-weight: 700;
+      font-weight: 800;
       display: inline-block;
     }
   }
@@ -247,7 +247,7 @@ body {
 
 a {
   color: $color-body;
-  font-weight: 700;
+  font-weight: 800;
   transition: $fast;
   &:hover {
     color: $periwinkle-2;
@@ -1185,7 +1185,7 @@ button,
   flex-shrink: 0;
   h3 {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 24px;
     max-width: 221px;
   }
@@ -2289,7 +2289,7 @@ button,
     margin-bottom: 40px;
     h3 {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 24px;
     }
     h4 {
@@ -2373,6 +2373,27 @@ button,
   }
 }
 
+.content-table-of-contents {
+  padding: 52px 0 80px;
+  .content-table-of-contents__aside {
+    h3 {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 24px;
+      max-width: 221px;
+    }
+  }
+  .content-table-of-contents__entry {}
+  .content-table-of-contents__main {}
+  @media only screen and (min-width: $md) {
+    padding: 60px 0 100px;
+    .content-table-of-contents__aside {}
+    .content-table-of-contents__main {
+      display: flex;
+    }
+  }
+}
+
 .search-results {
   article {
     margin-bottom: 40px;
@@ -2432,7 +2453,7 @@ button,
     margin-bottom: 48px;
     h3 {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 24px;
       max-width: 221px;
     }
