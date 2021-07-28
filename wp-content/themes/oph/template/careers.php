@@ -123,7 +123,43 @@
 														</div>
 													</div>
 
-													<div class="quote-slideshow__foot"></div>
+													<div class="quote-slideshow__foot">
+														<div class="quote-slideshow__author<?php if ( count( $quote_slideshow ) > 1 ) { echo ' is-reel'; } ?>">
+															<?php foreach ( $quote_slideshow as $slide ) : ?>
+
+																<?php
+																	$author_image = get_the_post_thumbnail_url( $slide['author']->ID, 'lg' );
+																	$author_title = get_the_title( $slide['author']->ID );
+
+																	$team_title = get_field( 'team_title', $slide['author']->ID );
+																?>
+
+																<div>
+																	<div class="profile-image">
+																		<div class="profile-image__avatar">
+																			<img src="<?php echo $author_image; ?>" alt="">
+																		</div>
+
+																		<div class="profile-image__detail">
+																			<h4><?php echo $author_title; ?></h4>
+
+																			<?php if ( $team_title ) : ?>
+																				<h6><?php echo $team_title; ?></h6>
+																			<?php endif; ?>
+																		</div>
+																	</div>
+																</div>
+															<?php endforeach; ?>
+														</div>
+
+														<div class="quote-slideshow__nav">
+															<button class="slick-arrow" id="quote-slideshow-prev"></button>
+
+															<div class="quote-slideshow-dots"></div>
+
+															<button class="slick-arrow" id="quote-slideshow-next"></button>
+														</div>
+													</div>
 												</div>
 											<?php endif; ?>
 										<?php elseif ( get_row_layout() == 'text_blocks' ) : ?>

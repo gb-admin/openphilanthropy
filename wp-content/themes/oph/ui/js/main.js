@@ -1578,10 +1578,23 @@ jQuery(function($) {
   }
 
   $('.quote-slideshow__slider.is-reel').slick({
+    appendDots: $('.quote-slideshow-dots'),
     arrows: true,
     dots: true,
+    nextArrow: $('#quote-slideshow-next'),
+    prevArrow: $('#quote-slideshow-prev'),
     rows: 0,
-    speed: 275
+    speed: 275,
+    asNavFor: $('.quote-slideshow__author.is-reel')
+  });
+
+  $('.quote-slideshow__author.is-reel').slick({
+    arrows: false,
+    draggable: false,
+    fade: true,
+    rows: 0,
+    speed: 275,
+    asNavFor: $('.quote-slideshow__slider.is-reel')
   });
 
   $( '.reel--bleed .slick-slide' ).on( 'click', function( e ) {
