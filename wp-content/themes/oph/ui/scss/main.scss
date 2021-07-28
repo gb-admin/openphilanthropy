@@ -4772,17 +4772,19 @@ button,
       margin-right: 0;
     }
     &:nth-last-child(-n+2) {
-      ul {
-        right: 0;
-        left: auto;
-        &::after {
+      @include max-width(1240px) {
+        ul {
+          right: 0;
+          left: auto;
+          &::after {
+            right: 0;
+            left: auto;
+          }
+        }
+        .menu-path-helper {
           right: 0;
           left: auto;
         }
-      }
-      .menu-path-helper {
-        right: 0;
-        left: auto;
       }
     }
     &::after {
