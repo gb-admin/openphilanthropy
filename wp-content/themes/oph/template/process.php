@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Template Name: Grantmaking Process
+	 * Template Name: Process
 	 */
 
 	the_post();
