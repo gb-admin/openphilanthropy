@@ -1170,6 +1170,7 @@ button,
 
 .pagenav-aside {
   margin-bottom: 48px;
+  flex-shrink: 0;
   h3 {
     font-size: 18px;
     font-weight: 700;
@@ -1206,9 +1207,9 @@ button,
 
 .pagenav-content {
   width: 100%;
-  max-width: 676px;
   @media only screen and (min-width: $md) {
     margin-left: 32px;
+    max-width: 676px;
     flex: 1;
   }
 }
@@ -1263,6 +1264,7 @@ button,
     line-height: 24px;
   }
   h6 {
+    margin-bottom: 0;
     color: #000;
     font-size: 14px;
     font-weight: 500;
@@ -1272,6 +1274,7 @@ button,
   }
   .profile-image__avatar {
     margin-right: 16px;
+    flex-shrink: 0;
     img {
       width: 60px;
       height: 60px;
@@ -1282,13 +1285,19 @@ button,
 }
 
 .quote-slideshow {
+  margin: 40px 0;
   padding: 16px;
   background-color: #eff1f5;
+  .quote-slideshow__author {
+    margin-bottom: 16px;
+    max-width: 300px;
+  }
   .quote-slideshow__foot {
     padding-top: 24px;
     border-top: 2px solid #c0c7d6;
   }
   .quote-slideshow__nav {
+    margin-left: auto;
     display: flex;
     align-items: center;
     .slick-dots {
@@ -1308,11 +1317,15 @@ button,
     }
   }
   .quote-slideshow__slider {
+    margin-bottom: 32px;
     p {
       font-size: 16px;
       font-weight: 400;
       font-style: italic;
       line-height: 22px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
     img {
       margin-bottom: 24px;
@@ -1338,7 +1351,19 @@ button,
     background-position: top 7px left 10px;
   }
   @media only screen and (min-width: $md) {
+    padding: 24px;
+    max-width: calc(100vw - 352px);
+  }
+  @media only screen and (min-width: $lg) {
+    margin: 50px 0;
     padding: 50px 46px;
+    .quote-slideshow__author {
+      margin-bottom: 0;
+    }
+    .quote-slideshow__foot {
+      display: flex;
+      align-items: flex-start;
+    }
   }
 }
 
