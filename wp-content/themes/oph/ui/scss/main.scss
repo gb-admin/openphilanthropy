@@ -1787,6 +1787,9 @@ button,
 
 .content-careers {
   padding: 40px 0 80px;
+  .aside-post-navigation-mobile {
+    display: none;
+  }
   .content-careers__entry {
     h1,
     h2,
