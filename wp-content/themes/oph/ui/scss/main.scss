@@ -599,9 +599,7 @@ button,
   > *:last-child {
     margin-bottom: 0;
   }
-  @media only screen and (min-width: $md) {
-    margin-bottom: 2rem;
-  }
+
 }
 
 .entry-content {
@@ -669,6 +667,82 @@ button,
 /**
  * Style
  */
+
+.aside-post-navigation {
+  margin: 36px 0 40px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  a {
+    padding: 8px 12px;
+    padding-right: 35px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:hover {
+      color: #000;
+      &::before {
+        opacity: 1;
+      }
+    }
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-width: calc(100% + 32px);
+      background: linear-gradient(90deg, rgba(204, 204, 204, 1) 0%, rgba(255, 255, 255, 0) 100%);
+      opacity: 0;
+      position: absolute;
+      z-index: -1;
+      transition: $fast;
+    }
+  }
+  svg {
+    width: 25px;
+    height: 18px;
+  }
+  .aside-post-navigation-icon {
+    display: block;
+  }
+  > li {
+    margin-bottom: 8px;
+    position: relative;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    svg {
+      margin-top: -9px;
+      top: 50%;
+      right: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    > a {
+      max-width: 100%;
+      display: inline-block;
+      > span {
+        width: 100%;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.aside-post-navigation-icon {
+  display: none;
+}
+
+.aside-post-navigation-mobile {
+  @media only screen and (min-width: $md) {
+    display: none;
+  }
+}
 
 .copyright {
   color: #a6a9aa;
@@ -1094,6 +1168,51 @@ button,
   }
 }
 
+.pagenav-aside {
+  margin-bottom: 48px;
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    max-width: 221px;
+  }
+  .chosen-container {
+    margin-bottom: 24px;
+    .chosen-single {
+      @extend %select--box;
+    }
+  }
+  .social-media {
+    a {
+      background-color: $periwinkle-2;
+      &:hover {
+        background-color: $periwinkle-3;
+      }
+    }
+    svg {
+      fill: #fff;
+    }
+  }
+  @media only screen and (min-width: $md) {
+    top: 110px;
+    width: 280px;
+    align-self: flex-start;
+    position: sticky;
+  }
+  @media only screen and (min-width: $lg) {
+    top: 138px;
+  }
+}
+
+.pagenav-content {
+  width: 100%;
+  max-width: 676px;
+  @media only screen and (min-width: $md) {
+    margin-left: 32px;
+    flex: 1;
+  }
+}
+
 .pagination {
   margin-bottom: -15px;
   display: flex;
@@ -1510,6 +1629,78 @@ button,
   @media only screen and (min-width: $md) {
     padding: 60px 0 100px;
   }
+}
+
+.quote-slideshow {
+  padding: 16px;
+  background-color: #eff1f5;
+  @media only screen and (min-width: $md) {
+    padding: 50px 46px;
+  }
+}
+
+.text-blocks {
+  margin: 34px 0;
+  h4 {
+    margin-bottom: 16px;
+    font-weight: 800;
+  }
+  .text-blocks__cell {
+    margin-bottom: 24px;
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+  .text-blocks__grid {}
+  @media only screen and (min-width: $md) {
+    margin: 54px 0 0;
+    .text-blocks__cell {
+      margin-bottom: 54px;
+      margin-left: 34px;
+      width: calc(50% - 34px);
+    }
+    .text-blocks__grid {
+      margin-left: -34px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.content-careers {
+  padding: 64px 0;
+  .content-careers__entry {
+    h2 {
+      font-weight: 800;
+    }
+    .entry-content {
+      p {
+        strong {
+          &:only-child {
+            color: $periwinkle-3;
+          }
+        }
+      }
+    }
+    .entry-title {
+      margin-bottom: 12px;
+    }
+  }
+  .content-careers__main {}
+  .content-careers__section {
+    margin-bottom: 40px;
+    padding-top: 26px;
+    border-top: 2px solid #cdd2de;
+  }
+  @media only screen and (min-width: $md) {
+    .content-careers__main {
+      display: flex;
+    }
+    .content-careers__section {
+      margin-bottom: 68px;
+    }
+  }
+  @media only screen and (min-width: $lg) {}
 }
 
 .content-focus-area-detail {
@@ -2048,75 +2239,6 @@ button,
     font-size: 34px;
     line-height: 42px;
   }
-  .aside-post-navigation {
-    margin: 40px 0;
-    display: none;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    a {
-      padding: 8px 12px;
-      padding-right: 35px;
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      position: relative;
-      &:hover {
-        color: #000;
-        &::before {
-          opacity: 1;
-        }
-      }
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        min-width: calc(100% + 32px);
-        background: linear-gradient(90deg, rgba(204, 204, 204, 1) 0%, rgba(255, 255, 255, 0) 100%);
-        opacity: 0;
-        position: absolute;
-        z-index: -1;
-        transition: $fast;
-      }
-    }
-    svg {
-      width: 25px;
-      height: 18px;
-    }
-    .aside-post-navigation-icon {
-      display: block;
-    }
-    > li {
-      margin-bottom: 8px;
-      position: relative;
-      &:last-child {
-        margin-bottom: 0;
-      }
-      svg {
-        margin-top: -9px;
-        top: 50%;
-        right: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      > a {
-        max-width: 100%;
-        display: inline-block;
-        > span {
-          width: 100%;
-          display: block;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-    }
-  }
-  .aside-post-navigation-icon {
-    display: none;
-  }
   .content-single__aside {
     margin-bottom: 48px;
     h3 {
@@ -2135,34 +2257,13 @@ button,
   .post-featured-image {
     margin-bottom: 32px;
   }
-  .social-media {
-    a {
-      background-color: $periwinkle-2;
-      &:hover {
-        background-color: $periwinkle-3;
-      }
-    }
-    svg {
-      fill: #fff;
-    }
-  }
-  // @media only screen and (min-width: $sm) {
-  //   padding: 64px 0;
-  // }
   @media only screen and (min-width: $md) {
     padding: 76px 0;
     .aside-post-navigation {
       display: block;
     }
-    .aside-post-navigation-mobile,
     #post_navigation_list_mobile_chosen {
       display: none;
-    }
-    .content-single__aside {
-      top: 110px;
-      width: 280px;
-      align-self: flex-start;
-      position: sticky;
     }
     .content-single__container {
       display: flex;
@@ -2262,6 +2363,21 @@ button,
   h2,
   h3 {
     scroll-margin-top: 86px;
+  }
+  ol {
+    margin: 28px 0;
+    padding-left: 40px;
+    list-style: decimal;
+    > li {
+      margin-bottom: 24px;
+      padding-left: 2px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &::marker {
+        font-weight: 800;
+      }
+    }
   }
   @media only screen and (min-width: $lg) {
     h1,

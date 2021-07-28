@@ -1577,73 +1577,12 @@ jQuery(function($) {
     $('.hero .slick-list').attr('tabindex', 0).focus();
   }
 
-  $( '.reel' ).slick( {
-    arrows: false,
+  $('.quote-slideshow__slider.is-reel').slick({
+    arrows: true,
+    dots: true,
     rows: 0,
     speed: 275
-  } );
-
-  $( '.logos-reel' ).slick( {
-    appendArrows: $( '.logos-reel-content' ),
-    autoplay: true,
-    autoplaySpeed: 1000,
-    centerMode: true,
-    nextArrow: nextArrow,
-    prevArrow: prevArrow,
-    rows: 0,
-    speed: 250,
-    slidesToScroll: 3
-  } );
-
-  $( '#careers-image-reel' ).slick( {
-    nextArrow: nextArrow,
-    prevArrow: prevArrow,
-    rows: 0,
-    speed: 250
-  } );
-
-  $( '.logos-reel .slick-slide' ).on( 'click', function( e ) {
-    var i = $( this ).data( 'slick-index' );
-
-    if ( $('.slick-slider' ).slick( 'slickCurrentSlide' ) !== i ) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      $( '.slick-slider' ).slick( 'slickGoTo', i );
-    }
-  } );
-
-  var logos_reel = function() {
-    var logos_reel = $( '.logos-reel' );
-
-    if ( window.matchMedia( '(min-width: 1024px)' ).matches ) {
-      logos_reel.slick( 'slickSetOption', {
-        slidesToShow: 4
-      }, true );
-    } else if ( window.matchMedia( '(min-width: 768px)' ).matches ) {
-      logos_reel.slick( 'slickSetOption', {
-        slidesToShow: 3
-      }, true );
-    } else if ( window.matchMedia( '(min-width: 375px)' ).matches ) {
-      logos_reel.slick( 'slickSetOption', {
-        slidesToShow: 2
-      }, true );
-    } else {
-      logos_reel.slick( 'slickSetOption', {
-        slidesToShow: 1
-      }, true );
-    }
-  };
-
-  logos_reel();
-
-  $( window ).on( 'load', function() {
-    logos_reel();
-  } );
-
-  $( window ).on( 'resize', function() {
-    setTimeout( logos_reel, 300 );
-  } );
+  });
 
   $( '.reel--bleed .slick-slide' ).on( 'click', function( e ) {
     var i = $( this ).data( 'slick-index' );

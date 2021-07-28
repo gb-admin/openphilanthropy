@@ -51,7 +51,7 @@
 <div class="content-single" id="grants-post">
 	<div class="wrap">
 		<div class="content-single__container">
-			<div class="content-single__aside">
+			<div class="content-single__aside pagenav-aside">
 				<h3>Navigate this page with the links below</h3>
 
 				<ul aria-label="Post Navigation List" class="aside-post-navigation" id="post-navigation-list"></ul>
@@ -81,7 +81,7 @@
 				</div>
 			</div>
 
-			<div class="content-single__main">
+			<div class="content-single__main pagenav-content">
 				<?php if ( $post_thumbnail ) : ?>
 					<img class="post-thumbnail" src="<?php echo $post_thumbnail; ?>" alt="">
 				<?php endif; ?>
