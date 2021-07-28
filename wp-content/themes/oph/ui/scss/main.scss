@@ -1855,6 +1855,14 @@ button,
         margin: 54px 0 24px;
       }
       p {
+        margin-bottom: 24px;
+        img {
+          margin: 24px 0;
+          width: 100%;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
         strong {
           &:only-child {
             color: $periwinkle-3;
