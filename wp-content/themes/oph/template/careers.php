@@ -98,10 +98,10 @@
 
 								<?php if ( $application_link_url ) : ?>
 									<li>
-										<h3><a href="<?php echo $application_link_url; ?>"><?php the_title(); ?></a></h3>
+										<h3><a href="<?php echo $application_link_url['url']; ?>"><?php the_title(); ?></a></h3>
 
 										<p>
-											<a class="application-link" href="<?php echo $application_link_url; ?>">
+											<a class="application-link" href="<?php echo $application_link_url['url']; ?>">
 												<?php echo $application_link_text; ?>
 
 												<svg aria-hidden="true" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
