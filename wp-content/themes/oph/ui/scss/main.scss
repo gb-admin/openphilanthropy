@@ -4179,6 +4179,9 @@ button,
   }
   .list-3-col {
     margin-top: 16px;
+    h4 {
+      margin-bottom: 30px;
+    }
   }
   @media only screen and (min-width: $md) {
     .button-group {
@@ -4186,6 +4189,13 @@ button,
     }
     .line-heading {
       margin-bottom: 70px;
+    }
+  }
+  @media only screen and (min-width: $lg) {
+    .list-3-col {
+      h4 {
+        margin-bottom: 40px;
+      }
     }
   }
   @include max-width($md) {
