@@ -4635,6 +4635,9 @@ button,
   }
   @media only screen and (min-width: $lg) {
     padding: 80px 0 84px;
+    .copyright {
+      margin-top: 38px;
+    }
   }
   @include max-width($md) {
     .footer-cell-menu > ul {
