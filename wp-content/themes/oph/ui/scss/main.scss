@@ -3024,6 +3024,13 @@ button,
     a {
       display: flex;
       align-items: center;
+      &:hover {
+        svg {
+          path {
+            stroke: $periwinkle-2;
+          }
+        }
+      }
       svg {
         margin-left: 10px;
         width: 23px;
