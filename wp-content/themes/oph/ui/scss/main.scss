@@ -4193,9 +4193,22 @@ button,
   }
   @media only screen and (min-width: $lg) {
     .list-3-col {
+      margin-left: -64px;
       h4 {
         margin-bottom: 40px;
       }
+      .bucket-description {
+        padding: 0 16px;
+      }
+      > li {
+        margin-left: 64px;
+        width: calc(33.33333% - 64px);
+      }
+    }
+  }
+  @media only screen and (min-width: $xl) {
+    .list-3-col {
+      padding: 0 24px;
     }
   }
   @include max-width($md) {
