@@ -4553,6 +4553,9 @@ button,
     font-size: 16px;
     line-height: 22px;
     font-weight: 400;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   h1,
   h2,
