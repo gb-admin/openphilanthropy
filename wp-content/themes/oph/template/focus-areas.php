@@ -78,37 +78,25 @@
 							}
 						?>
 
-						<?php if ( $bucket_title ) : ?>
-							<li class="<?php if ( ! $bucket_link_url ) { echo 'no-link'; } ?>">
-								<?php if ( $bucket_image_path ) : ?>
-									<?php if ( $bucket_link_url ) : ?>
-										<div aria-hidden="true" class="bucket-image">
-											<a href="<?php echo $bucket_link_url; ?>">
-												<img src="<?php echo $bucket_image_path; ?>" alt="">
-											</a>
-										</div>
-									<?php else : ?>
+						<?php if ( $bucket_title && $bucket_link_url ) : ?>
+							<li>
+								<a href="<?php echo $bucket_link_url; ?>">
+									<?php if ( $bucket_image_path ) : ?>
 										<div aria-hidden="true" class="bucket-image">
 											<img src="<?php echo $bucket_image_path; ?>" alt="">
 										</div>
+									<?php else : ?>
+										<div aria-hidden="true" class="bucket-image"></div>
 									<?php endif; ?>
-								<?php else : ?>
-									<div aria-hidden="true" class="bucket-image"></div>
-								<?php endif; ?>
 
-								<?php if ( $bucket_link_url ) : ?>
-									<h4>
-										<a href="<?php echo $bucket_link_url; ?>"><?php echo $bucket_title; ?></a>
-									</h4>
-								<?php else : ?>
 									<h4><?php echo $bucket_title; ?></h4>
-								<?php endif; ?>
 
-								<?php if ( $bucket_content ) : ?>
-									<div class="bucket-description">
-										<?php echo $bucket_content; ?>
-									</div>
-								<?php endif; ?>
+									<?php if ( $bucket_content ) : ?>
+										<div class="bucket-description">
+											<?php echo $bucket_content; ?>
+										</div>
+									<?php endif; ?>
+								</a>
 							</li>
 						<?php endif; ?>
 					<?php endforeach; ?>

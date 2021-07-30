@@ -3943,6 +3943,13 @@ button,
   }
   > li {
     margin-bottom: 20px;
+    > a {
+      display: block;
+      &:hover {
+        background-color: $periwinkle-5;
+        color: #000;
+      }
+    }
   }
   @media only screen and (min-width: $md) {
     margin-left: -24px;
@@ -3952,7 +3959,10 @@ button,
     > li {
       margin-bottom: 0;
       margin-left: 24px;
-      width: calc(33.33333% - 24px);
+      width: calc(50% - 24px);
+      > a {
+        padding: 44px 22px;
+      }
     }
   }
   @media only screen and (min-width: $lg) {
@@ -4047,9 +4057,6 @@ button,
     .bucket-image {
       min-height: 150px;
     }
-    > li {
-      margin-bottom: 40px;
-    }
   }
   .focus-areas-content__main {
     margin: 0 auto 40px;
@@ -4059,23 +4066,19 @@ button,
   }
   @media only screen and (min-width: $md) {
     .focus-areas-content__main {
-      margin-bottom: 100px;
+      margin-bottom: 56px;
     }
     .list-4-col {
-      margin-bottom: 20px;
-      > li {
-        margin-bottom: 60px;
-      }
+      margin-bottom: 100px;
     }
   }
   @media only screen and (min-width: $lg) {
     .list-4-col {
-      margin-bottom: 0;
-      margin-left: -64px;
+      margin-left: -24px;
       > li {
-        margin-bottom: 80px;
-        margin-left: 64px;
-        width: calc(25% - 64px);
+        margin-bottom: 12px;
+        margin-left: 24px;
+        width: calc(25% - 24px);
       }
     }
   }
@@ -4214,7 +4217,7 @@ button,
         margin-left: 0;
         width: 50%;
         > a {
-          padding: 44px 24px;
+          padding: 44px 22px;
           display: block;
           &:hover {
             background-color: $periwinkle-5;
