@@ -726,7 +726,10 @@ button,
       > span {
         width: 100%;
         display: block;
-        white-space: nowrap;
+
+        // Added ellipses
+        /*white-space: nowrap;*/
+
         overflow: hidden;
         text-overflow: ellipsis;
       }
