@@ -3586,6 +3586,7 @@ button,
     &:focus,
     &:hover {
       background: none;
+      text-decoration: underline;
     }
     .sidebar-filter-hide-icon {
       margin-left: 16px;
