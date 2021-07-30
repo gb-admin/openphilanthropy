@@ -134,4 +134,6 @@
 	</div>
 <?php endif; ?>
 
+<?php get_template_part( 'part/cta', 'button' ); ?>
+
 <?php get_footer(); ?>
