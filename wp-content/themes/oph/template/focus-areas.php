@@ -114,13 +114,13 @@
 									<?php foreach ( $other_links as $link ) : ?>
 										<?php if ( $link['link']['url'] ) : ?>
 											<li>
-												<a href="<?php echo $link['link']['url']; ?>"><?php echo $link['link']['title']; ?></a>
+												<a href="<?php echo $link['link']['url']; ?>">
+													<h4><?php echo $link['link']['title']; ?></h4>
 
-												<div aria-hidden="true" class="other-links__icon">
-													<a href="<?php echo $link['link']['url']; ?>">
+													<div aria-hidden="true" class="other-links__icon">
 														<svg viewBox="0 0 36 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.55 1L34 8.5 26.55 16M0 8.5h34" stroke="#6e7ca0" stroke-width="2"/></svg>
-													</a>
-												</div>
+													</div>
+												</a>
 											</li>
 										<?php endif; ?>
 									<?php endforeach; ?>

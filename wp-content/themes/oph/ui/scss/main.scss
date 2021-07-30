@@ -3946,7 +3946,6 @@ button,
     > a {
       display: block;
       &:hover {
-        background-color: $periwinkle-5;
         color: #000;
       }
     }
@@ -3962,6 +3961,9 @@ button,
       width: calc(50% - 24px);
       > a {
         padding: 44px 22px;
+        &:hover {
+          background-color: $periwinkle-5;
+        }
       }
     }
   }
@@ -3981,8 +3983,23 @@ button,
       color: $periwinkle-2;
     }
   }
+  h4 {
+    font-weight: 800;
+  }
   li {
-    margin-bottom: 50px;
+    margin-bottom: 8px;
+    a {
+      padding: 28px 20px;
+      display: block;
+      &:hover {
+        background-color: $periwinkle-5;
+        svg {
+          path {
+            stroke: $periwinkle-3;
+          }
+        }
+      }
+    }
     svg {
       width: 35px;
       height: 16px;
@@ -3992,7 +4009,7 @@ button,
     }
   }
   .line-heading {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
   }
   .other-links__icon {
     margin-top: 20px;
@@ -4006,11 +4023,11 @@ button,
   }
   @media only screen and (min-width: $md) {
     li {
-      margin-left: 24px;
-      width: calc(33.33333% - 24px);
+      margin-left: 16px;
+      width: calc(33.33333% - 16px);
     }
     ul {
-      margin-left: -24px;
+      margin-left: -16px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -4022,10 +4039,10 @@ button,
   }
   @media only screen and (min-width: $lg) {
     li {
-      width: calc(25% - 24px);
+      width: calc(25% - 16px);
     }
     .line-heading {
-      margin-bottom: 80px;
+      margin-bottom: 52px;
     }
   }
 }
@@ -4056,6 +4073,9 @@ button,
     }
     .bucket-image {
       min-height: 150px;
+    }
+    > li {
+      margin-bottom: 40px;
     }
   }
   .focus-areas-content__main {
