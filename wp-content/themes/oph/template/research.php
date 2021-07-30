@@ -149,7 +149,7 @@
 								</a>
 							</div>
 						</div>
-					<?php endwhile; ?>
+					<?php endwhile; wp_reset_postdata(); ?>
 				</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
@@ -183,5 +183,7 @@
 		</div>
 	</div>
 </div>
+
+<?php get_template_part( 'part/cta', 'button' ); ?>
 
 <?php get_footer(); ?>
