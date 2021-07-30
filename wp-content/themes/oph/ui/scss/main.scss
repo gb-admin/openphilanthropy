@@ -2617,7 +2617,7 @@ button,
     padding: 64px 0 80px;
   }
   @media only screen and (min-width: $md) {
-    padding: 100px 0 124px;
+    padding: 76px 0 100px;
   }
 }
 
@@ -3268,7 +3268,7 @@ button,
     letter-spacing: 1px;
     line-height: 24px;
     text-transform: uppercase;
-  }     
+  }
   svg {
     width: 35px;
     height: 16px;
@@ -3284,21 +3284,33 @@ button,
     }
   }
   @media only screen and (min-width: $sm) {
-    margin-bottom: -48px;
-    margin-left: -64px;
+    margin-left: -16px;
     display: flex;
     flex-wrap: wrap;
     > li {
       margin-bottom: 48px;
-      margin-left: 64px;
-      width: calc(50% - 64px);
+      margin-left: 16px;
+      width: calc(50% - 16px);
+      > a {
+        margin: 0 auto;
+        padding: 24px;
+        max-width: 320px;
+        display: block;
+        &:hover {
+          background-color: $periwinkle-5;
+          svg {
+            path {
+              stroke: $periwinkle-3;
+            }
+          }
+        }
+      }
     }
   }
   @media only screen and (min-width: $lg) {
-    margin-bottom: -80px;
     > li {
-      margin-bottom: 80px;
-      width: calc(25% - 64px);
+      margin-bottom: 24px;
+      width: calc(25% - 16px);
     }
   }
   @include max-width($sm) {

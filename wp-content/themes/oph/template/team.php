@@ -29,19 +29,17 @@
 						?>
 
 						<li>
-							<h4>
-								<a href="<?php echo get_permalink(); ?>"><?php echo the_title(); ?></a>
-							</h4>
+							<a href="<?php echo get_permalink(); ?>">
+								<h4><?php echo the_title(); ?></h4>
 
-							<?php if ( $team_title ) : ?>
-								<h6><?php echo $team_title; ?></h6>
-							<?php endif; ?>
+								<?php if ( $team_title ) : ?>
+									<h6><?php echo $team_title; ?></h6>
+								<?php endif; ?>
 
-							<div aria-hidden="true" class="list-team__icon">
-								<a href="<?php echo get_permalink(); ?>">
+								<div aria-hidden="true" class="list-team__icon">
 									<svg viewBox="0 0 36 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.55 1L34 8.5 26.55 16M0 8.5h34" stroke="#6e7ca0" stroke-width="2"/></svg>
-								</a>
-							</div>
+								</div>
+							</a>
 						</li>
 					<?php endwhile; wp_reset_postdata(); ?>
 				</ul>
