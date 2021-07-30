@@ -86,21 +86,19 @@
 
 					<?php if ( $grant_title ) : ?>
 						<li>
-							<div class="bucket-image">
+							<a href="<?php echo $grant_link; ?>">
 								<?php if ( $grant_image ) : ?>
-									<a href="<?php echo $grant_link; ?>">
+									<div class="bucket-image">
 										<img src="<?php echo $grant_image; ?>" alt="">
-									</a>
+									</div>
 								<?php endif; ?>
-							</div>
 
-							<h4>
-								<a href="<?php echo $grant_link; ?>"><?php echo $grant_title; ?></a>
-							</h4>
+								<h4><?php echo $grant_title; ?></h4>
 
-							<div class="bucket-description">
-								<?php echo $grant_description; ?>
-							</div>
+								<div class="bucket-description">
+									<?php echo $grant_description; ?>
+								</div>
+							</a>
 						</li>
 					<?php endif; ?>
 				<?php endforeach; ?>
