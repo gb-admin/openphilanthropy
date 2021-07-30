@@ -3539,6 +3539,10 @@ button,
       &:hover {
         background-color: $periwinkle-4;
         border-color: $periwinkle-2;
+        & ~ svg,
+        & ~ button svg {
+          fill: $periwinkle-1;
+        }
       }
       // &:focus {
       //   & + svg {
@@ -3563,6 +3567,15 @@ button,
       fill: $periwinkle-2;
       position: absolute;
       z-index: 20;
+    }
+    .search-form {
+      &:hover {
+        button[type="submit"] {
+          svg {
+            fill: #fff;
+          }
+        }
+      }
     }
   }
 }
