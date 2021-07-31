@@ -255,19 +255,15 @@
 									<?php foreach ( $icon_grid as $icon ) : ?>
 										<?php if ( $icon['link'] && $icon['image'] ) : ?>
 											<li>
-												<a class="icon-grid__image" href="<?php echo $icon['link']['url']; ?>">
+												<a href="<?php echo $icon['link']['url']; ?>">
 													<img src="<?php echo $icon['image']['sizes']['lg']; ?>" alt="<?php echo $icon['image']['alt']; ?>">
-												</a>
 
-												<h4>
-													<a href="<?php echo $icon['link']['url']; ?>"><?php echo $icon['link']['title']; ?></a>
-												</h4>
+													<h4><?php echo $icon['link']['title']; ?></h4>
 
-												<div class="icon-grid__link">
-													<a href="<?php echo $icon['link']['url']; ?>">
+													<div class="icon-grid__link">
 														<svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-													</a>
-												</div>
+													</div>
+												</a>
 											</li>
 										<?php endif; ?>
 									<?php endforeach; ?>

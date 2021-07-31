@@ -2054,6 +2054,24 @@ button,
     .page-header {
       background-color: #e3efee;
     }
+    @media only screen and (min-width: $md) {
+      .list-icon-grid {
+        .icon-grid__link {
+          svg {
+            path {
+              stroke: #75b1ab;
+            }
+          }
+        }
+        > li {
+          > a {
+            &:hover {
+              background-color: rgba(117, 177, 171, .1);
+            }
+          }
+        }
+      }
+    }
   }
   &.color-theme--pink {
     .content-focus-area-detail-cta-button {
@@ -2109,6 +2127,24 @@ button,
     .page-header {
       background-color: #efe4eb;
     }
+    @media only screen and (min-width: $md) {
+      .list-icon-grid {
+        .icon-grid__link {
+          svg {
+            path {
+              stroke: #ad7a99;
+            }
+          }
+        }
+        > li {
+          > a {
+            &:hover {
+              background-color: rgba(173, 122, 153, .1);
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -2151,7 +2187,7 @@ button,
   @media only screen and (min-width: $md) {
     padding: 80px 0 20px;
     .line-heading {
-      margin-bottom: 50px;
+      margin-bottom: 12px;
     }
   }
   @media only screen and (min-width: $lg) {
@@ -2938,8 +2974,9 @@ button,
 }
 
 .list-icon-grid {
+  margin-bottom: 60px;
   .icon-grid__link {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     a {
@@ -2950,6 +2987,9 @@ button,
     svg {
       width: 23px;
       height: 16px;
+      path {
+        stroke: #4281a4;
+      }
     }
   }
   .icon-grid__image {
@@ -2968,33 +3008,41 @@ button,
       text-transform: uppercase;
     }
     img {
-      width: 150xp;
+      margin-bottom: 40px;
+      width: 150px;
       height: 150px;
     }
     > a {
+      height: 100%;
       display: inline-block;
       vertical-align: top;
     }
   }
   @media only screen and (min-width: $md) {
-    margin-left: -64px;
+    margin-left: -24px;
     display: flex;
     flex-wrap: wrap;
+    .icon-grid__link {
+      margin-top: 40px;
+    }
     > li {
-      margin-bottom: 80px;
-      margin-left: 64px;
-      width: calc(33.33333% - 64px);
+      margin-bottom: 14px;
+      margin-left: 24px;
+      width: calc(33.33333% - 24px);
+      > a {
+        padding: 40px;
+        &:hover {
+          background-color: rgba(66, 129, 164, .1);
+        }
+      }
     }
   }
   @media only screen and (min-width: $lg) {
-    padding: 0 64px;
-    > li {
-      margin-bottom: 100px;
-    }
+    padding: 0 24px;
   }
   @include max-width($md) {
     > li {
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       &:last-child {
         margin-bottom: 0;
       }
