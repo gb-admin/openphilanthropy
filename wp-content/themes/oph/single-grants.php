@@ -138,7 +138,7 @@
 								$related_eyebrow_copy = $related_eyebrow_link['title'];
 							}
 
-							$grants_focus_area = get_the_terms( $related_post->ID, 'grants-focus-area' );
+							$grants_focus_area = get_the_terms( $related_post->ID, 'focus-area' );
 
 							/**
 							 * Set eyebrow copy to Focus Area taxonomy.
@@ -202,7 +202,7 @@
 
 						$related_description = excerpt( $related_excerpt );
 
-						$grants_focus_area = get_the_terms( $related->ID, 'grants-focus-area' );
+						$grants_focus_area = get_the_terms( $related->ID, 'focus-area' );
 
 						if ( $grants_focus_area && ! is_wp_error( $grants_focus_area ) ) {
 							$related_eyebrow_copy = $grants_focus_area[0]->name;
