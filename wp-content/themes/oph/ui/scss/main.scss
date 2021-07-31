@@ -1378,8 +1378,16 @@ button,
       margin-bottom: 24px;
     }
   }
-  .quote-slideshow-dots {
+   .quote-slideshow-dots {
     display: flex;
+    button {
+      background-color: #c8cedc;
+    }
+    .slick-active {
+      button {
+        background-color: #6e7ca0;
+      }
+    }
   }
   .slick-arrow {
     padding: 0;
