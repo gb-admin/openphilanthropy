@@ -1135,8 +1135,8 @@ button,
 }
 
 .page-header-categories {
+  padding: 23px 0 36px;
   width: 100%;
-  height: 68px;
   background-color: $periwinkle-1;
   font-size: 16px;
   display: none;
@@ -1151,7 +1151,7 @@ button,
     }
   }
   a {
-    padding: 8px;
+    padding: 4px;
     color: #000;
     font-size: 16px;
     font-weight: 400;
@@ -1177,23 +1177,15 @@ button,
       position: relative;
     }
   }
+  ul {
+    margin-left: -4px;
+  }
   nav {
     display: flex;
   }
-  ul {
-    margin-left: -8px;
-    display: flex;
-    overflow: auto;
-    white-space: nowrap;
-    li {
-      margin-right: 8px;
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
   .clear-categories {
     margin-left: 16px;
+    min-width: 128px;
     color: $periwinkle-2;
     font-size: 16px;
     font-weight: 800;
@@ -1212,8 +1204,41 @@ button,
       margin-bottom: 0;
     }
   }
+  @media only screen and (min-width: $md) {
+    padding: 0;
+    height: 68px;
+    a {
+      padding: 8px;
+    }
+    ul {
+      margin-left: -8px;
+      display: flex;
+      overflow: auto;
+      white-space: nowrap;
+      li {
+        margin-right: 8px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
   @media only screen and (min-width: $lg) {
     scroll-margin-top: 114px;
+  }
+  @include max-width($md) {
+    ul {
+      width: 66.66667%;
+      li {
+        margin-bottom: 2px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .clear-categories {
+      width: 33.33333%;
+    }
   }
 }
 
