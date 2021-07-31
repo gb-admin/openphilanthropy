@@ -1368,7 +1368,7 @@ jQuery(function($) {
         trim = 86;
       }
 
-      if ($('body').hasClass('page-template-grantmaking-process')) {
+      if ($('body').hasClass('page-template-process')) {
         if (window.matchMedia('(min-width: 1024px)').matches) {
           trim = 144;
         } else {
