@@ -4297,8 +4297,11 @@ button,
 }
 
 #about-focus-areas {
-  padding: 60px 0 72px;
+  padding: 40px 0 60px;
   background: $periwinkle-1;
+  @media only screen and (min-width: $md) {
+    padding: 60px 0 72px;
+  }
 }
 
 #about-focus-areas-list {
@@ -4309,7 +4312,7 @@ button,
     font-size: 18px;
     line-height: 24px;
     text-align: center;
-    > :last-child {
+    &:last-child {
       margin-bottom: 0;
     }
     h3 {
