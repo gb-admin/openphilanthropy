@@ -2389,7 +2389,7 @@ button,
       line-height: 24px;
     }
     h4 {
-      margin-bottom: 20px;
+      margin-bottom: 0;
       color: #000;
       font-size: 18px;
       font-weight: 400;
@@ -2414,11 +2414,36 @@ button,
     ul {
       margin: 40px 0;
       li {
+        margin-bottom: 14px;
+        &:last-child {
+          margin-bottom: 0;
+        }
         a {
-          margin: -4px 0 0 -4px;
-          padding: 4px;
-          display: inline-flex;
-          align-items: center;
+          margin: -10px 0 0 -10px;
+          padding: 10px;
+          display: block;
+          position: relative;
+          &:hover {
+            &::before {
+              opacity: 1;
+            }
+          }
+          &::before {
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(110, 124, 160, .25) 0%, rgba(110, 124, 160, 0) 64.08%);
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+            transition: $fast;
+          }
+          h4 {
+            display: inline-flex;
+            align-items: center;
+          }
         }
         svg {
           margin-left: 10px;

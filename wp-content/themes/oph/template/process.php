@@ -29,15 +29,11 @@
 							?>
 
 							<li>
-								<h6>
-									<a data-goto="#<?php echo $step_href; ?>" href="#<?php echo $step_href; ?>" title="Stage <?php echo $k; ?>">Stage <?php echo $k; ?>:</a>
-								</h6>
+								<a data-goto="#<?php echo $step_href; ?>" href="#<?php echo $step_href; ?>" title="Stage <?php echo $k; ?>: <?php echo $i['title']; ?>">
+									<h6>Stage <?php echo $k; ?>:</h6>
 
-								<h4>
-									<a data-goto="#<?php echo $step_href; ?>" href="#<?php echo $step_href; ?>" title="<?php echo $i['title']; ?>">
-										<?php echo $i['title']; ?> <svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
-								</h4>
+									<h4><?php echo $i['title']; ?> <svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg></h4>
+								</a>
 							</li>
 						<?php endforeach; ?>
 					</ul>
