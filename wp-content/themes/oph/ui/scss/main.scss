@@ -1391,7 +1391,7 @@ button,
   }
   .slick-arrow {
     padding: 0;
-    background-color: #c8cedc;
+    background-color: rgba(110, 124, 160, .2);
     background-image: url('../img/angle-left-quote-slider.png');
     background-position: top 7px left 7px;
     background-repeat: no-repeat;
@@ -1400,6 +1400,10 @@ button,
     width: 26px;
     height: 26px;
     text-indent: -99999px;
+    transition: $fast;
+    &:hover {
+      background-color: rgba(110, 124, 160, .4);
+    }
   }
   #quote-slideshow-next {
     background-image: url('../img/angle-right-quote-slider.png');
