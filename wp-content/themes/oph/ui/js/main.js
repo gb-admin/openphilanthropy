@@ -1107,7 +1107,7 @@ jQuery(function($) {
    * Prevent Orphan
    */
   $( document ).ready( function() {
-    var element = $( 'h1, .line-heading h2, .list-3-col > li > h4, .list-4-col > li > h4, .page-header .entry-content p, .prevent-orphan, .footer-grid__cell h4, .footer-grid__cell button, .footer-grid__cell .button, .page-header .entry-content p' );
+    var element = $( '.page-header:not(.page-header--search) h1, .line-heading h2, .list-3-col > li > h4, .list-4-col > li > h4, .page-header .entry-content p, .prevent-orphan, .footer-grid__cell h4, .footer-grid__cell button, .footer-grid__cell .button, .page-header .entry-content p' );
 
     element.each( function() {
       var a = $( this ).html().trim().replace( '&nbsp;', ' ' ).split( ' ' );

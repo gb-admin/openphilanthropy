@@ -27,7 +27,7 @@
 			<?php endif; ?>
 
 			<div class="page-header__main">
-				<h1>Search Results for: <?php echo ucwords( htmlentities( $s, ENT_QUOTES, 'UTF-8' ) ); ?></h1>
+				<h1>Search Results for: <?php echo ucwords( $s ); ?></h1>
 
 				<?php if ( $page_header_content ) : ?>
 					<div class="entry-content">

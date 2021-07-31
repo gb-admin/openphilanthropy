@@ -114,7 +114,7 @@
 	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
-		<?php get_template_part( 'part/filter', 'sidebar' ); ?>
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'research' ) ); ?>
 
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 

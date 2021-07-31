@@ -1,4 +1,10 @@
 <?php
+	$post_type = '';
+
+	if ( $args['post_type'] ) {
+		$post_type = $args['post_type'];
+	}
+
 	$sidebar_filter = get_field( 'sidebar_filter' );
 
 	$params = get_url_params();
@@ -58,7 +64,18 @@
 		<div class="sidebar-filter__content">
 			<nav aria-label="Sidebar Filter Options" data-filter-anchor="categories">
 				<div class="sidebar-filter__search">
-					<?php get_template_part( 'searchform', 'grants' ); ?>
+
+					<?php
+						if ( $post_type ) {
+							if ( $post_type == 'grants' ) {
+								get_template_part( 'searchform', 'grants' );
+							} elseif ( $post_type == 'research' ) {
+								get_template_part( 'searchform', 'research' );
+							}
+						} else {
+							get_template_part( 'searchform' );
+						}
+					?>
 				</div>
 
 				<div class="sidebar-filter__option">

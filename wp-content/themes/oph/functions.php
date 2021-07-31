@@ -49,3 +49,19 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/register-post-type.php';
 require get_template_directory() . '/inc/register-taxonomy.php';
 require get_template_directory() . '/inc/shortcode.php';
+
+function custom_search_template( $template ) {
+  global $wp_query;
+
+  $post_type = get_query_var( 'post_type' );
+
+  if ( $wp_query->is_search && $post_type == 'grants' ) {
+    return locate_template( 'search-grants.php' );
+  } elseif ( $wp_query->is_search && $post_type == 'research' ) {
+  	return locate_template( 'search-research.php' );
+  }
+
+  return $template;   
+}
+
+add_filter( 'template_include', 'custom_search_template' );
