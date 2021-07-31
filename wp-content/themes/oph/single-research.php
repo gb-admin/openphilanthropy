@@ -4,6 +4,8 @@
 	get_header();
 
 	$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
+
+	$footnotes = get_field( 'footnotes' );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -49,6 +51,12 @@
 				<div class="entry-content">
 					<?php the_content(); ?>
 				</div>
+
+				<?php if ( $footnotes ) : ?>
+					<div class="entry-footnotes">
+						<?php echo $footnotes; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

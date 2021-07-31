@@ -313,7 +313,7 @@ hr {
   background: none;
   height: 0;
   border: 0;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #cdd2de;
 }
 
 svg {
@@ -2535,6 +2535,17 @@ button,
       .chosen-single {
         @extend %select--box;
       }
+    }
+  }
+  .entry-footnotes {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px solid #cdd2de;
+    font-size: 16px;
+    line-height: 22px;
+    opacity: .7;
+    p {
+      margin: 0;
     }
   }
   .post-featured-image {

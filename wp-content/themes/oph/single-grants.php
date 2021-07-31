@@ -42,6 +42,8 @@
 	if ( ! empty( $related_posts ) ) {
 		$related_query_posts = array_slice( $related_query_posts, 0, ( count( $related_posts ) * -1 ) );
 	}
+
+	$footnotes = get_field( 'footnotes' );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -89,6 +91,12 @@
 				<div class="entry-content">
 					<?php the_content(); ?>
 				</div>
+
+				<?php if ( $footnotes ) : ?>
+					<div class="entry-footnotes">
+						<?php echo $footnotes; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
