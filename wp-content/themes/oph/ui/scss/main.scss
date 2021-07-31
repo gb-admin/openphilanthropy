@@ -2457,6 +2457,20 @@ button,
     .grantmaking-process__entry {
       margin-left: 40px;
       max-width: 670px;
+      .entry-content {
+        p {
+          &:last-child {
+            margin-bottom: 0;
+            img {
+              margin-bottom: 0;
+            }
+          }
+          img {
+            margin: 20px 0;
+            width: 100%;
+          }
+        }
+      }
     }
     .grantmaking-process__main {
       display: flex;
