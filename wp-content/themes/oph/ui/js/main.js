@@ -2178,6 +2178,10 @@ jQuery(function($) {
       }
     };
 
+    if ($('#filter-categories-list li').length > 0) {
+      $('.page-header-categories').addClass('has-categories');
+    }
+
     $('#filter-categories-list > li > a').append(closeIcon);
 
     if (Object.keys(urlParams).length > 0) {

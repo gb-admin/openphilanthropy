@@ -1137,9 +1137,12 @@ button,
   height: 68px;
   background-color: $periwinkle-1;
   font-size: 16px;
-  display: flex;
+  display: none;
   align-items: center;
   scroll-margin-top: 86px;
+  &.has-categories {
+    display: flex;
+  }
   &.is-active {
     .clear-categories {
       display: flex;

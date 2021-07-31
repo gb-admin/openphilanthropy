@@ -1,7 +1,7 @@
 <?php
 	$post_type = get_post_type();
-	$terms_content_type = get_the_terms( $post->ID, $post_type . '-content-type' );
-	$terms_focus_area = get_the_terms( $post->ID, $post_type . '-focus-area' );
+	$terms_content_type = get_the_terms( $post->ID, 'content-type' );
+	$terms_focus_area = get_the_terms( $post->ID, 'focus-area' );
 ?>
 
 <?php if ( $terms_content_type || $terms_focus_area ) : ?>
