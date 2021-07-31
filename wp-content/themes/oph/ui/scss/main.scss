@@ -1047,9 +1047,9 @@ button,
   width: 100%;
   min-height: 300px;
   background-color: $periwinkle-2;
-  background-image: url('../img/background/page-header-background.png');
+  background-image: url('../img/background/page-header-background-mobile.png');
   background-position: right top;
-  background-size: 340px 300px;
+  background-size: 187px 220px;
   color: #fff;
   &.has-image {
     background-image: none;
@@ -1108,6 +1108,8 @@ button,
     padding: 40px 0 56px;
   }
   @media only screen and (min-width: $md) {
+    background-image: url('../img/background/page-header-background.png');
+    background-size: 340px 300px;
     &.page-header--focus-area-detail {
       h1 {
         font-size: 48px;
