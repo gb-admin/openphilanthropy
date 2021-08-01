@@ -17,20 +17,20 @@
 		$view_list = true;
 	}
 
-	$featured_research_updates = get_field( 'featured_research_updates' );
+	$featured_research = get_field( 'featured_research' );
 
-	$featured_research_updates_id = [];
+	$featured_research_id = [];
 
-	if ( $featured_research_updates ) {
-		array_push( $featured_research_updates_id, $featured_research_updates->ID );
+	if ( $featured_research ) {
+		array_push( $featured_research_id, $featured_research->ID );
 	}
 
-	$date_query = array(
+	$amount_meta_query = array(
 		'relation' => 'or'
 	);
 
-	$meta_query = array(
-		'relation' => 'and'
+	$date_query = array(
+		'relation' => 'or'
 	);
 
 	$order_query = 'desc';
@@ -61,9 +61,6 @@
 				if ( $value == 'a-z' ) {
 					$order_query = 'asc';
 					$orderby_query = 'title';
-				} elseif ( $value == 'high-to-low' ) {
-					$meta_key = 'grant_amount';
-					$orderby_query = 'meta_value_num';
 				} elseif ( $value == 'recent' ) {
 					$order_query = 'desc';
 					$orderby_query = 'date';
@@ -78,7 +75,14 @@
 				array_push( $date_query, $param_date_query );
 			}
 		} else {
+
+			// Get taxonomy by $key
 			$taxonomy = get_taxonomy( $key );
+
+			// Check if get taxonomy with post type prepended in case it was rewrite
+			if ( ! $taxonomy ) {
+				$taxonomy = get_taxonomy( 'research-' . $key );
+			}
 		}
 
 		if ( $taxonomy ) {
@@ -100,9 +104,11 @@
 		'order' => $order_query,
 		'orderby' => $orderby_query,
 		'paged' => $paged,
-		'post__not_in' => $featured_research_updates_id,
+		'post__not_in' => $featured_research_id,
 		'date_query' => $date_query,
-		'tax_query' => $tax_query
+		'meta_query' => $amount_meta_query,
+		'tax_query' => $tax_query,
+		'meta_key' => $meta_key
 	) );
 ?>
 
@@ -119,8 +125,20 @@
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
+			<ul class="block-feed-title-head is-research is-active">
+				<li>
+					<h6>Title</h6>
+				</li>
+				<li>
+					<h6>Date</h6>
+				</li>
+				<li>
+					<h6>Focus Area</h6>
+				</li>
+			</ul>
+
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
+				<div class="block-feed block-feed--list">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
@@ -129,16 +147,16 @@
 						?>
 
 						<div class="block-feed-post">
-							<h4>
+							<h4 class="block-feed-post__title">
 								<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
 							</h4>
 
-							<h5>
+							<h5 class="block-feed-post__date">
 								<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
 							</h5>
 
 							<?php if ( $research_focus_area ) : ?>
-								<h5>
+								<h5 class="block-feed-post__category">
 									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
 								</h5>
 							<?php endif; ?>
@@ -177,7 +195,7 @@
 				</nav>
 
 				<div class="feed-footer__options">
-					<button class="button button--secondary">View all as list</button>
+					<button class="button button--secondary button-view-list">View all as list</button>
 				</div>
 			</div>
 		</div>

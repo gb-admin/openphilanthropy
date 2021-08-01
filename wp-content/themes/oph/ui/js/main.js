@@ -2269,7 +2269,7 @@ jQuery(function($) {
   $(document).on('click', '.button-view-list', function(e) {
     e.preventDefault();
 
-    var blockFeed = $('.block-feed.block-feed--images');
+    var blockFeed = $('.block-feed');
     var blockFeedTitleHead = $('.block-feed-title-head');
 
     var links = $('.feed-options-bar a, #filter-categories-list a');
