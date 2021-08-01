@@ -138,7 +138,7 @@
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list">
+				<div class="block-feed block-feed--list block-feed--research">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
@@ -147,24 +147,30 @@
 						?>
 
 						<div class="block-feed-post">
-							<h4 class="block-feed-post__title">
-								<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
-							</h4>
+							<div class="block-feed-post__body">
+								<h4 class="block-feed-post__title">
+									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+								</h4>
 
-							<h5 class="block-feed-post__date">
-								<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
-							</h5>
+								<h6>Date</h6>
 
-							<?php if ( $research_focus_area ) : ?>
-								<h5 class="block-feed-post__category">
-									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+								<h5 class="block-feed-post__date">
+									<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
 								</h5>
-							<?php endif; ?>
 
-							<div class="block-feed-post__link">
-								<a href="<?php echo the_permalink(); ?>">
-									Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-								</a>
+								<h6>Focus Area</h6>
+
+								<?php if ( $research_focus_area ) : ?>
+									<h5 class="block-feed-post__category">
+										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									</h5>
+								<?php endif; ?>
+
+								<div class="block-feed-post__link">
+									<a href="<?php echo the_permalink(); ?>">
+										Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
+									</a>
+								</div>
 							</div>
 						</div>
 					<?php endwhile; wp_reset_postdata(); ?>

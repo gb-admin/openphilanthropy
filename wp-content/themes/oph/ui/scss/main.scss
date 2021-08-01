@@ -1641,11 +1641,6 @@ button,
         display: none;
       }
     }
-    @media only screen and (min-width: $lg) {
-      h6 {
-        display: none;
-      }
-    }
   }
   &.block-feed--list {
     margin-left: 0;
@@ -1656,13 +1651,31 @@ button,
         padding-left: 0;
       }
     }
+    &.block-feed--research {
+      .block-feed-post {
+        .block-feed-post__body {
+          @media only screen and (min-width: $lg) {
+            .block-feed-post__category,
+            .block-feed-post__date {
+              flex: 0 0 29%;
+            }
+            .block-feed-post__title {
+               flex: 0 0 42%;
+            }
+          }
+        }
+      }
+    }
     .block-feed-post {
       margin-left: 0;
+      padding: 0;
       width: 100%;
       min-height: 0;
+      border: 0;
       flex-direction: row;
       .block-feed-post__body {
         padding: 24px 28px;
+        width: 100%;
         min-height: 112px;
         border-bottom: 5px solid $periwinkle-2;
         h4 {
@@ -1679,6 +1692,10 @@ button,
             font-weight: 400;
             text-decoration: none;
           }
+        }
+        .block-feed-post__date,
+        .block-feed-post__organization-name {
+          display: block;
         }
         @media only screen and (min-width: $lg) {
           padding: 20px 20px 20px 0;
@@ -1741,7 +1758,6 @@ button,
         .block-feed-post__category,
         .block-feed-post__date,
         .block-feed-post__title {
-          padding-left: 20px;
           flex: 0 0 33.33333%;
         }
         .block-feed-post__category,
@@ -1750,6 +1766,13 @@ button,
         }
         .block-feed-post__title {
           flex: 0 0 42%;
+        }
+      }
+      @media only screen and (min-width: $lg) {
+        .block-feed-post__category,
+        .block-feed-post__date,
+        .block-feed-post__title {
+          padding-left: 20px;
         }
       }
     }
@@ -1772,6 +1795,9 @@ button,
     .block-feed-post {
       margin-left: 24px;
       width: calc(33.33333% - 24px);
+      h6 {
+        display: none;
+      }
     }
   }
 }
@@ -1877,10 +1903,7 @@ button,
       display: flex;
     }
     &.is-research {
-      padding-right: 0;
-      padding-left: 0;
       > li {
-        padding-left: 20px;
         flex: 0 0 42%;
         &:nth-child(2) {
           flex: 0 0 29%;
