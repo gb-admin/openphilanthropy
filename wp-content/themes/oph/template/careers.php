@@ -51,7 +51,7 @@
 								$pagenav_anchor = strtolower( sanitize_title_with_dashes( $content['title'] ) );
 							?>
 
-							<option value="<?php echo $content['title']; ?>"><?php echo $content['title']; ?></option>
+							<option value="<?php echo $pagenav_anchor; ?>"><?php echo $content['title']; ?></option>
 						<?php endforeach; ?>
 					</select>
 				<?php endif; ?>

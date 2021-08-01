@@ -834,17 +834,7 @@ jQuery(function($) {
    */
 
   $(document).ready(function() {
-    $('nav select').chosen({
-      width: '100%'
-    });
-  });
-
-  /**
-   * Form
-   */
-
-  $(document).ready(function() {
-    $('form select').chosen({
+    $('form select, nav select').chosen({
       width: '100%'
     });
   });
@@ -2200,7 +2190,7 @@ jQuery(function($) {
   $(document).ready(function() {
     var headersIds = $('.content-single .entry-content h2, .content-single .entry-content h3');
     var headersIdsList = $('.content-single .aside-post-navigation');
-    var headersIdsListMobile = $('.content-single .aside-post-navigation-mobile');
+    var headersIdsListMobile = $('.aside-post-navigation-mobile');
 
     // [Optional] Icon that will clone and append
     var headersIdsIcon = $('.aside-post-navigation-icon');

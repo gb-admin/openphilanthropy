@@ -669,6 +669,7 @@ button,
 
 .aside-post-navigation {
   margin: 32px 0;
+  display: none;
   &:last-child {
     margin-bottom: 0;
   }
@@ -733,6 +734,9 @@ button,
         text-overflow: ellipsis;
       }
     }
+  }
+  @media only screen and (min-width: $md) {
+    display: block;
   }
 }
 
@@ -1914,8 +1918,12 @@ button,
 
 .content-careers {
   padding: 40px 0 80px;
-  .aside-post-navigation-mobile {
-    display: none;
+  .content-careers__aside {
+    .chosen-container {
+      .chosen-single {
+        @extend %select--box;
+      }
+    }
   }
   .content-careers__entry {
     h1,
@@ -3956,7 +3964,7 @@ button,
   @include max-width($md) {
     ul {
       li {
-        margin-bottom: 4px;
+        margin-bottom: 2px;
         &:last-child {
           margin-bottom: 0;
         }
