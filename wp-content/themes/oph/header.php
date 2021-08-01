@@ -48,8 +48,10 @@
 
 			<div class="accessory-header">
 				<div class="accessory-header__content">
-					<button class="close" aria-label="Go back to page" title="close">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.971 47.971">
+					<button class="close" aria-label="Go back to page" title="Close">
+						<span class="screen-reader-text">Close menu</span>
+
+						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.971 47.971">
 							<path d="M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88c-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242C1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z"/>
 						</svg>
 					</button>
@@ -64,6 +66,27 @@
 					</span>
 				</div>
 			</div>
+
+			<?php
+				$url_facebook = get_field( 'url_facebook', 'options' );
+				$url_twitter = get_field( 'url_twitter', 'options' );
+			?>
+
+			<?php if ( $url_facebook || $url_twitter ) : ?>
+				<div class="social-media">
+					<?php if ( $url_facebook ) : ?>
+						<a class="social-media__twitter" href="<?php echo $url_facebook; ?>">
+							<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+						</a>
+					<?php endif; ?>
+
+					<?php if ( $url_twitter ) : ?>
+						<a class="social-media__facebook" href="<?php echo $url_twitter; ?>">
+							<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
+						</a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</nav>
 
 		<header class="<?php if ( is_front_page() ) { echo 'is-front-page'; } ?>" id="header">
