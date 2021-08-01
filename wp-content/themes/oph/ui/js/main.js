@@ -273,11 +273,11 @@ jQuery(function($) {
 
           if ( grid.hasClass( 'activated' ) ) {
             setTimeout( function() {
-              $( panel ).addClass( 'is-active' ).slideDown( 275 );
+              $( panel ).addClass( 'is-active' ).slideDown( 250 );
               grid.addClass( 'activated' );
             }, 175 );
           } else {
-            $( panel ).addClass( 'is-active' ).slideDown( 275 );
+            $( panel ).addClass( 'is-active' ).slideDown( 250 );
             grid.addClass( 'activated' );
           }
         }
@@ -978,7 +978,7 @@ jQuery(function($) {
 
       setTimeout( function() {
         classToggle.removeClass( 'is-closing' );
-      }, 275 );
+      }, 250 );
     }
   } );
 
@@ -991,7 +991,7 @@ jQuery(function($) {
 
     setTimeout( function() {
       classToggle.removeClass( 'is-closing' );
-    }, 275 );
+    }, 250 );
   } );
 
   $( '#accessory-toggle' ).on( 'click', function() {
@@ -1002,13 +1002,13 @@ jQuery(function($) {
 
       setTimeout( function() {
         classToggle.removeClass( 'is-closing' );
-      }, 275 );
+      }, 250 );
     } else {
       classToggle.addClass( 'is-open is-opening' ).removeClass( 'is-closed' );
 
       setTimeout( function() {
         classToggle.removeClass( 'is-opening' );
-      }, 275 );
+      }, 250 );
     }
   } );
 
@@ -1060,10 +1060,10 @@ jQuery(function($) {
     e.stopPropagation();
 
     if ( $( this ).parent( 'li' ).hasClass( 'is-open' ) ) {
-      $( this ).next( 'ul' ).slideUp( 275 );
+      $( this ).next( 'ul' ).slideUp( 250 );
       $( this ).parent( 'li' ).removeClass( 'is-open' );
     } else {
-      $( this ).next( 'ul' ).slideDown( 275 );
+      $( this ).next( 'ul' ).slideDown( 250 );
       $( this ).parent( 'li' ).addClass( 'is-open' );
     }
   } );
@@ -1076,10 +1076,10 @@ jQuery(function($) {
       window.location.href = $( this ).parent().attr( 'href' );
     } else if ( $( this ).parent( '.menu-item-has-children' ) || $( this ).parent().parent( '.menu-item-has-children' ) ) {
       if ( $( this ).closest( '.menu-item-has-children' ).hasClass( 'is-open' ) ) {
-        $( this ).closest( '.menu-item-has-children' ).find( 'ul' ).first().slideUp( 275 );
+        $( this ).closest( '.menu-item-has-children' ).find( 'ul' ).first().slideUp( 250 );
         $( this ).closest( '.menu-item-has-children' ).removeClass( 'is-open' );
       } else {
-        $( this ).closest( '.menu-item-has-children' ).find( 'ul' ).first().slideDown( 275 );
+        $( this ).closest( '.menu-item-has-children' ).find( 'ul' ).first().slideDown( 250 );
         $( this ).closest( '.menu-item-has-children' ).addClass( 'is-open' );
       }
     }
@@ -1352,7 +1352,7 @@ jQuery(function($) {
       if ($(this).attr('speed')) {
         var speed = $(this).attr('speed');
       } else {
-        var speed = 275;
+        var speed = 250;
       }
 
       if (! trim) {
@@ -1391,7 +1391,7 @@ jQuery(function($) {
       if ($(this).attr('speed')) {
         var speed = $(this).attr('speed');
       } else {
-        var speed = 275;
+        var speed = 250;
       }
 
       if (! trim) {
@@ -1503,10 +1503,10 @@ jQuery(function($) {
   //   e.preventDefault();
 
   //   if ( $( this ).parent( '.accordion' ).hasClass( 'is-open' ) ) {
-  //     $( this ).next( '.accordion__panel' ).slideUp( 275 );
+  //     $( this ).next( '.accordion__panel' ).slideUp( 250 );
   //     $( this ).parent( '.accordion' ).removeClass( 'is-open' );
   //   } else {
-  //     $( this ).next( '.accordion__panel' ).slideDown( 275 );
+  //     $( this ).next( '.accordion__panel' ).slideDown( 250 );
   //     $( this ).parent( '.accordion' ).addClass( 'is-open' );
   //   }
   // } );
@@ -1525,13 +1525,13 @@ jQuery(function($) {
   $('[href="#hire-talent-form"]').magnificPopup({
     type: 'inline',
     midClick: true,
-    removalDelay: 275
+    removalDelay: 250
   });
 
   $('[href="#submit-resume-form"]').magnificPopup({
     type: 'inline',
     midClick: true,
-    removalDelay: 275
+    removalDelay: 250
   });
 
   $('.close').on('click', function() {
