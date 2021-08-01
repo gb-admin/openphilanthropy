@@ -1055,18 +1055,23 @@ jQuery(function($) {
   //   }
   // } );
 
-  $( '#accessory-menu .menu-item-has-children > a' ).on( 'click', function( e ) {
+  $('#accessory-menu .menu-item-has-children > a').on('click', function(e) {
     e.preventDefault();
+
     e.stopPropagation();
 
-    if ( $( this ).parent( 'li' ).hasClass( 'is-open' ) ) {
-      $( this ).next( 'ul' ).slideUp( 250 );
-      $( this ).parent( 'li' ).removeClass( 'is-open' );
+    // Prevent multiple open
+    $(this).closest('ul').children('li.menu-item-has-children').children('ul').slideUp(250);
+    $(this).closest('ul').children('li').not($(this).parent('li')).removeClass('is-open');
+
+    if ($(this).parent('li').hasClass('is-open')) {
+      $(this).next('ul').slideUp(250);
+      $(this).parent('li').removeClass('is-open');
     } else {
-      $( this ).next( 'ul' ).slideDown( 250 );
-      $( this ).parent( 'li' ).addClass( 'is-open' );
+      $(this).next('ul').slideDown(250);
+      $(this).parent('li').addClass('is-open');
     }
-  } );
+  });
 
   $( '#accessory-menu .menu-item-has-children a span:first-child' ).on( 'click', function( e ) {
     e.preventDefault();
