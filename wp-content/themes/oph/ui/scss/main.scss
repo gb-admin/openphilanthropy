@@ -860,7 +860,9 @@ button,
       }
     }
     @media only screen and (min-width: $md) {
-      .hero-photo-credit-slider,
+      .hero-photo-credit-slider {
+        max-width: 140px;
+      }
       .slick-dots {
         max-width: 108px;
       }
