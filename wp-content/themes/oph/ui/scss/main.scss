@@ -5326,6 +5326,8 @@ button,
   .chosen-results {
     margin: 0 !important;
     padding: 0 !important;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
     > li {
       padding: 12px 16px !important;
       min-height: 44px;
