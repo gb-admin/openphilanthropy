@@ -893,7 +893,7 @@ jQuery(function($) {
     }
   });
 
-  $(document).on('mousedown', '.sidebar-filter .chosen-single', function() {
+  $(document).on('click', '.sidebar-filter .chosen-single', function() {
     var height = $(this).closest('.chosen-container').find('.chosen-drop').height();
     var nextItem = $(this).closest('.chosen-container').nextAll('.chosen-container:first, .dropdown:first');
     var marginTop = height + 16 + 'px';

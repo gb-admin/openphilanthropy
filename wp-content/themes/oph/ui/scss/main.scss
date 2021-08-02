@@ -5381,6 +5381,10 @@ button,
   }
 }
 
+.chosen-container.chosen-with-drop:active .chosen-drop {
+  pointer-events: none;
+}
+
 .chosen-container-single {
   padding: 0 !important;
   .chosen-results {
