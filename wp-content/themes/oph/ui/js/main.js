@@ -858,12 +858,18 @@ jQuery(function($) {
    * Dropdown - move items down.
    */
 
+  // Close all on click outside
   $(document).on('click', function(e) {
     if (! $(e.target).closest('.sidebar-filter .dropdown > button, .sidebar-filter .chosen-container').length) {
       $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container').css('marginTop', '0');
     }
   });
 
+  /**
+   * When dropdown open then click off window (ex. your desktop),
+   * dropdown closes, and no way to detect the click. Use
+   * 'chosen:hiding_dropdown' to hide.
+   */
   $('.sidebar-filter select').on('chosen:hiding_dropdown', function() {
     var findChosenWithDrop = $(this).closest('.sidebar-filter').find('.chosen-with-drop');
 
