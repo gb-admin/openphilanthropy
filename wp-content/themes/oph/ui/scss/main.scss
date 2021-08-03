@@ -754,31 +754,16 @@ button,
   padding: 8px 14px 7px 16px;
   min-width: 169px;
   min-height: 40px;
-  background: none;
+  background-image: url('../img/angle-down-periwinkle.png');
+  background-position: center right 16px;
+  background-repeat: no-repeat;
+  background-size: 22px 13px;
   border-radius: 999px;
   color: #000;
   font-weight: 400;
   text-align: left;
   justify-content: flex-start;
   cursor: pointer;
-  &:focus {
-    background: none;
-    border-color: $periwinkle-3;
-    svg {
-      path {
-        stroke: $periwinkle-3;
-      }
-    }
-  }
-  &:hover {
-    background: none;
-    border-color: $periwinkle-2;
-    svg {
-      path {
-        stroke: $periwinkle-3;
-      }
-    }
-  }
 }
 
 .copyright {
