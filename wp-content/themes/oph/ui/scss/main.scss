@@ -747,6 +747,9 @@ button,
 .aside-post-navigation-mobile {
   @media only screen and (min-width: $md) {
     display: none;
+    & + .chosen-container {
+      display: none;
+    }
   }
 }
 
