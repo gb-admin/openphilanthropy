@@ -1107,4 +1107,31 @@ jQuery(function($) {
 
     childList.slideToggle(200);
   });
+
+  $(document).ready(function() {
+    var chosenSelects = $('nav select');
+
+    if (chosenSelects.length) {
+      chosenSelects.each(function() {
+        var $select = $(this);
+        var select_opt1 = $select.children('option:first');
+        var placeholder = $select.attr('data-placeholder');
+
+        if (! placeholder) {
+          placeholder = 'Select...';
+        }
+
+        /**
+         * Add class to select on mobile.
+         */
+        if (/iP(od|hone)/i.test(window.navigator.userAgent) || (/Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent))) {
+          $select.addClass('chosen-mobile');
+        }
+
+        if (select_opt1.is(':empty')) {
+          select_opt1.text(placeholder);
+        }
+      });
+    }
+  });
 });

@@ -750,6 +750,37 @@ button,
   }
 }
 
+.chosen-mobile {
+  padding: 8px 14px 7px 16px;
+  min-width: 169px;
+  min-height: 40px;
+  background: none;
+  border-radius: 999px;
+  color: #000;
+  font-weight: 400;
+  text-align: left;
+  justify-content: flex-start;
+  cursor: pointer;
+  &:focus {
+    background: none;
+    border-color: $periwinkle-3;
+    svg {
+      path {
+        stroke: $periwinkle-3;
+      }
+    }
+  }
+  &:hover {
+    background: none;
+    border-color: $periwinkle-2;
+    svg {
+      path {
+        stroke: $periwinkle-3;
+      }
+    }
+  }
+}
+
 .copyright {
   color: #a6a9aa;
 }
