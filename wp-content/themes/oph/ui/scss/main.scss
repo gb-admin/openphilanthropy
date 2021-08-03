@@ -1818,10 +1818,14 @@ button,
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    &.block-feed--list {
+      flex-direction: column;
+    }
   }
   @media only screen and (min-width: 860px) {
     margin-left: -20px;
     padding-left: 0;
+    flex-direction: row;
     &.block-feed--list {
       padding-left: 20px;
     }
