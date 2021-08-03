@@ -1677,7 +1677,7 @@ button,
   }
   &.block-feed--list {
     margin-left: 0;
-    display: block;
+    flex-direction: column;
     &:not(.block-feed--images) {
       .block-feed-post {
         padding-right: 0;
@@ -1814,20 +1814,38 @@ button,
       display: none;
     }
   }
-  @media only screen and (min-width: 860px) {
-    margin-left: -20px;
+  @media only screen and (min-width: 650px) {
+    padding-left: 20px;
     display: flex;
     flex-wrap: wrap;
+  }
+  @media only screen and (min-width: 860px) {
+    margin-left: -20px;
+    padding-left: 0;
+    &.block-feed--list {
+      padding-left: 20px;
+    }
     .block-feed-post {
       margin-left: 20px;
       width: calc(50% - 20px);
     }
   }
   @media only screen and (min-width: $lg) {
+    .block-feed-post {
+      width: calc(33.33333% - 20px);
+    }
+  }
+  @media only screen and (min-width: $xl) {
     margin-left: -24px;
     .block-feed-post {
       margin-left: 24px;
       width: calc(33.33333% - 24px);
+    }
+  }
+  @media only screen and (min-width: 1440px) {
+    padding-left: 62px;
+    &.block-feed--list {
+      padding-left: 86px;
     }
   }
 }
@@ -1918,7 +1936,7 @@ button,
 
 .block-feed-title-head {
   margin-bottom: 20px;
-  padding-right: 20px;
+  padding: 0 20px 0;
   display: none;
   h6 {
     margin: 0;
@@ -1959,6 +1977,9 @@ button,
         flex: 0 0 14%;
       }
     }
+  }
+  @media only screen and (min-width: 1440px) {
+    padding-left: 86px;
   }
 }
 
@@ -3004,12 +3025,6 @@ button,
 
 .feed-section {
   margin-bottom: 80px;
-  &.is-feed-category-template {
-    .feed-section__posts {
-      padding-left: 20px;
-      min-height: 0;
-    }
-  }
   .feed-section__content {
     position: relative;
   }
@@ -3031,7 +3046,7 @@ button,
       }
     }
     .feed-section__posts {
-      padding-left: 370px;
+      padding-left: 20px;
       min-height: 718px;
     }
     .sidebar-filter {
@@ -3065,16 +3080,6 @@ button,
     margin-bottom: 100px;
     .sidebar-filter {
       top: 134px;
-    }
-  }
-  @media only screen and (min-width: 1419px) {
-    .feed-section__posts {
-      padding-left: 270px;
-    }
-  }
-  @media only screen and (min-width: 1619px) {
-    .feed-section__posts {
-      padding-left: 170px;
     }
   }
 }
