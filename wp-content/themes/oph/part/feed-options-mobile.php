@@ -37,7 +37,7 @@
 				</ul>
 			</div>
 
-			<button class="button button--solid">View all as list</button>
+			<button class="button button--solid button-view-list">View all as list</button>
 		</nav>
 	</div>
 </div>
