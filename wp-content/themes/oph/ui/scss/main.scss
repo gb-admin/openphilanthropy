@@ -1242,7 +1242,9 @@ button,
       }
     }
     .clear-categories {
+      margin-right: -4px;
       width: 33.33333%;
+      justify-content: flex-end;
     }
   }
 }
