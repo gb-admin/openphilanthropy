@@ -2932,6 +2932,8 @@ button,
     margin-top: 16px;
     margin-left: auto;
     flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
   }
   @media only screen and (min-width: $lg) {
     display: flex;
