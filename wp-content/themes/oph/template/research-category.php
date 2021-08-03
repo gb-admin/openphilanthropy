@@ -150,6 +150,8 @@
 			</div>
 		</div>
 
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants' ) ); ?>
+
 		<div class="feed-section__posts wrap">
 			<?php if ( $research->have_posts() ) : ?>
 				<div class="block-feed">
