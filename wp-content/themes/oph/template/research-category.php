@@ -46,7 +46,7 @@
 	$order_query = 'desc';
 
 	$tax_query = array(
-		'relation' => 'or',
+		'relation' => 'and',
 		array(
 			'taxonomy' => $content_type_taxonomy,
 			'field' => 'slug',
@@ -131,106 +131,34 @@
 
 <?php get_template_part( 'part/page', 'header-categories' ); ?>
 
-<div class="feed-section is-feed-category-template">
-	<div class="feed-options-bar">
-		<div class="wrap">
-			<nav aria-label="Feed Options Bar">
-				<div class="dropdown">
-					<button class="button" href="#">
-						Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-					</button>
-
-					<ul class="dropdown-content">
-						<li>
-							<a href="#high-to-low">Highest to lowest</a>
-						</li>
-						<li>
-							<a href="#a-z">A to Z</a>
-						</li>
-						<li>
-							<a href="#recent">Newest to oldest</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="dropdown dropdown--inline-content">
-					<button class="button" href="#">
-						Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-					</button>
-
-					<ul class="dropdown-content">
-						<li>
-							<a href="#25">25</a>
-						</li>
-						<li>
-							<a href="#50">50</a>
-						</li>
-						<li>
-							<a href="#100">100</a>
-						</li>
-					</ul>
-				</div>
-
-				<button class="button button--solid button-view-list">View all as list</button>
-			</nav>
-		</div>
-	</div>
+<div class="feed-section">
+	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
-		<div class="feed-options-bar feed-options-bar--mobile">
-			<div class="wrap">
-				<nav aria-label="Feed Options Bar">
-					<div class="dropdown">
-						<button class="button" href="#">
-							Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-						</button>
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'research' ) ); ?>
 
-						<ul class="dropdown-content">
-							<li>
-								<a href="#high-to-low">Highest to lowest</a>
-							</li>
-							<li>
-								<a href="#a-z">A to Z</a>
-							</li>
-							<li>
-								<a href="#recent">Newest to oldest</a>
-							</li>
-						</ul>
-					</div>
-
-					<div class="dropdown dropdown--inline-content">
-						<button class="button" href="#">
-							Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-						</button>
-
-						<ul class="dropdown-content">
-							<li>
-								<a href="#25">25</a>
-							</li>
-							<li>
-								<a href="#50">50</a>
-							</li>
-							<li>
-								<a href="#100">100</a>
-							</li>
-						</ul>
-					</div>
-
-					<button class="button button--solid button-view-list">View all as list</button>
-				</nav>
-			</div>
-		</div>
-
-		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants' ) ); ?>
+		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
+			<ul class="block-feed-title-head is-research is-active">
+				<li>
+					<h6>Title</h6>
+				</li>
+				<li>
+					<h6>Date</h6>
+				</li>
+				<li>
+					<h6>Focus Area</h6>
+				</li>
+			</ul>
+
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed">
+				<div class="block-feed block-feed--list block-feed--research">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
-							$post_content_type = get_the_terms( $post->ID, 'content-type' );
-							$post_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$research_content_type = get_the_terms( $post->ID, 'content-type' );
+							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
 						?>
 
 						<div class="block-feed-post">
@@ -249,9 +177,9 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $post_focus_area ) : ?>
+								<?php if ( $research_focus_area ) : ?>
 									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $post_focus_area[0]->slug; ?>#categories"><?php echo $post_focus_area[0]->name; ?></a>
+										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
 									</h5>
 								<?php endif; ?>
 
@@ -262,7 +190,7 @@
 								</div>
 							</div>
 						</div>
-					<?php endwhile; ?>
+					<?php endwhile; wp_reset_postdata(); ?>
 				</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
@@ -290,11 +218,13 @@
 				</nav>
 
 				<div class="feed-footer__options">
-					<button class="button button--secondary">View all as list</button>
+					<button class="button button--secondary button-view-list">View all as list</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<?php get_template_part( 'part/cta', 'button' ); ?>
 
 <?php get_footer(); ?>
