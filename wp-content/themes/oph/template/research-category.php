@@ -21,14 +21,67 @@
 		$content_type_taxonomy = $content_type->taxonomy;
 	}
 
+	$view_list = false;
+
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
+		$view_list = true;
+	}
+
+	$featured_research = get_field( 'featured_research' );
+
+	$featured_research_id = [];
+
+	if ( $featured_research ) {
+		array_push( $featured_research_id, $featured_research->ID );
+	}
+
+	$amount_meta_query = array(
+		'relation' => 'or'
+	);
+
 	$date_query = array(
 		'relation' => 'or'
 	);
 
-	$tax_query = array();
+	$order_query = 'desc';
+
+	$tax_query = array(
+		'relation' => 'or',
+		array(
+			'taxonomy' => $content_type_taxonomy,
+			'field' => 'slug',
+			'terms' => $content_type_slug
+		)
+	);
+
+	$orderby_query = 'date';
+	$meta_key = '';
+	$param_amount_meta_query = '';
+	$posts_per_page = 9;
+	$taxonomy = '';
 
 	foreach ( $params as $key => $param ) {
-		if ( $key == 'yr' ) {
+		if ( $key == 'items' ) {
+			foreach ( $param as $value ) {
+				if ( $value == '25' ) {
+					$posts_per_page = 25;
+				} elseif ( $value == '50' ) {
+					$posts_per_page = 50;
+				} elseif ( $value == '100' ) {
+					$posts_per_page = 100;
+				}
+			}
+		} elseif ( $key == 'sort' ) {
+			foreach ( $param as $value ) {
+				if ( $value == 'a-z' ) {
+					$order_query = 'asc';
+					$orderby_query = 'title';
+				} elseif ( $value == 'recent' ) {
+					$order_query = 'desc';
+					$orderby_query = 'date';
+				}
+			}
+		} elseif ( $key == 'yr' ) {
 			foreach ( $param as $value ) {
 				$param_date_query = array(
 					'year' => $value
@@ -36,23 +89,41 @@
 
 				array_push( $date_query, $param_date_query );
 			}
+		} else {
+
+			// Get taxonomy by $key
+			$taxonomy = get_taxonomy( $key );
+
+			// Check if get taxonomy with post type prepended in case it was rewrite
+			if ( ! $taxonomy ) {
+				$taxonomy = get_taxonomy( 'research-' . $key );
+			}
+		}
+
+		if ( $taxonomy ) {
+			foreach ( $param as $value ) {
+				$param_query = array(
+					'taxonomy' => $taxonomy->name,
+					'terms' => $value,
+					'field' => 'slug'
+				);
+
+				array_push( $tax_query, $param_query );
+			}
 		}
 	}
 
 	$research = new WP_Query( array(
 		'post_type' => 'research',
-		'posts_per_page' => 9,
-		'order' => 'desc',
-		'orderby' => 'date',
+		'posts_per_page' => $posts_per_page,
+		'order' => $order_query,
+		'orderby' => $orderby_query,
 		'paged' => $paged,
+		'post__not_in' => $featured_research_id,
 		'date_query' => $date_query,
-		'tax_query' => array(
-			array(
-				'taxonomy' => $content_type_taxonomy,
-				'field' => 'slug',
-				'terms' => $content_type_slug
-			)
-		)
+		'meta_query' => $amount_meta_query,
+		'tax_query' => $tax_query,
+		'meta_key' => $meta_key
 	) );
 ?>
 
@@ -163,24 +234,32 @@
 						?>
 
 						<div class="block-feed-post">
-							<h4>
-								<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
-							</h4>
+							<div class="block-feed-post__body">
+								<h6>Title</h6>
 
-							<h5>
-								<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
-							</h5>
+								<h4 class="block-feed-post__title">
+									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+								</h4>
 
-							<?php if ( $post_focus_area ) : ?>
-								<h5>
-									<a href="?focus-area=<?php echo $post_focus_area[0]->slug; ?>#categories"><?php echo $post_focus_area[0]->name; ?></a>
+								<h6>Date</h6>
+
+								<h5 class="block-feed-post__date">
+									<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
 								</h5>
-							<?php endif; ?>
 
-							<div class="block-feed-post__link">
-								<a href="<?php echo the_permalink(); ?>">
-									Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-								</a>
+								<h6>Focus Area</h6>
+
+								<?php if ( $post_focus_area ) : ?>
+									<h5 class="block-feed-post__category">
+										<a href="?focus-area=<?php echo $post_focus_area[0]->slug; ?>#categories"><?php echo $post_focus_area[0]->name; ?></a>
+									</h5>
+								<?php endif; ?>
+
+								<div class="block-feed-post__link">
+									<a href="<?php echo the_permalink(); ?>">
+										Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
+									</a>
+								</div>
 							</div>
 						</div>
 					<?php endwhile; ?>
