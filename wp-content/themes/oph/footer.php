@@ -24,20 +24,17 @@
 							</div>
 
 							<div class="footer-grid__cell footer-cell-menu">
-								<ul>
-									<li>
-										<a href="">Careers</a>
-									</li>
-									<li>
-										<a href="">Press kit</a>
-									</li>
-									<li>
-										<a href="">Anonymous Feedback</a>
-									</li>
-									<li>
-										<a href="">Lorem Ipsum</a>
-									</li>
-								</ul>
+
+								<?php
+									wp_nav_menu( array(
+										'container' => 'ul',
+										'menu_class' => 'menu',
+										'menu_id' => 'footer-menu',
+										'link_before' => '<span>',
+										'link_after' => '</span><span class="menu-icon"></span>',
+										'theme_location' => 'footer'
+									) );
+								?>
 							</div>
 
 							<div class="footer-grid__cell footer-cell-address">

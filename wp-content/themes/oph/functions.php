@@ -18,6 +18,7 @@ if ( ! function_exists( 'oph_setup' ) ) {
 
 		register_nav_menus( array(
 			'accessory' => esc_html__( 'Accessory', 'oph' ),
+			'footer' => esc_html__( 'Footer', 'oph' ),
 			'primary' => esc_html__( 'Primary', 'oph' ),
 			'secondary' => esc_html__( 'Secondary', 'oph' )
 		) );
