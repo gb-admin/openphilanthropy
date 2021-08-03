@@ -1189,7 +1189,7 @@ button,
     display: flex;
   }
   .clear-categories {
-    margin-left: 16px;
+    margin-left: 12px;
     min-width: 128px;
     color: $periwinkle-2;
     font-size: 16px;
@@ -1207,6 +1207,11 @@ button,
   .page-header-categories__content {
     > :last-child {
       margin-bottom: 0;
+    }
+  }
+  @media only screen and (min-width: 375px) {
+    .clear-categories {
+      margin-left: 16px;
     }
   }
   @media only screen and (min-width: $md) {
