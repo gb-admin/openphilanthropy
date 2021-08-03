@@ -1638,6 +1638,13 @@ button,
   .block-feed-post {
     margin-bottom: 24px;
   }
+  &:not(.block-feed--list) {
+    .block-feed-post {
+      h6 {
+        display: none;
+      }
+    }
+  }
   &.block-feed--images {
     h4 {
       margin-bottom: 36px;
@@ -1818,9 +1825,6 @@ button,
     .block-feed-post {
       margin-left: 24px;
       width: calc(33.33333% - 24px);
-      h6 {
-        display: none;
-      }
     }
   }
 }
