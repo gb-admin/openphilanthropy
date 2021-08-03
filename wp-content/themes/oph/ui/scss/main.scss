@@ -3722,12 +3722,15 @@ button,
     }
   }
   .sidebar-filter__main {
-    padding: 18px 24px 36px 64px;
+    padding: 18px 24px 36px 24px;
     height: 100%;
     border-top-right-radius: 46px;
     border-bottom-right-radius: 46px;
     overflow: hidden;
     transition: $smooth-ease;
+    @media only screen and (min-width: 375px) {
+      padding-left: 64px;
+    }
   }
   .sidebar-filter__option {
     margin-bottom: 16px;
