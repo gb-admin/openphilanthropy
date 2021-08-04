@@ -29,8 +29,6 @@ sitemap.xml
 wp-content/*
 wp-content/themes/twenty*
 
-grants_db
-
 !.editorconfig
 !.gitignore
 
@@ -49,3 +47,5 @@ grants_db
 
 !wp-content/
 !wp-content/themes/
+
+grants_db
