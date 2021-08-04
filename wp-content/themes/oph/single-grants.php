@@ -16,6 +16,10 @@
 	if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) && isset( $terms_focus_area[0] ) ) {
 		$primary_term = $terms_focus_area[0];
 
+		if ( isset( $primary_term->name ) ) {
+			$primary_term_name = $primary_term->name;
+		}
+
 		if ( isset( $primary_term->slug ) ) {
 			$primary_term_slug = $primary_term->slug;
 		}
@@ -33,24 +37,21 @@
 
 	$related_posts = get_field( 'related_posts' );
 
-	/**
-	 * Remove array items if missing data.
-	 *
-	 * (mainly for row added to select post and not selected)
-	 */
-	foreach ( $related_posts as $k => $i ) {
-		if ( $i['type'] == 'post' && ! $i['post'] ) {
-			unset( $related_posts[ $k ] );
-		}
+	if ( ! $related_posts ) {
+		$related_posts = [];
 	}
 
 	$related_posts_id = array( get_the_ID() );
 
-	if ( $related_posts ) {
+	if ( ! empty( $related_posts ) ) {
 		foreach ( $related_posts as $i ) {
 			array_push( $related_posts_id, $i->ID );
 		}
+
+		$related_posts_count = count( $related_posts );
 	}
+
+	$related_query_posts = [];
 
 	$related_query = new WP_Query( array(
 		'post_type' => 'grants',
@@ -61,13 +62,19 @@
 		'tax_query' => $tax_query
 	) );
 
-	$related_query_posts = $related_query->posts;
+	if ( ! empty( $related_query ) && isset( $related_query->posts ) ) {
+		$related_query_posts = $related_query->posts;
+	}
+
+	$related_posts = array_merge( $related_posts, $related_query_posts );
 
 	/**
-	 * Remove array items equal to number of custom posts.
+	 * Limit related posts to 3 if back filled.
 	 */
-	if ( ! empty( $related_posts ) ) {
-		$related_query_posts = array_slice( $related_query_posts, 0, ( count( $related_posts ) * -1 ) );
+	if ( isset( $related_posts_count ) && $related_posts_count > 3 ) {
+		$related_posts = array_slice( $related_posts, 0, 4 );
+	} else {
+		$related_posts = array_slice( $related_posts, 0, 3 );
 	}
 
 	$footnotes = get_field( 'footnotes' );
@@ -84,8 +91,6 @@
 				<h3>Navigate this page with the links below</h3>
 
 				<ul aria-label="Post Navigation List" class="aside-post-navigation" id="post-navigation-list"></ul>
-
-				<select aria-label="Mobile Post Navigation List" data-input-placeholder="Type to search..." class="aside-post-navigation-mobile goto-select" id="post-navigation-list-mobile"></select>
 
 				<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
 
@@ -129,7 +134,7 @@
 	</div>
 </div>
 
-<?php if ( $related_posts || $related_query_posts ) : ?>
+<?php if ( $related_posts ) : ?>
 	<div class="single-related-posts" id="related-posts">
 		<div class="wrap">
 			<div class="single-related-posts__main">
@@ -140,128 +145,55 @@
 
 			<div class="single-related-posts__grid">
 				<ul class="list-related-posts" id="related-posts-list">
-					<?php if ( $related_posts ) : ?>
-						<?php foreach ( $related_posts as $related ) : ?>
+					<?php foreach ( $related_posts as $related ) : ?>
 
-							<?php
-								if ( $related['type'] == 'custom' ) {
-									$related_custom = $related['custom'];
+						<?php
+							if ( ! isset( $related->ID ) && isset( $related['post'][0] ) ) {
+								$related = $related['post'][0];
+							}
 
-									$related_description = $related_custom['description'];
-									$related_eyebrow_copy = $related_custom['eyebrow_copy'];
-									$related_eyebrow_link = $related_custom['eyebrow_link'];
-									$related_eyebrow_link_url = $related_custom['eyebrow_link']['url'];
-									$related_link = $related_custom['link']['url'];
-									$related_title = $related_custom['title'];
-								} elseif ( $related['type'] == 'post' ) {
-									$related_post = $related['post'][0];
+							$related_eyebrow_copy = $primary_term_name;
+							$related_eyebrow_link = '/grants?focus-area=' . $primary_term_slug;
+							$related_link = get_permalink( $related->ID );
+							$related_post_type = get_post_type( $related->ID );
+							$related_title = $related->post_title;
 
-									$related_eyebrow_copy = $related['eyebrow_copy'];
-									$related_eyebrow_link = $related['eyebrow_link'];
-									$related_eyebrow_link_url = $related['eyebrow_link']['url'];
-									$related_link = get_permalink( $related_post->ID );
-									$related_post_type = get_post_type( $related_post->ID );
-									$related_title = $related_post->post_title;
-
-									if ( ! $related_eyebrow_copy && $related_eyebrow_link ) {
-										$related_eyebrow_copy = $related_eyebrow_link['title'];
-									}
-
-									$grants_focus_area = get_the_terms( $related_post->ID, 'focus-area' );
-
-									/**
-									 * Set eyebrow copy to Focus Area taxonomy.
-									 */
-									if ( ! $related_eyebrow_copy && $grants_focus_area && ! is_wp_error( $grants_focus_area ) ) {
-										$related_eyebrow_copy = $grants_focus_area[0]->name;
-										$related_eyebrow_link_url = '/' . $related_post_type . '?focus-area=' . $grants_focus_area[0]->slug;
-									}
-
-									if ( has_excerpt( $related_post->ID ) ) {
-										$related_excerpt_source = get_the_excerpt( $related_post->ID );
-									} else {
-										$related_excerpt_source = get_post_field( 'post_content', $related_post->ID );
-									}
-
-									$related_excerpt = array(
-										'append' => '...',
-										'limit' => 28,
-										'limitby' => 'word',
-										'source' => $related_excerpt_source
-									);
-
-									$related_description = excerpt( $related_excerpt );
-								}
-							?>
-
-							<li>
-								<h5>
-									<a href="<?php echo $related_eyebrow_link_url; ?>"><?php echo $related_eyebrow_copy; ?></a>
-								</h5>
-
-								<h4>
-									<a href="<?php echo $related_link; ?>"><?php echo $related_title; ?></a>
-								</h4>
-
-								<div class="single-related-posts__description">
-									<?php echo $related_description; ?>
-								</div>
-
-								<div class="single-related-posts__link">
-									<a href="<?php echo $related_link; ?>">
-										Read more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
-								</div>
-							</li>
-						<?php endforeach; ?>
-					<?php endif; ?>
-
-					<?php if ( $related_query_posts ) : ?>
-						<?php foreach ( $related_query_posts as $related ) : ?>
-
-							<?php
+							if ( has_excerpt( $related->ID ) ) {
 								$related_excerpt_source = get_the_excerpt( $related->ID );
-								$related_link = get_permalink( $related->ID );
-								$related_title = get_the_title( $related->ID );
+							} else {
+								$related_excerpt_source = get_post_field( 'post_content', $related->ID );
+							}
 
-								$related_excerpt = array(
-									'append' => '...',
-									'limit' => 28,
-									'limitby' => 'word',
-									'source' => $related_excerpt_source
-								);
+							$related_excerpt = array(
+								'append' => '...',
+								'limit' => 28,
+								'limitby' => 'word',
+								'source' => $related_excerpt_source
+							);
 
-								$related_description = excerpt( $related_excerpt );
+							$related_description = excerpt( $related_excerpt );
+						?>
 
-								$grants_focus_area = get_the_terms( $related->ID, 'focus-area' );
+						<li>
+							<h5>
+								<a href="<?php echo $related_eyebrow_link; ?>"><?php echo $related_eyebrow_copy; ?></a>
+							</h5>
 
-								if ( $grants_focus_area && ! is_wp_error( $grants_focus_area ) ) {
-									$related_eyebrow_copy = $grants_focus_area[0]->name;
-									$related_eyebrow_link_url = '/' . $related_post_type . '?focus-area=' . $grants_focus_area[0]->slug;
-								}
-							?>
+							<h4>
+								<a href="<?php echo $related_link; ?>"><?php echo $related_title; ?></a>
+							</h4>
 
-							<li>
-								<h5>
-									<a href="<?php echo $related_eyebrow_link_url; ?>"><?php echo $related_eyebrow_copy; ?></a>
-								</h5>
+							<div class="single-related-posts__description">
+								<?php echo $related_description; ?>
+							</div>
 
-								<h4>
-									<a href="<?php echo $related_link; ?>"><?php echo $related_title; ?></a>
-								</h4>
-
-								<div class="single-related-posts__description">
-									<?php echo $related_description; ?>
-								</div>
-
-								<div class="single-related-posts__link">
-									<a href="<?php echo $related_link; ?>">
-										Read more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
-								</div>
-							</li>
-						<?php endforeach; ?>
-					<?php endif; ?>
+							<div class="single-related-posts__link">
+								<a href="<?php echo $related_link; ?>">
+									Read more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
+								</a>
+							</div>
+						</li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 		</div>
