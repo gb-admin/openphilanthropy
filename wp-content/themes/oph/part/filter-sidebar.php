@@ -94,7 +94,7 @@
 								/**
 								 * Exclude authors from array.
 								 */
-								if ( $filter['filter_author_exclude'] ) {
+								if ( isset( $filter['filter_author_exclude'] ) ) {
 									foreach ( $filter['filter_author_exclude'] as $exclude ) {
 										foreach ( $research_authors as $key => $author ) {
 											if ( $exclude['name'] == $author->display_name ) {
