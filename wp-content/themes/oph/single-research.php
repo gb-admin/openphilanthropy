@@ -213,7 +213,7 @@
 						<a class="button" href="<?php echo $button['link']['url']; ?>"><?php echo $button['link']['title']; ?></a>
 					<?php endforeach; ?>
 				<?php else : ?>
-					<a class="button" href="/research">Back to Research</a>
+					<a class="button" href="/research">Back to Research &amp; Ideas</a>
 				<?php endif; ?>
 			</div>
 		</div>
