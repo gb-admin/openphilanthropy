@@ -173,7 +173,7 @@
 				</div>
 
 				<div class="sidebar-filter__button">
-					<a class="button" href="<?php echo get_stylesheet_directory() . '/grants_db.csv'; ?>" download="grants_db.csv">Download Spreadsheet</a>
+					<a class="button" href="<?php echo get_stylesheet_directory_uri() . '/grants_db.csv'; ?>" download="grants_db.csv">Download Spreadsheet</a>
 				</div>
 			</nav>
 		</div>
