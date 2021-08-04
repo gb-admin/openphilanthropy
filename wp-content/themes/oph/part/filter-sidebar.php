@@ -17,9 +17,19 @@
 		'taxonomy' => 'content-type'
 	) );
 
-	$focus_area = get_terms( array(
-		'taxonomy' => 'focus-area'
-	) );
+	$focus_area = get_taxonomy_hierarchy( 'focus-area' );
+
+	// Flatten hierarchy taxonomy array
+	foreach ( $focus_area as $k => $tax ) {
+		if ( isset( $tax->children ) && ! empty( $tax->children ) ) {
+
+			// Flatten
+			array_splice( $focus_area, 2, 0, $tax->children );
+
+			// Unset original
+			$tax->children = [];
+		}
+	}
 
 	$funding_type = get_terms( array(
 		'taxonomy' => 'funding-type'
@@ -132,7 +142,7 @@
 									<option value=""></option>
 
 									<?php foreach ( $focus_area as $i ) : ?>
-										<option class="<?php if ( in_array( $i->slug, $params['focus-area'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+										<option class="<?php if ( in_array( $i->slug, $params['focus-area'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php endif; ?>

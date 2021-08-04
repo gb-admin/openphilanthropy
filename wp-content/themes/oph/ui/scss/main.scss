@@ -3674,6 +3674,15 @@ button,
             opacity: 1;
           }
         }
+        &.is-term-child {
+          padding-left: 60px !important;
+          &::after {
+            left: 30px;
+          }
+          &::before {
+            left: 26px;
+          }
+        }
         padding-left: 44px !important;
         background-color: $periwinkle-6;
       }
