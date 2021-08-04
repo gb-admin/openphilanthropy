@@ -49,3 +49,4 @@ wp-content/themes/twenty*
 !wp-content/themes/
 
 grants_db
+grants_db.csv
