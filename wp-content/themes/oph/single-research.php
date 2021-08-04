@@ -41,23 +41,14 @@
 		$related_posts = [];
 	}
 
-	/**
-	 * Remove array item if type is 'post' but no post selected.
-	 */
-	if ( ! empty( $related_posts ) ) {
-		foreach ( $related_posts as $k => $i ) {
-			if ( $i['type'] == 'post' && ! $i['post'] ) {
-				unset( $related_posts[ $k ] );
-			}
-		}
-	}
-
 	$related_posts_id = array( get_the_ID() );
 
 	if ( ! empty( $related_posts ) ) {
 		foreach ( $related_posts as $i ) {
 			array_push( $related_posts_id, $i->ID );
 		}
+
+		$related_posts_count = count( $related_posts );
 	}
 
 	$related_query_posts = [];
@@ -78,9 +69,13 @@
 	$related_posts = array_merge( $related_posts, $related_query_posts );
 
 	/**
-	 * Limit related posts to 3.
+	 * Limit related posts to 3 if back filled.
 	 */
-	$related_posts = array_slice( $related_posts, 0, 3 );
+	if ( $related_posts_count > 3 ) {
+		$related_posts = array_slice( $related_posts, 0, 4 );
+	} else {
+		$related_posts = array_slice( $related_posts, 0, 3 );
+	}
 
 	$footnotes = get_field( 'footnotes' );
 ?>
@@ -157,20 +152,16 @@
 								$related = $related['post'][0];
 							}
 
-							// pr( $related );
-
 							$related_eyebrow_copy = $primary_term_name;
 							$related_eyebrow_link = '/research?focus-area=' . $primary_term_slug;
 							$related_link = get_permalink( $related->ID );
 							$related_post_type = get_post_type( $related->ID );
 							$related_title = $related->post_title;
 
-							$research_focus_area = get_the_terms( $related_post->ID, 'focus-area' );
-
-							if ( has_excerpt( $related_post->ID ) ) {
-								$related_excerpt_source = get_the_excerpt( $related_post->ID );
+							if ( has_excerpt( $related->ID ) ) {
+								$related_excerpt_source = get_the_excerpt( $related->ID );
 							} else {
-								$related_excerpt_source = get_post_field( 'post_content', $related_post->ID );
+								$related_excerpt_source = get_post_field( 'post_content', $related->ID );
 							}
 
 							$related_excerpt = array(
