@@ -71,7 +71,7 @@
 	/**
 	 * Limit related posts to 3 if back filled.
 	 */
-	if ( $related_posts_count > 3 ) {
+	if ( isset( $related_posts_count ) && $related_posts_count > 3 ) {
 		$related_posts = array_slice( $related_posts, 0, 4 );
 	} else {
 		$related_posts = array_slice( $related_posts, 0, 3 );
