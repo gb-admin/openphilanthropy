@@ -117,7 +117,7 @@
 <?php get_template_part( 'part/page', 'header-categories' ); ?>
 
 <div class="feed-section">
-	<?php get_template_part( 'part/feed', 'options' ); ?>
+	<?php get_template_part( 'part/feed', 'options', array( 'post_type' => 'research' ) ); ?>
 
 	<div class="feed-section__content">
 		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'research' ) ); ?>
@@ -203,7 +203,7 @@
 				</nav>
 
 				<div class="feed-footer__options">
-					<button class="button button--secondary button-view-list">View all as list</button>
+					<button class="button button--secondary button-view-list">View all as grid</button>
 				</div>
 			</div>
 		</div>

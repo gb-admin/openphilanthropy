@@ -1,10 +1,9 @@
 <?php
-	/**
-	 * Checking if post type if Research, because not sure if
-	 * high-to-low (which applies to grant_amount) is applicable.
-	 */
+	$post_type = '';
 
-	$post_type = get_post_type();
+	if ( isset( $args['post_type'] ) ) {
+		$post_type = $args['post_type'];
+	}
 
 	$research_page = get_page_by_path( 'research' );
 
@@ -61,7 +60,11 @@
 				</ul>
 			</div>
 
-			<button class="button button--solid button-view-list">View all as list</button>
+			<?php if ( $post_type == 'research' ) : ?>
+				<button class="button button--solid button-view-list">View all as grid</button>
+			<?php else : ?>
+				<button class="button button--solid button-view-list">View all as list</button>
+			<?php endif; ?>
 		</nav>
 	</div>
 </div>

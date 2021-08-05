@@ -1071,6 +1071,12 @@ jQuery(function($) {
     blockFeed.toggleClass('block-feed--list');
     blockFeedTitleHead.toggleClass('is-active');
 
+    if (blockFeed.hasClass('block-feed--list')) {
+      $('.button-view-list').text('View all as grid');
+    } else {
+      $('.button-view-list').text('View all as list');
+    }
+
     links.each(function() {
       var linkBaseUrl = window.location.href.toString().split(window.location.host)[0] + window.location.host;
       var linkUrl = false;
