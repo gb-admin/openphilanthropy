@@ -252,9 +252,7 @@
 						?>
 
 						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
-							<h5 class="block-feed-post__date">
-								<?php echo get_field( 'award_date', $grants->ID ); ?>
-							</h5>
+							<h5 class="block-feed-post__date"><?php echo $award_date; ?></h5>
 
 							<div class="block-feed-post__head">
 								<?php if ( $post_thumbnail ) : ?>
@@ -295,9 +293,7 @@
 
 								<h6>Date</h6>
 
-								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F j, Y', $grants->ID ); ?>
-								</h5>
+								<h5 class="block-feed-post__date"><?php echo $award_date; ?></h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">

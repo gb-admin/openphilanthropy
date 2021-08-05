@@ -1665,12 +1665,12 @@ button,
   position: relative;
   .block-feed-post {
     margin-bottom: 24px;
-    &.no-award-date {
-      padding-top: 31px !important;
-    }
   }
   &:not(.block-feed--list) {
     .block-feed-post {
+      &.no-award-date {
+        padding-top: 31px;
+      }
       h6 {
         display: none;
       }
