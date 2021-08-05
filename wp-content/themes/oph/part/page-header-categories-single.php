@@ -5,6 +5,7 @@
 		$post_type = $args['post_type'];
 	}
 
+	$award_date = get_field( 'award_date' );
 	$grant_amount = get_field( 'grant_amount' );
 
 	$terms_content_type = get_the_terms( $post->ID, 'content-type' );
@@ -38,6 +39,12 @@
 							<?php if ( $grant_amount ) : ?>
 								<li>
 									<a href="/<?php echo $post_type; ?>">Amount: <?php echo '$' . number_format( $grant_amount ); ?></a>
+								</li>
+							<?php endif; ?>
+
+							<?php if ( $award_date ) : ?>
+								<li>
+									<a href="/<?php echo $post_type; ?>">Award Date: <?php echo $award_date; ?></a>
 								</li>
 							<?php endif; ?>
 						<?php elseif ( $post_type == 'research' ) : ?>
