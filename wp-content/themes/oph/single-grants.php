@@ -82,7 +82,7 @@
 
 <?php get_template_part( 'part/page', 'header' ); ?>
 
-<?php get_template_part( 'part/page', 'header-categories-single' ); ?>
+<?php get_template_part( 'part/page', 'header-categories-single', array( 'post_type' => 'grants' ) ); ?>
 
 <div class="content-single" id="grants-post">
 	<div class="wrap">
