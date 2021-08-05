@@ -13,7 +13,7 @@
 						<?php if ( $terms_content_type && ! is_wp_error( $terms_content_type ) ) : ?>
 							<?php foreach ( $terms_content_type as $term ) : ?>
 								<li>
-									<a href="/<?php echo $post_type; ?>?content-type=<?php echo $term->slug; ?>"><?php echo $term->name; ?></a>
+									<a href="/<?php echo $post_type; ?>?content-type=<?php echo $term->slug; ?>">Content Type: <?php echo $term->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
@@ -21,7 +21,7 @@
 						<?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
 							<?php foreach ( $terms_focus_area as $term ) : ?>
 								<li>
-									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>"><?php echo $term->name; ?></a>
+									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Focus Area: <?php echo $term->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
