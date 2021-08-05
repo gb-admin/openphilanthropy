@@ -1,7 +1,7 @@
 <?php
 	$post_type = '';
 
-	if ( isset($args['post_type'] ) ) {
+	if ( isset( $args['post_type'] ) ) {
 		$post_type = $args['post_type'];
 	}
 
