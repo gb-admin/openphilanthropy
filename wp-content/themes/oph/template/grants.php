@@ -239,6 +239,7 @@
 					<?php while ( $grants->have_posts() ) : $grants->the_post(); ?>
 
 						<?php
+							$award_date = get_field( 'award_date' );
 							$grant_amount = get_field( 'grant_amount' );
 
 							$focus_area = get_the_terms( $post->ID, 'focus-area' );
@@ -250,9 +251,9 @@
 							}
 						?>
 
-						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } ?>">
+						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
 							<h5 class="block-feed-post__date">
-								<?php echo get_the_date( 'F j, Y', $grants->ID ); ?>
+								<?php echo get_field( 'award_date', $grants->ID ); ?>
 							</h5>
 
 							<div class="block-feed-post__head">
