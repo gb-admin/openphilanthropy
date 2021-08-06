@@ -1937,8 +1937,9 @@ button,
     text-transform: uppercase;
   }
   .block-feed-post__head {
+    padding: 28px;
     height: 184px;
-    background-color: #939496;
+    background-color: #fff;
     flex-shrink: 0;
     a {
       height: 100%;
