@@ -10,12 +10,10 @@
 
 	$focus_area_image = '';
 
-	$post_type = get_post_type();
-
-	$terms_focus_area = get_the_terms( $post->ID, $post_type . '-focus-area' );
+	$terms_focus_area = get_the_terms( $post->ID, 'focus-area' );
 
 	if ( ! is_wp_error( $terms_focus_area ) ) {
-		$focus_area_image = get_field( 'category_image', 'grants-focus-area_' . $terms_focus_area[0]->term_id );
+		$focus_area_image = get_field( 'category_image', 'focus-area_' . $terms_focus_area[0]->term_id );
 	}
 
 	if ( ! $page_header_image && $focus_area_image ) {
