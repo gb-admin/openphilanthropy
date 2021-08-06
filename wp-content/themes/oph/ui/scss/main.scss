@@ -2487,6 +2487,11 @@ button,
     &:last-child {
       margin-bottom: 0;
     }
+    &:only-child {
+      margin: 0 auto;
+      padding: 0;
+      max-width: 670px;
+    }
     .entry-content {
       h2 {
         font-size: 34px;
