@@ -350,7 +350,7 @@ jQuery(function($) {
    * Remove empty element
    */
   $( document ).ready( function() {
-    $( 'p, h1, h2, h3, h4, h5, h6' ).each( function() {
+    $( '.entry-content p, .entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6' ).each( function() {
       var html = $.trim( $( this ).html() );
 
       if ( html == '' || html == ' ' || html == '&nbsp;' ) {
