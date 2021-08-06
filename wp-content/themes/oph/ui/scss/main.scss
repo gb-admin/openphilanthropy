@@ -2939,8 +2939,11 @@ button,
   h3 {
     scroll-margin-top: 86px;
   }
-  ol {
+  ol,
+  ul {
     margin: 28px 0;
+  }
+  ol {
     padding-left: 40px;
     list-style: decimal;
     > li {
@@ -2955,7 +2958,6 @@ button,
     }
   }
   ul {
-    margin: 1rem 0;
     &:last-child {
       margin-bottom: 0;
     }
