@@ -22,7 +22,7 @@
 						<?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
 							<?php foreach ( $terms_focus_area as $term ) : ?>
 								<li>
-									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Focus Area: <?php echo $term->name; ?></a>
+									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Portfolio Area: <?php echo $term->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
