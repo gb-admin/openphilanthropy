@@ -1645,6 +1645,9 @@ button,
   border-top: 2px solid #cdd2de;
   border-bottom: 2px solid #cdd2de;
   color: #000;
+  & + .aside-short-message {
+    border-top: 0;
+  }
   a {
     font-weight: 400;
     text-decoration: underline;
