@@ -92,6 +92,8 @@
 
 				<ul aria-label="Post Navigation List" class="aside-post-navigation" id="post-navigation-list"></ul>
 
+				<select aria-label="Mobile Post Navigation List" data-input-placeholder="Type to search..." class="aside-post-navigation-mobile goto-select" id="post-navigation-list-mobile"></select>
+
 				<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
 
 				<div class="post-share">
