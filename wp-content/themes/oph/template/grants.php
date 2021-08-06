@@ -288,7 +288,7 @@
 								<h6>Organization Name</h6>
 
 								<?php if ( $organization_name && ! is_wp_error( $organization_name ) ) : ?>
-									<h4 class="block-feed-post__organization-name"><a href="?organization-name=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $organization_name[0]->name; ?></a></h4>
+									<h4 class="block-feed-post__organization-name"><a href="?organization-name=<?php echo $organization_name[0]->slug; ?>#categories"><?php echo $organization_name[0]->name; ?></a></h4>
 								<?php else : ?>
 									<div aria-hidden="true" class="block-feed-post__organization-name"></div>
 								<?php endif; ?>
