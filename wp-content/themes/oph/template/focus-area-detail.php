@@ -16,13 +16,13 @@
 
 	if ( $focus_area && $focus_area->term_id ) {
 		$focus_area_color = get_field( 'category_color', 'focus-area_' . $focus_area->term_id );
-		$focus_area_image = get_field( 'category_image', 'focus-area_' . $focus_area->term_id );
+		$focus_area_image = get_field( 'category_focus_areas_image', 'focus-area_' . $focus_area->term_id );
 
 		$focus_area_parent_id = get_ancestors( $focus_area->term_id, 'focus-area' )[0];
 
 		if ( $focus_area_parent_id ) {
 			$focus_area_color_parent = get_field( 'category_color', 'focus-area_' . $focus_area_parent_id );
-			$focus_area_image_parent = get_field( 'category_image', 'focus-area_' . $focus_area_parent_id );
+			$focus_area_image_parent = get_field( 'category_focus_areas_image', 'focus-area_' . $focus_area_parent_id );
 		}
 	}
 

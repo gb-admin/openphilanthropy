@@ -261,6 +261,10 @@
 							$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 
 							if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
+								$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+							}
+
+							if ( ! $post_thumbnail ) {
 								$post_thumbnail = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
 							}
 						?>
