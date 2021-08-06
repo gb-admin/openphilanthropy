@@ -131,7 +131,7 @@
 									<option value=""></option>
 
 									<?php foreach ( $content_type as $i ) : ?>
-										<option class="<?php if ( in_array( $i->slug, $params['content-type'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+										<option class="<?php if ( in_array( $i->slug, $params['content-type'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php endif; ?>
