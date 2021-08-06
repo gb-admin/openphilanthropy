@@ -29,8 +29,16 @@
 		'relation' => 'or'
 	);
 
-	$date_query = array(
+	$date_meta_query = array(
 		'relation' => 'or'
+	);
+
+	$meta_query = array(
+		'relation' => 'and',
+		'order_clause' => array(
+            'key' => 'award_date',
+            'type' => 'date'
+		)
 	);
 
 	$order_query = 'desc';
@@ -39,8 +47,8 @@
 		'relation' => 'or'
 	);
 
-	$orderby_query = 'date';
-	$meta_key = '';
+	$orderby_query = 'meta_value';
+	$meta_key = 'award_date';
 	$param_amount_meta_query = '';
 	$posts_per_page = 9;
 	$taxonomy = '';
@@ -94,17 +102,21 @@
 					$meta_key = 'grant_amount';
 					$orderby_query = 'meta_value_num';
 				} elseif ( $value == 'recent' ) {
+					$meta_key = 'award_date';
 					$order_query = 'desc';
-					$orderby_query = 'date';
+					$orderby_query = 'meta_value';
 				}
 			}
 		} elseif ( $key == 'yr' ) {
 			foreach ( $param as $value ) {
 				$param_date_query = array(
-					'year' => $value
+					'key' => 'award_date',
+					'value' =>  array( $value . '-01-01', $value . '-12-31' ),
+					'type' => 'date',
+					'compare' => 'between'
 				);
 
-				array_push( $date_query, $param_date_query );
+				array_push( $date_meta_query, $param_date_query );
 			}
 		} else {
 
@@ -130,6 +142,9 @@
 		}
 	}
 
+	array_push( $meta_query, $amount_meta_query );
+	array_push( $meta_query, $date_meta_query );
+
 	$grants = new WP_Query( array(
 		'post_type' => 'grants',
 		'posts_per_page' => $posts_per_page,
@@ -137,8 +152,7 @@
 		'orderby' => $orderby_query,
 		'paged' => $paged,
 		'post__not_in' => $featured_grants_id,
-		'date_query' => $date_query,
-		'meta_query' => $amount_meta_query,
+		'meta_query' => $meta_query,
 		'tax_query' => $tax_query,
 		'meta_key' => $meta_key
 	) );
