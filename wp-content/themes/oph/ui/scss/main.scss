@@ -2954,6 +2954,12 @@ button,
       }
     }
   }
+  ul {
+    margin: 1rem 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
   @media only screen and (min-width: $lg) {
     h1,
     h2,
