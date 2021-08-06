@@ -295,11 +295,11 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-									<h5 class="block-feed-post__focus-area">
+								<h5 class="block-feed-post__focus-area">
+									<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
 										<a href="?focus-area=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $focus_area[0]->name; ?></a>
-									</h5>
-								<?php endif; ?>
+									<?php endif; ?>
+								</h5>
 
 								<h6>Amount</h6>
 
