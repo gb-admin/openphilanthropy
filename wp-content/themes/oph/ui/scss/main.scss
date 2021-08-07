@@ -182,9 +182,9 @@ body {
   text-align: left;
   text-transform: none;
   justify-content: flex-start;
-  &:focus {
+  &:focus,
+  &:hover {
     background: none;
-    border-color: $periwinkle-3;
     svg {
       fill: none;
       path {
@@ -192,16 +192,12 @@ body {
       }
     }
   }
+  &:focus {
+    border-color: $periwinkle-3;
+  }
   &:hover {
-    background: none;
     border-color: $periwinkle-2;
     color: #000;
-    svg {
-      fill: none;
-      path {
-        stroke: $periwinkle-3;
-      }
-    }
   }
   svg {
     margin: 0 0 0 auto;
@@ -3662,6 +3658,20 @@ button,
       border-color: $periwinkle-2;
     }
   }
+  .select2-selection {
+    background-color: $periwinkle-6;
+    border-color: $periwinkle-6;
+    &:focus,
+    &:hover {
+      background-color: $periwinkle-3;
+      border-color: $periwinkle-3;
+      svg {
+        path {
+          stroke: $periwinkle-2;
+        }
+      }
+    }
+  }
   .sidebar-filter__button {
     button,
     .button {
@@ -5229,7 +5239,20 @@ button,
  */
 
 .select2 {
-  @extend %select-box;
+  &.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,
+  &.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+    border-radius: 999px;
+  }
+  .select2-selection {
+    @extend %select;
+    display: flex;
+    .select2-selection__arrow {
+      display: none;
+    }
+    .select2-selection__rendered {
+      padding: 0;
+    }
+  }
 }
 
 /**
