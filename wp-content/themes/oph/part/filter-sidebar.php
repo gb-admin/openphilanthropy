@@ -54,7 +54,7 @@
 		$grants_posts = $grants->posts;
 
 		foreach ( $grants_posts as $i ) {
-			$post_year = get_the_date( 'Y', $i->ID );
+			$post_year = get_field( 'award_date', $i->ID );
 
 			array_push( $grants_years, $post_year );
 		}
