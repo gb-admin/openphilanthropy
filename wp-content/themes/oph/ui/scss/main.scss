@@ -211,7 +211,7 @@ body {
   }
 }
 
-%select--box {
+%select-box {
   padding: 14px 16px !important;
   border-radius: 0;
   border-width: 1px;
@@ -5222,6 +5222,14 @@ button,
       }
     }
   }
+}
+
+/**
+ * Vendor: Select2
+ */
+
+.select2 {
+  @extend %select-box;
 }
 
 /**
