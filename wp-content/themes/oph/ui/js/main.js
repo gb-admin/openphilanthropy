@@ -53,6 +53,15 @@ jQuery(function($) {
   };
 
   /**
+   * Call Select2
+   */
+  $(document).ready(function() {
+    $('nav select').select2({
+      searchInputPlaceholder: 'Type here to search...'
+    });
+  });
+
+  /**
    * Dropdown - move items down.
    */
 
