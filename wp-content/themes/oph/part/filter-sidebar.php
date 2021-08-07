@@ -64,6 +64,8 @@
 	}
 
 	$grants_years = array_unique( $grants_years );
+
+	rsort( $grants_years );
 ?>
 
 <div class="sidebar-filter is-active">
