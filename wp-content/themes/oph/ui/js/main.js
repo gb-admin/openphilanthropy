@@ -85,8 +85,8 @@ jQuery(function($) {
 
   // Close all on click outside
   $(document).on('click', function(e) {
-    if (! $(e.target).closest('.sidebar-filter .dropdown > button, .sidebar-filter .chosen-container').length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container').css('marginTop', '0');
+    if (! $(e.target).closest('.sidebar-filter .dropdown > button, .sidebar-filter .chosen-container:not(.dropup)').length) {
+      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
     }
   });
 
@@ -99,7 +99,7 @@ jQuery(function($) {
     var findChosenWithDrop = $(this).closest('.sidebar-filter').find('.chosen-with-drop');
 
     if (! findChosenWithDrop.length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container').css('marginTop', '0');
+      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
     }
   });
 
@@ -119,12 +119,12 @@ jQuery(function($) {
   });
 
   $(document).on('click', '.sidebar-filter .chosen-single', function() {
-    var height = $(this).closest('.chosen-container').find('.chosen-drop').height();
-    var nextItem = $(this).closest('.chosen-container').nextAll('.chosen-container:first, .dropdown:first');
+    var height = $(this).closest('.chosen-container:not(.dropup)').find('.chosen-drop').height();
+    var nextItem = $(this).closest('.chosen-container:not(.dropup)').nextAll('.chosen-container:not(.dropup):first, .dropdown:first');
     var marginTop = height + 16 + 'px';
 
-    $(this).closest('.chosen-container').css('marginTop', '0');
-    $(this).closest('.chosen-container').siblings('.chosen-container, .dropdown').css('marginTop', '0');
+    $(this).closest('.chosen-container:not(.dropup)').css('marginTop', '0');
+    $(this).closest('.chosen-container:not(.dropup)').siblings('.chosen-container:not(.dropup), .dropdown').css('marginTop', '0');
 
     if ($(this).hasClass('chosen-with-drop')) {
       nextItem.css('marginTop', '0');
@@ -135,7 +135,7 @@ jQuery(function($) {
     var findChosenWithDrop = $(this).closest('.sidebar-filter').find('.chosen-with-drop');
 
     if (! findChosenWithDrop.length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container').css('marginTop', '0');
+      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
     }
   });
 
@@ -1138,6 +1138,21 @@ jQuery(function($) {
           select_opt1.text(placeholder);
         }
       });
+    }
+  });
+
+  /**
+   * Show dropdown as dropup if not enough space in window.
+   */
+  $('.sidebar-filter select').on('chosen:showing_dropdown', function() {
+    var chosenContainer = $(this).next('.chosen-container');
+    var thisDrop = chosenContainer.find('.chosen-drop');
+    var spaceBelow = $(window).height() - chosenContainer[0].getBoundingClientRect().bottom;
+
+    if (spaceBelow < 240) {
+      chosenContainer.addClass('dropup');
+    } else {
+      chosenContainer.removeClass('dropup');
     }
   });
 });

@@ -3682,6 +3682,17 @@ button,
     }
   }
   .chosen-container {
+    &.dropup {
+      margin-top: 0 !important;
+      .chosen-drop {
+        margin: 0 0 20px;
+        top: auto !important;
+        bottom: 100%;
+        &::before {
+          display: none;
+        }
+      }
+    }
     .chosen-drop {
       top: 41px !important;
       background-color: $periwinkle-6;
@@ -3690,6 +3701,7 @@ button,
       }
     }
     .chosen-results {
+      max-height: 182px;
       > li {
         &::after,
         &::before {
