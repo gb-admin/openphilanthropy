@@ -982,6 +982,18 @@ jQuery(function($) {
     });
   });
 
+  /**
+   * Set icon in Select2 button.
+   */
+
+  $(document).ready(function() {
+    var selectArrow = $('<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>');
+
+    $('select2-container').remove('select2-selection__arrow');
+
+    $('.select2-selection').append(selectArrow);
+  });
+
   $(document).on('click', '.button-view-list', function(e) {
     e.preventDefault();
 
