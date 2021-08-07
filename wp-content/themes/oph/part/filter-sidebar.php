@@ -56,6 +56,9 @@
 		foreach ( $grants_posts as $i ) {
 			$post_year = get_field( 'award_date', $i->ID );
 
+			// Return format is word-formatted - get year from last 4 characters.
+			$post_year = substr( $post_year, -4 );
+
 			array_push( $grants_years, $post_year );
 		}
 	}
