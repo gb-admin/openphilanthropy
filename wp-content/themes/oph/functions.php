@@ -89,3 +89,11 @@ function get_taxonomy_hierarchy( $taxonomy, $parent = 0 ) {
 
 	return $children;
 }
+
+/**
+ * Jump to the first error after submission
+ *
+ * @param $form
+ * @return mixed
+ */
+add_filter("gform_confirmation_anchor", create_function("","return true;"));
