@@ -56,7 +56,9 @@ jQuery(function($) {
    * Call Select2
    */
   $(document).ready(function() {
-    $('nav select').select2();
+    $('nav select').select2({
+      searchInputPlaceholder: 'Type here to search ...'
+    });
 
     $('.sidebar-filter select').select2({
       dropdownCssClass: 'sidebar-filter-dropdown',

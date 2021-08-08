@@ -27,33 +27,37 @@
 				<h3>Navigate this page with the links below</h3>
 
 				<?php if ( ! empty( $careers_content ) ) : ?>
-					<ul aria-label="Post Navigation List" class="aside-post-navigation" id="post-navigation-list">
-						<?php foreach ( $careers_content as $content ) : ?>
+					<nav aria-label="Post Navigation" class="aside-post-navigation" id="nav-post">
+						<ul class="list-aside-post-navigation" id="post-navigation-list">
+							<?php foreach ( $careers_content as $content ) : ?>
 
-							<?php
-								$pagenav_anchor = strtolower( sanitize_title_with_dashes( $content['title'] ) );
-							?>
+								<?php
+									$pagenav_anchor = strtolower( sanitize_title_with_dashes( $content['title'] ) );
+								?>
 
-							<li>
-								<a data-goto="#<?php echo $pagenav_anchor; ?>" href="<?php echo $pagenav_anchor; ?>" title="<?php echo $content['title']; ?>">
-									<span><?php echo $content['title']; ?></span>
+								<li>
+									<a data-goto="#<?php echo $pagenav_anchor; ?>" href="<?php echo $pagenav_anchor; ?>" title="<?php echo $content['title']; ?>">
+										<span><?php echo $content['title']; ?></span>
 
-									<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"></path></svg>
-								</a>
-							</li>
-						<?php endforeach; ?>
-					</ul>
+										<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"></path></svg>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</nav>
 
-					<select aria-label="Mobile Post Navigation List" data-input-placeholder="Type to search..." class="aside-post-navigation-mobile goto-select" id="post-navigation-list-mobile">
-						<?php foreach ( $careers_content as $content ) : ?>
+					<nav aria-label="Mobile Post Navigation" class="aside-post-navigation-mobile" id="nav-post-mobile">
+						<select data-input-placeholder="Type to search..." class="goto-select" id="post-navigation-list-mobile">
+							<?php foreach ( $careers_content as $content ) : ?>
 
-							<?php
-								$pagenav_anchor = strtolower( sanitize_title_with_dashes( $content['title'] ) );
-							?>
+								<?php
+									$pagenav_anchor = strtolower( sanitize_title_with_dashes( $content['title'] ) );
+								?>
 
-							<option value="<?php echo $pagenav_anchor; ?>"><?php echo $content['title']; ?></option>
-						<?php endforeach; ?>
-					</select>
+								<option value="<?php echo $pagenav_anchor; ?>"><?php echo $content['title']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</nav>
 				<?php endif; ?>
 
 				<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
