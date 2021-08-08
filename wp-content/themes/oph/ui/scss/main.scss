@@ -3605,11 +3605,12 @@ button,
 
 .list-steps {
   .list-steps__count {
-    margin-right: 28px;
+    margin: 0 16px 16px 0;
     width: 94px;
     height: 94px;
     background-color: $periwinkle-2;
     border-radius: 50%;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3636,8 +3637,6 @@ button,
   }
   .list-steps__title {
     margin-bottom: 30px;
-    display: flex;
-    align-items: center;
     h2 {
       margin: 0;
       color: $periwinkle-3;
@@ -3652,6 +3651,15 @@ button,
     border-top: 2px solid #cdd2de;
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+  @media only screen and (min-width: $md) {
+    .list-steps__count {
+      margin: 0 28px 0 0;
+    }
+    .list-steps__title {
+      display: flex;
+      align-items: center;
     }
   }
 }
