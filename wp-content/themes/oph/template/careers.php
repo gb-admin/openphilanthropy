@@ -114,6 +114,12 @@
 					</div>
 				<?php endif; ?>
 
+				<div class="careers-signup-form">
+					<h3>Sign up for job alerts</h3>
+
+					<?php echo do_shortcode( '[gravityforms id="1"]' ); ?>
+				</div>
+
 				<?php if ( have_rows( 'careers_content' ) ) : ?>
 					<div class="flexible-content-careers">
 						<?php while ( have_rows( 'careers_content' ) ) : the_row(); ?>
