@@ -119,7 +119,7 @@ body {
     margin: 0 .5rem 0 0;
     width: 20px;
     height: 20px;
-    fill: $orange;
+    fill: $periwinkle-2;
     position: relative;
   }
 }
@@ -1490,36 +1490,6 @@ button,
     .quote-slideshow__foot {
       display: flex;
       align-items: flex-start;
-    }
-  }
-}
-
-.search-form {
-  button[type="submit"] {
-    padding: 0;
-    top: 11px;
-    right: 12px;
-    width: 20px;
-    height: 19px;
-    background: none;
-    border: 0;
-    border-radius: 0;
-    position: absolute;
-    &:focus,
-    &:hover {
-      background: none;
-      svg {
-        path {
-          stroke: none;
-        }
-      }
-    }
-    svg {
-      margin: 0;
-      position: static;
-      path {
-        stroke: none;
-      }
     }
   }
 }
@@ -3758,6 +3728,70 @@ button,
   }
 }
 
+.search-form {
+  button[type="submit"] {
+    margin: 0 -8px 0 8px;
+    padding: 8px;
+    background: none;
+    border: 0;
+    &:hover {
+      svg {
+        fill: $periwinkle-3;
+      }
+    }
+    svg {
+      margin: 0;
+    }
+  }
+  input {
+    &:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+      padding: 0 16px;
+      height: 40px;
+      border: 2px solid $periwinkle-2;
+      border-radius: 999px;
+    }
+    outline: 0;
+  }
+  label {
+    top: -99999px;
+    left: -99999px;
+    position: absolute;
+  }
+}
+
+.search-form-box {
+  margin: 36px 0;
+  padding: 20px;
+  background: #eff1f5;
+  width: 100%;
+  max-width: 400px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  h3 {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 28px;
+  }
+  form {
+    display: flex;
+    input {
+      width: 100%;
+    }
+  }
+  .search-form {
+    input {
+      &:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+        border-color: transparent;
+      }
+    }
+  }
+  @media only screen and (min-width: $md) {
+    padding: 24px;
+  }
+}
+
 .select2-container {
   z-index: 15;
 }
@@ -4092,6 +4126,33 @@ button,
         button[type="submit"] {
           svg {
             fill: #fff;
+          }
+        }
+      }
+      button[type="submit"] {
+        padding: 0;
+        top: 11px;
+        right: 12px;
+        width: 20px;
+        height: 19px;
+        background: none;
+        border: 0;
+        border-radius: 0;
+        position: absolute;
+        &:focus,
+        &:hover {
+          background: none;
+          svg {
+            path {
+              stroke: none;
+            }
+          }
+        }
+        svg {
+          margin: 0;
+          position: static;
+          path {
+            stroke: none;
           }
         }
       }
