@@ -56,8 +56,30 @@ jQuery(function($) {
    * Call Select2
    */
   $(document).ready(function() {
-    $('nav select').select2({
-      searchInputPlaceholder: 'Type here to search...'
+    $('nav select').select2();
+
+    $('.sidebar-filter select').select2({
+      dropdownCssClass: 'sidebar-filter-dropdown',
+      searchInputPlaceholder: 'Type here to search ...'
+    });
+
+    /**
+     * Wrap dropdown on open. Inner div helps with rounded corners
+     * that have overflow hidden and pseudo element outside.
+     */
+    $('nav select').on('select2:open', function(e) {
+      $('.select2-dropdown-inner').contents().unwrap();
+
+      $('.select2-dropdown').wrapInner('<div class="select2-dropdown-inner"></div');
+
+      if ($('.select2-dropdown').children('.select2-dropdown-inner').length) {
+        $('.select2-dropdown').addClass('has-inner');
+      }
+
+      // Set search field to focus
+      setTimeout(function() {
+        $('input.select2-search__field')[0].focus();
+      }, 10);
     });
   });
 
@@ -66,24 +88,38 @@ jQuery(function($) {
    */
 
   // Close all on click outside
-  $(document).on('click', function(e) {
-    if (! $(e.target).closest('.sidebar-filter .dropdown > button').length) {
-      $('.sidebar-filter .dropdown').css('marginTop', '0');
+  $(document).on('mousedown', function(e) {
+    if (! $(e.target).closest('.sidebar-filter .select2').length) {
+      $('.sidebar-filter .select2').css('marginTop', '0');
+
+      $('.sidebar-filter').removeClass('has-select-open');
     }
   });
 
-  $('.sidebar-filter .dropdown > button').on('click', function(e) {
-    var height = $(this).next('.dropdown-content').height();
-    var nextItem = $(this).closest('.dropdown').next('.dropdown');
-    var marginTop = height + 16 + 'px';
+  $('nav select').on('select2:close', function(e) {
+    $(this).next('.select2').nextAll('.select2:first').css('marginTop', '0');
+  });
 
-    $(this).closest('.dropdown').css('marginTop', '0');
-    $(this).closest('.dropdown').siblings('.dropdown').css('marginTop', '0');
+  $('.sidebar-filter select').on('select2:open', function(e) {
+    var height = $('.select2-dropdown').height();
+    var nextItem = $(this).next('.select2').nextAll('.select2:first');
+    var marginTop = 173 + 16 + 'px'; // Using hard-code value of 173 instead of the 'height' variable
 
-    if ($(this).closest('.dropdown').hasClass('is-active')) {
-      nextItem.css('marginTop', '0');
-    } else {
+    // Set pointer-events to none to prevent undesired selection
+    $('.select2-dropdown ul').css('pointerEvents', 'none');
+
+    // Set pointer-events back to normal
+    setTimeout(function() {
+      $('.select2-dropdown ul').css('pointerEvents', 'auto');
+    }, 300);
+
+    $(this).css('marginTop', '0');
+    $(this).siblings('.select2').css('marginTop', '0');
+
+    if ($(this).next('.select2').hasClass('select2-container--below')) {
       nextItem.css('marginTop', marginTop);
+    } else {
+      nextItem.css('marginTop', '0');
     }
   });
 

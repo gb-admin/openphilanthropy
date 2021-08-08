@@ -179,6 +179,7 @@ body {
   border: 2px solid $periwinkle-2;
   color: #000;
   font-weight: 400;
+  letter-spacing: 0;
   text-align: left;
   text-transform: none;
   justify-content: flex-start;
@@ -3572,6 +3573,147 @@ button,
   }
 }
 
+.select2-container {
+  z-index: 15;
+}
+
+.select2-dropdown {
+  margin-top: 16px;
+  background: $periwinkle-6;
+  border: 0;
+  border-radius: 12px !important;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  overflow: hidden;
+  &.sidebar-filter-dropdown {
+    .select2-results {
+      .select2-results__options {
+        > li {
+          padding-left: 44px !important;
+          background-color: $periwinkle-6;
+          &::after,
+          &::before {
+            content: "";
+            margin-top: -10px;
+            top: 50%;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 20;
+          }
+          &::after {
+            margin-top: -6px;
+            top: 50%;
+            left: 14px;
+            width: 12px;
+            height: 12px;
+            background-color: $periwinkle-3;
+            opacity: 0;
+            z-index: 25;
+          }
+          &.category-selected {
+            &::after {
+              opacity: 1;
+            }
+          }
+          &.is-term-child {
+            padding-left: 60px !important;
+            &::after {
+              left: 30px;
+            }
+            &::before {
+              left: 26px;
+            }
+          }
+        }
+      }
+    }
+  }
+  &::before {
+    content: "";
+    top: -12px;
+    right: 16px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 11.5px 13px 11.5px;
+    border-color: transparent transparent $periwinkle-6 transparent;
+    display: inline-block;
+    position: absolute;
+    z-index: 15;
+    transition: $fast;
+  }
+  &.has-inner {
+    background: none;
+    border-radius: 0 !important;
+    overflow: visible;
+    &.select2-dropdown--above {
+      .select2-dropdown-inner {
+        height: 167px;
+      }
+    }
+    .select2-dropdown-inner {
+      background: $periwinkle-6;
+      border-radius: 12px !important;
+      height: 173px;
+      overflow: hidden;
+    }
+  }
+  &.select2-dropdown--above {
+    margin: -16px 0 0;
+    &::before {
+      display: none;
+    }
+  }
+  .select2-results {
+    .select2-results__options {
+      max-height: 129px;
+      > li {
+        &:last-child {
+          border-bottom: none;
+        }
+        &.select2-results__option--highlighted {
+          background-color: $periwinkle-3;
+        }
+        padding: 12px 16px !important;
+        min-height: 44px;
+        border-bottom: 1px solid #fff;
+        color: #fff;
+        font-size: 14px !important;
+        line-height: 18px !important;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        z-index: 20;
+        transition: $fast;
+      }
+    }
+  }
+  .select2-search {
+    padding: 0;
+    border-bottom: 1px solid #fff;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    .select2-search__field {
+      padding: 0 16px;
+      height: 43px;
+      background: none;
+      border: 0;
+      color: #fff;
+      outline: 0;
+      &::placeholder {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+}
+
 .sidebar-filter {
   margin-top: 28px;
   top: 0;
@@ -3661,10 +3803,13 @@ button,
   .select2-selection {
     background-color: $periwinkle-6;
     border-color: $periwinkle-6;
+    color: #fff;
+    height: 45px;
     &:focus,
     &:hover {
       background-color: $periwinkle-3;
       border-color: $periwinkle-3;
+      color: #fff;
       svg {
         path {
           stroke: $periwinkle-2;
@@ -5239,9 +5384,26 @@ button,
  */
 
 .select2 {
+  &.select2-container--default.select2-container--open.select2-container--above .select2-selection--single,
+  &.select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple,
   &.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,
   &.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
     border-radius: 999px;
+  }
+  &.select2-container--default {
+    .select2-selection--single {
+      .select2-selection__placeholder,
+      .select2-selection__rendered {
+        color: inherit;
+      }
+    }
+  }
+  &.select2-container--open {
+    .select2-selection {
+      > svg {
+        transform: rotate(180deg);
+      }
+    }
   }
   .select2-selection {
     @extend %select;
