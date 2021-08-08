@@ -53,29 +53,33 @@ jQuery(function($) {
   };
 
   /**
-   * Call Chosen.
-   *
-   * JS below for form and Chosen to be reorganized. 
+   * Call Select2
    */
-
   $(document).ready(function() {
-    $('form select, nav select').chosen({
-      width: '100%'
+    $('nav select').select2();
+
+    $('.sidebar-filter select').select2({
+      dropdownCssClass: 'sidebar-filter-dropdown',
+      searchInputPlaceholder: 'Type here to search ...'
     });
-  });
 
-  // $(document).ready(function() {
-  //   var chosen_search_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><path d="M11.975 2.052c-2.736-2.736-7.187-2.736-9.923 0-2.736 2.736-2.736 7.187 0 9.923 2.44 2.441 6.248 2.704 8.983.79l4.877 4.877c.478.477 1.252.477 1.73 0 .477-.478.477-1.252 0-1.73l-4.877-4.877c1.914-2.735 1.651-6.542-.79-8.983zm-1.438 8.485c-1.95 1.95-5.124 1.95-7.074 0-1.95-1.95-1.95-5.124 0-7.074 1.95-1.95 5.124-1.95 7.074 0 1.95 1.95 1.95 5.124 0 7.074z"/></svg>';
+    /**
+     * Wrap dropdown on open. Inner div helps with rounded corners
+     * that have overflow hidden and pseudo element outside.
+     */
+    $('nav select').on('select2:open', function(e) {
+      $('.select2-dropdown-inner').contents().unwrap();
 
-  //   $('.chosen-search').append(chosen_search_svg);
-  // });
+      $('.select2-dropdown').wrapInner('<div class="select2-dropdown-inner"></div');
 
-  $(document).ready(function() {
-    $('.chosen-search-input').each(function() {
-      var select = $(this).closest('.chosen-container').prev('select');
-      var chosenInputPlaceholder = select.attr('data-input-placeholder');
+      if ($('.select2-dropdown').children('.select2-dropdown-inner').length) {
+        $('.select2-dropdown').addClass('has-inner');
+      }
 
-      $('.chosen-search-input').attr('placeholder', chosenInputPlaceholder);
+      // Set search field to focus
+      setTimeout(function() {
+        $('input.select2-search__field')[0].focus();
+      }, 10);
     });
   });
 
@@ -84,58 +88,38 @@ jQuery(function($) {
    */
 
   // Close all on click outside
-  $(document).on('click', function(e) {
-    if (! $(e.target).closest('.sidebar-filter .dropdown > button, .sidebar-filter .chosen-container:not(.dropup)').length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
+  $(document).on('mousedown', function(e) {
+    if (! $(e.target).closest('.sidebar-filter .select2').length) {
+      $('.sidebar-filter .select2').css('marginTop', '0');
+
+      $('.sidebar-filter').removeClass('has-select-open');
     }
   });
 
-  /**
-   * When dropdown open then click off window (ex. your desktop),
-   * dropdown closes, and no way to detect the click. Use
-   * 'chosen:hiding_dropdown' to hide.
-   */
-  $('.sidebar-filter select').on('chosen:hiding_dropdown', function() {
-    var findChosenWithDrop = $(this).closest('.sidebar-filter').find('.chosen-with-drop');
-
-    if (! findChosenWithDrop.length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
-    }
+  $('nav select').on('select2:close', function(e) {
+    $(this).next('.select2').nextAll('.select2:first').css('marginTop', '0');
   });
 
-  $('.sidebar-filter .dropdown > button').on('click', function(e) {
-    var height = $(this).next('.dropdown-content').height();
-    var nextItem = $(this).closest('.dropdown').next('.dropdown');
-    var marginTop = height + 16 + 'px';
+  $('.sidebar-filter select').on('select2:open', function(e) {
+    var height = $('.select2-dropdown').height();
+    var nextItem = $(this).next('.select2').nextAll('.select2:first');
+    var marginTop = 173 + 16 + 'px'; // Using hard-code value of 173 instead of the 'height' variable
 
-    $(this).closest('.dropdown').css('marginTop', '0');
-    $(this).closest('.dropdown').siblings('.dropdown').css('marginTop', '0');
+    // Set pointer-events to none to prevent undesired selection
+    $('.select2-dropdown ul').css('pointerEvents', 'none');
 
-    if ($(this).closest('.dropdown').hasClass('is-active')) {
-      nextItem.css('marginTop', '0');
-    } else {
+    // Set pointer-events back to normal
+    setTimeout(function() {
+      $('.select2-dropdown ul').css('pointerEvents', 'auto');
+    }, 300);
+
+    $(this).css('marginTop', '0');
+    $(this).siblings('.select2').css('marginTop', '0');
+
+    if ($(this).next('.select2').hasClass('select2-container--below')) {
       nextItem.css('marginTop', marginTop);
-    }
-  });
-
-  $(document).on('click', '.sidebar-filter .chosen-single', function() {
-    var height = $(this).closest('.chosen-container:not(.dropup)').find('.chosen-drop').height();
-    var nextItem = $(this).closest('.chosen-container:not(.dropup)').nextAll('.chosen-container:not(.dropup):first, .dropdown:first');
-    var marginTop = height + 16 + 'px';
-
-    $(this).closest('.chosen-container:not(.dropup)').css('marginTop', '0');
-    $(this).closest('.chosen-container:not(.dropup)').siblings('.chosen-container:not(.dropup), .dropdown').css('marginTop', '0');
-
-    if ($(this).hasClass('chosen-with-drop')) {
-      nextItem.css('marginTop', '0');
     } else {
-      nextItem.css('marginTop', marginTop);
-    }
-
-    var findChosenWithDrop = $(this).closest('.sidebar-filter').find('.chosen-with-drop');
-
-    if (! findChosenWithDrop.length) {
-      $('.sidebar-filter .dropdown, .sidebar-filter .chosen-container:not(.dropup)').css('marginTop', '0');
+      nextItem.css('marginTop', '0');
     }
   });
 
@@ -999,12 +983,6 @@ jQuery(function($) {
       headersIdsListMobile.append($('<option value="' + $(this).attr('id') + '">' + $(this).text() + '</option>'));
     });
 
-    headersIdsListMobile.chosen({
-      width: '100%'
-    });
-
-    headersIdsListMobile.next('.chosen-container').find('.chosen-search-input').attr('placeholder', headersIdsListMobile.attr('data-input-placeholder'));
-
     if (headersIdsIcon && headersIdsIcon.length) {
       headersIdsList.children('li').children('a').each(function() {
         var headersIdsIconClone = headersIdsIcon.clone();
@@ -1041,15 +1019,15 @@ jQuery(function($) {
   });
 
   /**
-   * Set icon in Chosen button.
+   * Set icon in Select2 button.
    */
 
   $(document).ready(function() {
-    var svg = $('<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>');
+    var selectArrow = $('<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>');
 
-    $('.chosen-single > div').remove();
+    $('select2-container').remove('select2-selection__arrow');
 
-    $('.chosen-single').append(svg);
+    $('.select2-selection').append(selectArrow);
   });
 
   $(document).on('click', '.button-view-list', function(e) {
@@ -1112,47 +1090,5 @@ jQuery(function($) {
     var childList = $(this).closest('li').children('ul:first');
 
     childList.slideToggle(200);
-  });
-
-  $(document).ready(function() {
-    var chosenSelects = $('nav select');
-
-    if (chosenSelects.length) {
-      chosenSelects.each(function() {
-        var $select = $(this);
-        var select_opt1 = $select.children('option:first');
-        var placeholder = $select.attr('data-placeholder');
-
-        if (! placeholder) {
-          placeholder = 'Select...';
-        }
-
-        /**
-         * Add class to select on mobile.
-         */
-        if (/iP(od|hone)/i.test(window.navigator.userAgent) || (/Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent))) {
-          $select.addClass('chosen-mobile');
-        }
-
-        if (select_opt1.is(':empty')) {
-          select_opt1.text(placeholder);
-        }
-      });
-    }
-  });
-
-  /**
-   * Show dropdown as dropup if not enough space in window.
-   */
-  $('.sidebar-filter select').on('chosen:showing_dropdown', function() {
-    var chosenContainer = $(this).next('.chosen-container');
-    var thisDrop = chosenContainer.find('.chosen-drop');
-    var spaceBelow = $(window).height() - chosenContainer[0].getBoundingClientRect().bottom;
-
-    if (spaceBelow < 240) {
-      chosenContainer.addClass('dropup');
-    } else {
-      chosenContainer.removeClass('dropup');
-    }
   });
 });
