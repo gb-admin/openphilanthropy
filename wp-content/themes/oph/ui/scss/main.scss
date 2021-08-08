@@ -4044,6 +4044,10 @@ button,
         }
       }
     }
+    .select2-selection__rendered {
+      top: 1px;
+      position: relative;
+    }
   }
   .sidebar-filter__button {
     button,
