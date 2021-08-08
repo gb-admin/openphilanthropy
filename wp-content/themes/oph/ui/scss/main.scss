@@ -4028,6 +4028,11 @@ button,
       border-color: $periwinkle-2;
     }
   }
+  .select2-container--above {
+    & + select + .select2 {
+      margin-top: 0 !important;
+    }
+  }
   .select2-selection {
     background-color: $periwinkle-6;
     border-color: $periwinkle-6;
