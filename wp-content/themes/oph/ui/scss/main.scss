@@ -4074,53 +4074,6 @@ button,
   .sidebar-filter__search {
     margin-bottom: 16px;
     position: relative;
-    input[type="search"],
-    input[type="text"] {
-      @extend %button;
-      @extend .button--secondary;
-      margin: 0;
-      padding: 3px 16px 0;
-      width: 100%;
-      height: 42px;
-      background-color: $periwinkle-4;
-      border-color: $periwinkle-2;
-      color: #fff;
-      font-weight: 400;
-      text-align: left;
-      cursor: initial;
-      &:focus,
-      &:hover {
-        background-color: $periwinkle-4;
-        border-color: $periwinkle-2;
-        & ~ svg,
-        & ~ button svg {
-          fill: $periwinkle-1;
-        }
-      }
-      // &:focus {
-      //   & + svg {
-      //     fill: #fff;
-      //   }
-      // }
-      &::placeholder {
-        color: #fff;
-        opacity: 1;
-      }
-    }
-    label {
-      top: -99999px;
-      left: -99999px;
-      position: absolute;
-    }
-    svg {
-      top: 10px;
-      right: 14px;
-      width: 20px;
-      height: 19px;
-      fill: $periwinkle-2;
-      position: absolute;
-      z-index: 20;
-    }
     .search-form {
       &:hover {
         button[type="submit"] {
@@ -4156,6 +4109,53 @@ button,
             stroke: none;
           }
         }
+      }
+      input[type="search"],
+      input[type="text"] {
+        @extend %button;
+        @extend .button--secondary;
+        margin: 0;
+        padding: 3px 16px 0;
+        width: 100%;
+        height: 42px;
+        background-color: $periwinkle-4;
+        border-color: $periwinkle-2;
+        color: #fff;
+        font-weight: 400;
+        text-align: left;
+        cursor: initial;
+        &:focus,
+        &:hover {
+          background-color: $periwinkle-4;
+          border-color: $periwinkle-2;
+          & ~ svg,
+          & ~ button svg {
+            fill: $periwinkle-1;
+          }
+        }
+        // &:focus {
+        //   & + svg {
+        //     fill: #fff;
+        //   }
+        // }
+        &::placeholder {
+          color: #fff;
+          opacity: 1;
+        }
+      }
+      label {
+        top: -99999px;
+        left: -99999px;
+        position: absolute;
+      }
+      svg {
+        top: 10px;
+        right: 14px;
+        width: 20px;
+        height: 19px;
+        fill: $periwinkle-2;
+        position: absolute;
+        z-index: 20;
       }
     }
   }
