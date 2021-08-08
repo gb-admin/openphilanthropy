@@ -52,17 +52,29 @@ jQuery(function($) {
     return window.location.hash.substr( 1 ).replace( '#', '' );
   };
 
+  function select2CopyClasses(data, container) {
+    if (data.element) {
+      $(container).addClass($(data.element).attr('class'));
+    }
+
+    return data.text;
+  }
+
   /**
    * Call Select2
    */
   $(document).ready(function() {
     $('nav select').select2({
-      searchInputPlaceholder: 'Type here to search ...'
+      searchInputPlaceholder: 'Type here to search ...',
+      templateResult: select2CopyClasses,
+      templateSelection: select2CopyClasses
     });
 
     $('.sidebar-filter select').select2({
       dropdownCssClass: 'sidebar-filter-dropdown',
-      searchInputPlaceholder: 'Type here to search ...'
+      searchInputPlaceholder: 'Type here to search ...',
+      templateResult: select2CopyClasses,
+      templateSelection: select2CopyClasses
     });
 
     /**
