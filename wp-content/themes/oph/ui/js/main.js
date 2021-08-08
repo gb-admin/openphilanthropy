@@ -966,8 +966,8 @@ jQuery(function($) {
    */
   $(document).ready(function() {
     var headersIds = $('.content-single .entry-content h2, .content-single .entry-content h3');
-    var headersIdsList = $('.content-single .aside-post-navigation');
-    var headersIdsListMobile = $('.aside-post-navigation-mobile');
+    var headersIdsList = $('.content-single .aside-post-navigation ul');
+    var headersIdsListMobile = $('.aside-post-navigation-mobile select');
 
     // [Optional] Icon that will clone and append
     var headersIdsIcon = $('.aside-post-navigation-icon');
