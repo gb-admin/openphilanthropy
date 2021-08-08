@@ -1091,4 +1091,34 @@ jQuery(function($) {
 
     childList.slideToggle(200);
   });
+
+  /**
+   * Careers signup form.
+   */
+  function careersSignupFormSetup() {
+    var form = $('.careers-signup-form form:first');
+    var button = form.find('input[type="submit"]:first');
+    var gform_fields = form.find('.gform_fields');
+    var mailingListField = form.find('.gfield.mailing-list');
+
+    gform_fields.append(button);
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      mailingListField.insertAfter(gform_fields);
+    } else {
+      mailingListField.insertBefore(button);
+    }
+
+    $('.careers-signup-form:first').addClass('form-fields-setup');
+
+    form.addClass('form-fields-setup');
+  }
+
+  $(document).ready(function() {
+    careersSignupFormSetup();
+  });
+
+  $(window).on('resize', function() {
+    setTimeout(careersSignupFormSetup, 300);
+  });
 });
