@@ -33,8 +33,8 @@
 
 									<?php if ( $i['content'] ) : ?>
 										<ul>
-											<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
-												<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : ?>
+											<?php foreach ( $i['content'] as $n => $c ) : ?>
+												<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
 													<li>
 														<h5>
 															<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
@@ -60,9 +60,9 @@
 									<h2 id="section-<?php echo $k; ?>"><?php echo $k . '. ' . $i['section_title']; ?></h2>
 								</div>
 
-								<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
+								<?php foreach ( $i['content'] as $n => $c ) : ?>
 									<div class="section-content">
-										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : ?>
+										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
 											<h4 id="content-<?php echo $k . '-' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
 										<?php endif; ?>
 
