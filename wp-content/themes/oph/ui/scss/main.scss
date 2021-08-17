@@ -131,6 +131,7 @@ body {
 }
 
 %list {
+  padding-left: 14px;
   list-style: none;
   list-style-position: inside;
   > li {
@@ -140,7 +141,8 @@ body {
     }
     &::before {
       content: "\2022";
-      width: 16px;
+      margin-right: 12px;
+      width: 8px;
       color: #000;
       font-weight: 800;
       display: inline-block;
