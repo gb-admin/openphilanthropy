@@ -48,9 +48,11 @@
 									<h4>
 										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['title']; ?>"><?php echo $k . '. ' . $i['title']; ?></a>
 
-										<div class="content-navigation-icon">
-											<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-										</div>
+										<?php if ( ! empty( $i['sub_sections'] ) ) : ?>
+											<div class="content-navigation-icon">
+												<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+											</div>
+										<?php endif; ?>
 									</h4>
 
 									<?php if ( ! empty( $i['sub_sections'] ) ) : ?>
