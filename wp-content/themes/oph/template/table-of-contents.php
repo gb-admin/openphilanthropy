@@ -16,31 +16,51 @@
 	<div class="wrap">
 		<div class="content-table-of-contents__main">
 			<?php if ( $content_sections ) : ?>
+
+				<?php
+					$pagenav_sections = [];
+
+					foreach ( $content_sections as $k => $i ) {
+						$section_array = array(
+							'title' => $i['section_title'],
+							'sub_sections' => []
+						);
+
+						if ( isset( $i['content'] ) ) {
+							foreach ( $i['content'] as $c ) {
+								if ( $c['section_number'] ) {
+									array_push( $section_array['sub_sections'], $c['title'] );
+								}
+							}
+						}
+
+						array_push( $pagenav_sections, $section_array );
+					}
+				?>
+
 				<div class="content-table-of-contents__aside pagenav-aside">
 					<h3>Navigate this page with the links below</h3>
 
 					<nav aria-label="Content Navigation" id="content-navigation">
 						<ul class="list-content-navigation" id="content-navigation-list">
-							<?php foreach ( $content_sections as $k => $i ) : $k = $k + 1; ?>
+							<?php foreach ( $pagenav_sections as $k => $i ) : $k = $k + 1; ?>
 								<li>
 									<h4>
-										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['section_title']; ?>"><?php echo $k . '. ' . $i['section_title']; ?></a>
+										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['title']; ?>"><?php echo $k . '. ' . $i['title']; ?></a>
 
 										<div class="content-navigation-icon">
 											<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 										</div>
 									</h4>
 
-									<?php if ( $i['content'] ) : ?>
+									<?php if ( ! empty( $i['sub_sections'] ) ) : ?>
 										<ul>
-											<?php foreach ( $i['content'] as $n => $c ) : ?>
-												<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
-													<li>
-														<h5>
-															<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
-														</h5>
-													</li>
-												<?php endif; ?>
+											<?php foreach ( $i['sub_sections'] as $n => $c ) : $n = $n + 1; ?>
+												<li>
+													<h5>
+														<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c; ?></a>
+													</h5>
+												</li>
 											<?php endforeach; ?>
 										</ul>
 									<?php endif; ?>
