@@ -76,16 +76,37 @@
 			<?php if ( $content_sections ) : ?>
 				<div class="content-table-of-contents__entry pagenav-content">
 					<?php foreach ( $content_sections as $k => $i ) : ?>
-						<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; ?>
+						<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; $sub_sections = []; $o = 0; $p = 0; ?>
 							<div class="content-table-of-contents__section">
 								<div class="section-title">
 									<h2 id="section-<?php echo $k; ?>"><?php echo $k . '. ' . $i['section_title']; ?></h2>
 								</div>
 
+								<?php
+									foreach ( $i['content'] as $n => $c ) {
+										if ( $c['section_number'] ) {
+											$o++;
+
+											array_push( $sub_sections, $k . '.' . $o );
+										}
+									}
+								?>
+
 								<?php foreach ( $i['content'] as $n => $c ) : ?>
+
+									<?php
+										$sub_section_id = '';
+
+										if ( $c['section_number'] ) {
+											$p++;
+
+											$sub_section_id = 'content-' . $k . '-' . $p;
+										}
+									?>
+
 									<div class="section-content">
 										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
-											<h4 id="content-<?php echo $k . '-' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
+											<h4 id="<?php echo $sub_section_id; ?>"><?php if ( $c['section_number'] ) { echo $sub_sections[ $p - 1 ] . ' ' . $c['title']; } else { echo $c['title']; }; ?></h4>
 										<?php endif; ?>
 
 										<div class="section-content__entry">
