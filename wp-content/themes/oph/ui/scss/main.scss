@@ -1504,6 +1504,9 @@ button,
     border: 0;
   }
   .section-content__entry {
+    ul {
+      @extend %list;
+    }
     > :last-child {
       margin-bottom: 0;
     }
