@@ -2230,10 +2230,6 @@ button,
       }
     }
   }
-  .content-careers__footnotes {
-    padding-top: 26px;
-    border-top: 2px solid #cdd2de;
-  }
   .content-careers__main {}
   .content-careers__section {
     margin-bottom: 40px;
@@ -2265,6 +2261,12 @@ button,
   @media only screen and (min-width: $lg) {
     padding: 64px 0 106px;
   }
+}
+
+.content-footnotes {
+  margin-top: 64px;
+  padding-top: 26px;
+  border-top: 2px solid #cdd2de;
 }
 
 .content-focus-area-detail {

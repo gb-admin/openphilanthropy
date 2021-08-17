@@ -7,6 +7,7 @@
 
 	get_header();
 
+	$footnotes = get_field( 'footnotes' );
 	$steps = get_field( 'steps' );
 ?>
 
@@ -90,6 +91,14 @@
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</ul>
+
+					<?php if ( $footnotes ) : ?>
+						<div class="content-footnotes">
+							<div class="footnotes">
+								<?php echo $footnotes; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</div>

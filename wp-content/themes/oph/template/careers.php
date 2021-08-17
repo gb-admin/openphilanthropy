@@ -242,7 +242,7 @@
 				<?php endif; ?>
 
 				<?php if ( $footnotes ) : ?>
-					<div class="content-careers__footnotes">
+					<div class="content-footnotes">
 						<div class="footnotes">
 							<?php echo $footnotes; ?>
 						</div>

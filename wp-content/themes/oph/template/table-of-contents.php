@@ -8,6 +8,7 @@
 	get_header();
 
 	$content_sections = get_field( 'content_sections' );
+	$footnotes = get_field( 'footnotes' );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -117,6 +118,14 @@
 							</div>
 						<?php endif; ?>
 					<?php endforeach; ?>
+
+					<?php if ( $footnotes ) : ?>
+						<div class="content-footnotes">
+							<div class="footnotes">
+								<?php echo $footnotes; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</div>
