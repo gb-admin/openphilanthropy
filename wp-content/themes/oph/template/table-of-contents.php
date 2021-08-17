@@ -34,7 +34,7 @@
 									<?php if ( $i['content'] ) : ?>
 										<ul>
 											<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
-												<?php if ( isset( $c['title'] ) ) : ?>
+												<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : ?>
 													<li>
 														<h5>
 															<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></a>
@@ -62,7 +62,7 @@
 
 								<?php foreach ( $i['content'] as $n => $c ) : $n = $n + 1; ?>
 									<div class="section-content">
-										<?php if ( isset( $c['title'] ) ) : ?>
+										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : ?>
 											<h4 id="content-<?php echo $k . '-' . $n; ?>"><?php echo $k . '.' . $n . ' ' . $c['title']; ?></h4>
 										<?php endif; ?>
 
