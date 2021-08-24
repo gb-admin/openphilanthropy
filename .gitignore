@@ -50,3 +50,5 @@ wp-content/themes/twenty*
 
 grants_db
 grants_db.csv
+sftp.json
+package-lock.json

@@ -7,12 +7,22 @@
 
 	get_header();
 
+	// Custom order to sort by team's last name
+	add_filter( 'posts_orderby' , 'posts_orderby_lastname' );
+	function posts_orderby_lastname ($orderby_statement) {
+    	$orderby_statement = "RIGHT(post_title, LOCATE(' ', CONCAT(REVERSE(post_title), ' ')) - 1) ASC";
+    	return $orderby_statement;
+	}
+
 	$team = new WP_Query( array(
 		'post_type' => 'team',
 		'posts_per_page' => -1,
 		'order' => 'desc',
 		'orderby' => 'date'
 	) );
+
+	// Clean up as to not affect other posts
+	remove_filter( 'posts_orderby' , 'posts_orderby_lastname' );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
