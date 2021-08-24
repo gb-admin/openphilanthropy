@@ -1,3 +1,8 @@
 /**
  * Custom CSS
  */
+
+/* Sidebar conditionally hide or show via main.js */
+.content-single__aside > h3 {
+	display: none;
+}

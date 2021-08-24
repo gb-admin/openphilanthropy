@@ -980,6 +980,7 @@ jQuery(function($) {
     var headersIds = $('.content-single .entry-content h2, .content-single .entry-content h3');
     var headersIdsList = $('.content-single .aside-post-navigation ul');
     var headersIdsListMobile = $('.aside-post-navigation-mobile select');
+	var sidebarNavigationHeader = $(".content-single__aside > h3");
 
     // [Optional] Icon that will clone and append
     var headersIdsIcon = $('.aside-post-navigation-icon');
@@ -996,6 +997,11 @@ jQuery(function($) {
       headersIdsList.append($('<li><a data-goto="#' + $(this).attr('id') + '" href="#' + $(this).attr('id') + '"><span>' + $(this).text() + '</span></a></li>'));
       headersIdsListMobile.append($('<option value="' + $(this).attr('id') + '">' + $(this).text() + '</option>'));
     });
+
+	// Hide Navigation title if there are not sub-headings
+	if ( $('.header-anchor').length ) {
+		sidebarNavigationHeader.show();
+	}
 
     if (headersIdsIcon && headersIdsIcon.length) {
       headersIdsList.children('li').children('a').each(function() {
