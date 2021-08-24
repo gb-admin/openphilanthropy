@@ -4,5 +4,34 @@
 
 /* Sidebar conditionally hide or show via main.js */
 .content-single__aside > h3 {
-	display: none;
+  display: none;
 }
+
+/* Overriding 'Focus Area' arrows color */
+#focus-areas .list-4-col .bucket-description svg path { 
+  stroke: #445277; 
+} 
+
+/* Adjusting Careers content strong color */
+.content-careers .content-careers__entry .entry-content p strong:first-child { 
+  color: #445277; 
+} 
+
+/* Recoloring background for archive results */
+.block-feed-post {
+  background-color: #e8eaf2;
+}
+
+/* Adjusting links on dark banner */ 
+.page-header .entry-content a {
+  color: #FFF; 
+}
+.page-header .entry-content a:hover,
+.page-header .entry-content a:focus {
+  color: #445277;
+}
+
+/* Numbered Lists */ 
+.entry-content ol>li::marker { 
+  color: #445277; 
+} 
