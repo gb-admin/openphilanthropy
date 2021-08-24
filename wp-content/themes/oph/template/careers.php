@@ -10,11 +10,36 @@
 	$careers_content = get_field( 'careers_content' );
 	$footnotes = get_field( 'footnotes' );
 
+	function get_display_order_post_ids() {
+		$career_ids = get_posts([
+			'post_type'      => 'careers',
+			'fields'         => 'ids',
+			'orderby'        => 'date',
+			'order'          => 'desc',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+		]);
+
+		// Set general application to always be last
+		$general_application_post_id =  get_page_by_path( 'general-application', OBJECT, 'careers' )->ID ?? '';
+
+		if (
+				($key = array_search($general_application_post_id, $career_ids)) !== false &&
+				$key != count($career_ids) - 1
+			) {
+			unset($career_ids[$key]);
+			$career_ids = array_values($career_ids); // reset index
+			array_push($career_ids, $general_application_post_id);
+		}
+		
+		return $career_ids;
+	}
+
 	$careers = new WP_Query( array(
 		'post_type' => 'careers',
 		'posts_per_page' => -1,
-		'order' => 'desc',
-		'orderby' => 'date'
+		'post__in'	=> get_display_order_post_ids(),
+		'orderby' => 'post__in'
 	) );
 ?>
 
