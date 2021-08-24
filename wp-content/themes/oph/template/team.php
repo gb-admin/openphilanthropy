@@ -16,9 +16,7 @@
 
 	$team = new WP_Query( array(
 		'post_type' => 'team',
-		'posts_per_page' => -1,
-		'order' => 'desc',
-		'orderby' => 'date'
+		'posts_per_page' => -1
 	) );
 
 	// Clean up as to not affect other posts
