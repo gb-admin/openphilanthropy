@@ -100,6 +100,7 @@
 
 				<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
 
+				<?php if ( get_field("social_share") == 'show' ) : ?>
 				<div class="post-share">
 					<div class="a2a_wrapper">
 						<div class="a2a_kit a2a_kit_size_32 a2a_default_style social-media">
@@ -119,6 +120,7 @@
 						<script async src="https://static.addtoany.com/menu/page.js"></script>
 					</div>
 				</div>
+				<?php endif; ?>
 			</div>
 
 			<div class="content-single__main pagenav-content">
