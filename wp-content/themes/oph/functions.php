@@ -50,6 +50,7 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/register-post-type.php';
 require get_template_directory() . '/inc/register-taxonomy.php';
 require get_template_directory() . '/inc/shortcode.php';
+require get_template_directory() . '/inc/sanitize-functions.php';
 
 function custom_search_template( $template ) {
   global $wp_query;
