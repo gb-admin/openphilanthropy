@@ -60,7 +60,7 @@
 				</ul>
 			</div>
 
-			<?php if ( $post_type == 'research' ) : ?>
+			<?php if ( $post_type == 'research' || is_page_template( 'template/research-category.php' ) ) : ?>
 				<button class="button button--solid button-view-list">View all as grid</button>
 			<?php else : ?>
 				<button class="button button--solid button-view-list">View all as list</button>
