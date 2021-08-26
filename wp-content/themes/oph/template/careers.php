@@ -174,7 +174,7 @@
 											<div class="entry-content">
 												<?php echo $content; ?>
 											</div>
-										<?php elseif ( get_row_layout() == 'quote_slideshow' ) : ?>
+										<?php elseif ( get_row_layout() == 'quote_slideshow' ) : ?> 
 
 											<?php
 												$quote_slideshow = get_sub_field( 'quote_slideshow' );
@@ -229,13 +229,15 @@
 															<?php endforeach; ?>
 														</div>
 
-														<div class="quote-slideshow__nav">
-															<button class="slick-arrow" id="quote-slideshow-prev"></button>
+														<?php if ( count( $quote_slideshow ) > 1 ) { ?>
+															<div class="quote-slideshow__nav">
+																<button class="slick-arrow" id="quote-slideshow-prev"></button>
 
-															<div class="quote-slideshow-dots"></div>
+																<div class="quote-slideshow-dots"></div>
 
-															<button class="slick-arrow" id="quote-slideshow-next"></button>
-														</div>
+																<button class="slick-arrow" id="quote-slideshow-next"></button>
+															</div>
+														<?php } ?>
 													</div>
 												</div>
 											<?php endif; ?>
