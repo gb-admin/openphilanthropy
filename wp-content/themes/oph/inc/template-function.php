@@ -228,3 +228,15 @@ function toggle_taxonomy( $args ) {
 		}
 	}
 }
+
+/**
+ * Classic editor - Adding subscript and superscript
+ * Adding in core buttons that's disabled by default
+ */
+
+function oph_adding_sub_sup_buttons_to_editor($buttons) {  
+    // $buttons[] = 'subscript';
+    $buttons[] = 'superscript';
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'oph_adding_sub_sup_buttons_to_editor');

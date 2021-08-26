@@ -23,7 +23,6 @@
 	</head>
 
 	<body <?php body_class(); ?>>
-
 		<?php
 			/**
 			 * Google Tag Manager (noscript)

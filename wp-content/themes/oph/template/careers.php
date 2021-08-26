@@ -111,7 +111,7 @@
 			<div class="content-careers__entry pagenav-content">
 				<?php if ( $careers->have_posts() ) : ?>
 					<div class="careers-positions">
-						<h2>Open Positions</h2>
+						<h2 id='open-positions-anchor'>Open Positions</h2>
 
 						<ul class="list-career-positions">
 							<?php while ( $careers->have_posts() ) : $careers->the_post(); ?>
