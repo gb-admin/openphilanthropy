@@ -650,6 +650,8 @@ jQuery(function($) {
     dots: true,
     rows: 0,
     speed: 250,
+	autoplay: true,
+  	autoplaySpeed: 4000,
     asNavFor: $('.hero-caption-slider, .hero-photo-credit-slider')
   });
 
