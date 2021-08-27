@@ -650,6 +650,8 @@ jQuery(function($) {
     dots: true,
     rows: 0,
     speed: 250,
+	autoplay: true,
+  	autoplaySpeed: 4000,
     asNavFor: $('.hero-caption-slider, .hero-photo-credit-slider')
   });
 
@@ -1141,4 +1143,19 @@ jQuery(function($) {
   $(window).on('resize', function() {
     setTimeout(careersSignupFormSetup, 300);
   });
+
+  // Adds smooth scroll to anchor tags
+  $('a[href*="#"]:not([href="#"])').on('click', function() {
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		var target = $(this.hash);
+		target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		if (target.length) {
+		  	$('html,body').animate({
+				scrollTop: target.offset().top
+		  	}, 1000);
+		  	return false;
+		}
+	}
+  });
+
 });

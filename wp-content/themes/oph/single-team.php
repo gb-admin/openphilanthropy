@@ -51,7 +51,7 @@
 
 			<div class="content-single-team__entry">
 				<div class="team-name-title">
-					<h2><?php echo get_the_title(); ?></h2>
+					<h2><?php echo oph_filter(get_the_title(), '*'); ?></h2>
 
 					<?php if ( $team_title ) : ?>
 						<h4><?php echo $team_title; ?></h4>

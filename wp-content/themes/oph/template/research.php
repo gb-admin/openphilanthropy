@@ -175,38 +175,37 @@
 								</div>
 							</div>
 						</div>
-					<?php endwhile; wp_reset_postdata(); ?>
+					<?php endwhile; wp_reset_postdata(); ?> 
+					<div class="feed-footer">
+						<nav aria-label="Post Feed Pagination" class="pagination">
+
+							<?php
+								global $wp_query;
+
+								$big = 999999999;
+								$translated = __( 'Page', 'oph' );
+
+								echo paginate_links( array(
+									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'end_size' => 2,
+									'mid_size' => 2,
+									'format' => '?paged=%#%',
+									'current' => max( 1, get_query_var('paged') ),
+									'total' => $research->max_num_pages,
+									'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+								) );
+							?>
+						</nav>
+
+						<div class="feed-footer__options">
+							<button class="button button--secondary button-view-list">View all as grid</button>
+						</div>
+					</div>
+				</div>
 				</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
 			<?php endif; ?>
-
-			<div class="feed-footer">
-				<nav aria-label="Post Feed Pagination" class="pagination">
-
-					<?php
-						global $wp_query;
-
-						$big = 999999999;
-						$translated = __( 'Page', 'oph' );
-
-						echo paginate_links( array(
-							'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-							'end_size' => 2,
-							'mid_size' => 2,
-							'format' => '?paged=%#%',
-							'current' => max( 1, get_query_var('paged') ),
-							'total' => $research->max_num_pages,
-							'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-						) );
-					?>
-				</nav>
-
-				<div class="feed-footer__options">
-					<button class="button button--secondary button-view-list">View all as grid</button>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 

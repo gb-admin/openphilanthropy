@@ -486,7 +486,7 @@
 
 																		<div class="aside-profile-images__info">
 																			<h5>
-																				<a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a>
+																				<a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo oph_filter($post->post_title, "*"); ?></a>
 																			</h5>
 
 																			<?php if ( $team_title ) : ?>

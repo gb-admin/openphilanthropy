@@ -89,7 +89,9 @@
 							<a href="<?php echo $grant_link; ?>">
 								<?php if ( $grant_image ) : ?>
 									<div class="bucket-image">
-										<img src="<?php echo $grant_image; ?>" alt="">
+										<div class="bucket-image__bg">
+											<img src="<?php echo $grant_image; ?>" alt="<?php echo $focus_area; ?>"> 
+										</div>
 									</div>
 								<?php endif; ?>
 
