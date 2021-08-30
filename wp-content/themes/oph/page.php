@@ -16,8 +16,8 @@ get_header();
 
 ?>
 
-	<main id="primary" class="site-main">
-
+	<main id="primary" class="site-main content-table-of-contents">
+		<div class='wrap'>
 		<?php
 		while ( have_posts() ) :
 			the_post();
@@ -31,7 +31,7 @@ get_header();
 
 		endwhile; // End of the loop.
 		?>
-
+		</div>
 	</main><!-- #main -->
 
 <?php
