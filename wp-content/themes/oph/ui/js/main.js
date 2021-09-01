@@ -1145,7 +1145,7 @@ jQuery(function($) {
   });
 
   // Adds smooth scroll to anchor tags
-  $('a[href*="#"]:not([href="#"])').on('click', function() {
+  $('a[href*="#"]:not([href="#"]):not([href$="#categories"])').on('click', function() {
 	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 		var stickyHeaderHeight = $(".header-content").outerHeight();
 
