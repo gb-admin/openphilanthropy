@@ -11,6 +11,22 @@
 	$terms_content_type = get_the_terms( $post->ID, 'content-type' );
 	$terms_focus_area = get_the_terms( $post->ID, 'focus-area' );
 	$terms_organization_name = get_the_terms( $post->ID, 'organization-name' );
+
+	// ? filter values are duplicated from filter-sidebar
+	switch(true) {
+		case $grant_amount < 100000:
+			$grant_filter = "?amount=less-than-1hundthous#categories";
+			break;
+		case $grant_amount >= 100000 && $grant_amount <= 1000000 :
+			$grant_filter = "?amount=between-1hundthous-1mil#categories";
+			break;
+		case $grant_amount > 1000000:
+			$grant_filter = "?amount=greater-than-1mil#categories";
+			break;
+		default:
+			$grant_filter = "";
+			break;
+	}
 ?>
 
 <?php if ( $terms_content_type || $terms_focus_area ) : ?>
@@ -38,13 +54,13 @@
 
 							<?php if ( $grant_amount ) : ?>
 								<li>
-									<a href="/<?php echo $post_type; ?>">Amount: <?php echo '$' . number_format( $grant_amount ); ?></a>
+									<a href="/<?php echo $post_type; ?><?php echo $grant_filter; ?>">Amount: <?php echo '$' . number_format( $grant_amount ); ?></a>
 								</li>
 							<?php endif; ?>
 
 							<?php if ( $award_date ) : ?>
 								<li>
-									<a href="/<?php echo $post_type; ?>">Award Date: <?php echo $award_date; ?></a>
+									<a href="/<?php echo $post_type; ?>?yr=<?php echo date("Y", strtotime($award_date)); ?>#categories">Award Date: <?php echo $award_date; ?></a>
 								</li>
 							<?php endif; ?>
 						<?php elseif ( $post_type == 'research' ) : ?>
