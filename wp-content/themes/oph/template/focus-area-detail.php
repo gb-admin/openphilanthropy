@@ -326,7 +326,7 @@
 							'posts_per_page' => 3,
 							'order' => 'desc',
 							'orderby' => 'date',
-							'post__not_in' => $research_preview_id,
+							'post__in' => $research_preview_id,
 							'tax_query' => $tax_query
 						) );
 
