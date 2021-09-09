@@ -178,15 +178,14 @@
 
 								$research_description = excerpt( $research_excerpt );
 							}
-
+		
 							if ( $research_content_type ) {
-								$research_eyebrow_copy = $research_content_type[0]->name;
-								$research_eyebrow_link = get_term_link($research_content_type[0]);
+								$first_parent_term = get_term_top_most_parent($research_content_type[0],'content-type');
+								$research_eyebrow_copy = $first_parent_term->name;
+								$research_eyebrow_link = get_term_link($first_parent_term);
 
-								if ( !$research_content_type[0]->parent ) {
-									// Top level content types uses document root, remove the standard content-type path
-									$research_eyebrow_link = str_replace("content-type/", '', $research_eyebrow_link);
-								}							
+								// Top level content types uses document root, remove the standard content-type path
+								$research_eyebrow_link = str_replace("content-type/", '', $research_eyebrow_link);
 							}
 
 							if ( $i['description'] ) {
