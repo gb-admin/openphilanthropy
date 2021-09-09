@@ -162,7 +162,7 @@
 							$research_post = $i['post'][0];
 
 							if ( $research_post ) {
-								$research_focus_area = get_the_terms( $research_post->ID, 'focus-area' );
+								$research_focus_area = get_the_terms( $research_post->ID, 'content-type' );
 
 								$research_link = get_permalink( $research_post->ID );
 								$research_title = get_the_title( $research_post->ID );
@@ -181,8 +181,12 @@
 
 							if ( $research_focus_area ) {
 								$research_eyebrow_copy = $research_focus_area[0]->name;
+								$research_eyebrow_link = get_term_link($research_focus_area[0]);
 
-								$research_eyebrow_link = '/research?focus-area=' . $research_focus_area[0]->slug;
+								if ( !$research_focus_area[0]->parent ) {
+									// Top level content types uses document root, remove the standard content-type path
+									$research_eyebrow_link = str_replace("content-type/", '', $research_eyebrow_link);
+								}							
 							}
 
 							if ( $i['description'] ) {
