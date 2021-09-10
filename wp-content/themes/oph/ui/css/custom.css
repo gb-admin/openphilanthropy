@@ -106,3 +106,13 @@
   padding-top: calc(1.75rem - 4px); 
 }
 
+/* Grant's page */
+@media only screen and (min-width: 650px) {
+	.feed-section .block-feed .block-feed-post {
+		margin-bottom: 40px;
+	}
+}
+
+h5.block-feed-post__focus-area {
+	text-decoration: none ;
+}

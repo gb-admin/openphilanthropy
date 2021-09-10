@@ -534,7 +534,6 @@ jQuery(function($) {
 
   $( '.search-utility button' ).on( 'click', function( e ) {
     var search = $( this ).closest( 'form' ).find( '.search-field' );
-
     if ( ! search.hasClass( 'is-active' ) ) {
       e.preventDefault();
 
@@ -830,24 +829,42 @@ jQuery(function($) {
 
   /**
    * Sidebar filters hide.
+   * 
+   * Cookie js @link https://github.com/js-cookie/js-cookie
+   * Note, no expiry is set | default behaviour is to treat this as a session cookie (expires once the customer closes the browser)
    */
+  
+  // Only remember the top level to avoid creating additional cookies for pagination pages
+  var sidebarPagename = window.location.pathname.split('/')[1] || '';
 
   $('.sidebar-filter-hide-button').on('click', function(e) {
     e.preventDefault();
-
     var sidebar = $(this).closest('.sidebar-filter');
 
     $(this).closest('.feed-section').find('.sidebar-filter-show-button-container').toggleClass('is-active');
 
     sidebar.toggleClass('is-active');
+
+	var visibility = sidebar.hasClass('is-active') ? 1 : 0;
+	Cookies.set(`sidebar-filter-visible-${sidebarPagename}`, visibility);
   });
 
   $('.sidebar-filter-show-button').on('click', function(e) {
     e.preventDefault();
-
+	
     $(this).closest('.feed-section').find('.sidebar-filter-show-button-container').removeClass('is-active');
 
     $('.sidebar-filter').addClass('is-active');
+  });
+
+  $(document).ready(function() {
+	if ( !$( '.sidebar-filter' ).length ) return;
+	var getSearchUtilityVisiblity = Cookies.get(`sidebar-filter-visible-${sidebarPagename}`);
+
+	// If visible is set to 1 or user hasn't selected a preference, then we'll show the sidebar
+	if ( typeof getSearchUtilityVisiblity === "undefined" || getSearchUtilityVisiblity == "1" ) {
+		$('.sidebar-filter').addClass('is-active');
+	}
   });
 
   /**

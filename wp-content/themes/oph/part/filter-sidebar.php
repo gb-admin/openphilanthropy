@@ -68,7 +68,7 @@
 	rsort( $grants_years );
 ?>
 
-<div class="sidebar-filter is-active">
+<div class="sidebar-filter">
 	<div class="sidebar-filter__main">
 		<div class="sidebar-filter-hide">
 			<button class="sidebar-filter-hide-button">

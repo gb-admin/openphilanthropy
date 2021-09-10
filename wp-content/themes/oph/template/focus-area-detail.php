@@ -140,23 +140,26 @@
 
 						$grants_preview_id = [];
 
+						// User opted for manual selection
 						if ( $grants_preview ) {
 							foreach ( $grants_preview as $i ) {
 								array_push( $grants_preview_id, $i->ID );
 							}
-						}
+						} 
 
 						$related_query = new WP_Query( array(
-							'post_type' => 'grants',
+							'post_type'      => 'grants',
 							'posts_per_page' => 3,
-							'order' => 'desc',
-							'orderby' => 'date',
-							'post__not_in' => $grants_preview_id,
-							'tax_query' => array(
+							'order'          => 'desc',
+							'orderby'        => 'meta_value',
+							'meta_key'       => 'award_date',
+							'meta_type'      => 'DATE',
+							'post__in'       => $grants_preview_id,
+							'tax_query'      => array(
 								array(
 									'taxonomy' => $focus_area->taxonomy,
-									'field' => 'slug',
-									'terms' => $focus_area->slug
+									'field'    => 'slug',
+									'terms'    => $focus_area->slug
 								)
 							)
 						) );
@@ -323,7 +326,7 @@
 							'posts_per_page' => 3,
 							'order' => 'desc',
 							'orderby' => 'date',
-							'post__not_in' => $research_preview_id,
+							'post__in' => $research_preview_id,
 							'tax_query' => $tax_query
 						) );
 
