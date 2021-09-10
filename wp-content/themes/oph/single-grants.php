@@ -3,7 +3,8 @@
 
 	get_header();
 
-	$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
+	$post_thumbnail = ($cover_image_id = get_field('cover_image', $post->ID) ) ? 
+						wp_get_attachment_image($cover_image_id, 'lg', false, array('class'	=> 'post-thumbnail')) : false;
 
 	$primary_term_slug = '';
 
@@ -124,9 +125,9 @@
 			</div>
 
 			<div class="content-single__main pagenav-content">
-				<?php if ( $post_thumbnail ) : ?>
-					<img class="post-thumbnail" src="<?php echo $post_thumbnail; ?>" alt="">
-				<?php endif; ?>
+				<?php if ( $post_thumbnail ) : 
+					echo $post_thumbnail;
+				endif; ?>
 
 				<div class="entry-content">
 					<?php the_content(); ?>
