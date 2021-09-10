@@ -301,7 +301,7 @@
 
 								<h5 class="block-feed-post__focus-area">
 									<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-										<a href="?focus-area=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $focus_area[0]->name; ?></a>
+										<?php echo $focus_area[0]->name; ?>
 									<?php endif; ?>
 								</h5>
 

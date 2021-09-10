@@ -112,3 +112,7 @@
 		margin-bottom: 40px;
 	}
 }
+
+h5.block-feed-post__focus-area {
+	text-decoration: none ;
+}
