@@ -162,7 +162,7 @@
 	/**
 	 * Export data to CSV.
 	 */
-	$file = fopen( get_stylesheet_directory_uri() . '/grants_db.csv', 'w' );
+	$file = fopen( get_stylesheet_directory() . '/grants_db.csv', 'w' );
 
 	fputcsv( $file, array( 'Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date' ) );
 
