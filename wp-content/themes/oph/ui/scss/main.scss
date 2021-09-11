@@ -5889,3 +5889,10 @@ body.home header.is-scrolled #sitewide-search-button {
 		}
 	}
 }
+
+body.search-no-results {
+	section.no-results header {
+		background: none;
+		color: initial;
+	}
+}
