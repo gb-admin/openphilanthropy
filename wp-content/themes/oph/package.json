@@ -36,6 +36,7 @@
     "map": false
   },
   "scripts": {
+	"watch-new": "node-sass ui/scss/main.scss ui/css/main.min.css --source-map true --output-style compressed --indent-type tab --indent-width 1 -w",
     "watch": "node-sass sass/ -o ./ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
     "compile:css": "node-sass sass/ -o ./ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
     "compile:rtl": "rtlcss style.css style-rtl.css",
