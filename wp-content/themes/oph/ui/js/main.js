@@ -534,7 +534,6 @@ jQuery(function($) {
 
   $( '.search-utility button' ).on( 'click', function( e ) {
     var search = $( this ).closest( 'form' ).find( '.search-field' );
-
     if ( ! search.hasClass( 'is-active' ) ) {
       e.preventDefault();
 
@@ -830,24 +829,42 @@ jQuery(function($) {
 
   /**
    * Sidebar filters hide.
+   * 
+   * Cookie js @link https://github.com/js-cookie/js-cookie
+   * Note, no expiry is set | default behaviour is to treat this as a session cookie (expires once the customer closes the browser)
    */
+  
+  // Only remember the top level to avoid creating additional cookies for pagination pages
+  var sidebarPagename = window.location.pathname.split('/')[1] || '';
 
   $('.sidebar-filter-hide-button').on('click', function(e) {
     e.preventDefault();
-
     var sidebar = $(this).closest('.sidebar-filter');
 
     $(this).closest('.feed-section').find('.sidebar-filter-show-button-container').toggleClass('is-active');
 
     sidebar.toggleClass('is-active');
+
+	var visibility = sidebar.hasClass('is-active') ? 1 : 0;
+	Cookies.set(`sidebar-filter-visible-${sidebarPagename}`, visibility);
   });
 
   $('.sidebar-filter-show-button').on('click', function(e) {
     e.preventDefault();
-
+	
     $(this).closest('.feed-section').find('.sidebar-filter-show-button-container').removeClass('is-active');
 
     $('.sidebar-filter').addClass('is-active');
+  });
+
+  $(document).ready(function() {
+	if ( !$( '.sidebar-filter' ).length ) return;
+	var getSearchUtilityVisiblity = Cookies.get(`sidebar-filter-visible-${sidebarPagename}`);
+
+	// If visible is set to 1 or user hasn't selected a preference, then we'll show the sidebar
+	if ( typeof getSearchUtilityVisiblity === "undefined" || getSearchUtilityVisiblity == "1" ) {
+		$('.sidebar-filter').addClass('is-active');
+	}
   });
 
   /**
@@ -1145,7 +1162,7 @@ jQuery(function($) {
   });
 
   // Adds smooth scroll to anchor tags
-  $('a[href*="#"]:not([href="#"])').on('click', function() {
+  $('a[href*="#"]:not([href="#"]):not([href$="#categories"])').on('click', function() {
 	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 		var stickyHeaderHeight = $(".header-content").outerHeight();
 
@@ -1158,6 +1175,38 @@ jQuery(function($) {
 		  	return false;
 		}
 	}
+  });
+
+  /**
+   * Adding a custom search form on primary menu's search icon. 
+   * We are creating a separate one here to reserve the default searchform.php for content-none.php template
+   */
+  $("#sitewide-search-button").on("click", function() {
+	let template = `<div id='header-sitewide-search-form' style='display: none;'>
+						<div class='close-btn'>
+							<a href='javascript:void(0);'>
+								<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M8.14231 9.40385L0.5422 1.72711L1.90039 0.355225L9.50051 8.03197L17.1001 0.35573L18.4583 1.72762L10.8587 9.40385L18.6485 17.2722L17.2903 18.644L9.50051 10.7757L1.71024 18.6445L0.352051 17.2727L8.14231 9.40385Z" fill="#6E7CA0"/>
+								</svg>
+							</a>
+						</div>
+						<form class="header-search-form wrap" action="/" method="get">
+							<input class="search-field" id="search-input" type="search" name="s" placeholder="Search here" value="${siteData.searchQuery}">
+							<button type="submit">
+								<svg aria-hidden="true" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M16.478 13.675c2.273-3.305 1.94-7.862-.998-10.801-3.314-3.314-8.687-3.314-12 0-3.314 3.314-3.314 8.686 0 12 3.207 3.208 8.345 3.31 11.676.308l4.429 4.429 1.414-1.414-4.521-4.522zm-2.413-9.387c2.533 2.533 2.533 6.64 0 9.172-2.532 2.533-6.639 2.533-9.171 0-2.533-2.533-2.533-6.64 0-9.172 2.532-2.533 6.639-2.533 9.171 0z"/></svg>
+							</button>
+						</form>
+					</div>`;
+	if ( !$("#header-sitewide-search-form").length ) {
+		$("body").append(template);
+	}
+
+	$("#header-sitewide-search-form").fadeIn(300);
+	$("#search-input:first").focus();
+  });
+
+  $(document).on("click", "#header-sitewide-search-form .close-btn a", function() {
+	$("#header-sitewide-search-form").fadeOut(300);
   });
 
 });

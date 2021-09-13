@@ -106,3 +106,7 @@
   padding-top: calc(1.75rem - 4px); 
 }
 
+/* Grant's page */
+h5.block-feed-post__focus-area {
+	text-decoration: none ;
+}

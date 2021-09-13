@@ -45,7 +45,9 @@
 						</article>
 					<?php endwhile; ?>
 				</div>
-			<?php endif; ?>
+			<?php else :
+				get_template_part( 'part/content', 'none' );
+			endif; ?>
 
 			<?php if ( $post_type ) : ?>
 				<div class="search-results__back">

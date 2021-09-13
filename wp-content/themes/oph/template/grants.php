@@ -162,7 +162,7 @@
 	/**
 	 * Export data to CSV.
 	 */
-	$file = fopen( get_stylesheet_directory_uri() . '/grants_db.csv', 'w' );
+	$file = fopen( get_stylesheet_directory() . '/grants_db.csv', 'w' );
 
 	fputcsv( $file, array( 'Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date' ) );
 
@@ -301,7 +301,7 @@
 
 								<h5 class="block-feed-post__focus-area">
 									<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-										<a href="?focus-area=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $focus_area[0]->name; ?></a>
+										<?php echo $focus_area[0]->name; ?>
 									<?php endif; ?>
 								</h5>
 
