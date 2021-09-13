@@ -56,12 +56,12 @@ jobs:
 
       - name: Push to Prod
         if: endsWith(github.ref, 'main')
-        run: git@git.wpengine.com:production/openphilprod.git -f
+        run: git push git@git.wpengine.com:production/openphilprod.git -f
 
       - name: Push to Stag
         if: endsWith(github.ref, 'stag')
-        run: git@git.wpengine.com:production/openphilstag.git -f
+        run: git push git@git.wpengine.com:production/openphilstag.git -f
 
       - name: Push to Dev
         if: endsWith(github.ref, 'dev')
-        run: git@git.wpengine.com:production/openphildev.git -f
+        run: git push git@git.wpengine.com:production/openphildev.git -f
