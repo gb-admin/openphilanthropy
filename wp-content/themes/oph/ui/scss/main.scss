@@ -5896,3 +5896,11 @@ body.search-no-results {
 		color: initial;
 	}
 }
+
+body.search-results {
+	.block-feed.block-feed--list:not(.block-feed--images) .block-feed-post {
+		padding: 24px 28px;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+}
