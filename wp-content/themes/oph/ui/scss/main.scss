@@ -2944,6 +2944,12 @@ button,
     p {
       margin: 0;
     }
+
+	ul {
+		list-style: disc;
+		list-style-position: inside;
+		margin: 10px 0 10px 10px;
+	}
   }
   .post-featured-image {
     margin-bottom: 32px;
