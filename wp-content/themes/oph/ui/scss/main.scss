@@ -2386,12 +2386,10 @@ button,
           }
         }
         > li {
-          > a {
             &:hover {
-              background-color: rgba(117, 177, 171, .1);
-            }
-          }
-        }
+				background-color: rgba(117, 177, 171, .1);
+		  	}       
+		}
       }
     }
   }
@@ -3387,11 +3385,12 @@ button,
       margin-bottom: 14px;
       margin-left: 24px;
       width: calc(33.33333% - 24px);
+	  &:hover {
+		background-color: rgba(66, 129, 164, .1);
+	  }
+	  
       > a {
         padding: 40px;
-        &:hover {
-          background-color: rgba(66, 129, 164, .1);
-        }
       }
     }
   }
@@ -4607,7 +4606,7 @@ button,
 	  &:hover {
 		background-color: $periwinkle-5;
 	  }
-	  
+
       > a {
         padding: 44px 22px;
       }
