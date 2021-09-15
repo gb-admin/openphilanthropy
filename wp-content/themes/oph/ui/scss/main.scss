@@ -4604,11 +4604,12 @@ button,
       margin-bottom: 0;
       margin-left: 24px;
       width: calc(50% - 24px);
+	  &:hover {
+		background-color: $periwinkle-5;
+	  }
+	  
       > a {
         padding: 44px 22px;
-        &:hover {
-          background-color: $periwinkle-5;
-        }
       }
     }
   }
