@@ -4517,6 +4517,10 @@ button,
   > :last-child {
     margin-bottom: 0;
   }
+
+  .keep-together {
+	white-space: nowrap;
+  }
 }
 
 .bucket-description-link {
