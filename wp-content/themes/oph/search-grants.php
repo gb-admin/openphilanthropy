@@ -125,7 +125,7 @@
 							</div>
 
 							<div class="block-feed-post__body">
-								<h6>Grant Type</h6>
+								<h6>Grant Title</h6>
 
 								<h4 class="block-feed-post__title">
 									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
