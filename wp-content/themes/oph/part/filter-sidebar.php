@@ -17,7 +17,7 @@
 		'taxonomy' => 'content-type'
 	) );
 
-	$focus_area = get_taxonomy_hierarchy( 'focus-area' );
+	$focus_area = get_taxonomy_hierarchy( 'focus-area', $parent=0, $post_type );
 
 	// Flatten hierarchy taxonomy array
 	foreach ( $focus_area as $k => $tax ) {
