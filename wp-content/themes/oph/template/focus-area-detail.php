@@ -556,7 +556,8 @@
 
 						$grant_terms = get_terms( array(
 							'taxonomy' => 'focus-area',
-							'parent' => 0
+							'parent' => 0,
+							'post_type'	=> 'grants'
 						) );
 					?>
 

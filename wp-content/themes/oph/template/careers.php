@@ -270,6 +270,10 @@
 
 				<?php if ( $footnotes ) : ?>
 					<div class="content-footnotes">
+						<a href='javascript:void(0);' id='toggle-footnotes'
+							data-show='[+] Show Footnotes'
+							data-hide='[-] Hide Footnotes'
+						>[+] Show Footnotes</a>
 						<div class="footnotes">
 							<?php echo $footnotes; ?>
 						</div>

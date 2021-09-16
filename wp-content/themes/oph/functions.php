@@ -69,28 +69,7 @@ function custom_search_template( $template ) {
 
 add_filter( 'template_include', 'custom_search_template' );
 
-/**
- * Recursively get taxonomy and its children
- *
- * @param string $taxonomy
- * @param int $parent - parent term id
- * @return array
- */
-function get_taxonomy_hierarchy( $taxonomy, $parent = 0 ) {
-	$children = array();
 
-	$taxonomy = is_array( $taxonomy ) ? array_shift( $taxonomy ) : $taxonomy;
-
-	$terms = get_terms( $taxonomy, array( 'parent' => $parent ) );
-
-	foreach ( $terms as $term ) {
-		$term->children = get_taxonomy_hierarchy( $taxonomy, $term->term_id );
-
-		$children[ $term->term_id ] = $term;
-	}
-
-	return $children;
-}
 
 /**
  * Jump to the first error after submission

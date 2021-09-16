@@ -767,13 +767,17 @@ button,
   color: #a6a9aa;
 }
 
+#toggle-footnotes {
+  margin-bottom: 20px;
+  display: block;
+}
+
 .footnotes {
-  color: $periwinkle-2;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1px;
+  display: none;
+  color: #000000;
+  font-size: 18px;
+  letter-spacing: normal;
   line-height: 24px;
-  text-transform: uppercase;
   p {
     margin-bottom: 0;
   }
@@ -2386,12 +2390,10 @@ button,
           }
         }
         > li {
-          > a {
             &:hover {
-              background-color: rgba(117, 177, 171, .1);
-            }
-          }
-        }
+				background-color: rgba(117, 177, 171, .1);
+		  	}       
+		}
       }
     }
   }
@@ -2944,6 +2946,12 @@ button,
     p {
       margin: 0;
     }
+
+	ul {
+		list-style: disc;
+		list-style-position: inside;
+		margin: 10px 0 10px 10px;
+	}
   }
   .post-featured-image {
     margin-bottom: 32px;
@@ -3381,11 +3389,12 @@ button,
       margin-bottom: 14px;
       margin-left: 24px;
       width: calc(33.33333% - 24px);
+	  &:hover {
+		background-color: rgba(66, 129, 164, .1);
+	  }
+	  
       > a {
         padding: 40px;
-        &:hover {
-          background-color: rgba(66, 129, 164, .1);
-        }
       }
     }
   }
@@ -4511,6 +4520,10 @@ button,
   > :last-child {
     margin-bottom: 0;
   }
+
+  .keep-together {
+	white-space: nowrap;
+  }
 }
 
 .bucket-description-link {
@@ -4594,11 +4607,12 @@ button,
       margin-bottom: 0;
       margin-left: 24px;
       width: calc(50% - 24px);
+	  &:hover {
+		background-color: $periwinkle-5;
+	  }
+
       > a {
         padding: 44px 22px;
-        &:hover {
-          background-color: $periwinkle-5;
-        }
       }
     }
   }
@@ -5497,6 +5511,10 @@ button,
       }
     }
   }
+  ul.sub-menu {
+	box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.25);
+  }
+
   ul {
     padding: 8px 0;
     background: #fff;
@@ -5895,4 +5913,16 @@ body.search-no-results {
 		background: none;
 		color: initial;
 	}
+}
+
+body.search-results {
+	.block-feed.block-feed--list:not(.block-feed--images) .block-feed-post {
+		padding: 24px 28px;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+}
+
+#main .page-header > .wrap {
+	width: 80%;
 }
