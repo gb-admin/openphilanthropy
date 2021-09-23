@@ -232,7 +232,7 @@
 		<div class="feed-section__posts wrap">
 			<ul class="block-feed-title-head<?php if ( $view_list ) { echo ' is-active'; } ?>">
 				<li>
-					<h6>Grant<br> Type</h6>
+					<h6>Grant<br> Title</h6>
 				</li>
 				<li>
 					<h6>Organization<br> Name</h6>
@@ -283,7 +283,7 @@
 							</div>
 
 							<div class="block-feed-post__body">
-								<h6>Grant Type</h6>
+								<h6>Grant Title</h6>
 
 								<h4 class="block-feed-post__title">
 									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>

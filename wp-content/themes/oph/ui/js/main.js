@@ -1051,7 +1051,7 @@ jQuery(function($) {
         bucketDescriptionIcon = $('<svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>');
       }
 
-      appendParent.append('&nbsp;').append($('<a class="bucket-description-link" href="' + bucketDescriptionHref + '"></a>'));
+      appendParent.append($('<span class="keep-together">&nbsp;<a class="bucket-description-link" href="' + bucketDescriptionHref + '"></a></span>'));
 
       $(this).find('.bucket-description-link').append(bucketDescriptionIcon);
     });
@@ -1207,6 +1207,20 @@ jQuery(function($) {
 
   $(document).on("click", "#header-sitewide-search-form .close-btn a", function() {
 	$("#header-sitewide-search-form").fadeOut(300);
+  });
+
+  // Career page's footnotes toggle
+  $("body.page-template-careers #toggle-footnotes").on("click", function() {
+	let $root = $(this);
+	if ( $(".footnotes").is(":visible") ) { // collapse
+		$(".footnotes").slideUp(400, function () {
+			$root.text($root.data('show'));
+		});
+	} else { // show
+		$(".footnotes").slideDown(400, function() {
+			$root.text($root.data('hide'));
+		});
+	}
   });
 
 });

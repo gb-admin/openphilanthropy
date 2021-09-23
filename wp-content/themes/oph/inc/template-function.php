@@ -270,3 +270,68 @@ function oph_add_search_functionality ( $items, $args ) {
     }
     return $items;
 }
+
+/**
+ * Recursively get taxonomy and its children
+ *
+ * @param string $taxonomy
+ * @param int $parent - parent term id
+ * @return array
+ */
+function get_taxonomy_hierarchy( $taxonomy, $parent = 0, $post_type = '' ) {
+	$children = array();
+
+	$taxonomy = is_array( $taxonomy ) ? array_shift( $taxonomy ) : $taxonomy;
+
+	$args['parent'] = $parent;
+	if ( $post_type ) {
+		// By default get_terms does not accept post_type param, this is added via oph_terms_clauses function below
+		$args['post_type'] = $post_type; 
+	}
+
+	$terms = get_terms( $taxonomy, $args );
+
+	foreach ( $terms as $term ) {
+		$term->children = get_taxonomy_hierarchy( $taxonomy, $term->term_id, $post_type );
+
+		$children[ $term->term_id ] = $term;
+	}
+
+	return $children;
+}
+
+/**
+ * Extend get terms with post type parameter.
+ * @link https://dfactory.eu/wp-how-to-get-terms-post-type/
+ *
+ * @global $wpdb
+ * @param string $clauses
+ * @param string $taxonomy
+ * @param array $args
+ * @return string
+ */
+function oph_terms_clauses( $clauses, $taxonomy, $args ) {
+	if ( isset( $args['post_type'] ) && ! empty( $args['post_type'] ) && $args['fields'] !== 'count' ) {
+		global $wpdb;
+
+		$post_types = array();
+
+		if ( is_array( $args['post_type'] ) ) {
+			foreach ( $args['post_type'] as $cpt ) {
+				$post_types[] = "'" . $cpt . "'";
+			}
+		} else {
+			$post_types[] = "'" . $args['post_type'] . "'";
+		}
+
+		if ( ! empty( $post_types ) ) {
+			$clauses['fields'] = 'DISTINCT ' . str_replace( 'tt.*', 'tt.term_taxonomy_id, tt.taxonomy, tt.description, tt.parent', $clauses['fields'] ) . ', COUNT(p.post_type) AS count';
+			$clauses['join'] .= ' LEFT JOIN ' . $wpdb->term_relationships . ' AS r ON r.term_taxonomy_id = tt.term_taxonomy_id LEFT JOIN ' . $wpdb->posts . ' AS p ON p.ID = r.object_id';
+			$clauses['where'] .= ' AND (p.post_type IN (' . implode( ',', $post_types ) . ') OR p.post_type IS NULL)';
+			$clauses['orderby'] = 'GROUP BY t.term_id ' . $clauses['orderby'];
+		}
+	}
+	return $clauses;
+}
+
+add_filter( 'terms_clauses', 'oph_terms_clauses', 10, 3 );
