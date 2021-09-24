@@ -44,7 +44,7 @@
 					</ul>
 				</div>
 
-				<button class="button button--solid button-view-list">View all as list</button>
+				<button class="button button--solid button-view-list">View as List</button>
 			</nav>
 		</div>
 	</div>
@@ -89,7 +89,7 @@
 						</ul>
 					</div>
 
-					<button class="button button--solid button-view-list">View all as list</button>
+					<button class="button button--solid button-view-list">View as List</button>
 				</nav>
 			</div>
 		</div>
@@ -174,7 +174,7 @@
 
 			<div class="feed-footer">
 				<div class="feed-footer__options">
-					<button class="button button--secondary">View all as list</button>
+					<button class="button button--secondary">View as List</button>
 				</div>
 			</div>
 		</div>

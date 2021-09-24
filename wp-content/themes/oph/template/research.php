@@ -198,7 +198,7 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View all as grid</button>
+							<button class="button button--secondary button-view-list">View as Grid</button>
 						</div>
 					</div>
 				</div>
