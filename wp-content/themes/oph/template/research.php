@@ -11,10 +11,10 @@
 
 	$params = get_url_params();
 
-	$view_list = false;
+	$view_list = true; // this is the default view
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
-		$view_list = true;
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
+		$view_list = false;
 	}
 
 	$featured_research = get_field( 'featured_research' );
@@ -138,7 +138,7 @@
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list block-feed--research">
+				<div class="block-feed block-feed--research<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
@@ -185,8 +185,12 @@
 								$big = 999999999;
 								$translated = __( 'Page', 'oph' );
 
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
 								echo paginate_links( array(
-									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'base' => str_replace( $big, '%#%', $base_url ),
 									'end_size' => 2,
 									'mid_size' => 2,
 									'format' => '?paged=%#%',
@@ -198,7 +202,9 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View as Grid</button>
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('list'); ?>
+							</button>
 						</div>
 					</div>
 				</div>

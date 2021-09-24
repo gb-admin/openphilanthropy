@@ -37,7 +37,9 @@
 				</ul>
 			</div>
 
-			<button class="button button--solid button-view-list">View as List</button>
+			<button class="button button--solid button-view-list">
+				<?php echo oph_display_type('grid'); ?>
+			</button>
 		</nav>
 	</div>
 </div>

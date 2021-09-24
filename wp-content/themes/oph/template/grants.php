@@ -332,8 +332,14 @@
 								$big = 999999999;
 								$translated = __( 'Page', 'oph' );
 
+								// Setting the view-list parameter on pagination url.
+								// Note the ampersand is replaced prior to running the method as it causes unexpected behaviour
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
 								echo paginate_links( array(
-									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'base' => str_replace( $big, '%#%', $base_url ),
 									'end_size' => 2,
 									'mid_size' => 2,
 									'format' => '?paged=%#%',
@@ -345,7 +351,9 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View as List</button>
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('grid'); ?>
+							</button>
 						</div>
 					</div>
 				</div>

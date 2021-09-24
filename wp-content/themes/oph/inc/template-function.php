@@ -335,3 +335,17 @@ function oph_terms_clauses( $clauses, $taxonomy, $args ) {
 }
 
 add_filter( 'terms_clauses', 'oph_terms_clauses', 10, 3 );
+
+// Setting grid or list view
+function oph_display_type($default_view='list') {
+	$view_text = [
+		'list'	=> 'View as Grid',
+		'grid'	=> 'View as List'
+	];
+
+	// None set, use default
+	if ( !isset($_GET['view-list']) ) return $view_text[$default_view];
+
+	// Is set, return the corresponding text
+	return ( $_GET['view-list'] == "true" ) ? $view_text['list'] : $view_text['grid'];
+}

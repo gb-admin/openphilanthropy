@@ -44,7 +44,9 @@
 					</ul>
 				</div>
 
-				<button class="button button--solid button-view-list">View as List</button>
+				<button class="button button--solid button-view-list">
+					<?php echo oph_display_type('grid'); ?>
+				</button>
 			</nav>
 		</div>
 	</div>
@@ -89,7 +91,9 @@
 						</ul>
 					</div>
 
-					<button class="button button--solid button-view-list">View as List</button>
+					<button class="button button--solid button-view-list">
+						<?php echo oph_display_type('grid'); ?>
+					</button>
 				</nav>
 			</div>
 		</div>
@@ -133,7 +137,9 @@
 
 			<div class="feed-footer">
 				<div class="feed-footer__options">
-					<button class="button button--secondary">View as List</button>
+					<button class="button button--secondary">
+						<?php echo oph_display_type('grid'); ?>
+					</button>
 				</div>
 			</div>
 		</div>

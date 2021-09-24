@@ -213,7 +213,9 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View as Grid</button>
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('list'); ?>
+							</button>
 						</div>
 					</div>
 				</div>
