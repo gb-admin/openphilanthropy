@@ -1089,9 +1089,9 @@ jQuery(function($) {
     blockFeedTitleHead.toggleClass('is-active');
 
     if (blockFeed.hasClass('block-feed--list')) {
-      $('.button-view-list').text('View all as grid');
+      $('.button-view-list').text('View as Grid');
     } else {
-      $('.button-view-list').text('View all as list');
+      $('.button-view-list').text('View as List');
     }
 
     links.each(function() {
