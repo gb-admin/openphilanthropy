@@ -105,6 +105,10 @@
 					$meta_key = 'award_date';
 					$order_query = 'desc';
 					$orderby_query = 'meta_value';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$meta_key = 'award_date';
+					$order_query = 'asc';
+					$orderby_query = 'meta_value';
 				}
 			}
 		} elseif ( $key == 'yr' ) {

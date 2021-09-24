@@ -16,6 +16,9 @@
 					<li>
 						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories">Newest to oldest</a>
 					</li>
+					<li>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>#categories">Oldest to newest</a>
+					</li>
 				</ul>
 			</div>
 
