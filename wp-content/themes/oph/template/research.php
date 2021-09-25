@@ -138,6 +138,9 @@
 				<li>
 					<h6>Focus Area</h6>
 				</li>
+				<li>
+					<h6>Content Type</h6>
+				</li>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
@@ -165,11 +168,22 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $research_focus_area ) : ?>
-									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
-									</h5>
-								<?php endif; ?>
+								<h5 class="block-feed-post__category">
+									<?php if ( $research_focus_area ) : ?>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<?php endif; ?>
+								</h5>
+
+								<h6>Content Type</h6>
+								<h5 class='block-feed-post__content_type'>
+									<?php if ($research_content_type) : ?>
+									<ul class="research-content-type">
+										<?php foreach($research_content_type as $term) : ?>
+										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+									<?php endif; ?>
+								</h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">
