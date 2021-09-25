@@ -1,4 +1,6 @@
 jQuery(function($) {
+  // Used for cookie setting - only remember the top level to avoid creating additional cookies for pagination pages
+  var rootPageName = window.location.pathname.split('/')[1] || '';
 
   /**
    * Fix dark mode flash.
@@ -833,11 +835,7 @@ jQuery(function($) {
    * Cookie js @link https://github.com/js-cookie/js-cookie
    * Note, no expiry is set | default behaviour is to treat this as a session cookie (expires once the customer closes the browser)
    */
-  
-  // Only remember the top level to avoid creating additional cookies for pagination pages
-  var sidebarPagename = window.location.pathname.split('/')[1] || '';
-
-  $('.sidebar-filter-hide-button').on('click', function(e) {
+    $('.sidebar-filter-hide-button').on('click', function(e) {
     e.preventDefault();
     var sidebar = $(this).closest('.sidebar-filter');
 
@@ -846,7 +844,7 @@ jQuery(function($) {
     sidebar.toggleClass('is-active');
 
 	var visibility = sidebar.hasClass('is-active') ? 1 : 0;
-	Cookies.set(`sidebar-filter-visible-${sidebarPagename}`, visibility);
+	Cookies.set(`sidebar-filter-visible-${rootPageName}`, visibility);
   });
 
   $('.sidebar-filter-show-button').on('click', function(e) {
@@ -859,7 +857,7 @@ jQuery(function($) {
 
   $(document).ready(function() {
 	if ( !$( '.sidebar-filter' ).length ) return;
-	var getSearchUtilityVisiblity = Cookies.get(`sidebar-filter-visible-${sidebarPagename}`);
+	var getSearchUtilityVisiblity = Cookies.get(`sidebar-filter-visible-${rootPageName}`);
 
 	// If visible is set to 1 or user hasn't selected a preference, then we'll show the sidebar
 	if ( typeof getSearchUtilityVisiblity === "undefined" || getSearchUtilityVisiblity == "1" ) {
@@ -1075,7 +1073,7 @@ jQuery(function($) {
     var blockFeed = $('.block-feed');
     var blockFeedTitleHead = $('.block-feed-title-head');
 
-    var links = $('.feed-options-bar a, #filter-categories-list a');
+    var links = $('.feed-options-bar a, #filter-categories-list a, .feed-footer nav.pagination a');
 
     var styleFix = $('<style id="posts-wrap-transition-fix">.feed-section__posts * { transition: none !important; }</style>');
 
@@ -1089,9 +1087,9 @@ jQuery(function($) {
     blockFeedTitleHead.toggleClass('is-active');
 
     if (blockFeed.hasClass('block-feed--list')) {
-      $('.button-view-list').text('View all as grid');
+      $('.button-view-list').text('View as Grid');
     } else {
-      $('.button-view-list').text('View all as list');
+      $('.button-view-list').text('View as List');
     }
 
     links.each(function() {
@@ -1110,9 +1108,9 @@ jQuery(function($) {
 
       if (linkUrl) {
         if ($('.block-feed.block-feed--list').length) {
-          linkUrl.searchParams.append('view-list', 'true');
+          linkUrl.searchParams.set('view-list', 'true');
         } else {
-          linkUrl.searchParams.delete('view-list');
+          linkUrl.searchParams.set('view-list', 'false');
         }
       }
 

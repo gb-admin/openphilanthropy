@@ -39,6 +39,9 @@
 					<li>
 						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories">Newest to oldest</a>
 					</li>
+					<li>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>#categories">Oldest to newest</a>
+					</li>
 				</ul>
 			</div>
 
@@ -61,9 +64,13 @@
 			</div>
 
 			<?php if ( $post_type == 'research' || is_page_template( 'template/research-category.php' ) ) : ?>
-				<button class="button button--solid button-view-list">View all as grid</button>
+				<button class="button button--solid button-view-list">
+					<?php echo oph_display_type('list'); ?>
+				</button>
 			<?php else : ?>
-				<button class="button button--solid button-view-list">View all as list</button>
+				<button class="button button--solid button-view-list">
+					<?php echo oph_display_type('grid'); ?>
+				</button>
 			<?php endif; ?>
 		</nav>
 	</div>

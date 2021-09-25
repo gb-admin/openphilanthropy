@@ -27,9 +27,9 @@
 
 		if ( $primary_term_slug ) {
 			$focus_area_query = array(
-				'field' => 'slug',
+				'field'    => 'slug',
 				'taxonomy' => 'focus-area',
-				'terms' => $primary_term_slug
+				'terms'    => $primary_term_slug
 			);
 
 			array_push( $tax_query, $focus_area_query );
@@ -54,20 +54,56 @@
 
 	$related_query_posts = [];
 
+	// Get a list of related posts from the same organization (if any)
+	$terms_org_name = get_the_terms( $post->ID, 'organization-name' );
+	$related_org_query_posts = [];
+	if ( isset($terms_org_name[0]) ) {
+		$related_org_query = new WP_Query( array(
+			'post_type'      => 'grants',
+			'posts_per_page' => 3,
+			'order'          => 'desc',
+			'orderby'        => 'date',
+			'post__not_in'   => $related_posts_id,
+			'tax_query'      => array(
+				'relation'	=> 'AND',
+				array(
+					'taxonomy' => 'organization-name',
+					'field'    => 'slug',
+					'terms'    => $terms_org_name[0]->slug
+				),
+				array(
+					'field'    => 'slug',
+					'taxonomy' => 'focus-area',
+					'terms'    => $primary_term_slug
+				)
+			)
+		) );
+
+		if ( ! empty( $related_org_query ) && isset( $related_org_query->posts ) ) {
+			$related_org_query_posts = $related_org_query->posts;
+			
+			// Add to ignore list for the next query and update the count
+			$related_org_posts_id = wp_list_pluck( $related_org_query_posts, 'ID' );
+			$related_posts_id = array_merge($related_posts_id, $related_org_posts_id);
+			$related_posts_count = count( $related_posts );
+		}
+	}
+	
 	$related_query = new WP_Query( array(
-		'post_type' => 'grants',
+		'post_type'      => 'grants',
 		'posts_per_page' => 3,
-		'order' => 'desc',
-		'orderby' => 'date',
-		'post__not_in' => $related_posts_id,
-		'tax_query' => $tax_query
+		'order'          => 'desc',
+		'orderby'        => 'date',
+		'post__not_in'   => $related_posts_id,
+		'tax_query'      => $tax_query
 	) );
 
 	if ( ! empty( $related_query ) && isset( $related_query->posts ) ) {
 		$related_query_posts = $related_query->posts;
 	}
 
-	$related_posts = array_merge( $related_posts, $related_query_posts );
+	// The order of merge is important as it retains the priority override order
+	$related_posts = array_merge( $related_posts, $related_org_query_posts, $related_query_posts );
 
 	/**
 	 * Limit related posts to 3 if back filled.

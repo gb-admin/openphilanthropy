@@ -105,6 +105,10 @@
 					$meta_key = 'award_date';
 					$order_query = 'desc';
 					$orderby_query = 'meta_value';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$meta_key = 'award_date';
+					$order_query = 'asc';
+					$orderby_query = 'meta_value';
 				}
 			}
 		} elseif ( $key == 'yr' ) {
@@ -271,7 +275,7 @@
 
 						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
 							<?php if ( $award_date ) : ?>
-								<h5 class="block-feed-post__date"><a href="<?php echo get_permalink(); ?>"><?php echo $award_date; ?></a></h5>
+								<h5 class="block-feed-post__date"><a href="<?php echo get_permalink(); ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
 							<?php endif; ?>
 
 							<div class="block-feed-post__head">
@@ -313,7 +317,7 @@
 
 								<h6>Date</h6>
 
-								<h5 class="block-feed-post__date"><?php echo $award_date; ?></h5>
+								<h5 class="block-feed-post__date"><?php echo date("F Y", strtotime($award_date)); ?></h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">
@@ -332,8 +336,14 @@
 								$big = 999999999;
 								$translated = __( 'Page', 'oph' );
 
+								// Setting the view-list parameter on pagination url.
+								// Note the ampersand is replaced prior to running the method as it causes unexpected behaviour
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
 								echo paginate_links( array(
-									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'base' => str_replace( $big, '%#%', $base_url ),
 									'end_size' => 2,
 									'mid_size' => 2,
 									'format' => '?paged=%#%',
@@ -345,7 +355,9 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View all as list</button>
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('grid'); ?>
+							</button>
 						</div>
 					</div>
 				</div>
