@@ -1643,6 +1643,10 @@ button,
       h6 {
         display: none;
       }
+
+	  .block-feed-post__content_type {
+		display: none;
+	  }
     }
   }
   &.block-feed--images {
@@ -1685,8 +1689,9 @@ button,
         .block-feed-post__body {
           @media only screen and (min-width: $lg) {
             .block-feed-post__category,
+			.block-feed-post__content_type,
             .block-feed-post__date {
-              flex: 0 0 29%;
+              flex: 0 0 19%;
             }
             .block-feed-post__title {
                flex: 0 0 42%;
@@ -1955,11 +1960,14 @@ button,
       > li {
         flex: 0 0 42%;
         &:nth-child(2) {
-          flex: 0 0 29%;
+          flex: 0 0 19%;
         }
         &:nth-child(3) {
-          flex: 0 0 29%;
+          flex: 0 0 19%;
         }
+		&:nth-child(4) {
+			flex: 0 0 19%;
+		}
       }
     }
     > li {

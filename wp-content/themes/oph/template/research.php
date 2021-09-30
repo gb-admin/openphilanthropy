@@ -11,10 +11,10 @@
 
 	$params = get_url_params();
 
-	$view_list = false;
+	$view_list = true; // this is the default view
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
-		$view_list = true;
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
+		$view_list = false;
 	}
 
 	$featured_research = get_field( 'featured_research' );
@@ -63,6 +63,9 @@
 					$orderby_query = 'title';
 				} elseif ( $value == 'recent' ) {
 					$order_query = 'desc';
+					$orderby_query = 'date';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$order_query = 'asc';
 					$orderby_query = 'date';
 				}
 			}
@@ -135,10 +138,13 @@
 				<li>
 					<h6>Focus Area</h6>
 				</li>
+				<li>
+					<h6>Content Type</h6>
+				</li>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list block-feed--research">
+				<div class="block-feed block-feed--research<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
@@ -162,11 +168,22 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $research_focus_area ) : ?>
-									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
-									</h5>
-								<?php endif; ?>
+								<h5 class="block-feed-post__category">
+									<?php if ( $research_focus_area ) : ?>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<?php endif; ?>
+								</h5>
+
+								<h6>Content Type</h6>
+								<h5 class='block-feed-post__content_type'>
+									<?php if ($research_content_type) : ?>
+									<ul class="research-content-type">
+										<?php foreach($research_content_type as $term) : ?>
+										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+									<?php endif; ?>
+								</h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">
@@ -185,8 +202,12 @@
 								$big = 999999999;
 								$translated = __( 'Page', 'oph' );
 
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
 								echo paginate_links( array(
-									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'base' => str_replace( $big, '%#%', $base_url ),
 									'end_size' => 2,
 									'mid_size' => 2,
 									'format' => '?paged=%#%',
@@ -198,7 +219,9 @@
 						</nav>
 
 						<div class="feed-footer__options">
-							<button class="button button--secondary button-view-list">View all as grid</button>
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('list'); ?>
+							</button>
 						</div>
 					</div>
 				</div>
