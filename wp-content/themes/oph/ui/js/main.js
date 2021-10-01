@@ -1221,4 +1221,29 @@ jQuery(function($) {
 	}
   });
 
+  // Scroll to Footnote 
+  console.log('Watching for footnotes.'); 
+
+  var scrollNote; 
+  scrollNote = $('.see-footnote'); 
+
+  $( scrollNote ).click(function( e ) {
+    e.preventDefault(); 
+
+    var source, sourceTag, footNote, fnOffset; 
+    source = $(this); 
+    sourceTag = $(this).attr('id'); 
+    console.log(sourceTag); 
+    footNote = $('a.footnote-label[href$="' + sourceTag + '"]'); 
+    console.log(footNote.attr('href')); 
+    fnOffset = footNote.offset(); 
+
+    $("html, body").animate(
+        {
+          scrollTop: fnOffset.top - 140 
+        },
+        750
+      );
+  });
+
 });
