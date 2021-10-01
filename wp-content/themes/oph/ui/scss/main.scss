@@ -2964,6 +2964,10 @@ button,
 		list-style-position: inside;
 		margin: 10px 0 10px 10px;
 	}
+  a.source-definition {
+    font-weight: 500; 
+    text-decoration: underline; 
+  }
   }
   .post-featured-image {
     margin-bottom: 32px;
