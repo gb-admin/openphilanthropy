@@ -2469,9 +2469,9 @@ button,
           }
         }
         > li {
+          &:hover {
+            background-color: rgba(173, 122, 153, .1);
           > a {
-            &:hover {
-              background-color: rgba(173, 122, 153, .1);
             }
           }
         }
@@ -3398,6 +3398,7 @@ button,
     margin-left: -24px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; 
     .icon-grid__link {
       margin-top: 40px;
     }
