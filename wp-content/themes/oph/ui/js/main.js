@@ -1221,4 +1221,37 @@ jQuery(function($) {
 	}
   });
 
+  // Scroll to Footnote 
+  console.log('Watching for footnotes...'); 
+
+  var scrollNote; 
+  scrollNote = $('.see-footnote'); 
+
+  $( scrollNote ).click(function( e ) {
+    e.preventDefault(); 
+
+    var source, sourceTag, footNote, fnOffset; 
+    source = $(this); 
+    sourceTag = $(this).attr('id'); 
+    footNote = $('a.footnote-label[href$="' + sourceTag + '"]'); 
+    fnOffset = footNote.offset(); 
+
+    $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750 );
+  });
+
+  // Scroll on Footer Button View
+  console.log('Waiting to scroll...'); 
+
+  var footView; 
+  footView = $('.feed-footer__options').children('button[class^="button-view-"], button[class*=" button-view-"]'); 
+
+  $( footView ).click(function( e ) { 
+    var feed, feedOffset; 
+    feed = $('.feed-options-bar'); 
+    setTimeout( function() { 
+      feedOffset = feed.offset();
+      $("html, body").animate({ scrollTop: feedOffset.top - 140 }, 500 );
+    }, 200 );
+  });
+
 });
