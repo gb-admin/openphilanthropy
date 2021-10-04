@@ -107,6 +107,6 @@
 }
 
 /* Grant's page */
-h5.block-feed-post__focus-area {
+h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
 	text-decoration: none ;
 }

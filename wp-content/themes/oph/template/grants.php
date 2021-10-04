@@ -312,7 +312,7 @@
 								<h6>Amount</h6>
 
 								<?php if ( $grant_amount ) : ?>
-									<h5><?php echo '$' . number_format( $grant_amount ); ?></h5>
+									<h5 class='block-feed-post__grant-amount'><?php echo '$' . number_format( $grant_amount ); ?></h5>
 								<?php endif; ?>
 
 								<h6>Date</h6>
