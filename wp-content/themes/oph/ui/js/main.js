@@ -1067,6 +1067,20 @@ jQuery(function($) {
     $('.select2-selection').append(selectArrow);
   });
 
+  function setGridViewSameHeight() {
+	var elem = ".block-feed:not(.block-feed--list) > .block-feed-post.same-height";
+	var maxHeight = Math.max.apply(null, $(elem).map(function () {
+		return $(this).height();
+	}).get());
+
+	if ( maxHeight ) {
+		$(elem).css("min-height", maxHeight + 'px');
+	}
+  }
+
+  // Trigger if the initial view is grid
+  setGridViewSameHeight();
+
   $(document).on('click', '.button-view-list', function(e) {
     e.preventDefault();
 
@@ -1116,6 +1130,8 @@ jQuery(function($) {
 
       $(this).attr('href', linkUrl.href);
     });
+
+	setGridViewSameHeight();
   });
 
   /**
