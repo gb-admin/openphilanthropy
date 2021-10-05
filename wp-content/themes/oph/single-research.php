@@ -129,6 +129,10 @@
 				<?php endif; ?>
 
 				<div class="entry-content">
+					<div class='author-date-meta'>
+						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span> |
+						<span class='author'>by <?= get_post_meta(get_the_ID(),'custom_author', true) ?: 'GBdev'; ?></span> 
+					</div>
 					<?php the_content(); ?>
 				</div>
 

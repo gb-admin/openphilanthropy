@@ -5934,3 +5934,15 @@ body.search-results {
 #main .page-header > .wrap {
 	width: 80%;
 }
+
+
+body.single-research {
+	.author-date-meta {
+		margin-bottom: 20px;
+		font-size: 0.8rem;
+
+		.publish-date {
+			font-style: italic;
+		}
+	}
+}
