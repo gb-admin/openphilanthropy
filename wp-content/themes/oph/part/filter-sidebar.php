@@ -11,7 +11,15 @@
 
 	global $wpdb;
 
-	$research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+	// Loading in official WP Users that have posts in post_type research
+	$official_research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+
+	// Loading unofficial custom authors (added in metabox -> postmeta)
+	$custom_research_authors = oph_get_all_custom_authors();
+
+	// Merging the two together
+	$research_authors = oph_merge_all_research_authors($official_research_authors, $custom_research_authors);
+
 
 	$content_type = get_terms( array(
 		'taxonomy' => 'content-type'

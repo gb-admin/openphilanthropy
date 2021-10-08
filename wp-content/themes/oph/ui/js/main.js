@@ -913,9 +913,9 @@ jQuery(function($) {
       }
 
       if ($('.block-feed.block-feed--list').length) {
-        url.searchParams.append('view-list', 'true');
+		url.searchParams.set('view-list', 'true');
       } else {
-        url.searchParams.delete('view-list');
+		url.searchParams.set('view-list', 'false');
       }
 
       /**

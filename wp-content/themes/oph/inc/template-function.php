@@ -99,7 +99,7 @@ function get_url_params() {
 
 	foreach ( $query as $param ) {
 		if ( strpos( $param, '=' ) === false ) {
-			$param += '=';
+			$param .= '=';
 		}
 
 		list( $name, $value ) = explode( '=', $param, 2 );
