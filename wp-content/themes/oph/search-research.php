@@ -15,13 +15,13 @@
 
 					<ul class="dropdown-content">
 						<li>
-							<a href="#high-to-low">Highest to lowest</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>">A to Z</a>
 						</li>
 						<li>
-							<a href="#a-z">A to Z</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>">Newest to oldest</a>
 						</li>
 						<li>
-							<a href="#recent">Newest to oldest</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>">Oldest to newest</a>
 						</li>
 					</ul>
 				</div>
@@ -33,13 +33,13 @@
 
 					<ul class="dropdown-content">
 						<li>
-							<a href="#25">25</a>
+							<a href="<?php echo esc_url( add_query_arg( 'items', '25' ) ); ?>">25</a>
 						</li>
 						<li>
-							<a href="#50">50</a>
+							<a href="<?php echo esc_url( add_query_arg( 'items', '50' ) ); ?>">50</a>
 						</li>
 						<li>
-							<a href="#100">100</a>
+							<a href="<?php echo esc_url( add_query_arg( 'items', '100' ) ); ?>">100</a>
 						</li>
 					</ul>
 				</div>
@@ -62,13 +62,13 @@
 
 						<ul class="dropdown-content">
 							<li>
-								<a href="#high-to-low">Highest to lowest</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>">A to Z</a>
 							</li>
 							<li>
-								<a href="#a-z">A to Z</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>">Newest to oldest</a>
 							</li>
 							<li>
-								<a href="#recent">Newest to oldest</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>">Oldest to newest</a>
 							</li>
 						</ul>
 					</div>
@@ -80,13 +80,13 @@
 
 						<ul class="dropdown-content">
 							<li>
-								<a href="#25">25</a>
+								<a href="<?php echo esc_url( add_query_arg( 'items', '25' ) ); ?>">25</a>
 							</li>
 							<li>
-								<a href="#50">50</a>
+								<a href="<?php echo esc_url( add_query_arg( 'items', '50' ) ); ?>">50</a>
 							</li>
 							<li>
-								<a href="#100">100</a>
+								<a href="<?php echo esc_url( add_query_arg( 'items', '100' ) ); ?>">100</a>
 							</li>
 						</ul>
 					</div>
@@ -137,7 +137,7 @@
 
 			<div class="feed-footer">
 				<div class="feed-footer__options">
-					<button class="button button--secondary">
+					<button class="button button--secondary button-view-list">
 						<?php echo oph_display_type('grid'); ?>
 					</button>
 				</div>
