@@ -623,8 +623,8 @@ button,
   }
   img,
   svg {
-    width: 21px;
-    height: 21px;
+    width: 16px;
+    height: 16px;
     fill: $periwinkle-4;
     position: relative;
   }
@@ -2469,9 +2469,9 @@ button,
           }
         }
         > li {
+          &:hover {
+            background-color: rgba(173, 122, 153, .1);
           > a {
-            &:hover {
-              background-color: rgba(173, 122, 153, .1);
             }
           }
         }
@@ -2935,6 +2935,10 @@ button,
     font-size: 34px;
     line-height: 42px;
   }
+  h4 {
+    margin-bottom: 12px; 
+    margin-top: 24px; 
+  }
   .content-single__aside {
     margin-bottom: 48px;
     h3 {
@@ -2960,6 +2964,10 @@ button,
 		list-style-position: inside;
 		margin: 10px 0 10px 10px;
 	}
+  a.source-definition {
+    font-weight: 500; 
+    text-decoration: underline; 
+  }
   }
   .post-featured-image {
     margin-bottom: 32px;
@@ -3390,6 +3398,7 @@ button,
     margin-left: -24px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; 
     .icon-grid__link {
       margin-top: 40px;
     }
