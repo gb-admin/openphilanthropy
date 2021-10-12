@@ -25,7 +25,7 @@ function oph_create_custom_author_metabox()
 
 function oph_custom_author_template($post)
 {
-	$current_author = get_post_meta($post->ID, 'custom_author', true) ?: wp_get_current_user()->display_name;
+	$current_author = get_post_meta($post->ID, 'custom_author', true) ?: get_the_author_meta( 'display_name', $post->post_author );
 	$wp_core_users = array_map(function($e) { return $e->display_name;},  get_users());
 	$post_meta_authors = array_map(function($e) { return $e->custom_author;},  oph_get_all_custom_authors());
 
@@ -66,4 +66,5 @@ function oph_save_custom_author_metabox($post_id) {
 		update_post_meta($post_id, 'custom_author', $custom_author);
 	}
 }
+
 /** End of custom author metabox **/

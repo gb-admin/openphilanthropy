@@ -129,6 +129,10 @@
 				<?php endif; ?>
 
 				<div class="entry-content">
+					<div class='author-date-meta'>
+						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span> |
+						<span class='author'>by <?= oph_get_post_author_name(); ?></span> 
+					</div>
 					<?php the_content(); ?>
 				</div>
 
