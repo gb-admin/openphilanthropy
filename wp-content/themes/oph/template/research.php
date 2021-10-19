@@ -152,7 +152,7 @@
 							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
 						?>
 
-						<div class="block-feed-post">
+						<div class="block-feed-post same-height">
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 

@@ -99,7 +99,7 @@ function get_url_params() {
 
 	foreach ( $query as $param ) {
 		if ( strpos( $param, '=' ) === false ) {
-			$param += '=';
+			$param .= '=';
 		}
 
 		list( $name, $value ) = explode( '=', $param, 2 );
@@ -349,3 +349,57 @@ function oph_display_type($default_view='list') {
 	// Is set, return the corresponding text
 	return ( $_GET['view-list'] == "true" ) ? $view_text['list'] : $view_text['grid'];
 }
+
+/**
+ *	Set parameters to modify search results
+ */
+
+add_action('pre_get_posts', function( \WP_Query $q) {
+	if ( !is_admin() && $q->is_main_query() && is_search()) {
+		$params = get_url_params();
+		
+		// Limiting posts per page
+		if ( isset($params['items'][0]) && ($items = $params['items'][0]) ) {
+			$q->set( 'posts_per_page', (int)$items);
+		}
+
+		if ( isset($params['sort'][0]) ) {
+			// Grant search
+			if ( $q->query['post_type'] == 'grants') {
+				switch($params['sort'][0]) {
+					case "high-to-low": 
+						$q->set("meta_key", 'grant_amount');
+						$q->set('orderby', 'meta_value_num');
+						break;
+					case "a-z":
+						$q->set("order", 'asc');
+						$q->set("orderby", "title");
+						break;
+					case "recent":
+						$q->set("meta_key", "award_date");
+						$q->set("order", "desc");
+						$q->set("orderby", "meta_value");
+						break;
+				}
+			}
+
+			// Research
+			if ( $q->query['post_type'] == 'research') {
+				switch($params['sort'][0]) {
+					case "a-z":
+						$q->set("order", 'asc');
+						$q->set("orderby", "title");
+						break;
+					case "recent":
+						$q->set("order", "desc");
+						$q->set("orderby", "date");
+						break;
+					case "oldest-to-newest":
+						$q->set("order", "asc");
+						$q->set("orderby", "date");
+						break;
+				}
+			}
+		}
+	}
+});

@@ -9,7 +9,7 @@ function enqueue_asset() {
 
 	wp_enqueue_style( 'main-style', get_template_directory_uri() . '/ui/css/main.min.css', array(), '1.0.1' );
 
-	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/ui/css/custom.css', array(), '1.0.2' );
+	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/ui/css/custom.css', array(), '1.0.4' );
 
 	wp_enqueue_script( 'jquery-bundle-script', get_template_directory_uri() . '/ui/js/jquery.bundle.js', array( 'jquery' ), '', true );
 
