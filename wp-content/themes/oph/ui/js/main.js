@@ -650,9 +650,12 @@ jQuery(function($) {
     arrows: false,
     dots: true,
     rows: 0,
-    speed: 250,
+    speed: 500,
 	autoplay: true,
   	autoplaySpeed: 4000,
+	fade: true,
+	useTransform: true,
+	cssEase: 'ease-in-out',
     asNavFor: $('.hero-caption-slider, .hero-photo-credit-slider')
   });
 
@@ -661,7 +664,7 @@ jQuery(function($) {
     draggable: false,
     fade: true,
     rows: 0,
-    speed: 250,
+    speed: 500,
     asNavFor: $('.hero-image-slider, .hero-photo-credit-slider')
   });
 

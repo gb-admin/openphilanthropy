@@ -104,6 +104,9 @@
 				<div class="sidebar-filter__option">
 					<?php foreach ( $sidebar_filter as $filter ) : ?>
 						<?php if ( $filter['filter'] == 'amount' ) : ?>
+							<?php 
+							// ! pending full removal if no longer needed | involves cleaning up all the query args
+							/*
 							<select data-filter="amount" data-input-placeholder="Type here to search ..." data-placeholder="Amount">
 								<option value=""></option>
 
@@ -111,6 +114,7 @@
 								<option class="<?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="between-1hundthous-1mil" value="Between $100,000 and $1,000,000">Between $100,000 and $1,000,000</option>
 								<option class="<?php if ( in_array( 'greater-than-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="greater-than-1mil" value="Greater than $1,000,000">Greater than $1,000,000</option>
 							</select>
+							*/ ?>
 						<?php elseif ( $filter['filter'] == 'author' ) : ?>
 
 							<?php
@@ -195,9 +199,11 @@
 					<?php endforeach; ?>
 				</div>
 
+				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
 					<a class="button" href="<?php echo get_stylesheet_directory_uri() . '/grants_db.csv'; ?>" download="grants_db.csv">Download Spreadsheet</a>
 				</div>
+				<?php endif; ?>
 			</nav>
 		</div>
 

@@ -64,6 +64,14 @@
 	</div>
 </div>
 
-<?php get_template_part( 'part/cta', 'button' ); ?>
+<div class="cta-button" id="button">
+	<div class="wrap">
+		<div class="cta-button__content">
+			<div class="button-group">
+				<a class="button" href="<?php echo get_permalink( get_page_by_path( 'careers' ) )  ?>">See all Positions</a>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php get_footer(); ?>
