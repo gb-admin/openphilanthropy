@@ -195,9 +195,11 @@
 					<?php endforeach; ?>
 				</div>
 
+				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
 					<a class="button" href="<?php echo get_stylesheet_directory_uri() . '/grants_db.csv'; ?>" download="grants_db.csv">Download Spreadsheet</a>
 				</div>
+				<?php endif; ?>
 			</nav>
 		</div>
 
