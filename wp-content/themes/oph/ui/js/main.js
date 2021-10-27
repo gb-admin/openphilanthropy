@@ -1240,8 +1240,22 @@ jQuery(function($) {
 	}
   });
 
+    // Single Research Page
+	$("body.single-research #toggle-footnotes").on("click", function() {
+		let $root = $(this);
+		if ( $(".footnotes").is(":visible") ) { // collapse
+			$root.find("span.expand").show().css("display", "inline-flex");
+			$root.find("span.collapse").hide();
+			$(".footnotes").slideUp(100, 'linear');
+		} else { // show
+			$root.find("span.collapse").show().css("display", "inline-flex");
+			$root.find("span.expand").hide();
+			$(".footnotes").slideDown(100, 'linear');
+		}
+	});
+
   // Scroll to Footnote 
-  console.log('Watching for footnotes...'); 
+//   console.log('Watching for footnotes...'); 
 
   var scrollNote; 
   scrollNote = $('.see-footnote'); 

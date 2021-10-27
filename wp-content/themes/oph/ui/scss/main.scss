@@ -770,6 +770,19 @@ button,
 #toggle-footnotes {
   margin-bottom: 20px;
   display: block;
+
+  span {
+	display: inline-flex;
+	align-items: center;
+
+	&.collapse {
+		display: none;
+	}
+
+	svg {
+		margin-left: 5px;
+	}
+  }
 }
 
 .footnotes {
