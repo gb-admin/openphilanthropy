@@ -770,6 +770,19 @@ button,
 #toggle-footnotes {
   margin-bottom: 20px;
   display: block;
+
+  span {
+	display: inline-flex;
+	align-items: center;
+
+	&.collapse {
+		display: none;
+	}
+
+	svg {
+		margin-left: 5px;
+	}
+  }
 }
 
 .footnotes {
@@ -1645,6 +1658,10 @@ button,
       }
 
 	  .block-feed-post__content_type {
+		display: none;
+	  }
+
+	  .block-feed-post__author {
 		display: none;
 	  }
     }
