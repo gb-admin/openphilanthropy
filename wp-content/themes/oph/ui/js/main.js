@@ -68,6 +68,8 @@ jQuery(function($) {
   $(document).ready(function() {
     $('nav select').select2({
       searchInputPlaceholder: 'Type here to search ...',
+	  // Hides the search on career's page | For other pages requires at least 5 results for the search to show
+	  minimumResultsForSearch: $("body.page-template-careers").length ? Infinity : 5,
       templateResult: select2CopyClasses,
       templateSelection: select2CopyClasses
     });
