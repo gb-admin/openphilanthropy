@@ -68,6 +68,8 @@ jQuery(function($) {
   $(document).ready(function() {
     $('nav select').select2({
       searchInputPlaceholder: 'Type here to search ...',
+	  // Hides the search on career's page | For other pages requires at least 5 results for the search to show
+	  minimumResultsForSearch: $("body.page-template-careers").length ? Infinity : 5,
       templateResult: select2CopyClasses,
       templateSelection: select2CopyClasses
     });
@@ -650,9 +652,12 @@ jQuery(function($) {
     arrows: false,
     dots: true,
     rows: 0,
-    speed: 250,
+    speed: 500,
 	autoplay: true,
   	autoplaySpeed: 4000,
+	fade: true,
+	useTransform: true,
+	cssEase: 'ease-in-out',
     asNavFor: $('.hero-caption-slider, .hero-photo-credit-slider')
   });
 
@@ -661,7 +666,7 @@ jQuery(function($) {
     draggable: false,
     fade: true,
     rows: 0,
-    speed: 250,
+    speed: 500,
     asNavFor: $('.hero-image-slider, .hero-photo-credit-slider')
   });
 
@@ -1237,8 +1242,22 @@ jQuery(function($) {
 	}
   });
 
+    // Single Research Page
+	$("body.single-research #toggle-footnotes").on("click", function() {
+		let $root = $(this);
+		if ( $(".footnotes").is(":visible") ) { // collapse
+			$root.find("span.expand").show().css("display", "inline-flex");
+			$root.find("span.collapse").hide();
+			$(".footnotes").slideUp(100, 'linear');
+		} else { // show
+			$root.find("span.collapse").show().css("display", "inline-flex");
+			$root.find("span.expand").hide();
+			$(".footnotes").slideDown(100, 'linear');
+		}
+	});
+
   // Scroll to Footnote 
-  console.log('Watching for footnotes...'); 
+//   console.log('Watching for footnotes...'); 
 
   var scrollNote; 
   scrollNote = $('.see-footnote'); 

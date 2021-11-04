@@ -189,6 +189,11 @@
 				<li>
 					<h6>Focus Area</h6>
 				</li>
+				<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
+				<li>
+					<h6>Author</h6>
+				</li>
+				<?php endif; ?>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
@@ -216,10 +221,17 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $research_focus_area ) : ?>
-									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
-									</h5>
+								<h5 class="block-feed-post__category">
+									<?php if ( $research_focus_area ) : ?>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<?php endif; ?>
+								</h5>
+
+								<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
+								<h6>Author</h6>
+								<h5 class="block-feed-post__author">
+									<?php echo oph_get_post_author_name(get_the_ID()); ?>
+								</h5>
 								<?php endif; ?>
 
 								<div class="block-feed-post__link">
