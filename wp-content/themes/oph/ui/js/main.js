@@ -1289,4 +1289,29 @@ jQuery(function($) {
     }, 200 );
   });
 
+  // Add class to assist the styling of dynamically imported tables
+  $("body.single-research, body.single-grants").find("table:not(.table)").each(function() {
+	let $table = $(this);
+	$table.addClass("table-imported");
+	/**
+	 * Create a thead based on the following conditions:
+	 * 1. there is no thead presently
+	 * 2. The first row only has texts
+	 */
+	if ( $table.find("thead").length == 0 ) {
+		let matchConditions = true;
+		$table.find("tbody > tr:first td").each(function() {
+			if ( $(this).text() != $(this).html() ) {
+				matchConditions = false;
+				return false;
+			}
+		});
+
+		if ( matchConditions === false ) return true; // skip to the next iteration
+
+		$el = $table.find("tbody > tr:first").detach();
+		let thead = $el.html().replaceAll("<td>", "<th>").replaceAll("</td>", "</th>");
+		$table.find("tbody").before("<thead>" + thead + "</thead>");
+	}
+  });
 });
