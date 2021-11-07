@@ -1243,7 +1243,7 @@ jQuery(function($) {
   });
 
     // Single Research Page
-	$("body.single-research #toggle-footnotes").on("click", function() {
+	$("body.single-research #toggle-footnotes, body.single-grants #toggle-footnotes").on("click", function() {
 		let $root = $(this);
 		if ( $(".footnotes").is(":visible") ) { // collapse
 			$root.find("span.expand").show().css("display", "inline-flex");
