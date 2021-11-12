@@ -1187,6 +1187,7 @@ jQuery(function($) {
 
 		var target = $(this.hash);
 		target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+
 		if (target.length) {
 		  	$('html,body').animate({
 				scrollTop: target.offset().top - stickyHeaderHeight
@@ -1243,18 +1244,26 @@ jQuery(function($) {
   });
 
     // Single Research Page
-	$("body.single-research #toggle-footnotes").on("click", function() {
+	$("body.single-research #toggle-footnotes, body.single-grants #toggle-footnotes").on("click", function() {
 		let $root = $(this);
 		if ( $(".footnotes").is(":visible") ) { // collapse
 			$root.find("span.expand").show().css("display", "inline-flex");
 			$root.find("span.collapse").hide();
 			$(".footnotes").slideUp(100, 'linear');
 		} else { // show
-			$root.find("span.collapse").show().css("display", "inline-flex");
-			$root.find("span.expand").hide();
-			$(".footnotes").slideDown(100, 'linear');
+			expandFootnotes($root, 100);
 		}
 	});
+
+	function expandFootnotes($root, delay=0) {
+		$root.find("span.collapse").show().css("display", "inline-flex");
+		$root.find("span.expand").hide();
+		if ( delay ) {
+			$(".footnotes").slideDown(100, 'linear');
+		} else {
+			$(".footnotes").show();
+		}
+	}
 
   // Scroll to Footnote 
 //   console.log('Watching for footnotes...'); 
@@ -1265,13 +1274,23 @@ jQuery(function($) {
   $( scrollNote ).click(function( e ) {
     e.preventDefault(); 
 
-    var source, sourceTag, footNote, fnOffset; 
-    source = $(this); 
-    sourceTag = $(this).attr('id'); 
-    footNote = $('a.footnote-label[href$="' + sourceTag + '"]'); 
-    fnOffset = footNote.offset(); 
+	var source, sourceTag, footNote, fnOffset; 
+	source = $(this); 
+	sourceTag = $(this).attr('id'); 
+	footNote = $('a.footnote-label[href$="' + sourceTag + '"]'); 
 
-    $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750 );
+	// If the footnotes is collapsed and the target footnote look up exists -> open quickly
+	if ( !$(".footnotes").is(":visible") && footNote ) {
+		expandFootnotes($("#toggle-footnotes"));
+	}
+
+	if ( !footNote) {
+		console.log("footnote id " + sourceTag + " not found");
+		return false;
+	}
+	fnOffset = footNote.offset(); 
+	$("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750 );
+	
   });
 
   // Scroll on Footer Button View
@@ -1289,4 +1308,29 @@ jQuery(function($) {
     }, 200 );
   });
 
+  // Add class to assist the styling of dynamically imported tables
+  $("body.single-research, body.single-grants").find("table:not(.table)").each(function() {
+	let $table = $(this);
+	$table.addClass("table-imported");
+	/**
+	 * Create a thead based on the following conditions:
+	 * 1. there is no thead presently
+	 * 2. The first row only has texts
+	 */
+	if ( $table.find("thead").length == 0 ) {
+		let matchConditions = true;
+		$table.find("tbody > tr:first td").each(function() {
+			if ( $(this).text() != $(this).html() ) {
+				matchConditions = false;
+				return false;
+			}
+		});
+
+		if ( matchConditions === false ) return true; // skip to the next iteration
+
+		$el = $table.find("tbody > tr:first").detach();
+		let thead = $el.html().replaceAll("<td>", "<th>").replaceAll("</td>", "</th>");
+		$table.find("tbody").before("<thead>" + thead + "</thead>");
+	}
+  });
 });
