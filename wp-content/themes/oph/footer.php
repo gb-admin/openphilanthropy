@@ -47,11 +47,11 @@
 
 								<h6>Email</h6>
 
-								<a href="">info@openphilanthropy.org</a>
+								<a href="mailto:info@openphilanthropy.org">info@openphilanthropy.org</a>
 
 								<h6>Media Inquiries</h6>
 
-								<a href="">media@openphilanthropy.org</a>
+								<a href="mailto:media@openphilanthropy.org">media@openphilanthropy.org</a>
 							</div>
 
 							<div class="footer-grid__cell footer-cell-social">
