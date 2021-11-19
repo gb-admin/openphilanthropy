@@ -38,7 +38,7 @@ switch(true) {
                         <?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
                             <?php foreach ( $terms_focus_area as $term ) : ?>
                                 <li>
-                                    <p>Portfolio Area: <?php echo $term->name; ?></p>
+                                    <a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Portfolio Area: <?php echo $term->name; ?></a>
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -47,7 +47,7 @@ switch(true) {
                             <?php if ( $terms_organization_name && ! is_wp_error( $terms_organization_name ) ) : ?>
                                 <?php foreach ( $terms_organization_name as $term ) : ?>
                                     <li>
-                                        <p>Organization Name: <?php echo $term->name; ?></p>
+                                        <a href="/<?php echo $post_type; ?>?organization-name=<?php echo $term->slug; ?>">Organization Name: <?php echo $term->name; ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
@@ -67,7 +67,7 @@ switch(true) {
                             <?php if ( $terms_content_type && ! is_wp_error( $terms_content_type ) ) : ?>
                                 <?php foreach ( $terms_content_type as $term ) : ?>
                                     <li>
-                                        <p>Content Type: <?php echo $term->name; ?></p>
+                                        <a href="/<?php echo $post_type; ?>?content-type=<?php echo $term->slug; ?>">Content Type: <?php echo $term->name; ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
