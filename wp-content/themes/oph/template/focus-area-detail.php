@@ -361,16 +361,17 @@
 											$related_title = $related->post_title;
 
 											$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
+											$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
 
 											$related_eyebrow_copy = '';
 											$related_eyebrow_link_url = '';
 
 											if ( $research_focus_area && $research_focus_area->name ) {
-												$related_eyebrow_copy = $research_focus_area->name;
+												$related_eyebrow_copy = $first_parent_term->name;
 											}
 
 											if ( $research_focus_area && $research_focus_area->slug ) {
-												$related_eyebrow_link_url = '/research?focus-area=' . $research_focus_area->slug;
+												$related_eyebrow_link_url = '/research?focus-area=' . $first_parent_term->slug;
 											}
 
 											if ( has_excerpt( $related->ID ) ) {
