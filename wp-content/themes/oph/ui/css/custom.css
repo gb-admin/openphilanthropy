@@ -116,6 +116,9 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
     border-bottom: 1px solid #969eb1;
     padding: 1rem 0;
     margin-bottom: 1rem;
+	font-size: 16px;
+	font-style: italic;
+	line-height: 22px;
 }
 
 .grant-intro p {
