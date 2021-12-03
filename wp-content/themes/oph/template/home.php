@@ -44,7 +44,7 @@
 
 							// Get category image
 							if ( ! empty( $focus_area ) && $focus_area[0]->term_id ) {
-								$grant_image = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id );
+								$grant_image = get_field( 'category_focus_areas_image', 'focus-area_' . $focus_area[0]->term_id );
 							}
 
 							// If category image found get url

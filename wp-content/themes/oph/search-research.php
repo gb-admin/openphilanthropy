@@ -2,6 +2,13 @@
 	get_header();
 
 	get_template_part( 'part/page-header', 'search' );
+
+	$sort_params = [
+		'high-to-low'      => 'High to lowest',
+		'a-z'              => 'A - Z',
+		'recent'           => 'Newest to oldest',
+		'oldest-to-newest' => 'Oldest to newest'
+	];
 ?>
 
 <div class="feed-section is-feed-category-template">
@@ -10,25 +17,27 @@
 			<nav aria-label="Feed Options Bar">
 				<div class="dropdown">
 					<button class="button" href="#">
-						Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+						Sort <?php if ( isset($_GET['sort']) ) echo "({$sort_params[$_GET['sort']]}) &nbsp;"; ?>
+						<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 					</button>
 
 					<ul class="dropdown-content">
 						<li>
-							<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>">A to Z</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>"><?= $sort_params['a-z']; ?></a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>">Newest to oldest</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>"><?= $sort_params['recent']; ?></a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>">Oldest to newest</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>"><?= $sort_params['oldest-to-newest']; ?></a>
 						</li>
 					</ul>
 				</div>
 
 				<div class="dropdown dropdown--inline-content">
 					<button class="button" href="#">
-						Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+						Items  <?php if ( isset($_GET['items']) ) echo "({$_GET['items']})"; ?>
+						<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 					</button>
 
 					<ul class="dropdown-content">
@@ -57,25 +66,27 @@
 				<nav aria-label="Feed Options Bar">
 					<div class="dropdown">
 						<button class="button" href="#">
-							Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+							Sort <?php if ( isset($_GET['sort']) ) echo "({$sort_params[$_GET['sort']]}) &nbsp;"; ?>
+							<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 						</button>
 
 						<ul class="dropdown-content">
 							<li>
-								<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>">A to Z</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>"><?= $sort_params['a-z']; ?></a>
 							</li>
 							<li>
-								<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>">Newest to oldest</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>"><?= $sort_params['recent']; ?></a>
 							</li>
 							<li>
-								<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>">Oldest to newest</a>
+								<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>"><?= $sort_params['oldest-to-newest']; ?></a>
 							</li>
 						</ul>
 					</div>
 
 					<div class="dropdown dropdown--inline-content">
 						<button class="button" href="#">
-							Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+							Items <?php if ( isset($_GET['items']) ) echo "({$_GET['items']})"; ?>
+							<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 						</button>
 
 						<ul class="dropdown-content">
