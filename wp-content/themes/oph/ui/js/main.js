@@ -1075,7 +1075,7 @@ jQuery(function($) {
   function setGridViewSameHeight() {
 	var elem = ".block-feed:not(.block-feed--list) > .block-feed-post.same-height";
 	var maxHeight = Math.max.apply(null, $(elem).map(function () {
-		return $(this).height();
+		return $(this).outerHeight();
 	}).get());
 
 	if ( maxHeight ) {
