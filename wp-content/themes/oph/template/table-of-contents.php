@@ -40,7 +40,7 @@
 				?>
 
 				<div class="content-table-of-contents__aside pagenav-aside">
-					<h3>Navigate this page with the links below</h3>
+					<h3>Table of Contents</h3>
 
 					<nav aria-label="Content Navigation" id="content-navigation">
 						<ul class="list-content-navigation" id="content-navigation-list">
