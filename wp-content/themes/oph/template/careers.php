@@ -49,7 +49,7 @@
 	<div class="wrap">
 		<div class="content-careers__main">
 			<div class="content-careers__aside pagenav-aside">
-				<h3>Navigate this page with the links below</h3>
+				<h3>Table of Contents</h3>
 
 				<?php if ( ! empty( $careers_content ) ) : ?>
 					<nav aria-label="Post Navigation" class="aside-post-navigation" id="nav-post">

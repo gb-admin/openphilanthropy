@@ -16,7 +16,7 @@
 	<div class="wrap">
 		<div class="content-single__container">
 			<div class="content-single__aside pagenav-aside">
-				<h3>Navigate this page with the links below</h3>
+				<h3>Table of Contents</h3>
 
 				<ul aria-label="Post Navigation List" class="aside-post-navigation" id="post-navigation-list"></ul>
 
