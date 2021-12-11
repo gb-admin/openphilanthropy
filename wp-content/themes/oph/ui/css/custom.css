@@ -131,3 +131,17 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
   font-weight: 400;
   flex-shrink: 0;
 }
+
+/* Chad Bugherd Task #243 */
+.search-no-results .page-header.page-header--search {
+  min-height: auto;
+}
+
+.search-no-results .content-search-results .page-header {
+  padding: 0;
+  min-height: auto;
+}
+
+.search-no-results #search-input {
+  width: 75%;
+}
