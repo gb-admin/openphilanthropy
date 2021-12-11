@@ -53,6 +53,10 @@ require get_template_directory() . '/inc/shortcode.php';
 require get_template_directory() . '/inc/sanitize-functions.php';
 require get_template_directory() . '/inc/metabox.php';
 require get_template_directory() . '/inc/helper-functions.php';
+require get_template_directory() . '/inc/grants_db.php';
+
+// Used for data migration
+include get_template_directory() . '/inc/onetime-script.php';
 
 function custom_search_template( $template ) {
   global $wp_query;
