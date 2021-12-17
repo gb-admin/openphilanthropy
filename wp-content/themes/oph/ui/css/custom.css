@@ -145,3 +145,19 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
 .search-no-results #search-input {
   width: 75%;
 }
+
+/* .content-single .entry-footnotes p {
+  color: #000; 
+  font-size: 12px;
+  line-height: 22px; 
+}
+
+.content-single .entry-footnotes p a.footnote-label {
+  font-size: 10px;
+  vertical-align: top;
+} */
+
+div.page-header {
+  height: 300px; 
+  max-height: 300px; 
+}
