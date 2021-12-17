@@ -201,7 +201,10 @@
 
 				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
-					<a class="button" href="<?php echo home_url() . '/grants/download-spreadsheet/' ?>">Download Spreadsheet</a>
+					<form action="<?php echo home_url() . '/grants/download-spreadsheet/' ?>" method="post">
+						<input type="hidden" name="grants_query" value="<?php echo base64_encode( serialize( $args['grants_query'] ) ); ?>" />
+						<input type="submit" class="button" value="Download Spreadsheet" />
+					</form>
 				</div>
 				<?php endif; ?>
 			</nav>

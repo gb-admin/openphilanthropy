@@ -162,12 +162,6 @@
 	) );
 
 	$grants_posts = $grants->posts;
-
-	// If session has not been started start session
-	if ( ! session_id() ) {
-		session_start();
-		$_SESSION['grants_query'] = $grants;
-	}
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -178,7 +172,7 @@
 	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
-		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants' ) ); ?>
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants', 'grants_query' => $grants ) ); ?>
 
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 

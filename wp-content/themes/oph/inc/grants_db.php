@@ -22,11 +22,10 @@ function oph_db_grants_download_spreadsheet() {
 	$filename = "grants_db.csv";
 
 	if (isset($wp_query->query_vars['download']) && $wp_query->query_vars['download'] == 'spreadsheet') {
-		if ( !session_id() ) session_start();
+		if ( !isset($_POST['grants_query']) ) exit("No data to download");
 
-		if ( !isset($_SESSION['grants_query']) ) exit("No data to download");
-
-		$grants_posts = $_SESSION['grants_query']->posts;
+		$grants_query = unserialize(base64_decode($_POST['grants_query']));
+		$grants_posts = $grants_query->posts;
 
 		$file = create_csv($grants_posts);
 		header('Content-Type: text/csv');
