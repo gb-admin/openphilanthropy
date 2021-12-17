@@ -30,7 +30,6 @@
 ?>
 
 <?php if ( $terms_content_type || $terms_focus_area ) : ?>
-<<<<<<< HEAD
 	<div class="single-header-categories" id="categories">
 		<div class="wrap">
 			<div class="single-header-categories__content">
@@ -52,29 +51,6 @@
 									</li>
 								<?php endforeach; ?>
 							<?php endif; ?>
-=======
-    <div class="single-header-categories" id="categories">
-        <div class="wrap">
-            <div class="single-header-categories__content">
-                <nav aria-label="Post Categories List">
-                    <ul id="single-header-categories-list">
-                        <?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
-                            <?php foreach ( $terms_focus_area as $term ) : ?>
-                                <li>
-                                    <a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Portfolio Area: <?php echo $term->name; ?></a>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-
-                        <?php if ( $post_type == 'grants' ) : ?>
-                            <?php if ( $terms_organization_name && ! is_wp_error( $terms_organization_name ) ) : ?>
-                                <?php foreach ( $terms_organization_name as $term ) : ?>
-                                    <li>
-                                        <a href="/<?php echo $post_type; ?>?organization-name=<?php echo $term->slug; ?>">Organization Name: <?php echo $term->name; ?></a>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
->>>>>>> c570a3ebfc8bf9f557aca01601625107de574f3a
 
 							<?php if ( $grant_amount ) : ?>
 								<li>
@@ -82,7 +58,6 @@
 								</li>
 							<?php endif; ?>
 
-<<<<<<< HEAD
 							<?php if ( $award_date ) : ?>
 								<li>
 									<p>Award Date: <?php echo $award_date; ?></p>
@@ -103,25 +78,3 @@
 		</div>
 	</div>
 <?php endif; ?>
-=======
-                            <?php if ( $award_date ) : ?>
-                                <li>
-                                    <p>Award Date: <?php echo $award_date; ?></p>
-                                </li>
-                            <?php endif; ?>
-                        <?php elseif ( $post_type == 'research' ) : ?>
-                            <?php if ( $terms_content_type && ! is_wp_error( $terms_content_type ) ) : ?>
-                                <?php foreach ( $terms_content_type as $term ) : ?>
-                                    <li>
-                                        <a href="/<?php echo $post_type; ?>?content-type=<?php echo $term->slug; ?>">Content Type: <?php echo $term->name; ?></a>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
->>>>>>> c570a3ebfc8bf9f557aca01601625107de574f3a
