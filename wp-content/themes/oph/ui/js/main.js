@@ -995,42 +995,139 @@ jQuery(function($) {
     }
   });
 
-  /**
-   * Apply header id's.
-   */
+  // Create Table of Contents 
   $(document).ready(function() {
-    var headersIds = $('.content-single .entry-content h2, .content-single .entry-content h3');
-    var headersIdsList = $('.content-single .aside-post-navigation ul');
-    var headersIdsListMobile = $('.aside-post-navigation-mobile select');
-	var sidebarNavigationHeader = $(".content-single__aside > h3");
 
-    // [Optional] Icon that will clone and append
-    var headersIdsIcon = $('.aside-post-navigation-icon');
+    var alpha, postNav, mobilePostNav, tocHeader, sources;
 
-    headersIds.each(function() {
-      var headersIdsText = $(this).text().toLowerCase().replace(/\s+/g, '-').replace(/[^0-9a-z-]/gi, '');
+    alpha = $('.content-single .entry-content h2'); 
+    postNav = $('.content-single .aside-post-navigation ul');
+    mobilePostNav = $('.aside-post-navigation-mobile select');
+    tocHeader = $(".content-single__aside > h3"); 
 
-      if (! $(this).attr('id')) {
-        $(this).addClass('header-anchor').attr('id', headersIdsText);
+    // log to the console for me 
+    function logme(data) {
+      console.log(data);
+    } 
+
+    // generate the anchor links
+    function anchorsMade(item, type) {
+      var anchorsText = $(item).text().toLowerCase().replace(/\s+/g, '-').replace(/[^0-9a-z-]/gi, ''); 
+      anchorsAway(item, anchorsText, type); 
+    } 
+
+    // apply anchor links
+    function anchorsAway(item, anchor, type) {
+      if (! $(item).attr('id')) {
+        $(item).addClass(type).attr('id', anchor); 
+      } else {
+        $(item).addClass(type); 
       }
-    });
+      sortTopLevel(item); 
+    } 
 
-    $('.header-anchor').each(function() {
-      headersIdsList.append($('<li><a data-goto="#' + $(this).attr('id') + '" href="#' + $(this).attr('id') + '"><span>' + $(this).text() + '</span></a></li>'));
-      headersIdsListMobile.append($('<option value="' + $(this).attr('id') + '">' + $(this).text() + '</option>'));
-    });
+    // sort for top-level nav items 
+    function sortTopLevel(item) {
+      if ( $(item).is('h2') ) {
+        genTop(item); 
+      } else {
+        sortSubLevel(item);
+      }
+    }
 
-	// Hide Navigation title if there are not sub-headings
-	if ( $('.header-anchor').length ) {
-		sidebarNavigationHeader.show();
-	}
+    // get sub-level 
+    function sortSubLevel(item) {
+      var content, treeGroup, subTree, subLevel, surLevel;
+      content = $(item).text().replace(/\./gi, "-"); 
+      treeGroup = content.split(' '); 
+      subTree = treeGroup[0]; 
+      subLevel = subTree.slice(-1); 
+      surLevel = subTree.slice(0, -2); 
 
-    if (headersIdsIcon && headersIdsIcon.length) {
-      headersIdsList.children('li').children('a').each(function() {
-        var headersIdsIconClone = headersIdsIcon.clone();
+      logme(subTree.length);
 
-        $(this).append(headersIdsIconClone);
+      if ( subLevel == '1' ) { 
+        if ( subTree.length > 3 ) {
+          genList(item, surLevel, true); 
+        } else {
+          genList(item, surLevel); 
+        }
+      } else {
+        getList(item, subTree); 
+      }
+    }
+
+    // create new sublist 
+    function genList(item, subTree, dig = false) {
+      logme('Running genList()'); 
+      var lastItem, newID, newList; 
+      newID = 'tree-' + subTree;
+      newList = '<ul id="' + newID +'" class="subtree"></ul>'; 
+
+      if ( dig ) {
+        lastItem = $(postNav).children('li').last().children('ul').last().children('li').last(); 
+      } else {
+        lastItem = $(postNav).children('li').last(); 
+        if ( ! lastItem.hasClass('tree') ) {
+          lastItem.addClass('tree'); 
+        }
+      }
+
+      $(lastItem).append(newList); 
+      genItem(item, newID); 
+    }
+
+    // get current sublist 
+    function getList(item, subTree) {
+      logme('Running getList()'); 
+      var listID = 'tree-' + subTree.slice(0, -2); 
+      logme('subTree: ' + subTree)
+      logme('listID: ' + listID); 
+      genItem(item, listID); 
+    }
+
+    // generate list item 
+    function genItem(item, itemID) { 
+      logme('Running genItem()'); 
+      var itemList = 'ul#' + itemID; 
+      logme(itemList); 
+      $(itemList).append($('<li><a data-goto="#' + $(item).attr('id') + '" href="#' + $(item).attr('id') + '"><span>' + $(item).text() + '</span></a></li>')); 
+    }
+
+    // create top-level list items 
+    function genTop(item) {
+      postNav.append($('<li><div class="treetop"><a data-goto="#' + $(item).attr('id') + '" href="#' + $(item).attr('id') + '"><span>' + $(item).text() + '</span></a><span class="foliage"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span></div></li>')); 
+      mobilePostNav.append($('<option value="' + $(item).attr('id') + '">' + $(item).text() + '</option>'));
+    }
+
+    // for each alpha, find every beta 
+    $(alpha).each(function(){ 
+      var content, beta; 
+      
+      content = $(this).text(); 
+
+      if ( content.endsWith('Sources') ) {
+        logme('Found the Sources.');
+      }
+
+      anchorsMade(this, 'header-anchor');
+      logme(this); 
+
+      beta = $(this).nextUntil(alpha, 'h4'); 
+
+      $(beta).each(function(){ 
+        var val = $(this).text();
+
+        if( val.match(/^\d/)){ 
+          anchorsMade(this, 'sub-anchor');
+          logme(this);
+        }
       });
+    });
+
+    // Hide Navigation title if there are not sub-headings
+    if ( $('.header-anchor').length ) {
+      tocHeader.show();
     }
   });
 
@@ -1057,6 +1154,21 @@ jQuery(function($) {
       appendParent.append($('<span class="keep-together">&nbsp;<a class="bucket-description-link" href="' + bucketDescriptionHref + '"></a></span>'));
 
       $(this).find('.bucket-description-link').append(bucketDescriptionIcon);
+    });
+  });
+
+  // Show ToC Subtrees 
+  $(document).ready(function(){
+    var pollinator = $('span.foliage'); 
+
+    $(pollinator).click(function() { 
+      var trunk = $(this).closest('.tree'); 
+
+      if ( $(trunk).hasClass('bloomed') ) {
+        $(trunk).removeClass('bloomed');  
+      } else {
+        $(trunk).addClass('bloomed');
+      }
     });
   });
 

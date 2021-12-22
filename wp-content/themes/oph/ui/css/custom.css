@@ -161,3 +161,75 @@ div.page-header {
   height: 300px; 
   max-height: 300px; 
 }
+
+.aside-post-navigation li,
+.aside-post-navigation li:last-child {
+  
+}
+
+.aside-post-navigation li a {
+  color: #445277; 
+  display: block; 
+  font-size: 16px; 
+  font-weight: 800; 
+  line-height: 22px; 
+  margin: 0 0 12px 0; 
+  padding: 0; 
+}
+.aside-post-navigation li a:hover,
+.aside-post-navigation li a:focus {
+  text-decoration: underline; 
+}
+
+.aside-post-navigation li div.treetop {
+  position: relative; 
+  width: 100%; 
+}
+.aside-post-navigation li div.treetop span.foliage {
+  display: none; 
+  position: absolute; 
+  top: 2px; 
+  right: -16px; 
+  z-index: 10;
+}
+.aside-post-navigation li.tree div.treetop span.foliage {
+  align-items: center; 
+  display: flex; 
+  height: auto; 
+  justify-content: center; 
+  padding: 4px; 
+  transform: rotate(180deg); 
+  width: 22px; 
+}
+.aside-post-navigation li.tree.bloomed div.treetop span.foliage {
+  transform: rotate(0deg); 
+}
+.aside-post-navigation li div.treetop span.foliage svg {
+  height: auto; 
+  margin: 0; 
+  position: static; 
+  width: 100%; 
+}
+.aside-post-navigation li div.treetop span.foliage svg.cls-1 { 
+  fill:#6e7ca0; 
+}
+
+.aside-post-navigation li.tree ul.subtree {
+  height: 0; 
+  overflow: hidden; 
+  padding: 0 0 0 12px; 
+}
+
+.aside-post-navigation li.tree.bloomed ul.subtree {
+  height: auto; 
+}
+
+.aside-post-navigation ul.subtree li a {
+  color: #000000; 
+  font-weight: 400; 
+}
+
+.aside-post-navigation a::before {
+  content: none; 
+  display: none; 
+}
