@@ -164,7 +164,7 @@ div.page-header {
 
 .aside-post-navigation li,
 .aside-post-navigation li:last-child {
-  
+  margin-bottom: 0; 
 }
 
 .aside-post-navigation li a {
