@@ -1100,20 +1100,13 @@ jQuery(function($) {
       mobilePostNav.append($('<option value="' + $(item).attr('id') + '">' + $(item).text() + '</option>'));
     }
 
-    // for each alpha, find every beta 
+    // get each alpha, all betas, and begin navgen 
     $(alpha).each(function(){ 
-      var content, beta; 
       
-      content = $(this).text(); 
-
-      if ( content.endsWith('Sources') ) {
-        logme('Found the Sources.');
-      }
-
       anchorsMade(this, 'header-anchor');
       logme(this); 
 
-      beta = $(this).nextUntil(alpha, 'h4'); 
+      var beta = $(this).nextUntil(alpha, 'h4'); 
 
       $(beta).each(function(){ 
         var val = $(this).text();
@@ -1129,6 +1122,66 @@ jQuery(function($) {
     if ( $('.header-anchor').length ) {
       tocHeader.show();
     }
+  });
+
+  // Show ToC Subtrees 
+  // CSS class 'bloomed' toggles element height
+  $(document).ready(function(){
+    var pollinator = $('span.foliage'); 
+
+    $(pollinator).click(function() { 
+      var trunk = $(this).closest('.tree'); 
+
+      if ( $(trunk).hasClass('bloomed') ) {
+        $(trunk).removeClass('bloomed');  
+      } else {
+        $(trunk).addClass('bloomed');
+      }
+    });
+  });
+
+  // Create 'Sources' Toggle 
+  // Finds 'Sources' section in the_content() 
+  $(document).ready(function(){
+    var headings, sourceWrap, wrapContent, expandWrap; 
+    headings = $('.content-single .entry-content h2'); 
+    wrapContent = '<div class="source-wrap"></div>'; 
+    expandWrap = '<span class="source-expand">Expand <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span>';
+    
+    $(headings).each(function(){ 
+      var content = $(this).text(); 
+
+      if ( content.endsWith('Sources') ) {
+        console.log('Found the Sources: '); 
+        var sourceEnds, sourceList; 
+        sourceEnds = $('h2, div'); 
+
+        $(this).append(expandWrap); 
+        $(this).after(wrapContent); 
+
+        sourceWrap = $('.source-wrap'); 
+        
+        sourceList = $(sourceWrap).nextUntil(sourceEnds, 'p'); 
+        $(sourceList).each(function(){
+          $(this).appendTo(sourceWrap); 
+        });
+      }
+    });
+  });
+
+  // Reveal Sources on click 
+  $(document).ready(function(){
+    var pulley, curtain; 
+    pulley = $('.entry-content h2[id$="sources"] span.source-expand'); 
+    curtain = $(pulley).parent('h2'); 
+
+    $(pulley).click(function(){
+      if ( $(curtain).hasClass('revealed') ) {
+        $(curtain).removeClass('revealed');  
+      } else {
+        $(curtain).addClass('revealed');
+      }
+    });
   });
 
   /**
@@ -1154,21 +1207,6 @@ jQuery(function($) {
       appendParent.append($('<span class="keep-together">&nbsp;<a class="bucket-description-link" href="' + bucketDescriptionHref + '"></a></span>'));
 
       $(this).find('.bucket-description-link').append(bucketDescriptionIcon);
-    });
-  });
-
-  // Show ToC Subtrees 
-  $(document).ready(function(){
-    var pollinator = $('span.foliage'); 
-
-    $(pollinator).click(function() { 
-      var trunk = $(this).closest('.tree'); 
-
-      if ( $(trunk).hasClass('bloomed') ) {
-        $(trunk).removeClass('bloomed');  
-      } else {
-        $(trunk).addClass('bloomed');
-      }
     });
   });
 

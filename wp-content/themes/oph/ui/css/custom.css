@@ -210,8 +210,8 @@ div.page-header {
   position: static; 
   width: 100%; 
 }
-.aside-post-navigation li div.treetop span.foliage svg.cls-1 { 
-  fill:#6e7ca0; 
+.aside-post-navigation li div.treetop span.foliage svg .cls-1 { 
+  fill:#445277; 
 }
 
 .aside-post-navigation li.tree ul.subtree {
@@ -232,4 +232,47 @@ div.page-header {
 .aside-post-navigation a::before {
   content: none; 
   display: none; 
+}
+
+.entry-content h2[id$="sources"] {
+  position: relative;
+} 
+.entry-content h2[id$="sources"] span.source-expand {
+  align-items: center; 
+  cursor: default; 
+  display: flex; 
+  flex-wrap: nowrap; 
+  font-size: 16px; 
+  font-weight: 800; 
+  height: 25px; 
+  justify-content: flex-end; 
+  position: absolute; 
+  right: 0; 
+  text-align: right; 
+  top: calc(50% - 12.5px); 
+}
+.entry-content h2[id$="sources"] span.source-expand:hover,
+.entry-content h2[id$="sources"] span.source-expand:focus {
+  color: #6e7ca0; 
+}
+.entry-content h2[id$="sources"] span.source-expand svg {
+  height: 25px; 
+  margin-left: 8px; 
+  padding: 0 6px; 
+  transform: rotate(180deg); 
+  width: 25px; 
+}
+.entry-content h2[id$="sources"].revealed span.source-expand svg {
+  transform: rotate(0deg);
+}
+.entry-content h2[id$="sources"] span.source-expand svg .cls-1{
+  fill:#445277; 
+}
+
+.entry-content h2[id$="sources"] + .source-wrap {
+  height: 0; 
+  overflow: hidden; 
+}
+.entry-content h2[id$="sources"].revealed + .source-wrap {
+  height: auto; 
 }
