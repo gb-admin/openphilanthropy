@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_61c3689a2ec2f",
-            "label": "Table of Contents",
+            "label": "Important Info",
             "name": "",
             "type": "message",
             "instructions": "",
@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<p style=\"font-size:16px;margin:0;padding:0;\">The Table of Contents will be automatically generated from the content below.  Top-level headings should all be styled as <span style=\"font-family:monospace;\">h2<\/span>, and all subsequent levels of headings should be styled as <span style=\"font-family:monospace;\">h4<\/span>.<\/p>",
+            "message": "<p style=\"margin:0;padding:0;\">The Table of Contents will be automatically generated from the post content.<\/p>\r\n<ul style=\"list-style:disc;margin-left:24px;margin-bottom:0;\">\r\n<li>Top-level headings must all be styled as <span style=\"font-family:monospace;\">h2<\/span>.<\/li>\r\n<li>All subsequent levels of headings must be styled as <span style=\"font-family:monospace;\">h4<\/span>, and <span style=\"text-decoration:underline;\">must begin<\/span> with a number.<\/li>\r\n<\/ul>",
             "new_lines": "",
             "esc_html": 0
         }
@@ -36,6 +36,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "",
-    "modified": 1640196298
+    "description": "Explainer text for Table of Contents generation.",
+    "modified": 1641235264
 }
