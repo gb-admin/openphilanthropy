@@ -12,6 +12,7 @@
 
 	$focus_areas = get_field( 'focus_areas' );
 	$focus_areas_content = get_field( 'focus_areas_content' );
+	$focus_areas_title = get_field( 'focus_areas_title' );
 
 	$other_links = get_field( 'other_links' );
 	$other_links_title = get_field( 'other_links_title' );
@@ -56,6 +57,12 @@
 						</div>
 					</div>
 				<?php endif; ?>
+
+				<?php if ( $focus_areas_title ) : ?> 
+					<div class="line-heading"> 
+						<h2><?php echo $focus_areas_title; ?></h2> 
+					</div> 
+				<?php endif; ?> 
 
 				<ul class="list-4-col" data-arrows-small="true">
 					<?php foreach ( $focus_areas as $i ) : ?>

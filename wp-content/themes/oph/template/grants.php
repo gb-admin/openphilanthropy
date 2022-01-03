@@ -162,63 +162,6 @@
 	) );
 
 	$grants_posts = $grants->posts;
-
-	/**
-	 * Export data to CSV.
-	 */
-	$file = fopen( get_stylesheet_directory() . '/grants_db.csv', 'w' );
-
-	fputcsv( $file, array( 'Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date' ) );
-
-	$csv = [];
-
-	foreach ( $grants_posts as $i ) {
-		$post_grant_amount = get_field( 'grant_amount', $i->ID );
-		$post_grant_date = get_the_date( 'm/Y' );
-		$post_grant_focus_area = get_the_terms( $i->ID, 'focus-area' );
-		$post_grant_organization_name = get_the_terms( $i->ID, 'organization-name' );
-		$post_grant_title = get_the_title( $i->ID );
-
-		if ( $post_grant_amount ) {
-			$post_grant_amount = '$' . number_format( $post_grant_amount );
-		} else {
-			$post_grant_amount = '';
-		}
-
-		if ( $post_grant_date ) {
-			$post_grant_date = ltrim( $post_grant_date, '0' );
-		} else {
-			$post_grant_date = '';
-		}
-
-		if ( $post_grant_focus_area && ! is_wp_error( $post_grant_focus_area ) && isset( $post_grant_focus_area[0] ) ) {
-			if ( isset( $post_grant_focus_area[0]->name ) ) {
-				$post_grant_focus_area = $post_grant_focus_area[0]->name;
-			}
-		} else {
-			$post_grant_focus_area = '';
-		}
-
-		if ( $post_grant_organization_name && ! is_wp_error( $post_grant_organization_name ) && isset( $post_grant_organization_name[0] ) ) {
-			if ( isset( $post_grant_organization_name[0]->name ) ) {
-				$post_grant_organization_name = $post_grant_organization_name[0]->name;
-			}
-		} else {
-			$post_grant_organization_name = '';
-		}
-
-		if ( $post_grant_title ) {
-			$line = [ $post_grant_title, $post_grant_organization_name, $post_grant_focus_area, $post_grant_amount, $post_grant_date ];
-
-			array_push( $csv, $line );
-		}
-	}
-
-	foreach ( $csv as $row ) {
-		fputcsv( $file, $row );
-	}
-
-	fclose( $file );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -229,7 +172,7 @@
 	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
-		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants' ) ); ?>
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants', 'grants_query' => $grants ) ); ?>
 
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 

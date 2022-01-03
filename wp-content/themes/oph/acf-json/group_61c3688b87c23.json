@@ -1,0 +1,41 @@
+{
+    "key": "group_61c3688b87c23",
+    "title": "ToC Helper",
+    "fields": [
+        {
+            "key": "field_61c3689a2ec2f",
+            "label": "Table of Contents",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p style=\"font-size:16px;margin:0;padding:0;\">The Table of Contents will be automatically generated from the content below.  Top-level headings should all be styled as <span style=\"font-family:monospace;\">h2<\/span>, and all subsequent levels of headings should be styled as <span style=\"font-family:monospace;\">h4<\/span>.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "research"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1640196298
+}

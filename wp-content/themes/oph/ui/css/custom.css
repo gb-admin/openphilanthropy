@@ -98,11 +98,12 @@
 
 /* Homepage Highlighted Grants */ 
 .bucket-image__bg { 
-  border-radius: 50%; 
-  display: inline-block; 
-  padding: 1.75rem; 
-  padding-right: calc(1.75rem - 4px); 
-  padding-top: calc(1.75rem - 4px); 
+  /* background-color: #6e7ca0; */
+  /* border-radius: 50%; */
+  display: inline-block;
+  padding: 1.75rem;
+  padding-right: calc(1.75rem - 4px);
+  padding-top: calc(1.75rem - 4px);
 }
 
 /* Grant's page */
@@ -115,9 +116,6 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
     border-bottom: 1px solid #969eb1;
     padding: 1rem 0;
     margin-bottom: 1rem;
-	font-size: 16px;
-	font-style: italic;
-	line-height: 22px;
 }
 
 .grant-intro p {
@@ -132,4 +130,149 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
   font-size: 16px;
   font-weight: 400;
   flex-shrink: 0;
+}
+
+/* Chad Bugherd Task #243 */
+.search-no-results .page-header.page-header--search {
+  min-height: auto;
+}
+
+.search-no-results .content-search-results .page-header {
+  padding: 0;
+  min-height: auto;
+}
+
+.search-no-results #search-input {
+  width: 75%;
+}
+
+/* .content-single .entry-footnotes p {
+  color: #000; 
+  font-size: 12px;
+  line-height: 22px; 
+}
+
+.content-single .entry-footnotes p a.footnote-label {
+  font-size: 10px;
+  vertical-align: top;
+} */
+
+div.page-header {
+  height: 300px; 
+  max-height: 300px; 
+}
+
+.aside-post-navigation li,
+.aside-post-navigation li:last-child {
+  margin-bottom: 0; 
+}
+
+.aside-post-navigation li a {
+  color: #445277; 
+  display: block; 
+  font-size: 16px; 
+  font-weight: 800; 
+  line-height: 22px; 
+  margin: 0 0 12px 0; 
+  padding: 0; 
+}
+.aside-post-navigation li a:hover,
+.aside-post-navigation li a:focus {
+  text-decoration: underline; 
+}
+
+.aside-post-navigation li div.treetop {
+  position: relative; 
+  width: 100%; 
+}
+.aside-post-navigation li div.treetop span.foliage {
+  display: none; 
+  position: absolute; 
+  top: 2px; 
+  right: -16px; 
+  z-index: 10;
+}
+.aside-post-navigation li.tree div.treetop span.foliage {
+  align-items: center; 
+  display: flex; 
+  height: auto; 
+  justify-content: center; 
+  padding: 4px; 
+  transform: rotate(180deg); 
+  width: 22px; 
+}
+.aside-post-navigation li.tree.bloomed div.treetop span.foliage {
+  transform: rotate(0deg); 
+}
+.aside-post-navigation li div.treetop span.foliage svg {
+  height: auto; 
+  margin: 0; 
+  position: static; 
+  width: 100%; 
+}
+.aside-post-navigation li div.treetop span.foliage svg .cls-1 { 
+  fill:#445277; 
+}
+
+.aside-post-navigation li.tree ul.subtree {
+  height: 0; 
+  overflow: hidden; 
+  padding: 0 0 0 12px; 
+}
+
+.aside-post-navigation li.tree.bloomed ul.subtree {
+  height: auto; 
+}
+
+.aside-post-navigation ul.subtree li a {
+  color: #000000; 
+  font-weight: 400; 
+}
+
+.aside-post-navigation a::before {
+  content: none; 
+  display: none; 
+}
+
+.entry-content h2[id$="sources"] {
+  position: relative;
+} 
+.entry-content h2[id$="sources"] span.source-expand {
+  align-items: center; 
+  cursor: default; 
+  display: flex; 
+  flex-wrap: nowrap; 
+  font-size: 16px; 
+  font-weight: 800; 
+  height: 25px; 
+  justify-content: flex-end; 
+  position: absolute; 
+  right: 0; 
+  text-align: right; 
+  top: calc(50% - 12.5px); 
+}
+.entry-content h2[id$="sources"] span.source-expand:hover,
+.entry-content h2[id$="sources"] span.source-expand:focus {
+  color: #6e7ca0; 
+}
+.entry-content h2[id$="sources"] span.source-expand svg {
+  height: 25px; 
+  margin-left: 8px; 
+  padding: 0 6px; 
+  transform: rotate(180deg); 
+  width: 25px; 
+}
+.entry-content h2[id$="sources"].revealed span.source-expand svg {
+  transform: rotate(0deg);
+}
+.entry-content h2[id$="sources"] span.source-expand svg .cls-1{
+  fill:#445277; 
+}
+
+.entry-content h2[id$="sources"] + .source-wrap {
+  height: 0; 
+  overflow: hidden; 
+}
+.entry-content h2[id$="sources"].revealed + .source-wrap {
+  height: auto; 
 }

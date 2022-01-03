@@ -12,13 +12,13 @@
 							<div class="footer-grid__cell footer-cell-logo">
 								<div class="logo">
 									<a href="/">
-										<img src="<?php echo get_template_directory_uri() . '/ui/img/open-philanthropy-footer-logo.png'; ?>" alt="Open Philanthropy">
+										<img src="<?php echo get_template_directory_uri() . '/ui/img/open-philanthropy-footer-logo.svg'; ?>" alt="Open Philanthropy">
 									</a>
 								</div>
 
 								<div class="logo-mobile">
 									<a href="/">
-										<img src="<?php echo get_template_directory_uri() . '/ui/img/open-philanthropy-footer-mobile-logo.png'; ?>" alt="Open Philanthropy">
+										<img src="<?php echo get_template_directory_uri() . '/ui/img/open-philanthropy-footer-mobile-logo.svg'; ?>" alt="Open Philanthropy">
 									</a>
 								</div>
 							</div>
