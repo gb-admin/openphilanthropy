@@ -289,3 +289,7 @@ button.button-view-list {
 .content-team__copy {
   margin: 24px 0; 
 }
+
+table.table-imported {
+  table-layout: auto; 
+}
