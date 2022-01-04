@@ -284,4 +284,8 @@ button.button-view-list {
   button.button-view-list {
     display: flex !important; 
   } 
+} 
+
+.content-team__copy {
+  margin: 24px 0; 
 }
