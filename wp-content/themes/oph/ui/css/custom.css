@@ -276,3 +276,12 @@ div.page-header {
 .entry-content h2[id$="sources"].revealed + .source-wrap {
   height: auto; 
 }
+
+button.button-view-list {
+  display: none !important; 
+}
+@media screen and (min-width: 650px) {
+  button.button-view-list {
+    display: flex !important; 
+  } 
+}
