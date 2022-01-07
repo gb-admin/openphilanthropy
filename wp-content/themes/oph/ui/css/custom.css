@@ -332,3 +332,5 @@ table.table-imported {
     height: calc(100vh - 138px); 
   }
 }
+
+body { overflow-x: hidden; } 
