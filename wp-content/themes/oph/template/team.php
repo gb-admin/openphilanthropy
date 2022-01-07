@@ -53,6 +53,9 @@
 				</ul>
 			<?php endif; ?>
 		</div>
+		<div class="content-team__copy">
+			<?php the_content(); ?> 
+		</div>
 	</div>
 </div>
 

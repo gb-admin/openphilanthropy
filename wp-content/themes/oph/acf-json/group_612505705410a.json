@@ -1,0 +1,55 @@
+{
+    "key": "group_612505705410a",
+    "title": "Post Social Share",
+    "fields": [
+        {
+            "key": "field_61250585fd9fd",
+            "label": "Social Share",
+            "name": "social_share",
+            "type": "radio",
+            "instructions": "Toggle visibility of the social share icons",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "show": "Show",
+                "hide": "Hide"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "show",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "grants"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "research"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1641234365
+}
