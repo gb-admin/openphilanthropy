@@ -293,3 +293,42 @@ button.button-view-list {
 table.table-imported {
   table-layout: auto; 
 }
+
+@media screen and (min-width: 768px) {
+  .content-single .content-single__aside {
+    height: calc(100vh - 110px); 
+    max-width: 320px; 
+    min-width: 250px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    padding-bottom: 32px; 
+    padding-right: 18px; 
+    width: 33%; 
+  }
+
+  /* width */
+  .content-single .content-single__aside::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  .content-single .content-single__aside::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  /* Handle */
+  .content-single .content-single__aside::-webkit-scrollbar-thumb {
+    background: #f1f1f1; 
+    border-radius: 2px; 
+  }
+
+  /* Handle on hover */
+  .content-single .content-single__aside::-webkit-scrollbar-thumb:hover {
+    background: #cdd2de; 
+  }
+}
+@media screen and (min-width: 1024px) {  
+  .content-single .content-single__aside {
+    height: calc(100vh - 138px); 
+  }
+}
