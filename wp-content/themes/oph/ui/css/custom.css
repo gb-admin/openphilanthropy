@@ -377,3 +377,17 @@ table.table-imported {
   margin-right: auto !important; 
   margin-top: 18px !important; 
 }
+
+#footer .footer-cell-address h6 {
+  font-size: 14px; 
+  line-height: 16px; 
+  margin-top: 12px; 
+}
+#footer .footer-cell-address h6:first-child {
+  margin-top: 0; 
+}
+#footer .footer-cell-address a,
+#footer .footer-cell-address address {
+  font-size: 16px; 
+  line-height: 20px; 
+}
