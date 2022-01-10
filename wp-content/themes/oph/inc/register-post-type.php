@@ -147,7 +147,7 @@ function post_type_research() {
 		'hierarchical'       => false,
 		'menu_icon'          => 'dashicons-index-card',
 		'menu_position'      => null,
-		'supports'           => array( 'author', 'editor', 'excerpt', 'revisions', 'title' )
+		'supports'           => array( 'author', 'editor', 'excerpt', 'revisions', 'title', 'thumbnail' )
 	);
 
 	register_post_type( 'research', $args );
