@@ -52,6 +52,10 @@
 								<h6>Media Inquiries</h6>
 
 								<a href="mailto:media@openphilanthropy.org">media@openphilanthropy.org</a>
+								
+								<h6>Anonymous Feedback</h6>
+
+								<a href="https://forms.gle/yRDgkvNAM5pKQWH48">Feedback Form</a>
 							</div>
 
 							<div class="footer-grid__cell footer-cell-social">
