@@ -332,3 +332,41 @@ table.table-imported {
     height: calc(100vh - 138px); 
   }
 }
+
+.entry-content a {
+  color: #6e7ca0; 
+  text-decoration: none; 
+}
+.entry-content a:hover, 
+.entry-content a:focus {
+  color: #445277;
+}
+
+.entry-content a.see-footnote {
+  font-size: 75%; 
+  font-weight: 400; 
+  line-height: 100%; 
+  margin-left: 2px; 
+  vertical-align: text-top; 
+}
+
+.content-single .entry-footnotes .footnotes p {
+  font-size: 12px; 
+  line-height: 22px; 
+}
+.content-single .entry-footnotes .footnotes p a.footnote-label {
+  font-size: 85%; 
+  font-weight: 400; 
+  line-height: 100%; 
+  margin-right: 4px; 
+  vertical-align: text-top; 
+}
+
+.content-single .entry-footnotes a.source-definition {
+  color: #6e7ca0; 
+  text-decoration: none; 
+}
+.content-single .entry-footnotes a.source-definition:hover,
+.content-single .entry-footnotes a.source-definition:focus {
+  color: #445277;
+}
