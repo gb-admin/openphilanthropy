@@ -370,3 +370,10 @@ table.table-imported {
 .content-single .entry-footnotes a.source-definition:focus {
   color: #445277;
 }
+
+.content-single .entry-content figure {
+  margin-bottom: 18px !important; 
+  margin-left: auto !important; 
+  margin-right: auto !important; 
+  margin-top: 18px !important; 
+}
