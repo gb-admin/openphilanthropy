@@ -134,7 +134,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "template\/basic-text-template.php"
+                "value": "template\/basic-section-template.php"
             }
         ]
     ],
@@ -146,5 +146,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636739981
+    "modified": 1641936407
 }
