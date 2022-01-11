@@ -76,10 +76,6 @@
 				<button class="button button--solid button-view-list">
 					<?php echo oph_display_type('list'); ?>
 				</button>
-			<?php else : ?>
-				<button class="button button--solid button-view-list">
-					<?php echo oph_display_type('grid'); ?>
-				</button>
 			<?php endif; ?>
 		</nav>
 	</div>
