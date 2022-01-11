@@ -391,3 +391,40 @@ table.table-imported {
   font-size: 16px; 
   line-height: 20px; 
 }
+
+.content-basic-text {
+  padding: 52px 0 80px;
+}
+@media screen and (min-width: 768px) {
+  .content-basic-text {
+    padding: 60px 0 100px;
+  }
+}
+.content-basic-text .content-basic-text__main a {
+  color: #6e7ca0; 
+  font-weight: 400; 
+  text-decoration: none; 
+}
+.content-basic-text .content-basic-text__main a:hover, 
+.content-basic-text .content-basic-text__main a:focus {
+  color: #445277;
+}
+.content-basic-text .content-basic-text__main ol, .content-basic-text .content-basic-text__main ul {
+  padding-left: 1.25rem; 
+} 
+.content-basic-text .content-basic-text__main ol > li, .content-basic-text .content-basic-text__main ul > li {
+  position: relative; 
+} 
+.content-basic-text .content-basic-text__main ol  {
+  list-style: auto; 
+} 
+.content-basic-text .content-basic-text__main ul > li::before  {
+  content: "\2022";
+  margin-right: 12px;
+  width: 8px;
+  color: #000;
+  font-weight: 800;
+  display: inline-block;
+  position: absolute; 
+  left: -1.25rem; 
+ }
