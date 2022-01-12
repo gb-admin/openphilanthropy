@@ -134,7 +134,7 @@ h5.block-feed-post__focus-area, h5.block-feed-post__grant-amount {
 
 /* Chad Bugherd Task #243 */
 .search-no-results .page-header.page-header--search {
-  min-height: auto;
+  /* min-height: auto; */
 }
 
 .search-no-results .content-search-results .page-header {
@@ -448,4 +448,20 @@ table.table-imported {
 .content-single .entry-footnotes ol li {
   font-size: 12px; 
   line-height: 22px; 
+}
+
+.error404 .search-form-box {
+  background-color: transparent; 
+  max-width: none; 
+  padding: 0; 
+} 
+.error404 #search-input {
+  width: 75%; 
+} 
+
+.error404 .search-form input:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+  padding: 0 16px;
+  height: 40px;
+  border: 2px solid #6e7ca0;
+  border-radius: 999px;
 }
