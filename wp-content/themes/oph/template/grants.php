@@ -50,7 +50,7 @@
 	$orderby_query = 'meta_value';
 	$meta_key = 'award_date';
 	$param_amount_meta_query = '';
-	$posts_per_page = 9;
+	$posts_per_page = 25;
 	$taxonomy = '';
 
 	foreach ( $params as $key => $param ) {
