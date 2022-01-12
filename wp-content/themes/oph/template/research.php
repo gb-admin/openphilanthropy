@@ -163,7 +163,7 @@
 								<h6>Date</h6>
 
 								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
+									<?php echo get_the_date( 'F Y', $research->ID ); ?>
 								</h5>
 
 								<h6>Focus Area</h6>
