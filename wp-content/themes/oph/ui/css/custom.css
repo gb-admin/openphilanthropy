@@ -464,4 +464,22 @@ table.table-imported {
   height: 40px;
   border: 2px solid #6e7ca0;
   border-radius: 999px;
-}
+} 
+
+@media only screen and (min-width: 768px) {
+  .single-header-categories ul {
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    overflow: hidden; 
+  } 
+  .single-header-categories {
+    height: auto; 
+  } 
+} 
+.single-header-categories p {
+  margin: 0; 
+} 
+.single-header-categories .single-header-categories__content {
+  padding: 8px 0; 
+} 
