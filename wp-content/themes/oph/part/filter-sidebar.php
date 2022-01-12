@@ -201,10 +201,11 @@
 
 				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
-					<form action="<?php echo home_url() . '/grants/download-spreadsheet/' ?>" method="post">
-						<input type="hidden" name="grants_query" value="<?php echo base64_encode( serialize( $args['grants_query'] ) ); ?>" />
-						<input type="submit" class="button" value="Download Spreadsheet" />
-					</form>
+					<?php
+					  $nonce = wp_create_nonce("generate_grants_csv_nonce");
+					  $link = admin_url('admin-ajax.php?action=generate_grants&nonce='.$nonce);
+					  echo '<a class="button" data-nonce="' . $nonce . '" href="' . $link . '">Download Spreadsheet</a>';
+					?>
 				</div>
 				<?php endif; ?>
 			</nav>
