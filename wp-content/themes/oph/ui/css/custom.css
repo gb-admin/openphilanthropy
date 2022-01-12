@@ -427,4 +427,19 @@ table.table-imported {
   display: inline-block;
   position: absolute; 
   left: -1.25rem; 
- }
+}
+
+.block-feed-post__head {
+  position: relative; 
+}
+.block-feed-post__head::after {
+  box-shadow: inset 0 0 8px -3px rgb(0 0 0 / 50%); 
+  content: ""; 
+  display: block; 
+  height: 100%; 
+  left: 0; 
+  position: absolute; 
+  top: 0; 
+  width: 100%; 
+  z-index: 5; 
+}
