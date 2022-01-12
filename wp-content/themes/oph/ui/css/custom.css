@@ -442,4 +442,10 @@ table.table-imported {
   top: 0; 
   width: 100%; 
   z-index: 5; 
+} 
+
+.content-single .entry-footnotes ul li,
+.content-single .entry-footnotes ol li {
+  font-size: 12px; 
+  line-height: 22px; 
 }
