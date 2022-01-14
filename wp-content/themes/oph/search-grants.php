@@ -55,10 +55,6 @@
 						</li>
 					</ul>
 				</div>
-
-				<button class="button button--solid button-view-list">
-					<?php echo oph_display_type('grid'); ?>
-				</button>
 			</nav>
 		</div>
 	</div>
@@ -107,10 +103,6 @@
 							</li>
 						</ul>
 					</div>
-
-					<button class="button button--solid button-view-list">
-						<?php echo oph_display_type('grid'); ?>
-					</button>
 				</nav>
 			</div>
 		</div>
@@ -133,9 +125,12 @@
 						?>
 
 						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } ?>">
-							<h5 class="block-feed-post__date">
-								<?php echo get_the_date( 'F j, Y', $grants->ID ); ?>
-							</h5>
+							<?php 
+							$award_date = get_field( 'award_date' );
+							if ( $award_date ) : ?>
+								<?php $yearFilter = get_site_url(null, '/grants/?yr=', 'https') . date("Y", strtotime($award_date)); ?>
+								<h5 class="block-feed-post__date"><a href="<?php echo $yearFilter; ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
+							<?php endif; ?>
 
 							<div class="block-feed-post__head">
 								<?php if ( $post_thumbnail ) : ?>

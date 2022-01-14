@@ -218,7 +218,8 @@
 
 						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
 							<?php if ( $award_date ) : ?>
-								<h5 class="block-feed-post__date"><a href="<?php echo get_permalink(); ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
+								<?php $yearFilter = get_site_url(null, '/grants/?yr=', 'https') . date("Y", strtotime($award_date)); ?>
+								<h5 class="block-feed-post__date"><a href="<?php echo $yearFilter; ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
 							<?php endif; ?>
 
 							<div class="block-feed-post__head">

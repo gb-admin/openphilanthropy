@@ -1460,27 +1460,90 @@ jQuery(function($) {
 
   // Add class to assist the styling of dynamically imported tables
   $("body.single-research, body.single-grants").find("table:not(.table)").each(function() {
-	let $table = $(this);
-	$table.addClass("table-imported");
-	/**
-	 * Create a thead based on the following conditions:
-	 * 1. there is no thead presently
-	 * 2. The first row only has texts
-	 */
-	if ( $table.find("thead").length == 0 ) {
-		let matchConditions = true;
-		$table.find("tbody > tr:first td").each(function() {
-			if ( $(this).text() != $(this).html() ) {
-				matchConditions = false;
-				return false;
-			}
-		});
+  	let $table = $(this);
+  	$table.addClass("table-imported");
+  	/**
+  	 * Create a thead based on the following conditions:
+  	 * 1. there is no thead presently
+  	 * 2. The first row only has texts
+  	 */
+  	if ( $table.find("thead").length == 0 ) {
+  		let matchConditions = true;
+  		$table.find("tbody > tr:first td").each(function() {
+  			if ( $(this).text() != $(this).html() ) {
+  				matchConditions = false;
+  				return false;
+  			}
+  		});
 
-		if ( matchConditions === false ) return true; // skip to the next iteration
+  		if ( matchConditions === false ) return true; // skip to the next iteration
 
-		$el = $table.find("tbody > tr:first").detach();
-		let thead = $el.html().replaceAll("<td>", "<th>").replaceAll("</td>", "</th>");
-		$table.find("tbody").before("<thead>" + thead + "</thead>");
-	}
-  });
-});
+  		$el = $table.find("tbody > tr:first").detach();
+  		let thead = $el.html().replaceAll("<td>", "<th>").replaceAll("</td>", "</th>");
+  		$table.find("tbody").before("<thead>" + thead + "</thead>");
+  	}
+  }); 
+
+  /**
+   * Live Sort-by Column Header 
+   * - research.php
+   * - research-category.php
+   * 
+   */ 
+  $(document).ready(function() {
+    console.log('Filters are ready.'); 
+    
+    var filterBtn, layout, listings; 
+    // title buttons, archive block, archive results 
+    filterBtn = $('h6.feed-sorter'); 
+    layout = $('.feed-section__posts .block-feed-post--container'); 
+    listings = $('.block-feed .block-feed-post'); 
+
+    // begin filter on-click 
+    $(filterBtn).click(function(){ 
+      var filter = $(this); 
+      activateTitle(filter); 
+    }); 
+
+    function activateTitle(filter){
+      var data, dataUpp, dataStr;
+      data = $(filter).data('sort'); 
+      dataUpp = data.substr(0,1).toUpperCase()+data.substr(1); 
+      dataStr = 'sort' + dataUpp; 
+      console.log(dataStr); 
+
+      if ( filter.hasClass('sorting') ) { 
+        if ( filter.hasClass('rev') ) {
+          $(filterBtn).removeClass('rev'); 
+          sort(dataStr);
+        } else {
+          $(filter).addClass('rev'); 
+          sortRev(dataStr); 
+        }
+      } else {
+        $(filterBtn).removeClass('sorting'); 
+        $(filter).addClass('sorting'); 
+        sort(dataStr); 
+      }
+    } 
+
+    function sort(dataStr){ 
+      $(listings).sort(function(a, b) {
+        var A = $(a).data(dataStr).toUpperCase();
+        var B = $(b).data(dataStr).toUpperCase();
+        return (A < B) ? -1 : (A > B) ? 1 : 0;
+      }).appendTo(layout);
+    }
+
+    function sortRev(dataStr) {
+      $(listings).sort(function(a, b) {
+        var A = $(a).data(dataStr).toUpperCase();
+        var B = $(b).data(dataStr).toUpperCase();
+        return (A < B) ? 1 : (A > B) ? -1 : 0;
+      }).appendTo(layout);
+    }
+   }); 
+}); 
+
+
+// reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate 

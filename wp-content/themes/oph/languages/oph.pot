@@ -35,7 +35,7 @@ msgid "https://automattic.com/"
 msgstr ""
 
 #: 404.php:18
-msgid "Oops! That page can&rsquo;t be found."
+msgid "Sorry, that page cannot be found."
 msgstr ""
 
 #: 404.php:22
