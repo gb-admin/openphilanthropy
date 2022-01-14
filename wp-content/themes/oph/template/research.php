@@ -130,29 +130,41 @@
 		<div class="feed-section__posts wrap">
 			<ul class="block-feed-title-head is-research is-active">
 				<li>
-					<h6>Title</h6>
+					<h6 class="feed-sorter" data-sort="title">Title</h6>
 				</li>
 				<li>
-					<h6>Date</h6>
+					<h6 class="feed-sorter" data-sort="date">Date</h6>
 				</li>
 				<li>
-					<h6>Focus Area</h6>
+					<h6 class="feed-sorter" data-sort="focus">Focus Area</h6>
 				</li>
 				<li>
-					<h6>Content Type</h6>
+					<h6 class="feed-sorter" data-sort="content">Content Type</h6> 
 				</li>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
 				<div class="block-feed block-feed--research<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
+					<div class="block-feed-post--container">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
 							$research_content_type = get_the_terms( $post->ID, 'content-type' );
-							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$research_focus_area = get_the_terms( $post->ID, 'focus-area' ); 
+							// setting data-terms for live sorting 
+							$sortTitle = strtok( get_the_title( $post->ID ), " "); 
+							$sortDate = get_the_date( 'Y-m-d', $research->ID ); 
+							$sortFocus = ''; 
+							if ( $research_focus_area ) {
+								$sortFocus = $research_focus_area[0]->name; 
+							} 
+							$sortContent = ''; 
+							if ($research_content_type) {
+								$sortContent = $research_content_type[0]->name; 
+							} 
 						?>
 
-						<div class="block-feed-post same-height">
+						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -193,6 +205,7 @@
 							</div>
 						</div>
 					<?php endwhile; wp_reset_postdata(); ?> 
+					</div>
 					<div class="feed-footer">
 						<nav aria-label="Post Feed Pagination" class="pagination">
 
