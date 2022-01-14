@@ -298,7 +298,7 @@
 						$heading = get_sub_field( 'heading' );
 
 						if ( ! $button_text ) {
-							$button_text = 'See All Reports In This Area';
+							$button_text = 'See All Research & Updates In This Area';
 						}
 
 						$research_preview_id = [];
