@@ -590,7 +590,7 @@
 												} elseif ( $statistic == 'million-given' ) {
 													$number = $grant_amount_total;
 
-													$title = 'Millions<br> Given';
+													$title = 'Million<br> Given';
 												} elseif ( $statistic == 'portfolio-areas' ) {
 													$number = count( $grant_terms );
 
@@ -604,7 +604,11 @@
 
 										<?php if ( $number ) : ?>
 											<li class="<?php if ( strlen( $number ) > 4 ) { echo ' is-large-number'; } ?>">
-												<h4><span class="header-number"><?php echo $number; ?></span> <?php echo $title; ?></h4>
+												<h4>
+													<span class="header-number">
+														<?php if ( $statistic == 'million-given' ) { echo '$';} ?><?php echo $number; ?></span> 
+														<?php echo $title; ?> 
+												</h4>
 											</li>
 										<?php endif; ?>
 									<?php endforeach; ?>
