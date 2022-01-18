@@ -298,7 +298,7 @@
 						$heading = get_sub_field( 'heading' );
 
 						if ( ! $button_text ) {
-							$button_text = 'See All Reports In This Area';
+							$button_text = 'See All Research & Updates In This Area';
 						}
 
 						$research_preview_id = [];
@@ -590,7 +590,7 @@
 												} elseif ( $statistic == 'million-given' ) {
 													$number = $grant_amount_total;
 
-													$title = 'Millions<br> Given';
+													$title = 'Million<br> Given';
 												} elseif ( $statistic == 'portfolio-areas' ) {
 													$number = count( $grant_terms );
 
@@ -604,7 +604,11 @@
 
 										<?php if ( $number ) : ?>
 											<li class="<?php if ( strlen( $number ) > 4 ) { echo ' is-large-number'; } ?>">
-												<h4><span class="header-number"><?php echo $number; ?></span> <?php echo $title; ?></h4>
+												<h4>
+													<span class="header-number">
+														<?php if ( $statistic == 'million-given' ) { echo '$';} ?><?php echo $number; ?></span> 
+														<?php echo $title; ?> 
+												</h4>
 											</li>
 										<?php endif; ?>
 									<?php endforeach; ?>
