@@ -117,11 +117,17 @@
 						<?php
 							$post_content_type = get_the_terms( $post->ID, 'content-type' );
 							$post_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$linkExternally = get_field('externally_link'); 
+							$externalURL = get_field('external_url'); 
 						?>
 
 						<div class="block-feed-post">
 							<h4>
-								<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+								<?php if ( $linkExternally ) { ?>
+									<a href="<?php echo $externalURL; ?>"><?php the_title(); ?></a>
+								<?php } else { ?>
+									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+								<?php } ?>
 							</h4>
 
 							<h5>
