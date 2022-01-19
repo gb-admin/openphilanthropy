@@ -212,6 +212,8 @@
 								$sortFocus = $research_focus_area[0]->name; 
 							} 
 							$sortAuthor = oph_get_post_author_name(get_the_ID()); 
+							$linkExternally = get_field('externally_link'); 
+							$externalURL = get_field('external_url'); 
 						?>
 
 						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
@@ -220,8 +222,12 @@
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
-								<h4 class="block-feed-post__title">
-									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+								<h4 class="block-feed-post__title"> 
+									<?php if ( $linkExternally ) { ?>
+										<a href="<?php echo $externalURL; ?>"><?php the_title(); ?></a>
+									<?php } else { ?>
+										<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+									<?php } ?>
 								</h4>
 
 								<h6>Date</h6>
