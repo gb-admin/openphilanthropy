@@ -244,7 +244,7 @@
 							</h4>
 
 							<div class="single-related-posts__description">
-								<?php echo $related_description; ?>
+								<p><?php echo $related_description; ?></p> 
 							</div>
 
 							<div class="single-related-posts__link">

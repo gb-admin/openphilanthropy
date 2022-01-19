@@ -162,6 +162,8 @@
 							if ($research_content_type) {
 								$sortContent = $research_content_type[0]->name; 
 							} 
+							$linkExternally = get_field('externally_link'); 
+							$externalURL = get_field('external_url'); 
 						?>
 
 						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
@@ -169,7 +171,11 @@
 								<h6>Title</h6>
 
 								<h4 class="block-feed-post__title">
-									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+									<?php if ( $linkExternally ) { ?>
+										<a href="<?php echo $externalURL; ?>"><?php the_title(); ?></a>
+									<?php } else { ?>
+										<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+									<?php } ?>
 								</h4>
 
 								<h6>Date</h6>
