@@ -49,7 +49,7 @@
 	<div class="wrap">
 		<div class="content-careers__main">
 			<div class="content-careers__aside pagenav-aside">
-				<h3>Navigate this page with the links below</h3>
+				<h3>Table of Contents</h3>
 
 				<?php if ( ! empty( $careers_content ) ) : ?>
 					<nav aria-label="Post Navigation" class="aside-post-navigation" id="nav-post">
@@ -111,7 +111,7 @@
 			<div class="content-careers__entry pagenav-content">
 				<?php if ( $careers->have_posts() ) : ?>
 					<div class="careers-positions">
-						<h2>Open Positions</h2>
+						<h2 id='open-positions-anchor'>Open Positions</h2>
 
 						<ul class="list-career-positions">
 							<?php while ( $careers->have_posts() ) : $careers->the_post(); ?>
@@ -174,7 +174,7 @@
 											<div class="entry-content">
 												<?php echo $content; ?>
 											</div>
-										<?php elseif ( get_row_layout() == 'quote_slideshow' ) : ?>
+										<?php elseif ( get_row_layout() == 'quote_slideshow' ) : ?> 
 
 											<?php
 												$quote_slideshow = get_sub_field( 'quote_slideshow' );
@@ -229,13 +229,15 @@
 															<?php endforeach; ?>
 														</div>
 
-														<div class="quote-slideshow__nav">
-															<button class="slick-arrow" id="quote-slideshow-prev"></button>
+														<?php if ( count( $quote_slideshow ) > 1 ) { ?>
+															<div class="quote-slideshow__nav">
+																<button class="slick-arrow" id="quote-slideshow-prev"></button>
 
-															<div class="quote-slideshow-dots"></div>
+																<div class="quote-slideshow-dots"></div>
 
-															<button class="slick-arrow" id="quote-slideshow-next"></button>
-														</div>
+																<button class="slick-arrow" id="quote-slideshow-next"></button>
+															</div>
+														<?php } ?>
 													</div>
 												</div>
 											<?php endif; ?>
@@ -268,6 +270,10 @@
 
 				<?php if ( $footnotes ) : ?>
 					<div class="content-footnotes">
+						<a href='javascript:void(0);' id='toggle-footnotes'
+							data-show='[+] Show Footnotes'
+							data-hide='[-] Hide Footnotes'
+						>[+] Show Footnotes</a>
 						<div class="footnotes">
 							<?php echo $footnotes; ?>
 						</div>

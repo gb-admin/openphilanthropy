@@ -30,7 +30,8 @@ wp-content/*
 wp-content/themes/twenty*
 
 !.editorconfig
-!.gitignore
+!.gitignore 
+!.github
 
 !composer.json
 !readme.md

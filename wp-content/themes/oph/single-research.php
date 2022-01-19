@@ -88,7 +88,7 @@
 	<div class="wrap">
 		<div class="content-single__container">
 			<div class="content-single__aside pagenav-aside">
-				<h3>Navigate this page with the links below</h3>
+				<h3>Table of Contents</h3>
 
 				<nav aria-label="Post Navigation" class="aside-post-navigation" id="nav-post">
 					<ul class="list-aside-post-navigation" id="post-navigation-list"></ul>
@@ -129,12 +129,31 @@
 				<?php endif; ?>
 
 				<div class="entry-content">
+					<div class='author-date-meta'>
+						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span> |
+						<span class='author'>by <?= oph_get_post_author_name(); ?></span> 
+					</div>
 					<?php the_content(); ?>
 				</div>
 
 				<?php if ( $footnotes ) : ?>
 					<div class="entry-footnotes">
-						<?php echo $footnotes; ?>
+						<a href='javascript:void(0);' id='toggle-footnotes'
+						>
+							<span class='expand'>
+								Expand Footer 
+								<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.1123 9.71249L12.4996 15.2875L6.8877 9.71249" stroke="#445277" stroke-width="1.49661"/></svg>
+							</span>
+							<span class='collapse'>
+								Collapse Footer <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.8877 15.2875L12.5004 9.71248L18.1123 15.2875" stroke="#445277" stroke-width="1.49661"/>
+</svg>
+							</span>
+						</a>
+						<div class="footnotes">
+							<?php echo $footnotes; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -221,7 +240,7 @@
 						<a class="button" href="<?php echo $button['link']['url']; ?>"><?php echo $button['link']['title']; ?></a>
 					<?php endforeach; ?>
 				<?php else : ?>
-					<a class="button" href="/research">Back to Research &amp; Ideas</a>
+					<a class="button" href="/research">Back to Research &amp; Updates</a>
 				<?php endif; ?>
 			</div>
 		</div>

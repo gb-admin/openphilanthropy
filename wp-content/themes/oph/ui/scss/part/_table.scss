@@ -6,6 +6,7 @@ $root: 1rem !default;
  * Table
  */
 
+ // Targets designed contents
 .table {
   margin-bottom: $root;
   width: 100%;
@@ -42,4 +43,28 @@ $root: 1rem !default;
 .table--lg th,
 .table--lg td {
   padding: $root;
+}
+
+// Targets import post contents (class added via js)
+table.table-imported {
+	@extend .table;
+	border: 1px solid $periwinkle-3;
+	display: table;
+
+	thead th {
+		background-color: $periwinkle-3;
+		color: white;
+		border-right: 1px solid white;
+		vertical-align: top;
+
+		&:last-child {
+			border-right: none;
+		}
+	}
+
+	tbody {
+		tr:nth-child(even) {
+			background-color: $periwinkle-5;
+		}
+	}
 }

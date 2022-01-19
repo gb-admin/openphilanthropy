@@ -5,18 +5,13 @@
 		$post_type = $args['post_type'];
 	}
 
-	$research_page = get_page_by_path( 'research' );
-
-	$is_research_page = '';
-	$research_page_id = '';
-
-	if ( $research_page && $research_page->ID ) {
-		$research_page_id = $research_page->ID;
-	}
-
-	if ( $research_page_id == get_the_ID() ) {
-		$is_research_page = true;
-	}
+	$sort_params = [
+		'high-to-low'      => 'High to lowest',
+		'a-z'              => 'A - Z',
+		'recent'           => 'Newest to oldest',
+		'oldest-to-newest' => 'Oldest to newest'
+	]; 
+	$sorted = $sort_params[$_GET['sort']];
 ?>
 
 <div class="feed-options-bar">
@@ -24,27 +19,41 @@
 		<nav aria-label="Feed Options Bar">
 			<div class="dropdown">
 				<button class="button" href="#">
-					Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+					Sort <?php if ( isset($_GET['sort']) ) { echo "({$sort_params[$_GET['sort']]}) &nbsp;"; } ?>
+					<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 				</button>
 
 				<ul class="dropdown-content">
-					<?php if ( ! $is_research_page ) : ?>
+					<?php if ( is_page_template( 'template/grants.php' ) ) : ?>
 						<li>
-							<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories">Highest to lowest</a>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
 						</li>
 					<?php endif; ?>
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories">A to Z</a>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories"><?= $sort_params['a-z']; ?></a> 
 					</li>
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories">Newest to oldest</a>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories"><?= $sort_params['recent']; ?></a>
 					</li>
+					<li>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>#categories"><?= $sort_params['oldest-to-newest']; ?></a>
+					</li>
+					<?php 
+						if ( isset($_GET['sort']) ) { 
+							$url = "https://$_SERVER[HTTP_HOST]/".strtok($_SERVER["REQUEST_URI"],'?'); 
+							?>
+							<li>
+								<a href="<?php echo $url; ?>">Clear Sorting</a>
+							</li>
+						<?php }
+					?>
 				</ul>
 			</div>
 
 			<div class="dropdown dropdown--inline-content">
 				<button class="button" href="#">
-					Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+					Items <?php if ( isset($_GET['items']) ) echo "({$_GET['items']})"; ?>
+					<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 				</button>
 
 				<ul class="dropdown-content">
@@ -60,10 +69,10 @@
 				</ul>
 			</div>
 
-			<?php if ( $post_type == 'research' ) : ?>
-				<button class="button button--solid button-view-list">View all as grid</button>
-			<?php else : ?>
-				<button class="button button--solid button-view-list">View all as list</button>
+			<?php if ( $post_type == 'research' || is_page_template( 'template/research-category.php' ) ) : ?>
+				<button class="button button--solid button-view-list">
+					<?php echo oph_display_type('list'); ?>
+				</button>
 			<?php endif; ?>
 		</nav>
 	</div>

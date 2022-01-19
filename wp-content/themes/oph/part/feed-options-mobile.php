@@ -1,27 +1,43 @@
+<?php
+$sort_params = [
+	'high-to-low'      => 'High to lowest',
+	'a-z'              => 'A - Z',
+	'recent'           => 'Newest to oldest',
+	'oldest-to-newest' => 'Oldest to newest'
+];
+?>
+
 <div class="feed-options-bar feed-options-bar--mobile">
 	<div class="wrap">
 		<nav aria-label="Feed Options Bar">
 			<div class="dropdown">
 				<button class="button" href="#">
-					Sort <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+					Sort <?php if ( isset($_GET['sort']) ) echo "({$sort_params[$_GET['sort']]}) &nbsp;"; ?>
+					<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 				</button>
 
 				<ul class="dropdown-content">
+					<?php if ( ! $is_research_page ) : ?>
+						<li>
+							<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
+						</li>
+					<?php endif; ?>
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories">Highest to lowest</a>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories"><?= $sort_params['a-z']; ?></a>
 					</li>
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories">A to Z</a>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories"><?= $sort_params['recent']; ?></a>
 					</li>
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories">Newest to oldest</a>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'oldest-to-newest' ) ); ?>#categories"><?= $sort_params['oldest-to-newest']; ?></a>
 					</li>
 				</ul>
 			</div>
 
 			<div class="dropdown dropdown--inline-content">
 				<button class="button" href="#">
-					Items <svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
+					Items <?php if ( isset($_GET['items']) ) echo "({$_GET['items']})"; ?>
+					<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
 				</button>
 
 				<ul class="dropdown-content">
@@ -37,7 +53,9 @@
 				</ul>
 			</div>
 
-			<button class="button button--solid button-view-list">View all as list</button>
+			<button class="button button--solid button-view-list">
+				<?php echo oph_display_type('grid'); ?>
+			</button>
 		</nav>
 	</div>
 </div>

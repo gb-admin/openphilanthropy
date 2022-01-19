@@ -3,7 +3,8 @@
 
 	get_header();
 
-	$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
+	$post_thumbnail = ($cover_image_id = get_field('cover_image', $post->ID) ) ? 
+						wp_get_attachment_image($cover_image_id, 'lg', false, array('class'	=> 'post-thumbnail')) : false;
 
 	$primary_term_slug = '';
 
@@ -26,9 +27,9 @@
 
 		if ( $primary_term_slug ) {
 			$focus_area_query = array(
-				'field' => 'slug',
+				'field'    => 'slug',
 				'taxonomy' => 'focus-area',
-				'terms' => $primary_term_slug
+				'terms'    => $primary_term_slug
 			);
 
 			array_push( $tax_query, $focus_area_query );
@@ -53,20 +54,56 @@
 
 	$related_query_posts = [];
 
+	// Get a list of related posts from the same organization (if any)
+	$terms_org_name = get_the_terms( $post->ID, 'organization-name' );
+	$related_org_query_posts = [];
+	if ( isset($terms_org_name[0]) ) {
+		$related_org_query = new WP_Query( array(
+			'post_type'      => 'grants',
+			'posts_per_page' => 3,
+			'order'          => 'desc',
+			'orderby'        => 'date',
+			'post__not_in'   => $related_posts_id,
+			'tax_query'      => array(
+				'relation'	=> 'AND',
+				array(
+					'taxonomy' => 'organization-name',
+					'field'    => 'slug',
+					'terms'    => $terms_org_name[0]->slug
+				),
+				array(
+					'field'    => 'slug',
+					'taxonomy' => 'focus-area',
+					'terms'    => $primary_term_slug
+				)
+			)
+		) );
+
+		if ( ! empty( $related_org_query ) && isset( $related_org_query->posts ) ) {
+			$related_org_query_posts = $related_org_query->posts;
+			
+			// Add to ignore list for the next query and update the count
+			$related_org_posts_id = wp_list_pluck( $related_org_query_posts, 'ID' );
+			$related_posts_id = array_merge($related_posts_id, $related_org_posts_id);
+			$related_posts_count = count( $related_posts );
+		}
+	}
+	
 	$related_query = new WP_Query( array(
-		'post_type' => 'grants',
+		'post_type'      => 'grants',
 		'posts_per_page' => 3,
-		'order' => 'desc',
-		'orderby' => 'date',
-		'post__not_in' => $related_posts_id,
-		'tax_query' => $tax_query
+		'order'          => 'desc',
+		'orderby'        => 'date',
+		'post__not_in'   => $related_posts_id,
+		'tax_query'      => $tax_query
 	) );
 
 	if ( ! empty( $related_query ) && isset( $related_query->posts ) ) {
 		$related_query_posts = $related_query->posts;
 	}
 
-	$related_posts = array_merge( $related_posts, $related_query_posts );
+	// The order of merge is important as it retains the priority override order
+	$related_posts = array_merge( $related_posts, $related_org_query_posts, $related_query_posts );
 
 	/**
 	 * Limit related posts to 3 if back filled.
@@ -88,7 +125,7 @@
 	<div class="wrap">
 		<div class="content-single__container">
 			<div class="content-single__aside pagenav-aside">
-				<h3>Navigate this page with the links below</h3>
+				<h3>Table of Contents</h3>
 
 				<nav aria-label="Post Navigation" class="aside-post-navigation" id="nav-post">
 					<ul class="list-aside-post-navigation" id="post-navigation-list"></ul>
@@ -124,9 +161,9 @@
 			</div>
 
 			<div class="content-single__main pagenav-content">
-				<?php if ( $post_thumbnail ) : ?>
-					<img class="post-thumbnail" src="<?php echo $post_thumbnail; ?>" alt="">
-				<?php endif; ?>
+				<?php if ( $post_thumbnail ) : 
+					echo $post_thumbnail;
+				endif; ?>
 
 				<div class="entry-content">
 					<?php the_content(); ?>
@@ -134,7 +171,22 @@
 
 				<?php if ( $footnotes ) : ?>
 					<div class="entry-footnotes">
-						<?php echo $footnotes; ?>
+						<a href='javascript:void(0);' id='toggle-footnotes'
+						>
+							<span class='expand'>
+								Expand Footer 
+								<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.1123 9.71249L12.4996 15.2875L6.8877 9.71249" stroke="#445277" stroke-width="1.49661"/></svg>
+							</span>
+							<span class='collapse'>
+								Collapse Footer <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.8877 15.2875L12.5004 9.71248L18.1123 15.2875" stroke="#445277" stroke-width="1.49661"/>
+</svg>
+							</span>
+						</a>
+						<div class="footnotes">
+							<?php echo $footnotes; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 			</div>

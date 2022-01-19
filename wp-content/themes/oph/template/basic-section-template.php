@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Template Name: Table of Contents
+	 * Template Name: Basic Section Template
 	 */
 
 	the_post();
@@ -38,44 +38,10 @@
 						array_push( $pagenav_sections, $section_array );
 					}
 				?>
-
-				<div class="content-table-of-contents__aside pagenav-aside">
-					<h3>Table of Contents</h3>
-
-					<nav aria-label="Content Navigation" id="content-navigation">
-						<ul class="list-content-navigation" id="content-navigation-list">
-							<?php foreach ( $pagenav_sections as $k => $i ) : $k = $k + 1; ?>
-								<li>
-									<h4>
-										<a data-goto="#section-<?php echo $k; ?>" href="#section-<?php echo $k; ?>" title="<?php echo $i['title']; ?>"><?php echo $k . '. ' . $i['title']; ?></a>
-
-										<?php if ( ! empty( $i['sub_sections'] ) ) : ?>
-											<div class="content-navigation-icon">
-												<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>
-											</div>
-										<?php endif; ?>
-									</h4>
-
-									<?php if ( ! empty( $i['sub_sections'] ) ) : ?>
-										<ul>
-											<?php foreach ( $i['sub_sections'] as $n => $c ) : $n = $n + 1; ?>
-												<li>
-													<h5>
-														<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c; ?></a>
-													</h5>
-												</li>
-											<?php endforeach; ?>
-										</ul>
-									<?php endif; ?>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					</nav>
-				</div>
 			<?php endif; ?>
 
 			<?php if ( $content_sections ) : ?>
-				<div class="content-table-of-contents__entry pagenav-content">
+				<div class="content-table-of-contents__entry pagenav-content pagenav-content--fullwidth">
 					<?php foreach ( $content_sections as $k => $i ) : ?>
 						<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; $sub_sections = []; $o = 0; $p = 0; ?>
 							<div class="content-table-of-contents__section">

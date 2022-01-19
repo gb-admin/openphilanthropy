@@ -44,7 +44,7 @@
 
 							// Get category image
 							if ( ! empty( $focus_area ) && $focus_area[0]->term_id ) {
-								$grant_image = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id );
+								$grant_image = get_field( 'category_focus_areas_image', 'focus-area_' . $focus_area[0]->term_id );
 							}
 
 							// If category image found get url
@@ -89,7 +89,9 @@
 							<a href="<?php echo $grant_link; ?>">
 								<?php if ( $grant_image ) : ?>
 									<div class="bucket-image">
-										<img src="<?php echo $grant_image; ?>" alt="">
+										<div class="bucket-image__bg">
+											<img src="<?php echo $grant_image; ?>" alt="<?php echo $focus_area; ?>"> 
+										</div>
 									</div>
 								<?php endif; ?>
 
@@ -160,7 +162,7 @@
 							$research_post = $i['post'][0];
 
 							if ( $research_post ) {
-								$research_focus_area = get_the_terms( $research_post->ID, 'focus-area' );
+								$research_content_type = get_the_terms( $research_post->ID, 'content-type' );
 
 								$research_link = get_permalink( $research_post->ID );
 								$research_title = get_the_title( $research_post->ID );
@@ -176,11 +178,14 @@
 
 								$research_description = excerpt( $research_excerpt );
 							}
+		
+							if ( $research_content_type ) {
+								$first_parent_term = get_term_top_most_parent($research_content_type[0],'content-type');
+								$research_eyebrow_copy = $first_parent_term->name;
+								$research_eyebrow_link = get_term_link($first_parent_term);
 
-							if ( $research_focus_area ) {
-								$research_eyebrow_copy = $research_focus_area[0]->name;
-
-								$research_eyebrow_link = '/research?focus-area=' . $research_focus_area[0]->slug;
+								// Top level content types uses document root, remove the standard content-type path
+								$research_eyebrow_link = str_replace("content-type/", '', $research_eyebrow_link);
 							}
 
 							if ( $i['description'] ) {

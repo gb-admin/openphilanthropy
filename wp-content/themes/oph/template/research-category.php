@@ -113,7 +113,7 @@
 		}
 	}
 
-	$research = new WP_Query( array(
+	$args = array(
 		'post_type' => 'research',
 		'posts_per_page' => $posts_per_page,
 		'order' => $order_query,
@@ -124,7 +124,46 @@
 		'meta_query' => $amount_meta_query,
 		'tax_query' => $tax_query,
 		'meta_key' => $meta_key
-	) );
+	);
+
+	// Custom logic if author filter is active
+	if ( isset($params['author'][0]) ) {
+		
+		if ( $author_ids = oph_has_only_core_authors($params['author']) ) {
+			$args['author__in'] = $author_ids;
+			$research = new WP_Query($args);
+		} else if ( oph_has_only_custom_authors($params['author']) ) {
+			$args['meta_query'][] = array(
+				'key'     => 'custom_author',
+				'value'   => $params['author'],
+				'compare' => 'IN'
+			);
+			$research = new WP_Query($args);
+		} else { // mix of core and custom authors
+
+			// Since users can search multiple authors, both custom and wp users. We will create and merge 2 queries
+			$args_core_authors = $args_custom_authors = $args;
+			$args_core_authors['authors__in'] = oph_extract_core_authors($params['author']);
+			$args_custom_authors['meta_query'][] = array(
+				'key'     => 'custom_author',
+				'value'   => oph_extract_custom_authors($params['author']),
+				'compare' => 'IN'
+			);
+
+			$core_author_posts = new WP_Query($args_core_authors);
+			$custom_author_posts = new WP_Query($args_custom_authors);
+
+			$research = new WP_Query($args);
+			$research->posts = array_merge($core_author_posts->posts, $custom_author_posts->posts);
+			$research->post_count = $core_author_posts->post_count + $custom_author_posts->post_count;
+			$research->found_posts = $core_author_posts->found_posts + $custom_author_posts->found_posts;
+			$research->max_num_pages = ceil($research->found_posts / $posts_per_page); // Updated to reflect the merge
+		}
+	
+	} else {
+		$research = new WP_Query($args);
+	}
+
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -142,26 +181,42 @@
 		<div class="feed-section__posts wrap">
 			<ul class="block-feed-title-head is-research is-active">
 				<li>
-					<h6>Title</h6>
+					<h6 class="feed-sorter" data-sort="title">Title</h6>
 				</li>
 				<li>
-					<h6>Date</h6>
+					<h6 class="feed-sorter" data-sort="date">Date</h6>
 				</li>
 				<li>
-					<h6>Focus Area</h6>
+					<h6 class="feed-sorter" data-sort="focus">Focus Area</h6>
 				</li>
+				<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
+				<li>
+					<h6 class="feed-sorter" data-sort="author">Author</h6>
+				</li>
+				<?php endif; ?>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
 				<div class="block-feed block-feed--list block-feed--research">
+					<div class="block-feed-post--container">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
 							$research_content_type = get_the_terms( $post->ID, 'content-type' );
 							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							// setting data-terms for live sorting 
+							$sortTitle = strtok( get_the_title( $post->ID ), " "); 
+							$sortDate = get_the_date( 'Y-m-d', $research->ID ); 
+							$sortFocus = ''; 
+							if ( $research_focus_area ) {
+								$sortFocus = $research_focus_area[0]->name; 
+							} 
+							$sortAuthor = oph_get_post_author_name(get_the_ID()); 
 						?>
 
-						<div class="block-feed-post">
+						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
+							echo 'data-sort-author="'.$sortAuthor.'"';
+						} ?>>
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -172,15 +227,22 @@
 								<h6>Date</h6>
 
 								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
+									<?php echo get_the_date( 'F Y', $research->ID ); ?>
 								</h5>
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $research_focus_area ) : ?>
-									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
-									</h5>
+								<h5 class="block-feed-post__category">
+									<?php if ( $research_focus_area ) : ?>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<?php endif; ?>
+								</h5>
+
+								<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
+								<h6>Author</h6>
+								<h5 class="block-feed-post__author">
+									<?php echo oph_get_post_author_name(get_the_ID()); ?>
+								</h5>
 								<?php endif; ?>
 
 								<div class="block-feed-post__link">
@@ -190,36 +252,38 @@
 								</div>
 							</div>
 						</div>
-					<?php endwhile; wp_reset_postdata(); ?>
-				</div>
+					<?php endwhile; wp_reset_postdata(); ?> 
+					</div>
+					<div class="feed-footer">
+						<nav aria-label="Post Feed Pagination" class="pagination">
+
+							<?php
+								global $wp_query;
+
+								$big = 999999999;
+								$translated = __( 'Page', 'oph' );
+
+								echo paginate_links( array(
+									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'end_size' => 2,
+									'mid_size' => 2,
+									'format' => '?paged=%#%',
+									'current' => max( 1, get_query_var('paged') ),
+									'total' => $research->max_num_pages,
+									'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+								) );
+							?>
+						</nav>
+
+						<div class="feed-footer__options">
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('list'); ?>
+							</button>
+						</div>
+					</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
 			<?php endif; ?>
-
-			<div class="feed-footer">
-				<nav aria-label="Post Feed Pagination" class="pagination">
-
-					<?php
-						global $wp_query;
-
-						$big = 999999999;
-						$translated = __( 'Page', 'oph' );
-
-						echo paginate_links( array(
-							'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-							'end_size' => 2,
-							'mid_size' => 2,
-							'format' => '?paged=%#%',
-							'current' => max( 1, get_query_var('paged') ),
-							'total' => $research->max_num_pages,
-							'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-						) );
-					?>
-				</nav>
-
-				<div class="feed-footer__options">
-					<button class="button button--secondary button-view-list">View all as list</button>
-				</div>
 			</div>
 		</div>
 	</div>

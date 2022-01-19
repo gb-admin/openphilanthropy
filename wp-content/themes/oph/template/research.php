@@ -11,10 +11,10 @@
 
 	$params = get_url_params();
 
-	$view_list = false;
+	$view_list = true; // this is the default view
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
-		$view_list = true;
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
+		$view_list = false;
 	}
 
 	$featured_research = get_field( 'featured_research' );
@@ -63,6 +63,9 @@
 					$orderby_query = 'title';
 				} elseif ( $value == 'recent' ) {
 					$order_query = 'desc';
+					$orderby_query = 'date';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$order_query = 'asc';
 					$orderby_query = 'date';
 				}
 			}
@@ -127,26 +130,41 @@
 		<div class="feed-section__posts wrap">
 			<ul class="block-feed-title-head is-research is-active">
 				<li>
-					<h6>Title</h6>
+					<h6 class="feed-sorter" data-sort="title">Title</h6>
 				</li>
 				<li>
-					<h6>Date</h6>
+					<h6 class="feed-sorter" data-sort="date">Date</h6>
 				</li>
 				<li>
-					<h6>Focus Area</h6>
+					<h6 class="feed-sorter" data-sort="focus">Focus Area</h6>
+				</li>
+				<li>
+					<h6 class="feed-sorter" data-sort="content">Content Type</h6> 
 				</li>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list block-feed--research">
+				<div class="block-feed block-feed--research<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
+					<div class="block-feed-post--container">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
 						<?php
 							$research_content_type = get_the_terms( $post->ID, 'content-type' );
-							$research_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$research_focus_area = get_the_terms( $post->ID, 'focus-area' ); 
+							// setting data-terms for live sorting 
+							$sortTitle = strtok( get_the_title( $post->ID ), " "); 
+							$sortDate = get_the_date( 'Y-m-d', $research->ID ); 
+							$sortFocus = ''; 
+							if ( $research_focus_area ) {
+								$sortFocus = $research_focus_area[0]->name; 
+							} 
+							$sortContent = ''; 
+							if ($research_content_type) {
+								$sortContent = $research_content_type[0]->name; 
+							} 
 						?>
 
-						<div class="block-feed-post">
+						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -157,16 +175,27 @@
 								<h6>Date</h6>
 
 								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F j, Y', $research->ID ); ?>
+									<?php echo get_the_date( 'F Y', $research->ID ); ?>
 								</h5>
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $research_focus_area ) : ?>
-									<h5 class="block-feed-post__category">
-										<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
-									</h5>
-								<?php endif; ?>
+								<h5 class="block-feed-post__category">
+									<?php if ( $research_focus_area ) : ?>
+									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<?php endif; ?>
+								</h5>
+
+								<h6>Content Type</h6>
+								<h5 class='block-feed-post__content_type'>
+									<?php if ($research_content_type) : ?>
+									<ul class="research-content-type">
+										<?php foreach($research_content_type as $term) : ?>
+										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+									<?php endif; ?>
+								</h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">
@@ -175,38 +204,44 @@
 								</div>
 							</div>
 						</div>
-					<?php endwhile; wp_reset_postdata(); ?>
+					<?php endwhile; wp_reset_postdata(); ?> 
+					</div>
+					<div class="feed-footer">
+						<nav aria-label="Post Feed Pagination" class="pagination">
+
+							<?php
+								global $wp_query;
+
+								$big = 999999999;
+								$translated = __( 'Page', 'oph' );
+
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
+								echo paginate_links( array(
+									'base' => str_replace( $big, '%#%', $base_url ),
+									'end_size' => 2,
+									'mid_size' => 2,
+									'format' => '?paged=%#%',
+									'current' => max( 1, get_query_var('paged') ),
+									'total' => $research->max_num_pages,
+									'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+								) );
+							?>
+						</nav>
+
+						<div class="feed-footer__options">
+							<button class="button button--secondary button-view-list">
+								<?php echo oph_display_type('list'); ?>
+							</button>
+						</div>
+					</div>
+				</div>
 				</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
 			<?php endif; ?>
-
-			<div class="feed-footer">
-				<nav aria-label="Post Feed Pagination" class="pagination">
-
-					<?php
-						global $wp_query;
-
-						$big = 999999999;
-						$translated = __( 'Page', 'oph' );
-
-						echo paginate_links( array(
-							'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-							'end_size' => 2,
-							'mid_size' => 2,
-							'format' => '?paged=%#%',
-							'current' => max( 1, get_query_var('paged') ),
-							'total' => $research->max_num_pages,
-							'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-						) );
-					?>
-				</nav>
-
-				<div class="feed-footer__options">
-					<button class="button button--secondary button-view-list">View all as grid</button>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 

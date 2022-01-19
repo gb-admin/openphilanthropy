@@ -1,0 +1,41 @@
+{
+    "key": "group_61c3688b87c23",
+    "title": "ToC Helper",
+    "fields": [
+        {
+            "key": "field_61c3689a2ec2f",
+            "label": "Important Info",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p style=\"margin:0;padding:0;\">The Table of Contents will be automatically generated from the post content.<\/p>\r\n<ul style=\"list-style:disc;margin-left:24px;margin-bottom:0;\">\r\n<li>Top-level headings must all be styled as <span style=\"font-family:monospace;\">h2<\/span>.<\/li>\r\n<li>All subsequent levels of headings must be styled as <span style=\"font-family:monospace;\">h4<\/span>, and <span style=\"text-decoration:underline;\">must begin<\/span> with a number.<\/li>\r\n<\/ul>",
+            "new_lines": "",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "research"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Explainer text for Table of Contents generation.",
+    "modified": 1641235264
+}

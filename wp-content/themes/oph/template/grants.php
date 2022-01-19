@@ -50,7 +50,7 @@
 	$orderby_query = 'meta_value';
 	$meta_key = 'award_date';
 	$param_amount_meta_query = '';
-	$posts_per_page = 9;
+	$posts_per_page = 25;
 	$taxonomy = '';
 
 	foreach ( $params as $key => $param ) {
@@ -105,6 +105,10 @@
 					$meta_key = 'award_date';
 					$order_query = 'desc';
 					$orderby_query = 'meta_value';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$meta_key = 'award_date';
+					$order_query = 'asc';
+					$orderby_query = 'meta_value';
 				}
 			}
 		} elseif ( $key == 'yr' ) {
@@ -158,63 +162,6 @@
 	) );
 
 	$grants_posts = $grants->posts;
-
-	/**
-	 * Export data to CSV.
-	 */
-	$file = fopen( get_stylesheet_directory_uri() . '/grants_db.csv', 'w' );
-
-	fputcsv( $file, array( 'Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date' ) );
-
-	$csv = [];
-
-	foreach ( $grants_posts as $i ) {
-		$post_grant_amount = get_field( 'grant_amount', $i->ID );
-		$post_grant_date = get_the_date( 'm/Y' );
-		$post_grant_focus_area = get_the_terms( $i->ID, 'focus-area' );
-		$post_grant_organization_name = get_the_terms( $i->ID, 'organization-name' );
-		$post_grant_title = get_the_title( $i->ID );
-
-		if ( $post_grant_amount ) {
-			$post_grant_amount = '$' . number_format( $post_grant_amount );
-		} else {
-			$post_grant_amount = '';
-		}
-
-		if ( $post_grant_date ) {
-			$post_grant_date = ltrim( $post_grant_date, '0' );
-		} else {
-			$post_grant_date = '';
-		}
-
-		if ( $post_grant_focus_area && ! is_wp_error( $post_grant_focus_area ) && isset( $post_grant_focus_area[0] ) ) {
-			if ( isset( $post_grant_focus_area[0]->name ) ) {
-				$post_grant_focus_area = $post_grant_focus_area[0]->name;
-			}
-		} else {
-			$post_grant_focus_area = '';
-		}
-
-		if ( $post_grant_organization_name && ! is_wp_error( $post_grant_organization_name ) && isset( $post_grant_organization_name[0] ) ) {
-			if ( isset( $post_grant_organization_name[0]->name ) ) {
-				$post_grant_organization_name = $post_grant_organization_name[0]->name;
-			}
-		} else {
-			$post_grant_organization_name = '';
-		}
-
-		if ( $post_grant_title ) {
-			$line = [ $post_grant_title, $post_grant_organization_name, $post_grant_focus_area, $post_grant_amount, $post_grant_date ];
-
-			array_push( $csv, $line );
-		}
-	}
-
-	foreach ( $csv as $row ) {
-		fputcsv( $file, $row );
-	}
-
-	fclose( $file );
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -225,14 +172,14 @@
 	<?php get_template_part( 'part/feed', 'options' ); ?>
 
 	<div class="feed-section__content">
-		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants' ) ); ?>
+		<?php get_template_part( 'part/filter', 'sidebar', array( 'post_type' => 'grants', 'grants_query' => $grants ) ); ?>
 
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
 			<ul class="block-feed-title-head<?php if ( $view_list ) { echo ' is-active'; } ?>">
 				<li>
-					<h6>Grant<br> Type</h6>
+					<h6>Grant<br> Title</h6>
 				</li>
 				<li>
 					<h6>Organization<br> Name</h6>
@@ -271,7 +218,8 @@
 
 						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
 							<?php if ( $award_date ) : ?>
-								<h5 class="block-feed-post__date"><a href="<?php echo get_permalink(); ?>"><?php echo $award_date; ?></a></h5>
+								<?php $yearFilter = get_site_url(null, '/grants/?yr=', 'https') . date("Y", strtotime($award_date)); ?>
+								<h5 class="block-feed-post__date"><a href="<?php echo $yearFilter; ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
 							<?php endif; ?>
 
 							<div class="block-feed-post__head">
@@ -283,7 +231,7 @@
 							</div>
 
 							<div class="block-feed-post__body">
-								<h6>Grant Type</h6>
+								<h6>Grant Title</h6>
 
 								<h4 class="block-feed-post__title">
 									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
@@ -301,19 +249,19 @@
 
 								<h5 class="block-feed-post__focus-area">
 									<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-										<a href="?focus-area=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $focus_area[0]->name; ?></a>
+										<?php echo $focus_area[0]->name; ?>
 									<?php endif; ?>
 								</h5>
 
 								<h6>Amount</h6>
 
 								<?php if ( $grant_amount ) : ?>
-									<h5><?php echo '$' . number_format( $grant_amount ); ?></h5>
+									<h5 class='block-feed-post__grant-amount'><?php echo '$' . number_format( $grant_amount ); ?></h5>
 								<?php endif; ?>
 
 								<h6>Date</h6>
 
-								<h5 class="block-feed-post__date"><?php echo $award_date; ?></h5>
+								<h5 class="block-feed-post__date"><?php echo date("F Y", strtotime($award_date)); ?></h5>
 
 								<div class="block-feed-post__link">
 									<a href="<?php echo the_permalink(); ?>">
@@ -323,36 +271,40 @@
 							</div>
 						</div>
 					<?php endwhile; wp_reset_postdata(); ?>
+					<div class="feed-footer">
+						<nav aria-label="Post Feed Pagination" class="pagination">
+
+							<?php
+								global $wp_query;
+
+								$big = 999999999;
+								$translated = __( 'Page', 'oph' );
+
+								// Setting the view-list parameter on pagination url.
+								// Note the ampersand is replaced prior to running the method as it causes unexpected behaviour
+								$base_url = add_query_arg( array(
+									'view-list' => $view_list ? "true" : "false"
+								), str_replace("#038;", "&", esc_url( get_pagenum_link( $big )) ) );
+
+								echo paginate_links( array(
+									'base' => str_replace( $big, '%#%', $base_url ),
+									'end_size' => 2,
+									'mid_size' => 2,
+									'format' => '?paged=%#%',
+									'current' => max( 1, get_query_var('paged') ),
+									'total' => $grants->max_num_pages,
+									'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+								) );
+							?>
+						</nav>
+
+						<div class="feed-footer__options">
+						</div>
+					</div>
 				</div>
 			<?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
 			<?php endif; ?>
-
-			<div class="feed-footer">
-				<nav aria-label="Post Feed Pagination" class="pagination">
-
-					<?php
-						global $wp_query;
-
-						$big = 999999999;
-						$translated = __( 'Page', 'oph' );
-
-						echo paginate_links( array(
-							'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-							'end_size' => 2,
-							'mid_size' => 2,
-							'format' => '?paged=%#%',
-							'current' => max( 1, get_query_var('paged') ),
-							'total' => $grants->max_num_pages,
-							'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-						) );
-					?>
-				</nav>
-
-				<div class="feed-footer__options">
-					<button class="button button--secondary button-view-list">View all as list</button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

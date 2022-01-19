@@ -140,23 +140,26 @@
 
 						$grants_preview_id = [];
 
+						// User opted for manual selection
 						if ( $grants_preview ) {
 							foreach ( $grants_preview as $i ) {
 								array_push( $grants_preview_id, $i->ID );
 							}
-						}
+						} 
 
 						$related_query = new WP_Query( array(
-							'post_type' => 'grants',
+							'post_type'      => 'grants',
 							'posts_per_page' => 3,
-							'order' => 'desc',
-							'orderby' => 'date',
-							'post__not_in' => $grants_preview_id,
-							'tax_query' => array(
+							'order'          => 'desc',
+							'orderby'        => 'meta_value',
+							'meta_key'       => 'award_date',
+							'meta_type'      => 'DATE',
+							'post__in'       => $grants_preview_id,
+							'tax_query'      => array(
 								array(
 									'taxonomy' => $focus_area->taxonomy,
-									'field' => 'slug',
-									'terms' => $focus_area->slug
+									'field'    => 'slug',
+									'terms'    => $focus_area->slug
 								)
 							)
 						) );
@@ -295,7 +298,7 @@
 						$heading = get_sub_field( 'heading' );
 
 						if ( ! $button_text ) {
-							$button_text = 'See All Reports In This Area';
+							$button_text = 'See All Research & Updates In This Area';
 						}
 
 						$research_preview_id = [];
@@ -323,7 +326,7 @@
 							'posts_per_page' => 3,
 							'order' => 'desc',
 							'orderby' => 'date',
-							'post__not_in' => $research_preview_id,
+							'post__in' => $research_preview_id,
 							'tax_query' => $tax_query
 						) );
 
@@ -358,16 +361,17 @@
 											$related_title = $related->post_title;
 
 											$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
+											$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
 
 											$related_eyebrow_copy = '';
 											$related_eyebrow_link_url = '';
 
 											if ( $research_focus_area && $research_focus_area->name ) {
-												$related_eyebrow_copy = $research_focus_area->name;
+												$related_eyebrow_copy = $first_parent_term->name;
 											}
 
 											if ( $research_focus_area && $research_focus_area->slug ) {
-												$related_eyebrow_link_url = '/research?focus-area=' . $research_focus_area->slug;
+												$related_eyebrow_link_url = '/research?focus-area=' . $first_parent_term->slug;
 											}
 
 											if ( has_excerpt( $related->ID ) ) {
@@ -553,7 +557,8 @@
 
 						$grant_terms = get_terms( array(
 							'taxonomy' => 'focus-area',
-							'parent' => 0
+							'parent' => 0,
+							'post_type'	=> 'grants'
 						) );
 					?>
 
@@ -585,7 +590,7 @@
 												} elseif ( $statistic == 'million-given' ) {
 													$number = $grant_amount_total;
 
-													$title = 'Millions<br> Given';
+													$title = 'Million<br> Given';
 												} elseif ( $statistic == 'portfolio-areas' ) {
 													$number = count( $grant_terms );
 
@@ -599,7 +604,11 @@
 
 										<?php if ( $number ) : ?>
 											<li class="<?php if ( strlen( $number ) > 4 ) { echo ' is-large-number'; } ?>">
-												<h4><span class="header-number"><?php echo $number; ?></span> <?php echo $title; ?></h4>
+												<h4>
+													<span class="header-number">
+														<?php if ( $statistic == 'million-given' ) { echo '$';} ?><?php echo $number; ?></span> 
+														<?php echo $title; ?> 
+												</h4>
 											</li>
 										<?php endif; ?>
 									<?php endforeach; ?>

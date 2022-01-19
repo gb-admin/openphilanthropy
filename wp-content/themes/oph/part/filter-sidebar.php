@@ -11,13 +11,21 @@
 
 	global $wpdb;
 
-	$research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+	// Loading in official WP Users that have posts in post_type research
+	$official_research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+
+	// Loading unofficial custom authors (added in metabox -> postmeta)
+	$custom_research_authors = oph_get_all_custom_authors();
+
+	// Merging the two together
+	$research_authors = oph_merge_all_research_authors($official_research_authors, $custom_research_authors);
+
 
 	$content_type = get_terms( array(
 		'taxonomy' => 'content-type'
 	) );
 
-	$focus_area = get_taxonomy_hierarchy( 'focus-area' );
+	$focus_area = get_taxonomy_hierarchy( 'focus-area', $parent=0, $post_type );
 
 	// Flatten hierarchy taxonomy array
 	foreach ( $focus_area as $k => $tax ) {
@@ -68,7 +76,7 @@
 	rsort( $grants_years );
 ?>
 
-<div class="sidebar-filter is-active">
+<div class="sidebar-filter">
 	<div class="sidebar-filter__main">
 		<div class="sidebar-filter-hide">
 			<button class="sidebar-filter-hide-button">
@@ -96,6 +104,9 @@
 				<div class="sidebar-filter__option">
 					<?php foreach ( $sidebar_filter as $filter ) : ?>
 						<?php if ( $filter['filter'] == 'amount' ) : ?>
+							<?php 
+							// ! pending full removal if no longer needed | involves cleaning up all the query args
+							/*
 							<select data-filter="amount" data-input-placeholder="Type here to search ..." data-placeholder="Amount">
 								<option value=""></option>
 
@@ -103,6 +114,7 @@
 								<option class="<?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="between-1hundthous-1mil" value="Between $100,000 and $1,000,000">Between $100,000 and $1,000,000</option>
 								<option class="<?php if ( in_array( 'greater-than-1mil', $params['amount'] ) ) { echo 'category-selected'; } ?>" data-category="greater-than-1mil" value="Greater than $1,000,000">Greater than $1,000,000</option>
 							</select>
+							*/ ?>
 						<?php elseif ( $filter['filter'] == 'author' ) : ?>
 
 							<?php
@@ -187,9 +199,15 @@
 					<?php endforeach; ?>
 				</div>
 
+				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
-					<a class="button" href="<?php echo get_stylesheet_directory_uri() . '/grants_db.csv'; ?>" download="grants_db.csv">Download Spreadsheet</a>
+					<?php
+					  $nonce = wp_create_nonce("generate_grants_csv_nonce");
+					  $link = admin_url('admin-ajax.php?action=generate_grants&nonce='.$nonce);
+					  echo '<a class="button" data-nonce="' . $nonce . '" href="' . $link . '">Download Spreadsheet</a>';
+					?>
 				</div>
+				<?php endif; ?>
 			</nav>
 		</div>
 
