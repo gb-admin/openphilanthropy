@@ -80,6 +80,8 @@
 	$footnotes = get_field( 'footnotes' ); 
 
 	$displayAuthor = get_post_meta($post->ID, 'custom_author', true);
+
+	$hidePub = get_field( 'hide_pubDate' ); 
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -132,7 +134,8 @@
 
 				<div class="entry-content">
 					<div class='author-date-meta'>
-						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span><?php if ( !empty($displayAuthor) ){?><span class='author'> | by <?php echo $displayAuthor; ?></span> <?php } ?> 
+						<?php if ( !$hidePub ) { ?>
+						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?> </span><?php } if( !$hidePub && !empty($displayAuthor) ) { echo '<span> | </span>'; } if ( !empty($displayAuthor) ){?><span class='author'> by <?php echo $displayAuthor; ?></span> <?php } ?> 
 					</div>
 					<?php the_content(); ?>
 				</div>

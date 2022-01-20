@@ -1,0 +1,43 @@
+{
+    "key": "group_61e9ca57ad51f",
+    "title": "Hide Publication Date",
+    "fields": [
+        {
+            "key": "field_61e9ca6ec4115",
+            "label": "",
+            "name": "hide_pubDate",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Hide Date",
+            "ui_off_text": "Show Date"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "research"
+            }
+        ]
+    ],
+    "menu_order": -10,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1642712229
+}
