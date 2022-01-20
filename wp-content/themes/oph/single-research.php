@@ -77,7 +77,9 @@
 		$related_posts = array_slice( $related_posts, 0, 3 );
 	}
 
-	$footnotes = get_field( 'footnotes' );
+	$footnotes = get_field( 'footnotes' ); 
+
+	$displayAuthor = get_post_meta($post->ID, 'custom_author', true);
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
@@ -130,8 +132,7 @@
 
 				<div class="entry-content">
 					<div class='author-date-meta'>
-						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span> |
-						<span class='author'>by <?= oph_get_post_author_name(); ?></span> 
+						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?></span><?php if ( !empty($displayAuthor) ){?><span class='author'> | by <?php echo $displayAuthor; ?></span> <?php } ?> 
 					</div>
 					<?php the_content(); ?>
 				</div>
