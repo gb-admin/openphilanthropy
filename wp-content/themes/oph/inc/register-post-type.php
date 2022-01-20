@@ -95,7 +95,7 @@ function post_type_grants() {
 		'hierarchical'       => false,
 		'menu_icon'          => 'dashicons-portfolio',
 		'menu_position'      => null,
-		'supports'           => array( 'author', 'editor', 'excerpt', 'revisions', 'thumbnail', 'title' )
+		'supports'           => array( 'editor', 'excerpt', 'revisions', 'thumbnail', 'title' )
 	);
 
 	register_post_type( 'grants', $args );
@@ -147,7 +147,7 @@ function post_type_research() {
 		'hierarchical'       => false,
 		'menu_icon'          => 'dashicons-index-card',
 		'menu_position'      => null,
-		'supports'           => array( 'author', 'editor', 'excerpt', 'revisions', 'title', 'thumbnail' )
+		'supports'           => array( 'editor', 'excerpt', 'revisions', 'title', 'thumbnail' )
 	);
 
 	register_post_type( 'research', $args );

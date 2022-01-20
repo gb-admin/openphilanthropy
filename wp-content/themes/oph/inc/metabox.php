@@ -5,7 +5,7 @@
  * 
  */
 add_action('add_meta_boxes', 'oph_create_custom_author_metabox');
-add_action('save_post', 'oph_save_custom_author_metabox');
+add_action('save_post', 'oph_save_custom_author_metabox', 10, 2);
 
 function oph_create_custom_author_metabox()
 {
@@ -15,7 +15,7 @@ function oph_create_custom_author_metabox()
 
 	add_meta_box(
 		'custom_author_metabox',  	   // Unique ID
-		__('Custom Author', 'oph'),    // Box title
+		__('Display Author', 'oph'),    // Box title
 		'oph_custom_author_template',  // Content callback, must be of type callable
 		$screens,
 		'side',
@@ -23,30 +23,49 @@ function oph_create_custom_author_metabox()
 	);
 }
 
-function oph_custom_author_template($post)
-{
-	$current_author = get_post_meta($post->ID, 'custom_author', true) ?: get_the_author_meta( 'display_name', $post->post_author );
-	$wp_core_users = array_map(function($e) { return $e->display_name;},  get_users());
-	$post_meta_authors = array_map(function($e) { return $e->custom_author;},  oph_get_all_custom_authors());
+// creates custom meta box output
+function oph_custom_author_template() {
+    global $post;  // set $post to the current post ID
+    $originalpost = $post;  // stores the current $post so it can be reset after a wp_query()
+    wp_nonce_field( basename( __FILE__ ), 'research__meta_nonce' );  // sets nonce to be checked when saving meta
+    $displayAuthor = get_post_meta( $post->ID, 'custom_author', true );  // gets the meta data if it already exists
+    
+    // outputs a simple text field
+    echo '<p>Enter the Author for this post.</p>'; 
+    echo '<input type="custom_author" name="custom_author" id="custom_author" value="' . esc_textarea( $displayAuthor )  . '" class="widefat">';
+}
 
-	$filtered_users = array_unique(array_merge($wp_core_users, $post_meta_authors));
-	?>
-	<style>
-		#custom_author {
-			padding: 3px 8px;
-			width: 100%;
-			margin-top: 5px;
-		}
-	</style>
-	<label for="custom_author"><?php _e("Select or type one below", "oph"); ?></label> <br/>
-	<input list="custom_authors" id="custom_author" name="custom_author" value="<?= esc_html($current_author); ?>" />
-	<datalist id="custom_authors">
-		<?php 
-		foreach( $filtered_users as $display_name ) : ?>
-		<option value="<?= esc_html($display_name); ?>">
-		<?php endforeach; ?>
-	</datalist>
-	<?php
+// saves custom meta box data
+function oph_save_custom_author_metabox( $post_id, $post ) {
+  // return if the user doesn't have edit permissions.
+  if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    return $post_id;
+  }
+  // return unless nonce is verified
+  if ( ! isset( $_POST['research__meta_nonce'] ) || ! wp_verify_nonce( $_POST['research__meta_nonce'], basename(__FILE__) ) ) {
+    return $post_id;
+  }
+  // sanitize the meta data save it into an array
+  $meta_array['custom_author'] = esc_textarea( $_POST['custom_author'] );
+  // $meta_array['_meta_field2'] = esc_textarea( $_POST['_meta_field2'] );
+
+  foreach ( $meta_array as $key => $value ) :
+    // avoid duplicate data during revisions
+    if ( 'revision' === $post->post_type ) {
+        return;
+    }
+    // update the meta value it if already has one
+    if ( get_post_meta( $post_id, $key, false ) ) {
+        update_post_meta( $post_id, $key, $value );
+    // otherwise create meta entry with new value
+    } else {
+        add_post_meta( $post_id, $key, $value);
+    }
+    // delete meta entry if the field has no value
+    if ( ! $value ) {
+        delete_post_meta( $post_id, $key );
+    }
+  endforeach;
 }
 
 function oph_get_all_custom_authors()
@@ -58,13 +77,6 @@ function oph_get_all_custom_authors()
 		FROM $wpdb->postmeta WHERE meta_key = 'custom_author'");
 
 	return $authors;
-}
-
-function oph_save_custom_author_metabox($post_id) {
-	if ( array_key_exists('custom_author', $_POST ) ) {
-		$custom_author = sanitize_user($_POST['custom_author']);
-		update_post_meta($post_id, 'custom_author', $custom_author);
-	}
 }
 
 /** End of custom author metabox **/
