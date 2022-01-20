@@ -194,6 +194,11 @@
 					<h6 class="feed-sorter" data-sort="author">Author</h6>
 				</li>
 				<?php endif; ?>
+				<?php if ( is_page('research-reports') ) : ?>
+				<li>
+					<h6 class="feed-sorter" data-sort="content">Content Type</h6> 
+				</li>
+				<?php endif; ?>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
@@ -211,6 +216,10 @@
 							if ( $research_focus_area ) {
 								$sortFocus = $research_focus_area[0]->name; 
 							} 
+							$sortContent = ''; 
+							if ($research_content_type) {
+								$sortContent = $research_content_type[0]->name; 
+							} 
 							$sortAuthor = oph_get_post_author_name(get_the_ID()); 
 							$linkExternally = get_field('externally_link'); 
 							$externalURL = get_field('external_url'); 
@@ -218,7 +227,7 @@
 
 						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
 							echo 'data-sort-author="'.$sortAuthor.'"';
-						} ?>>
+						} ?> <?php if( is_page('research-reports') ) { ?>data-sort-content="<?php echo $sortContent; ?>"<?php } ?>>
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -248,6 +257,19 @@
 								<h6>Author</h6>
 								<h5 class="block-feed-post__author">
 									<?php echo oph_get_post_author_name(get_the_ID()); ?>
+								</h5>
+								<?php endif; ?>
+
+								<?php if ( is_page('research-reports') ) : ?>
+								<h6>Content Type</h6>
+								<h5 class='block-feed-post__content_type'>
+									<?php if ($research_content_type) : ?>
+									<ul class="research-content-type">
+										<?php foreach($research_content_type as $term) : ?>
+										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+									<?php endif; ?>
 								</h5>
 								<?php endif; ?>
 
