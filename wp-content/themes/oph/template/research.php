@@ -164,9 +164,10 @@
 							} 
 							$linkExternally = get_field('externally_link'); 
 							$externalURL = get_field('external_url'); 
+							$hidePub = get_field( 'hide_pubDate' ); 
 						?>
 
-						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
+						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" <?php if (!$hidePub) { echo 'data-sort-date="'.$sortDate.'"'; } else { echo 'data-sort-date=""'; } ?> data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -180,9 +181,11 @@
 
 								<h6>Date</h6>
 
-								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F Y', $research->ID ); ?>
-								</h5>
+									<h5 class="block-feed-post__date">
+										<?php if ( !$hidePub ) { 
+											echo get_the_date( 'F Y', $research->ID ); 
+										} ?>
+									</h5>
 
 								<h6>Focus Area</h6>
 

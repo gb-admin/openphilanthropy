@@ -223,9 +223,10 @@
 							$sortAuthor = oph_get_post_author_name(get_the_ID()); 
 							$linkExternally = get_field('externally_link'); 
 							$externalURL = get_field('external_url'); 
+							$hidePub = get_field( 'hide_pubDate' ); 
 						?>
 
-						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" data-sort-date="<?php echo $sortDate; ?>" data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
+						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" <?php if (!$hidePub) { echo 'data-sort-date="'.$sortDate.'"'; } else { echo 'data-sort-date=""'; } ?> data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
 							echo 'data-sort-author="'.$sortAuthor.'"';
 						} ?> <?php if( is_page('research-reports') ) { ?>data-sort-content="<?php echo $sortContent; ?>"<?php } ?>>
 							<div class="block-feed-post__body">
@@ -242,7 +243,9 @@
 								<h6>Date</h6>
 
 								<h5 class="block-feed-post__date">
-									<?php echo get_the_date( 'F Y', $research->ID ); ?>
+									<?php if ( !$hidePub ) { 
+										echo get_the_date( 'F Y', $research->ID ); 
+									} ?>
 								</h5>
 
 								<h6>Focus Area</h6>
