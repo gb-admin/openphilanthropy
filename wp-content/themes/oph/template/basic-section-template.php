@@ -42,6 +42,11 @@
 
 			<?php if ( $content_sections ) : ?>
 				<div class="content-table-of-contents__entry pagenav-content pagenav-content--fullwidth">
+					<?php if ( !empty( get_the_content() ) ) { ?>
+						<div class="content-table-of-contents__entry_content"> 
+							<?php the_content(); ?>
+						</div>
+					<?php } ?>
 					<?php foreach ( $content_sections as $k => $i ) : ?>
 						<?php if ( $i['content'] && $i['section_title'] ) : $k = $k + 1; $sub_sections = []; $o = 0; $p = 0; ?>
 							<div class="content-table-of-contents__section">
