@@ -579,3 +579,7 @@ ul.block-feed-title-head li h6.sorting.rev::after {
   flex-wrap: wrap; 
   justify-content: space-between; 
 }
+
+.sidebar-filter__submit {
+	margin-bottom: 16px;
+}

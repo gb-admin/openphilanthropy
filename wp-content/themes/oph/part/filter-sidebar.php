@@ -199,6 +199,10 @@
 					<?php endforeach; ?>
 				</div>
 
+				<div class="sidebar-filter__button">
+					<a href='javascript:void(0);' class="button sidebar-filter__submit">Submit</a>
+				</div>
+
 				<?php if ( is_page('grants') ) : ?>
 				<div class="sidebar-filter__button">
 					<?php

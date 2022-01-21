@@ -44,6 +44,26 @@
 							</div>
 						</article>
 					<?php endwhile; ?>
+					<div class="feed-footer">
+						<nav aria-label="Search Pagination" class="pagination">
+							<?php
+								global $wp_query;
+
+								$big = 999999999;
+								$translated = __( 'Page', 'oph' );
+
+								echo paginate_links( array(
+									'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+									'end_size' => 2,
+									'mid_size' => 2,
+									'format' => '?paged=%#%',
+									'current' => max( 1, get_query_var('paged') ),
+									'total' => $wp_query->max_num_pages,
+									'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+								) );
+							?>
+						</nav>
+					</div>
 				</div>
 			<?php else :
 				get_template_part( 'part/content', 'none' );
