@@ -128,8 +128,9 @@
 							<?php 
 							$award_date = get_field( 'award_date' );
 							if ( $award_date ) : ?>
-								<?php $yearFilter = get_site_url(null, '/grants/?yr=', 'https') . date("Y", strtotime($award_date)); ?>
-								<h5 class="block-feed-post__date"><a href="<?php echo $yearFilter; ?>"><?php echo date("F Y", strtotime($award_date)); ?></a></h5>
+								<h5 class="block-feed-post__date">
+									<?php echo date("F Y", strtotime($award_date)); ?>	
+								</h5>
 							<?php endif; ?>
 
 							<div class="block-feed-post__head">
