@@ -177,16 +177,15 @@
 							$grants_preview = array_slice( $grants_preview, 0, 3 );
 						}
 					?>
+					<?php if ( $grants_preview ) : ?>
+						<div class="content-focus-area-detail-grants-preview">
+							<div class="wrap">
+								<?php if ( $heading ) : ?>
+									<div class="line-heading">
+										<h2><?php echo $heading; ?></h2>
+									</div>
+								<?php endif; ?>
 
-					<div class="content-focus-area-detail-grants-preview">
-						<div class="wrap">
-							<?php if ( $heading ) : ?>
-								<div class="line-heading">
-									<h2><?php echo $heading; ?></h2>
-								</div>
-							<?php endif; ?>
-
-							<?php if ( $grants_preview ) : ?>
 								<ul class="list-related-posts list-related-posts--no-eyebrow list-3-col<?php if ( count( $grants_preview ) > 3 ) { echo ' has-4-posts'; } ?>" id="related-posts-list">
 									<?php foreach ( $grants_preview as $related ) : ?>
 
@@ -247,9 +246,9 @@
 								<div class="button-group">
 									<a class="button" href="/grants?focus-area=<?php echo $focus_area->slug; ?>"><?php echo $button_text; ?></a>
 								</div>
-							<?php endif; ?>
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 				<?php elseif ( get_row_layout() == 'icon_grid' ) : ?>
 
 					<?php

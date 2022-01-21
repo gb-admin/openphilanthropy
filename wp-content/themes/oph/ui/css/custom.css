@@ -290,7 +290,12 @@ button.button-view-list {
   margin: 24px 0; 
 }
 
-table.table-imported {
+.content div.scroll-box {
+  max-width: 100%; 
+  overflow-x: auto; 
+  width: 100% !important; 
+}
+.content table.table-imported {
   table-layout: auto; 
 }
 
@@ -350,11 +355,13 @@ table.table-imported {
   vertical-align: text-top; 
 }
 
-.content-single .entry-footnotes .footnotes p {
+.content-single .entry-footnotes .footnotes p,
+.content-footnotes .footnotes p {
   font-size: 12px; 
   line-height: 22px; 
 }
-.content-single .entry-footnotes .footnotes p a.footnote-label {
+.content-single .entry-footnotes .footnotes p a.footnote-label, 
+.content-footnotes .footnotes p a.footnote-label {
   font-size: 85%; 
   font-weight: 400; 
   line-height: 100%; 
@@ -362,12 +369,15 @@ table.table-imported {
   vertical-align: text-top; 
 }
 
-.content-single .entry-footnotes a.source-definition {
+.content-single .entry-footnotes a.source-definition,
+.content-footnotes a.source-definition {
   color: #263046; 
   text-decoration: underline; 
 }
 .content-single .entry-footnotes a.source-definition:hover,
-.content-single .entry-footnotes a.source-definition:focus {
+.content-single .entry-footnotes a.source-definition:focus,
+.content-footnotes a.source-definition:hover,
+.content-footnotes a.source-definition:focus {
   color: #445277;
 }
 
@@ -376,6 +386,7 @@ table.table-imported {
   margin-left: auto !important; 
   margin-right: auto !important; 
   margin-top: 18px !important; 
+  max-width: 100%; 
 }
 
 #footer .footer-cell-address h6 {
@@ -403,13 +414,16 @@ table.table-imported {
 .content-basic-text .content-basic-text__main { 
   max-width: 950px; 
 } 
-.content-basic-text .content-basic-text__main a {
+.content-basic-text .content-basic-text__main a, 
+.content-table-of-contents .content-table-of-contents__entry a {
   color: #263046; 
   font-weight: 400; 
   text-decoration: underline; 
 }
 .content-basic-text .content-basic-text__main a:hover, 
-.content-basic-text .content-basic-text__main a:focus {
+.content-basic-text .content-basic-text__main a:focus,
+.content-table-of-contents .content-table-of-contents__entry a:hover,
+.content-table-of-contents .content-table-of-contents__entry a:focus {
   color: #445277;
 }
 .content-basic-text .content-basic-text__main ol, .content-basic-text .content-basic-text__main ul {
@@ -448,7 +462,9 @@ table.table-imported {
 } 
 
 .content-single .entry-footnotes ul li,
-.content-single .entry-footnotes ol li {
+.content-single .entry-footnotes ol li,
+.content-footnotes ul li,
+.content-footnotes ol li {
   font-size: 12px; 
   line-height: 22px; 
 }
