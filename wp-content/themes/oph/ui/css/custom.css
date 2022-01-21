@@ -290,7 +290,12 @@ button.button-view-list {
   margin: 24px 0; 
 }
 
-table.table-imported {
+.content div.scroll-box {
+  max-width: 100%; 
+  overflow-x: auto; 
+  width: 100% !important; 
+}
+.content table.table-imported {
   table-layout: auto; 
 }
 
@@ -376,6 +381,7 @@ table.table-imported {
   margin-left: auto !important; 
   margin-right: auto !important; 
   margin-top: 18px !important; 
+  max-width: 100%; 
 }
 
 #footer .footer-cell-address h6 {

@@ -1462,7 +1462,12 @@ jQuery(function($) {
   // Add class to assist the styling of dynamically imported tables
   $("body.single-research, body.single-grants").find("table:not(.table)").each(function() {
   	let $table = $(this);
-  	$table.addClass("table-imported");
+  	$table.addClass("table-imported"); 
+    if ( $table.parent(".scroll-box").length < 1 ) {
+      console.log('Table boxed up.'); 
+      $table.wrap("<div class='scroll-box'></div>"); 
+    }
+
   	/**
   	 * Create a thead based on the following conditions:
   	 * 1. there is no thead presently
