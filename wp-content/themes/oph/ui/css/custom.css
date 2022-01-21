@@ -613,4 +613,11 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 } 
 .entry-footnotes blockquote p:last-of-type { 
   margin-bottom: 0; 
+} 
+
+.sidebar-filter__button.sidebar-filter__download {
+  margin-top: 24px; 
+}
+.sidebar-filter__button.sidebar-filter__download .button {
+  background-color: rgba(110,124,160,0.33);
 }

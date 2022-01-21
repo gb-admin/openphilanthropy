@@ -204,7 +204,7 @@
 				</div>
 
 				<?php if ( is_page('grants') ) : ?>
-				<div class="sidebar-filter__button">
+				<div class="sidebar-filter__button sidebar-filter__download">
 					<?php
 					  $nonce = wp_create_nonce("generate_grants_csv_nonce");
 					  $link = admin_url('admin-ajax.php?action=generate_grants&nonce='.$nonce);
