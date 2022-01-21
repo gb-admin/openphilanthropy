@@ -1555,7 +1555,33 @@ jQuery(function($) {
         return (A < B) ? 1 : (A > B) ? -1 : 0;
       }).appendTo(layout);
     }
-   }); 
+  }); 
+
+  // Hides the flex-helper pseudo element when un-needed 
+  $(document).ready(function() {    
+    var feed, results; 
+    feed = $('.feed-section__posts .block-feed-post--container'); 
+    results = $(feed).children('.block-feed-post'); 
+
+    // if the page has a feed, run the script 
+    if ( feed.length > 0 ) {
+      var count, tally; 
+      count = 0; 
+      // count up the number of results 
+      $(results).each(function(){ 
+        count = ++count; 
+      });
+      console.log('Count: ' + count); 
+      // test divisible by three (for 3x3 grid fix) 
+      tally = count % 3; 
+      console.log('Tally: '+tally); 
+      // if divisible, hide the helper
+      if ( !tally ) { 
+        console.log('Grid cubed.'); 
+        $(feed).addClass('cubed'); 
+      }
+    } 
+  }); 
 }); 
 
 

@@ -579,6 +579,28 @@ ul.block-feed-title-head li h6.sorting.rev::after {
   flex-wrap: wrap; 
   justify-content: space-between; 
 }
+.block-feed-post--container::after {
+  content: ""; 
+  flex: auto; 
+} 
+.block-feed-post--container.cubed::after {
+  display: none; 
+} 
+@media screen and (min-width: 860px) {
+  .block-feed-post--container::after {
+    max-width: calc(50% - 20px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .block-feed-post--container::after {
+    max-width: calc(33.33333% - 20px);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .block-feed-post--container::after {
+    max-width: calc(33.33333% - 24px);
+  }
+}
 
 .sidebar-filter__submit {
 	margin-bottom: 16px;
