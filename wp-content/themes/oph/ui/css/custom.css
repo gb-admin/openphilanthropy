@@ -355,11 +355,13 @@ button.button-view-list {
   vertical-align: text-top; 
 }
 
-.content-single .entry-footnotes .footnotes p {
+.content-single .entry-footnotes .footnotes p,
+.content-footnotes .footnotes p {
   font-size: 12px; 
   line-height: 22px; 
 }
-.content-single .entry-footnotes .footnotes p a.footnote-label {
+.content-single .entry-footnotes .footnotes p a.footnote-label, 
+.content-footnotes .footnotes p a.footnote-label {
   font-size: 85%; 
   font-weight: 400; 
   line-height: 100%; 
@@ -367,12 +369,15 @@ button.button-view-list {
   vertical-align: text-top; 
 }
 
-.content-single .entry-footnotes a.source-definition {
+.content-single .entry-footnotes a.source-definition,
+.content-footnotes a.source-definition {
   color: #263046; 
   text-decoration: underline; 
 }
 .content-single .entry-footnotes a.source-definition:hover,
-.content-single .entry-footnotes a.source-definition:focus {
+.content-single .entry-footnotes a.source-definition:focus,
+.content-footnotes a.source-definition:hover,
+.content-footnotes a.source-definition:focus {
   color: #445277;
 }
 
@@ -457,7 +462,9 @@ button.button-view-list {
 } 
 
 .content-single .entry-footnotes ul li,
-.content-single .entry-footnotes ol li {
+.content-single .entry-footnotes ol li,
+.content-footnotes ul li,
+.content-footnotes ol li {
   font-size: 12px; 
   line-height: 22px; 
 }
