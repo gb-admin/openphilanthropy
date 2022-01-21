@@ -177,7 +177,7 @@
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list block-feed--research">
+				<div class="block-feed<?php if ( $view_list ) { echo ' block-feed--list'; } ?> block-feed--research">
 					<div class="block-feed-post--container">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 
