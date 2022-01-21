@@ -86,7 +86,7 @@
 								<?php endif; ?>
 
 								<p class="copyright">
-									&copy; Open Philanthropy 2021
+									&copy; Open Philanthropy 2022
 								</p>
 							</div>
 						</div>
