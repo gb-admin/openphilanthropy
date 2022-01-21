@@ -126,39 +126,14 @@
 		'meta_key' => $meta_key
 	);
 
-	// Custom logic if author filter is active
 	if ( isset($params['author'][0]) ) {
 		
-		if ( $author_ids = oph_has_only_core_authors($params['author']) ) {
-			$args['author__in'] = $author_ids;
-			$research = new WP_Query($args);
-		} else if ( oph_has_only_custom_authors($params['author']) ) {
-			$args['meta_query'][] = array(
-				'key'     => 'custom_author',
-				'value'   => $params['author'],
-				'compare' => 'IN'
-			);
-			$research = new WP_Query($args);
-		} else { // mix of core and custom authors
-
-			// Since users can search multiple authors, both custom and wp users. We will create and merge 2 queries
-			$args_core_authors = $args_custom_authors = $args;
-			$args_core_authors['authors__in'] = oph_extract_core_authors($params['author']);
-			$args_custom_authors['meta_query'][] = array(
-				'key'     => 'custom_author',
-				'value'   => oph_extract_custom_authors($params['author']),
-				'compare' => 'IN'
-			);
-
-			$core_author_posts = new WP_Query($args_core_authors);
-			$custom_author_posts = new WP_Query($args_custom_authors);
-
-			$research = new WP_Query($args);
-			$research->posts = array_merge($core_author_posts->posts, $custom_author_posts->posts);
-			$research->post_count = $core_author_posts->post_count + $custom_author_posts->post_count;
-			$research->found_posts = $core_author_posts->found_posts + $custom_author_posts->found_posts;
-			$research->max_num_pages = ceil($research->found_posts / $posts_per_page); // Updated to reflect the merge
-		}
+		$args['meta_query'][] = array(
+			'key'     => 'custom_author',
+			'value'   => $params['author'],
+			'compare' => 'IN'
+		);
+		$research = new WP_Query($args);
 	
 	} else {
 		$research = new WP_Query($args);
@@ -220,7 +195,7 @@
 							if ($research_content_type) {
 								$sortContent = $research_content_type[0]->name; 
 							} 
-							$sortAuthor = oph_get_post_author_name(get_the_ID()); 
+							$sortAuthor = get_post_meta($post->ID, 'custom_author', true); 
 							$linkExternally = get_field('externally_link'); 
 							$externalURL = get_field('external_url'); 
 							$hidePub = get_field( 'hide_pubDate' ); 
@@ -259,7 +234,7 @@
 								<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
 								<h6>Author</h6>
 								<h5 class="block-feed-post__author">
-									<?php echo oph_get_post_author_name(get_the_ID()); ?>
+									<?php echo $sortAuthor; ?>
 								</h5>
 								<?php endif; ?>
 
