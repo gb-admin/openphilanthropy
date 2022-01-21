@@ -196,82 +196,84 @@
 			</ul>
 
 			<?php if ( $grants->have_posts() ) : ?>
-				<div class="block-feed block-feed--images<?php if ( $view_list ) { echo ' block-feed--list'; } ?>">
-					<?php while ( $grants->have_posts() ) : $grants->the_post(); ?>
+				<div class="block-feed block-feed--images<?php if ( $view_list ) { echo ' block-feed--list'; } ?>"> 
+					<div class="block-feed-post--container">
+						<?php while ( $grants->have_posts() ) : $grants->the_post(); ?>
 
-						<?php
-							$award_date = get_field( 'award_date' );
-							$grant_amount = get_field( 'grant_amount' );
+							<?php
+								$award_date = get_field( 'award_date' );
+								$grant_amount = get_field( 'grant_amount' );
 
-							$focus_area = get_the_terms( $post->ID, 'focus-area' );
-							$organization_name = get_the_terms( $post->ID, 'organization-name' );
-							$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
+								$focus_area = get_the_terms( $post->ID, 'focus-area' );
+								$organization_name = get_the_terms( $post->ID, 'organization-name' );
+								$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 
-							if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
-								$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
-							}
+								if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
+									$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+								}
 
-							if ( ! $post_thumbnail ) {
-								$post_thumbnail = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
-							}
-						?>
+								if ( ! $post_thumbnail ) {
+									$post_thumbnail = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+								}
+							?>
 
-						<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
-							<?php if ( $award_date ) : ?>
-								<h5 class="block-feed-post__date">
-									<?php echo date("F Y", strtotime($award_date)); ?>
-								</h5>
-							<?php endif; ?>
-
-							<div class="block-feed-post__head">
-								<?php if ( $post_thumbnail ) : ?>
-									<a href="<?php echo the_permalink(); ?>">
-										<img src="<?php echo $post_thumbnail; ?>" alt="">
-									</a>
-								<?php endif; ?>
-							</div>
-
-							<div class="block-feed-post__body">
-								<h6>Grant Title</h6>
-
-								<h4 class="block-feed-post__title">
-									<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
-								</h4>
-
-								<h6>Organization Name</h6>
-
-								<?php if ( $organization_name && ! is_wp_error( $organization_name ) ) : ?>
-									<h4 class="block-feed-post__organization-name"><a href="?organization-name=<?php echo $organization_name[0]->slug; ?>#categories"><?php echo $organization_name[0]->name; ?></a></h4>
-								<?php else : ?>
-									<div aria-hidden="true" class="block-feed-post__organization-name"></div>
+							<div class="block-feed-post<?php if ( ! $post_thumbnail ) { echo ' no-thumbnail'; } if ( ! $award_date ) { echo ' no-award-date'; } ?>">
+								<?php if ( $award_date ) : ?>
+									<h5 class="block-feed-post__date">
+										<?php echo date("F Y", strtotime($award_date)); ?>
+									</h5>
 								<?php endif; ?>
 
-								<h6>Focus Area</h6>
-
-								<h5 class="block-feed-post__focus-area">
-									<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-										<?php echo $focus_area[0]->name; ?>
+								<div class="block-feed-post__head">
+									<?php if ( $post_thumbnail ) : ?>
+										<a href="<?php echo the_permalink(); ?>">
+											<img src="<?php echo $post_thumbnail; ?>" alt="">
+										</a>
 									<?php endif; ?>
-								</h5>
+								</div>
 
-								<h6>Amount</h6>
+								<div class="block-feed-post__body">
+									<h6>Grant Title</h6>
 
-								<?php if ( $grant_amount ) : ?>
-									<h5 class='block-feed-post__grant-amount'><?php echo '$' . number_format( $grant_amount ); ?></h5>
-								<?php endif; ?>
+									<h4 class="block-feed-post__title">
+										<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+									</h4>
 
-								<h6>Date</h6>
+									<h6>Organization Name</h6>
 
-								<h5 class="block-feed-post__date"><?php echo date("F Y", strtotime($award_date)); ?></h5>
+									<?php if ( $organization_name && ! is_wp_error( $organization_name ) ) : ?>
+										<h4 class="block-feed-post__organization-name"><a href="?organization-name=<?php echo $organization_name[0]->slug; ?>#categories"><?php echo $organization_name[0]->name; ?></a></h4>
+									<?php else : ?>
+										<div aria-hidden="true" class="block-feed-post__organization-name"></div>
+									<?php endif; ?>
 
-								<div class="block-feed-post__link">
-									<a href="<?php echo the_permalink(); ?>">
-										Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
+									<h6>Focus Area</h6>
+
+									<h5 class="block-feed-post__focus-area">
+										<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
+											<?php echo $focus_area[0]->name; ?>
+										<?php endif; ?>
+									</h5>
+
+									<h6>Amount</h6>
+
+									<?php if ( $grant_amount ) : ?>
+										<h5 class='block-feed-post__grant-amount'><?php echo '$' . number_format( $grant_amount ); ?></h5>
+									<?php endif; ?>
+
+									<h6>Date</h6>
+
+									<h5 class="block-feed-post__date"><?php echo date("F Y", strtotime($award_date)); ?></h5>
+
+									<div class="block-feed-post__link">
+										<a href="<?php echo the_permalink(); ?>">
+											Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					<?php endwhile; wp_reset_postdata(); ?>
+						<?php endwhile; wp_reset_postdata(); ?>
+					</div>
 					<div class="feed-footer">
 						<nav aria-label="Post Feed Pagination" class="pagination">
 

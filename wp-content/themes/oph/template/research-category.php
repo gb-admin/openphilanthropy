@@ -154,7 +154,7 @@
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
-			<ul class="block-feed-title-head is-research is-active">
+			<ul class="block-feed-title-head is-research<?php if ( $view_list ) { echo ' is-active'; } ?>">
 				<li>
 					<h6 class="feed-sorter" data-sort="title">Title</h6>
 				</li>
@@ -177,7 +177,7 @@
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
-				<div class="block-feed block-feed--list block-feed--research">
+				<div class="block-feed<?php if ( $view_list ) { echo ' block-feed--list'; } ?> block-feed--research">
 					<div class="block-feed-post--container">
 					<?php while ( $research->have_posts() ) : $research->the_post(); ?>
 

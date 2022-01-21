@@ -128,7 +128,7 @@
 		<?php get_template_part( 'part/feed', 'options-mobile' ); ?>
 
 		<div class="feed-section__posts wrap">
-			<ul class="block-feed-title-head is-research is-active">
+			<ul class="block-feed-title-head is-research<?php if ( $view_list ) { echo ' is-active'; } ?>">
 				<li>
 					<h6 class="feed-sorter" data-sort="title">Title</h6>
 				</li>
