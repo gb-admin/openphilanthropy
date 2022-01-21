@@ -403,13 +403,16 @@ table.table-imported {
 .content-basic-text .content-basic-text__main { 
   max-width: 950px; 
 } 
-.content-basic-text .content-basic-text__main a {
+.content-basic-text .content-basic-text__main a, 
+.content-table-of-contents .content-table-of-contents__entry a {
   color: #263046; 
   font-weight: 400; 
   text-decoration: underline; 
 }
 .content-basic-text .content-basic-text__main a:hover, 
-.content-basic-text .content-basic-text__main a:focus {
+.content-basic-text .content-basic-text__main a:focus,
+.content-table-of-contents .content-table-of-contents__entry a:hover,
+.content-table-of-contents .content-table-of-contents__entry a:focus {
   color: #445277;
 }
 .content-basic-text .content-basic-text__main ol, .content-basic-text .content-basic-text__main ul {
