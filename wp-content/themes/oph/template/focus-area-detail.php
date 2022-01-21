@@ -207,7 +207,19 @@
 												'source' => $related_excerpt_source
 											);
 
-											$related_description = excerpt( $related_excerpt );
+											$related_description = excerpt( $related_excerpt ); 
+
+											$grant_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
+											$related_eyebrow_copy = '';
+											$related_eyebrow_link_url = '';
+
+											if ( $grant_focus_area && $grant_focus_area->name ) {
+												$related_eyebrow_copy = $grant_focus_area->name;
+											}
+
+											if ( $grant_focus_area && $grant_focus_area->slug ) {
+												$related_eyebrow_link_url = 'grants/?focus-area=' . $grant_focus_area->slug;
+											}
 										?>
 
 										<li>
@@ -365,13 +377,12 @@
 
 											$related_eyebrow_copy = '';
 											$related_eyebrow_link_url = '';
+ 
+											$research_content_type = get_the_terms( $related->ID, 'content-type' )[0]; 
+											$related_eyebrow_copy = $research_content_type->name;  
 
-											if ( $research_focus_area && $research_focus_area->name ) {
-												$related_eyebrow_copy = $first_parent_term->name;
-											}
-
-											if ( $research_focus_area && $research_focus_area->slug ) {
-												$related_eyebrow_link_url = '/research?focus-area=' . $first_parent_term->slug;
+											if ( $research_content_type && $research_content_type->slug ) {
+												$related_eyebrow_link_url = get_home_url( null,'/research/?content-type=', 'https') . $research_content_type->slug;
 											}
 
 											if ( has_excerpt( $related->ID ) ) {
