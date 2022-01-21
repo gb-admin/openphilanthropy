@@ -1142,32 +1142,33 @@ jQuery(function($) {
 
   // Create 'Sources' Toggle 
   // Finds 'Sources' section in the_content() 
-  $(document).ready(function(){
-    var headings, sourceWrap, wrapContent, expandWrap; 
-    headings = $('.content-single .entry-content h2'); 
-    wrapContent = '<div class="source-wrap"></div>'; 
-    expandWrap = '<span class="source-expand">Expand <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span>';
+  // JK they don't want it now... 
+  // $(document).ready(function(){
+  //   var headings, sourceWrap, wrapContent, expandWrap; 
+  //   headings = $('.content-single .entry-content h2'); 
+  //   wrapContent = '<div class="source-wrap"></div>'; 
+  //   expandWrap = '<span class="source-expand">Expand <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span>';
     
-    $(headings).each(function(){ 
-      var content = $(this).text(); 
+  //   $(headings).each(function(){ 
+  //     var content = $(this).text(); 
 
-      if ( content.endsWith('Sources') ) {
-        console.log('Found the Sources: '); 
-        var sourceEnds, sourceList; 
-        sourceEnds = $('h2, div'); 
+  //     if ( content.endsWith('Sources') ) {
+  //       console.log('Found the Sources: '); 
+  //       var sourceEnds, sourceList; 
+  //       sourceEnds = $('h2, div'); 
 
-        $(this).append(expandWrap); 
-        $(this).after(wrapContent); 
+  //       $(this).append(expandWrap); 
+  //       $(this).after(wrapContent); 
 
-        sourceWrap = $('.source-wrap'); 
+  //       sourceWrap = $('.source-wrap'); 
         
-        sourceList = $(sourceWrap).nextUntil(sourceEnds, 'p'); 
-        $(sourceList).each(function(){
-          $(this).appendTo(sourceWrap); 
-        });
-      }
-    });
-  });
+  //       sourceList = $(sourceWrap).nextUntil(sourceEnds, 'p'); 
+  //       $(sourceList).each(function(){
+  //         $(this).appendTo(sourceWrap); 
+  //       });
+  //     }
+  //   });
+  // });
 
   // Reveal Sources on click 
   $(document).ready(function(){
