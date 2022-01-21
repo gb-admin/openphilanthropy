@@ -582,4 +582,35 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 
 .sidebar-filter__submit {
 	margin-bottom: 16px;
+} 
+
+.entry-content blockquote { 
+  background-color: #EFF1F5; 
+  border-left: 2px solid #4F5C78; 
+  margin: 26px 0;
+  padding: 16px 16px 16px 32px; 
+} 
+.entry-content blockquote p { 
+  font-size: 16px; 
+  font-style: italic; 
+  font-weight: 400; 
+  line-height: 26px; 
+} 
+.entry-content blockquote p:last-of-type { 
+  margin-bottom: 0; 
+}
+.entry-footnotes blockquote { 
+  background-color: #EFF1F5; 
+  border-left: 2px solid #4F5C78; 
+  margin: 12px 0;
+  padding: 8px 8px 8px 22px; 
+} 
+.entry-footnotes blockquote p { 
+  /* font-size: 16px;  */
+  font-style: italic; 
+  font-weight: 400; 
+  /* line-height: 26px;  */
+} 
+.entry-footnotes blockquote p:last-of-type { 
+  margin-bottom: 0; 
 }
