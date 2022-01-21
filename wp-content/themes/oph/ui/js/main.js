@@ -895,6 +895,7 @@ jQuery(function($) {
    */
 
   var url = new URL(window.location.href);
+  window.sidebarFilterUrl = ''; // Used to store the current URL for the sidebar filters.
 
   $('.sidebar-filter select').on('change', function() {
     var category = $(this).find(':selected').attr('data-category'),
@@ -931,8 +932,14 @@ jQuery(function($) {
         url.href = url.href.split('#')[0] + '#' + filterAnchor;
       }
 
-      window.location.replace(url.href);
+	  window.sidebarFilterUrl = url.href;
+      
     }
+  });
+
+  $(".sidebar-filter a.sidebar-filter__submit").on('click', function(e) {
+	  e.preventDefault();
+	  window.location.replace(window.sidebarFilterUrl);
   });
 
   var closeIcon = $('<svg aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.857 6.506L1.571.221.157 1.635 6.443 7.92 0 14.363l1.414 1.415 6.443-6.443 6.442 6.442 1.415-1.414L9.27 7.92l6.285-6.285L14.142.221 7.857 6.506z"/></svg>');
