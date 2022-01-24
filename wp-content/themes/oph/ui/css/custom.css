@@ -641,5 +641,15 @@ ul.block-feed-title-head li h6.sorting.rev::after {
   margin-top: 24px; 
 }
 .sidebar-filter__button.sidebar-filter__download .button {
-  background-color: rgba(110,124,160,0.33);
+  background-color: rgba(110,124,160,0.33); 
+  border: 0; 
+} 
+
+#header-sitewide-search-form {
+  z-index: 40; 
 }
+
+body:not(.home) header .sitewide-search-button svg path,
+body.home header.is-scrolled .sitewide-search-button svg path {
+  fill: #445277;
+} 
