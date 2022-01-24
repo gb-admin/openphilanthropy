@@ -257,7 +257,7 @@ function get_term_top_most_parent( $term, $taxonomy ) {
 // Add the search function to the navigation menu
 add_filter( 'wp_nav_menu_items', 'oph_add_search_functionality', 10, 2 );
 function oph_add_search_functionality ( $items, $args ) {
-    if ( $args->theme_location == 'primary') { 
+    if ( $args->theme_location == 'primary' || $args->theme_location == 'accessory') { 
 		ob_start(); ?>
         <li id='sitewide-search'>
 			<a href='javascript:void(0)' id='sitewide-search-button'>

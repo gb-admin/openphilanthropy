@@ -643,4 +643,8 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 .sidebar-filter__button.sidebar-filter__download .button {
   background-color: rgba(110,124,160,0.33); 
   border: 0; 
+} 
+
+#header-sitewide-search-form {
+  z-index: 40; 
 }
