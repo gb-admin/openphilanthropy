@@ -648,3 +648,8 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 #header-sitewide-search-form {
   z-index: 40; 
 }
+
+body:not(.home) header .sitewide-search-button svg path,
+body.home header.is-scrolled .sitewide-search-button svg path {
+  fill: #445277;
+} 

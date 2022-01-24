@@ -259,8 +259,8 @@ add_filter( 'wp_nav_menu_items', 'oph_add_search_functionality', 10, 2 );
 function oph_add_search_functionality ( $items, $args ) {
     if ( $args->theme_location == 'primary' || $args->theme_location == 'accessory') { 
 		ob_start(); ?>
-        <li id='sitewide-search'>
-			<a href='javascript:void(0)' id='sitewide-search-button'>
+        <li class='sitewide-search'>
+			<a href='javascript:void(0)' class='sitewide-search-button'>
 				<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M15.4837 13.2867C17.7568 9.98148 17.4241 5.42387 14.4855 2.48532C11.1718 -0.82844 5.79908 -0.82844 2.48532 2.48532C-0.82844 5.79908 -0.82844 11.1718 2.48532 14.4855C5.69318 17.6934 10.8305 17.7959 14.1616 14.7931L18.5908 19.2222L20.005 17.808L15.4837 13.2867ZM13.0713 3.89953C15.604 6.43225 15.604 10.5386 13.0713 13.0713C10.5386 15.604 6.43225 15.604 3.89953 13.0713C1.36682 10.5386 1.36682 6.43225 3.89953 3.89953C6.43225 1.36682 10.5386 1.36682 13.0713 3.89953Z" fill="white"/>
 				</svg>

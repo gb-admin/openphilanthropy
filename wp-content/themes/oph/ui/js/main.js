@@ -1359,7 +1359,7 @@ jQuery(function($) {
    * Adding a custom search form on primary menu's search icon. 
    * We are creating a separate one here to reserve the default searchform.php for content-none.php template
    */
-  $("#sitewide-search-button").on("click", function() {
+  $(".sitewide-search-button").on("click", function() {
 	let template = `<div id='header-sitewide-search-form' style='display: none;'>
   		<div class='close-btn'>
   			<a href='javascript:void(0);'>
