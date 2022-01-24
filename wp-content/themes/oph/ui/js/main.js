@@ -1546,16 +1546,16 @@ jQuery(function($) {
 
     function sort(dataStr){ 
       $(listings).sort(function(a, b) {
-        var A = $(a).data(dataStr).toUpperCase();
-        var B = $(b).data(dataStr).toUpperCase();
+        var A = $(a).data(dataStr).toString(); 
+        var B = $(b).data(dataStr).toString(); 
         return (A < B) ? -1 : (A > B) ? 1 : 0;
       }).appendTo(layout);
     }
 
     function sortRev(dataStr) {
       $(listings).sort(function(a, b) {
-        var A = $(a).data(dataStr).toUpperCase();
-        var B = $(b).data(dataStr).toUpperCase();
+        var A = $(a).data(dataStr).toString(); 
+        var B = $(b).data(dataStr).toString(); 
         return (A < B) ? 1 : (A > B) ? -1 : 0;
       }).appendTo(layout);
     }
