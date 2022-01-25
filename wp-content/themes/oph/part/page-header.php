@@ -28,9 +28,12 @@
 
 	if ( is_single() ) {
 		array_push( $page_header_class, 'is-single' );
+	} 
+
+	if ( is_singular('grants') ) {
+		$orgSite =  get_field('org_website', $post->ID); 
 	}
 ?>
-
 <div class="page-header<?php echo ' ' . inline_list( $page_header_class, ' ' ); ?>">
 	<div class="wrap">
 		<div class="page-header__content">
@@ -49,7 +52,7 @@
 					</div>
 				<?php endif; ?>
 
-				<?php if ( $page_header_button ) : ?>
+				<?php if ( $page_header_button ) { ?>
 					<div class="button-group">
 						<?php foreach ( $page_header_button as $i ) : ?>
 							<?php if ( $i['link']['url'] ) : ?>
@@ -57,7 +60,12 @@
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-				<?php endif; ?>
+				<?php } elseif ( $orgSite ) {  ?> 
+					<div class="button-group">						
+						<a class="button" href="<?php echo $orgSite; ?>" target="_blank">Organization Site</a> 
+					</div>
+				<?php } ?>
+
 			</div>
 		</div>
 	</div>
