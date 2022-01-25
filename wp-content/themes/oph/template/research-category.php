@@ -23,7 +23,7 @@
 
 	$view_list = false;
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
+	if ( ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) || ( empty(count($_GET)) ) ) {
 		$view_list = true;
 	}
 
@@ -169,11 +169,6 @@
 					<h6 class="feed-sorter" data-sort="author">Author</h6>
 				</li>
 				<?php endif; ?>
-				<?php if ( is_page('research-reports') ) : ?>
-				<li>
-					<h6 class="feed-sorter" data-sort="content">Content Type</h6> 
-				</li>
-				<?php endif; ?>
 			</ul>
 
 			<?php if ( $research->have_posts() ) : ?>
@@ -203,7 +198,7 @@
 
 						<div class="block-feed-post" data-sort-title="<?php echo $sortTitle; ?>" <?php if (!$hidePub) { echo 'data-sort-date="'.$sortDate.'"'; } else { echo 'data-sort-date=""'; } ?> data-sort-focus="<?php echo $sortFocus; ?>" <?php if ( is_page('blog-posts') || is_page('notable-lessons') ) {
 							echo 'data-sort-author="'.$sortAuthor.'"';
-						} ?> <?php if( is_page('research-reports') ) { ?>data-sort-content="<?php echo $sortContent; ?>"<?php } ?>>
+						} ?>> 
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
@@ -235,19 +230,6 @@
 								<h6>Author</h6>
 								<h5 class="block-feed-post__author">
 									<?php echo $sortAuthor; ?>
-								</h5>
-								<?php endif; ?>
-
-								<?php if ( is_page('research-reports') ) : ?>
-								<h6>Content Type</h6>
-								<h5 class='block-feed-post__content_type'>
-									<?php if ($research_content_type) : ?>
-									<ul class="research-content-type">
-										<?php foreach($research_content_type as $term) : ?>
-										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
-										<?php endforeach; ?>
-									</ul>
-									<?php endif; ?>
 								</h5>
 								<?php endif; ?>
 
