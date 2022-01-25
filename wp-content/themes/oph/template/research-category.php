@@ -23,7 +23,7 @@
 
 	$view_list = false;
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) {
+	if ( ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) || ( empty(count($_GET)) ) ) {
 		$view_list = true;
 	}
 
