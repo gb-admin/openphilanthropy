@@ -290,13 +290,15 @@ button.button-view-list {
   margin: 24px 0; 
 }
 
-.content div.scroll-box {
+.content div.scroll-box,
+.content-single div.scroll-box {
   max-width: 100%; 
   overflow-x: auto; 
   width: 100% !important; 
 }
-.content table.table-imported {
-  table-layout: auto; 
+.content table.table-imported,
+.content-single table.table-imported {
+  table-layout: auto !important; 
 }
 
 @media screen and (min-width: 768px) {
