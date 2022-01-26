@@ -65,7 +65,6 @@
 						<a class="button" href="<?php echo $orgSite; ?>" target="_blank">Organization Site</a> 
 					</div>
 				<?php } ?>
-
 			</div>
 		</div>
 	</div>
