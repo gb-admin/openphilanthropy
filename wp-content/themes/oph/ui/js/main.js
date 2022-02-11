@@ -1221,7 +1221,6 @@ jQuery(function($) {
   /**
    * Set icon in Select2 button.
    */
-
   $(document).ready(function() {
     var selectArrow = $('<svg viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6 1.5l9.9 9.9 9.9-9.9" stroke="#6e7ca0" stroke-width="2"/></svg>');
 
@@ -1230,20 +1229,66 @@ jQuery(function($) {
     $('.select2-selection').append(selectArrow);
   });
 
-  function setGridViewSameHeight() {
-	var elem = ".block-feed:not(.block-feed--list) > .block-feed-post.same-height";
-	var maxHeight = Math.max.apply(null, $(elem).map(function () {
-		return $(this).outerHeight();
-	}).get());
+  /**
+   * Set List View Height to 'auto' 
+   */
+  function resetGridViewHeight() {
+    console.log('Resetting the grid...');
+    var elem; 
+    elem = $(".block-feed-post.same-height"); 
 
-	if ( maxHeight ) {
-		$(elem).css("min-height", maxHeight + 'px');
-	}
+    $(elem).each(function() {
+      $(this).css('height', 'auto'); 
+    });
   }
 
-  // Trigger if the initial view is grid
-  setGridViewSameHeight();
+  /**
+   * Set Grid View Height to Largest
+   */
+  function setGridViewSameHeight() { 
+    console.log('Resizing the grid...');
+    var elem, match; 
+    elem = $(".block-feed-post.same-height"); 
+    
+    match = 0;
+    $(elem).each(function() {
+      var postHeight; 
+      postHeight = $(this).outerHeight(); 
 
+      console.log('match: ' + match); 
+      console.log('postHeight: ' + postHeight); 
+
+      if ( postHeight > match ) {
+        match = postHeight; 
+      }
+    });
+
+    console.log('Final match: ' + match); 
+
+    $(elem).each(function() {
+      $(this).css('height', match); 
+    }); 
+
+    console.log('Posts matched.'); 
+  }
+
+  /**
+   * Deal with Grid View on Page Load 
+   */
+  $(document).ready(function() { 
+    var postFeed = $('.block-feed'); 
+    if ( !postFeed.hasClass('block-feed--list') ) {
+      // Trigger if the initial view is grid
+      setGridViewSameHeight();
+    } else {
+      console.log('Viewing as list'); 
+    }
+  });
+
+
+  /**
+   * View as List/Grid Action 
+   */
   $(document).on('click', '.button-view-list', function(e) {
     e.preventDefault();
 
@@ -1294,7 +1339,11 @@ jQuery(function($) {
       $(this).attr('href', linkUrl.href);
     });
 
-	setGridViewSameHeight();
+    if (blockFeed.hasClass('block-feed--list')) {
+      resetGridViewHeight();
+    } else {
+      setGridViewSameHeight();
+    }
   });
 
   /**
