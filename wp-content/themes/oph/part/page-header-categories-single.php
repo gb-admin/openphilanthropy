@@ -37,8 +37,19 @@
 					<ul id="single-header-categories-list">
 						<?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
 							<?php foreach ( $terms_focus_area as $term ) : ?>
+								<?php 
+								$parentID = $term->parent; 
+								// echo 'ParentID = ' . $parentID; 
+								if ( $parentID != 0 ) {
+									$grandparent = get_term( $parentID, 'focus-area' ); 
+									$grandparentID = $grandparent->parent; 
+									// echo 'GrandparentID = ' . $grandparentID; 
+								}
+								if ( ($parentID != 0) && ($grandparentID != 0) ) {} else {}
+								?> 
 								<li>
-									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">Portfolio Area: <?php echo $term->name; ?></a>
+									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">
+										<?php if ( ($parentID != 0) && ($grandparentID != 0) ) { ?> Portfolio Area: <?php } else { ?> Focus Area: <?php } echo $term->name; ?></a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
