@@ -656,6 +656,7 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   fill: #445277;
 } 
 
+/* Grid View Eyebrow */ 
 .block-feed-post-research { 
   border-top: 0; 
   padding: 0 0 20px 0; 
@@ -680,7 +681,6 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   padding: 6px 20px; 
   text-transform: uppercase; 
 } 
-
 .block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__eyebrow p {
   line-height: 19.12px; 
   margin: 0; 
@@ -688,4 +688,45 @@ body.home header.is-scrolled .sitewide-search-button svg path {
 
 .block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__date {
   display: none; 
+} 
+
+
+/* Research Archive Content Type Bubbles */
+.block-feed.block-feed--research .block-feed-post .block-feed-post__body .block-feed-post__content_type ul.research-content-type { 
+  margin-top: -24px; 
+  white-space: pre-line; 
 }
+.block-feed.block-feed--research .block-feed-post .block-feed-post__body .block-feed-post__content_type ul.research-content-type li {
+  background-color: #FFF; 
+  border-radius: 14px; 
+  display: inline-block; 
+  margin-bottom: 10px; 
+  padding: 2px 13px; 
+} 
+.block-feed.block-feed--research .block-feed-post .block-feed-post__body .block-feed-post__content_type ul.research-content-type li a {
+  font-size: 14px; 
+  font-weight: 800; 
+  line-height: 22px; 
+  text-decoration: none; 
+  text-transform: uppercase; 
+} 
+
+.block-feed:not(.block-feed--list) .block-feed-post .block-feed-post__content_type {
+  display: block; 
+} 
+
+.block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__category {
+  margin-bottom: 15px; 
+}
+
+/* @media only screen and (min-width: 1024px) {
+  .block-feed.block-feed--list.block-feed--research .block-feed-post .block-feed-post__body .block-feed-post__date {
+    flex: 0 0 160px; 
+  } 
+  .block-feed-title-head.is-research>li:nth-child(2) {
+    flex: 0 0 160px; 
+  } 
+  .block-feed.block-feed--list.block-feed--research .block-feed-post .block-feed-post__body .block-feed-post__content_type {
+    flex: 0 0 auto; 
+  }
+} */
