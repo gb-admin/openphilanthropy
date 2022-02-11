@@ -656,3 +656,36 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   fill: #445277;
 } 
 
+.block-feed-post-research { 
+  border-top: 0; 
+  padding: 0 0 20px 0; 
+} 
+
+.block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__body { 
+  margin: 20px 20px 0 20px; 
+} 
+
+.block-feed-post__eyebrow { 
+  display: none; 
+} 
+
+.block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__eyebrow { 
+  background-color: #6e7ca0; 
+  color: #FFF; 
+  display: block; 
+  font-size: 14px; 
+  font-weight: 800; 
+  letter-spacing: 1px; 
+  min-height: 31.11px; 
+  padding: 6px 20px; 
+  text-transform: uppercase; 
+} 
+
+.block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__eyebrow p {
+  line-height: 19.12px; 
+  margin: 0; 
+}
+
+.block-feed:not(.block-feed--list) .block-feed-post-research .block-feed-post__date {
+  display: none; 
+}
