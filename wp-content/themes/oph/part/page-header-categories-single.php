@@ -45,7 +45,6 @@
 									$grandparentID = $grandparent->parent; 
 									// echo 'GrandparentID = ' . $grandparentID; 
 								}
-								if ( ($parentID != 0) && ($grandparentID != 0) ) {} else {}
 								?> 
 								<li>
 									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">
