@@ -167,7 +167,14 @@
 							$hidePub = get_field( 'hide_pubDate' ); 
 						?>
 
-						<div class="block-feed-post same-height" data-sort-title="<?php echo $sortTitle; ?>" <?php if (!$hidePub) { echo 'data-sort-date="'.$sortDate.'"'; } else { echo 'data-sort-date=""'; } ?> data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
+						<div class="block-feed-post same-height block-feed-post-research" data-sort-title="<?php echo $sortTitle; ?>" <?php if (!$hidePub) { echo 'data-sort-date="'.$sortDate.'"'; } else { echo 'data-sort-date=""'; } ?> data-sort-focus="<?php echo $sortFocus; ?>" data-sort-content="<?php echo $sortContent; ?>">
+							<div class="block-feed-post__eyebrow"> 
+								<p>
+									<?php if ( !$hidePub ) { 
+										echo get_the_date( 'F Y', $research->ID ); 
+									} ?>
+								</p>
+							</div>
 							<div class="block-feed-post__body">
 								<h6>Title</h6>
 
