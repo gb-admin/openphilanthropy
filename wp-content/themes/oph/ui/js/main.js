@@ -131,44 +131,6 @@ jQuery(function($) {
     getOptions(focusSelect); 
   });
 
-  // $(document).ready(function() {
-  //   var contentSelect, contentOptions; 
-  //   contentSelect = $('select[data-filter="content-type"]'); 
-  //   contentOptions = $(contentSelect).children('option'); 
-  //   $(contentOptions).each(function() { 
-  //     var parent, parentElem;
-  //     parent = $(this).data( "parent" ); 
-  //     if ( parent != 0 ) {
-  //       parentElem = $('select[data-filter="content-type"] option[data-termID=' + parent + ']'); 
-        
-  //       if ( $(parentElem).data( "parent" ) == 0 ) { 
-  //         $(this).addClass('level-second'); 
-  //       } else { 
-  //         var gparent, gparentElem; 
-  //         gparent = $(parentElem).data( "parent" ); 
-  //         gparentElem = 
-  //       } 
-  //     } else {
-  //       $(this).insertAfter(parentElem);  
-  //     }
-  //     // $(this).insertAfter(parentElem); 
-  //   });
-  // });
-
-  // $(document).ready(function() {
-  //   var focusSelect, focusOptions; 
-  //   focusSelect = $('select[data-filter="focus-area"]'); 
-  //   focusOptions = $(focusSelect).children('option'); 
-  //   $(focusOptions).each(function() { 
-  //     var parent, parentElem; 
-  //     parent = $(this).data( "parent" ); 
-  //     if ( parent != 0 ) { 
-  //       parentElem = $('select[data-filter="focus-area"] option[data-termID=' + parent + ']'); 
-  //       $(this).insertAfter(parentElem); 
-  //     }
-  //   });
-  // });
-
 
   /**
    * Call Select2
@@ -182,12 +144,22 @@ jQuery(function($) {
       templateSelection: select2CopyClasses
     });
 
-    $('.sidebar-filter select').select2({
+    var sidebarSelect = $('.sidebar-filter select').select2({
       dropdownCssClass: 'sidebar-filter-dropdown',
       searchInputPlaceholder: 'Type here to search ...',
       templateResult: select2CopyClasses,
-      templateSelection: select2CopyClasses
-    });
+      templateSelection: select2CopyClasses, 
+      // allowClear: true 
+    }); 
+
+    $(sidebarSelect).on('select2:select', function (e) {
+      var element, classes;
+      element = e.params.data.element; 
+      classes = e.params.data.element.className; 
+      console.log(classes); 
+
+      $(element).addClass('active'); 
+    }); 
 
     /**
      * Wrap dropdown on open. Inner div helps with rounded corners
@@ -1747,3 +1719,7 @@ jQuery(function($) {
 
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate 
+
+// window.onclick = e => {
+//   console.log(e.target);  // to get the element
+// }  
