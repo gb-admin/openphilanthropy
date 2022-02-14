@@ -70,7 +70,7 @@
 
 							<?php if ( $award_date ) : ?>
 								<li>
-									<p>Award Date: <?php echo $award_date; ?></p>
+									<p>Award Date: <?php echo date("F Y", strtotime($award_date)); ?></p>
 								</li>
 							<?php endif; ?>
 						<?php elseif ( $post_type == 'research' ) : ?>
