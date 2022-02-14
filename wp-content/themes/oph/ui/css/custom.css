@@ -730,3 +730,11 @@ body.home header.is-scrolled .sitewide-search-button svg path {
     flex: 0 0 auto; 
   }
 } */
+
+.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options>li.is-term-child.level-3::before {
+  left: 40px;
+} 
+
+.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options>li.is-term-child.level-3 {
+  padding-left: 76px !important;
+}
