@@ -63,8 +63,6 @@
 								<li>
 									<a data-goto="#<?php echo $pagenav_anchor; ?>" href="<?php echo $pagenav_anchor; ?>" title="<?php echo $content['title']; ?>">
 										<span><?php echo $content['title']; ?></span>
-
-										<svg aria-hidden="true" class="aside-post-navigation-icon" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"></path></svg>
 									</a>
 								</li>
 							<?php endforeach; ?>
