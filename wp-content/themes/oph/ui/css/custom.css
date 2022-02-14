@@ -731,10 +731,17 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   }
 } */
 
-.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options>li.is-term-child.level-3::before {
+.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options > li.is-term-child.level-3::before {
   left: 40px;
 } 
 
-.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options>li.is-term-child.level-3 {
+.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options > li.is-term-child.level-3 {
   padding-left: 76px !important;
+} 
+.select2-dropdown.sidebar-filter-dropdown .select2-results .select2-results__options>li.is-term-child.level-3::after {
+  left: 44px; 
 }
+
+.select2-results .select2-results__options li.select2-results__option.active::after {
+  opacity: 100; 
+} 
