@@ -135,7 +135,7 @@
 				<div class="entry-content">
 					<div class='author-date-meta'>
 						<?php if ( !$hidePub ) { ?>
-						<span class='publish-date'>Published: <?= get_the_date("M d, Y"); ?> </span><?php } if( !$hidePub && !empty($displayAuthor) ) { echo '<span> | </span>'; } if ( !empty($displayAuthor) ){?><span class='author'> by <?php echo $displayAuthor; ?></span> <?php } ?> 
+						<span class='publish-date'>Published: <?= get_the_date("F Y"); ?> </span><?php } if( !$hidePub && !empty($displayAuthor) ) { echo '<span> | </span>'; } if ( !empty($displayAuthor) ){?><span class='author'> by <?php echo $displayAuthor; ?></span> <?php } ?> 
 					</div>
 					<?php the_content(); ?>
 				</div>
