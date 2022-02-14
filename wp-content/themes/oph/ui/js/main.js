@@ -1548,8 +1548,8 @@ jQuery(function($) {
 	$("#header-sitewide-search-form").fadeOut(300);
   });
 
-  // Career page's footnotes toggle
-  $("body.page-template-careers #toggle-footnotes").on("click", function() {
+  // Page template footnotes toggle
+  $("body.page-template #toggle-footnotes").on("click", function() {
 	let $root = $(this);
 	if ( $(".footnotes").is(":visible") ) { // collapse
 		$(".footnotes").slideUp(400, function () {
