@@ -65,6 +65,13 @@
                 "operator": "==",
                 "value": "template\/basic-text-template.php"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "careers"
+            }
         ]
     ],
     "menu_order": 0,
@@ -75,5 +82,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642006961
+    "modified": 1644881255
 }
