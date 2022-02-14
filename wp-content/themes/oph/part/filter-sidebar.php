@@ -25,19 +25,23 @@
 		'taxonomy' => 'content-type'
 	) );
 
-	$focus_area = get_taxonomy_hierarchy( 'focus-area', $parent=0, $post_type );
+	// $focus_area = get_taxonomy_hierarchy( 'focus-area', $parent=0, $post_type );
 
-	// Flatten hierarchy taxonomy array
-	foreach ( $focus_area as $k => $tax ) {
-		if ( isset( $tax->children ) && ! empty( $tax->children ) ) {
+	$focus_area = get_terms( array(
+		'taxonomy' => 'focus-area'
+	) );
 
-			// Flatten
-			array_splice( $focus_area, 2, 0, $tax->children );
+	// // Flatten hierarchy taxonomy array
+	// foreach ( $focus_area as $k => $tax ) {
+	// 	if ( isset( $tax->children ) && ! empty( $tax->children ) ) {
 
-			// Unset original
-			$tax->children = [];
-		}
-	}
+	// 		// Flatten
+	// 		array_splice( $focus_area, 2, 0, $tax->children );
+
+	// 		// Unset original
+	// 		$tax->children = [];
+	// 	}
+	// }
 
 	$funding_type = get_terms( array(
 		'taxonomy' => 'funding-type'
@@ -145,10 +149,10 @@
 
 							<?php if ( $content_type ) : ?>
 								<select data-filter="content-type" data-input-placeholder="Type here to search ..." data-placeholder="Content Type">
-									<option value=""></option>
+									<option class="filler-option" value=""></option>
 
 									<?php foreach ( $content_type as $i ) : ?>
-										<option class="<?php if ( in_array( $i->slug, $params['content-type'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+										<option class="<?php if ( in_array( $i->slug, $params['content-type'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" data-parent="<?php echo $i->parent ?>" data-termID="<?php echo $i->term_id ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php endif; ?>
@@ -156,10 +160,10 @@
 
 							<?php if ( $focus_area ) : ?>
 								<select data-filter="focus-area" data-input-placeholder="Type here to search ..." data-placeholder="Focus Area">
-									<option value=""></option>
+									<option class="filler-option" value=""></option>
 
 									<?php foreach ( $focus_area as $i ) : ?>
-										<option class="<?php if ( in_array( $i->slug, $params['focus-area'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
+										<option class="<?php if ( in_array( $i->slug, $params['focus-area'] ) ) { echo 'category-selected'; } if ( $i->parent != 0 ) { echo ' is-term-child'; } ?>" data-category="<?php echo $i->slug; ?>" data-parent="<?php echo $i->parent ?>" data-termID="<?php echo $i->term_id ?>" value="<?php echo $i->name; ?>"><?php echo $i->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php endif; ?>

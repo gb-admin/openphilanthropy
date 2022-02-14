@@ -63,6 +63,114 @@ jQuery(function($) {
   }
 
   /**
+   * Fix for the Select2 Bullshit 
+   */
+
+  // Find all select options
+  function getOptions(select) {
+    var options = $(select).children('option').not('.filler-option'); 
+    getParents(options); 
+  } 
+  // Get parent data for all options
+  function getParents(options) {
+    $(options).each(function() { 
+      var parent = $(this).data( "parent" ); 
+      getLevel(this, parent, 1)
+    });
+
+    sortOptions(options, 2); 
+  } 
+  // Get sub-levels
+  function getLevel(element, parent, iteration) { 
+    if ( parent == 0 ) {
+      addLevel(element, iteration); 
+    } else { 
+      var parentSelect, parentElem, parentData; 
+      parentSelect = $(element).parent();
+      parentElem = $(parentSelect).children('option[data-termID=' + parent + ']');  
+      iteration++; 
+      parentData = $(parentElem).data( "parent" );  
+      getLevel(element, parentData, iteration); 
+    } 
+  }
+  // Add level as CSS class 
+  function addLevel(element, level) {
+    var classLevel = 'level-' + level; 
+    $(element).addClass(classLevel); 
+  }
+
+  function sortOptions(options, iteration) { 
+    var currentLevel, currentOptions; 
+    currentLevel = 'level-' + iteration; 
+    currentOptions = []; 
+
+    $(options).each(function(){
+      if ( $(this).hasClass(currentLevel) ){
+        currentOptions.push(this); 
+      }
+    });
+
+    if ( $(currentOptions).length ) { 
+      $(currentOptions).each(function(){
+        var parent, parentSelect, parentElem; 
+        parent = $(this).data( "parent" ); 
+        parentSelect = $(this).parent();
+        parentElem = $(parentSelect).children('option[data-termID=' + parent + ']');  
+        $(this).insertAfter(parentElem);  
+      });
+      iteration++; 
+      sortOptions(options, iteration); 
+    } 
+  } 
+  
+  $(document).ready(function(){
+    var contentSelect, focusSelect;
+    contentSelect = $('select[data-filter="content-type"]'); 
+    focusSelect = $('select[data-filter="focus-area"]'); 
+    getOptions(contentSelect); 
+    getOptions(focusSelect); 
+  });
+
+  // $(document).ready(function() {
+  //   var contentSelect, contentOptions; 
+  //   contentSelect = $('select[data-filter="content-type"]'); 
+  //   contentOptions = $(contentSelect).children('option'); 
+  //   $(contentOptions).each(function() { 
+  //     var parent, parentElem;
+  //     parent = $(this).data( "parent" ); 
+  //     if ( parent != 0 ) {
+  //       parentElem = $('select[data-filter="content-type"] option[data-termID=' + parent + ']'); 
+        
+  //       if ( $(parentElem).data( "parent" ) == 0 ) { 
+  //         $(this).addClass('level-second'); 
+  //       } else { 
+  //         var gparent, gparentElem; 
+  //         gparent = $(parentElem).data( "parent" ); 
+  //         gparentElem = 
+  //       } 
+  //     } else {
+  //       $(this).insertAfter(parentElem);  
+  //     }
+  //     // $(this).insertAfter(parentElem); 
+  //   });
+  // });
+
+  // $(document).ready(function() {
+  //   var focusSelect, focusOptions; 
+  //   focusSelect = $('select[data-filter="focus-area"]'); 
+  //   focusOptions = $(focusSelect).children('option'); 
+  //   $(focusOptions).each(function() { 
+  //     var parent, parentElem; 
+  //     parent = $(this).data( "parent" ); 
+  //     if ( parent != 0 ) { 
+  //       parentElem = $('select[data-filter="focus-area"] option[data-termID=' + parent + ']'); 
+  //       $(this).insertAfter(parentElem); 
+  //     }
+  //   });
+  // });
+
+
+  /**
    * Call Select2
    */
   $(document).ready(function() {
