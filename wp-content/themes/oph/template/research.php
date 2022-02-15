@@ -101,7 +101,7 @@
 		}
 	}
 
-	$research = new WP_Query( array(
+	$args = array(
 		'post_type' => 'research',
 		'posts_per_page' => $posts_per_page,
 		'order' => $order_query,
@@ -112,7 +112,20 @@
 		'meta_query' => $amount_meta_query,
 		'tax_query' => $tax_query,
 		'meta_key' => $meta_key
-	) );
+	); 
+
+	if ( isset($params['author'][0]) ) {
+		
+		$args['meta_query'][] = array(
+			'key'     => 'custom_author',
+			'value'   => $params['author'],
+			'compare' => 'IN'
+		);
+		$research = new WP_Query($args);
+	
+	} else {
+		$research = new WP_Query($args);
+	}
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
