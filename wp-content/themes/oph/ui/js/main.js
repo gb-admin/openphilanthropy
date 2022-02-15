@@ -147,6 +147,7 @@ jQuery(function($) {
     var sidebarSelect = $('.sidebar-filter select').select2({
       dropdownCssClass: 'sidebar-filter-dropdown',
       searchInputPlaceholder: 'Type here to search ...',
+      minimumResultsForSearch: 5, 
       templateResult: select2CopyClasses,
       templateSelection: select2CopyClasses, 
       // allowClear: true 
