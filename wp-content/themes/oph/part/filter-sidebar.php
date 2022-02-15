@@ -12,13 +12,13 @@
 	global $wpdb;
 
 	// Loading in official WP Users that have posts in post_type research
-	$official_research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
+	// $official_research_authors = $wpdb->get_results( "select A.*, COUNT(*) as post_count from $wpdb->users A inner join $wpdb->posts B on A.ID = B.post_author WHERE ( ( B.post_type = 'research' AND ( B.post_status = 'publish' OR B.post_status = 'private' ) ) ) GROUP BY A.ID ORDER BY post_count DESC" );
 
 	// Loading unofficial custom authors (added in metabox -> postmeta)
-	$custom_research_authors = oph_get_all_custom_authors();
+	// $custom_research_authors = oph_get_all_custom_authors();
 
 	// Merging the two together
-	$research_authors = oph_merge_all_research_authors($official_research_authors, $custom_research_authors);
+	// $research_authors = oph_merge_all_research_authors($official_research_authors, $custom_research_authors);
 
 
 	$content_type = get_terms( array(
@@ -77,7 +77,28 @@
 
 	$grants_years = array_unique( $grants_years );
 
-	rsort( $grants_years );
+	rsort( $grants_years );  
+
+	$sort_authors = array(); 
+
+	$research_posts = new WP_Query(
+		array(
+			'post_type' => 'research',
+			'posts_per_page' => -1
+		)
+	); 
+
+	if ( $research_posts && $research_posts->posts ) {
+		$authors_sortable = $research_posts->posts; 
+
+		foreach ( $authors_sortable as $i ) {
+			$displayAuthor = get_post_meta($i->ID, 'custom_author', true); 
+			array_push( $sort_authors, $displayAuthor ); 
+		}
+	}
+	$sort_authors = array_unique( $sort_authors ); 
+	sort( $sort_authors ); 
+
 ?>
 
 <div class="sidebar-filter">
@@ -121,24 +142,24 @@
 								/**
 								 * Exclude authors from array.
 								 */
-								if ( isset( $filter['filter_author_exclude'] ) ) {
-									foreach ( $filter['filter_author_exclude'] as $exclude ) {
-										foreach ( $research_authors as $key => $author ) {
-											if ( $exclude['name'] == $author->display_name ) {
-												unset( $research_authors[ $key ] );
-											} elseif ( $exclude['name'] == $author->user_nicename ) {
-												unset( $research_authors[ $key ] );
-											}
-										}
-									}
-								}
+								// if ( isset( $filter['filter_author_exclude'] ) ) {
+								// 	foreach ( $filter['filter_author_exclude'] as $exclude ) {
+								// 		foreach ( $research_authors as $key => $author ) {
+								// 			if ( $exclude['name'] == $author->display_name ) {
+								// 				unset( $research_authors[ $key ] );
+								// 			} elseif ( $exclude['name'] == $author->user_nicename ) {
+								// 				unset( $research_authors[ $key ] );
+								// 			}
+								// 		}
+								// 	}
+								// }
 							?>
 
 							<select data-filter="author" data-input-placeholder="Type here to search ..." data-placeholder="Author">
 								<option value=""></option>
 
-								<?php foreach ( $research_authors as $author ) : ?>
-									<option class="<?php if ( in_array( $author->user_nicename, $params['author'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $author->user_nicename; ?>" value="<?php echo $author->display_name; ?>"><?php echo $author->display_name; ?></option>
+								<?php foreach ( $sort_authors as $author ) : ?>
+									<option class="<?php if ( in_array( $author, $params['author'] ) ) { echo 'category-selected'; } ?>" data-category="<?php echo $author; ?>" value="<?php echo $author; ?>"><?php echo $author; ?></option>
 								<?php endforeach; ?>
 							</select>
 						<?php elseif ( $filter['filter'] == 'content-type' ) : ?>
