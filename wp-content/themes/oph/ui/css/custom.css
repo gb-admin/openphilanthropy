@@ -789,4 +789,10 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   border-color: #fff;
   color: #445277; 
   text-decoration: none; 
+} 
+
+figcaption {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 8px;
 }
