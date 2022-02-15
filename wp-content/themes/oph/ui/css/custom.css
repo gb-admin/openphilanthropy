@@ -745,3 +745,7 @@ body.home header.is-scrolled .sitewide-search-button svg path {
 .select2-results .select2-results__options li.select2-results__option.active::after {
   opacity: 100; 
 } 
+
+.select2-dropdown .select2-search--hide + .select2-results .select2-results__options {
+  max-height: 200px; 
+}
