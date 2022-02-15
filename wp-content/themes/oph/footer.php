@@ -61,7 +61,7 @@
 							<div class="footer-grid__cell footer-cell-social">
 								<h4>Sign Up to Follow Our Work</h4>
 
-								<button>Join Our Mailing List</button>
+								<a href="https://openphilanthropy.us12.list-manage.com/subscribe?u=5f851555ed522f52a8cc7157f&id=204e32798b" title="Join Our Mailing List" class="button">Join Our Mailing List</a> 
 
 								<?php if ( $url_facebook || $url_twitter ) : ?>
 									<div class="social-media">
