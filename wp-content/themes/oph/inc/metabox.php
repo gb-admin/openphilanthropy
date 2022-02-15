@@ -68,15 +68,15 @@ function oph_save_custom_author_metabox( $post_id, $post ) {
   endforeach;
 }
 
-function oph_get_all_custom_authors()
-{
-	global $wpdb;
+// function oph_get_all_custom_authors()
+// {
+// 	global $wpdb;
 
-	$authors = $wpdb->get_results(
-		"SELECT DISTINCT(meta_value) AS custom_author
-		FROM $wpdb->postmeta WHERE meta_key = 'custom_author'");
+// 	$authors = $wpdb->get_results(
+// 		"SELECT DISTINCT(meta_value) AS custom_author
+// 		FROM $wpdb->postmeta WHERE meta_key = 'custom_author'");
 
-	return $authors;
-}
+// 	return $authors;
+// }
 
-/** End of custom author metabox **/
+/** End of custom author metabox **/ 
