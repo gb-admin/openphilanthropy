@@ -1125,17 +1125,26 @@ jQuery(function($) {
 
     // get sub-level 
     function sortSubLevel(item) {
-      var content, treeGroup, subTree, subLevel, surLevel;
+      var content, treeGroup, subTree, sliceTree, subLevel, surSlice, surLevel;
       content = $(item).text().replace(/\./gi, "-"); 
       treeGroup = content.split(' '); 
       subTree = treeGroup[0]; 
-      subLevel = subTree.slice(-1); 
-      surLevel = subTree.slice(0, -2); 
+      sliceTree = subTree.split('-'); 
+      logme(sliceTree); 
+      // subLevel = subTree.slice(-1); 
+      // logme('subLevel: ' + subLevel); 
+      subLevel = sliceTree.slice(-1); 
+      logme('new subLevel: ' + subLevel); 
+      // surLevel = subTree.slice(0, -2); 
+      // logme('surLevel: ' + surLevel); 
+      surSlice = sliceTree.slice(0, -1); 
+      surLevel = surSlice.join('-');
+      logme('new surLevel: ' + surLevel); 
 
       logme(subTree.length);
 
       if ( subLevel == '1' ) { 
-        if ( subTree.length > 3 ) {
+        if ( sliceTree.length > 2 ) {
           genList(item, surLevel, true); 
         } else {
           genList(item, surLevel); 
@@ -1148,14 +1157,32 @@ jQuery(function($) {
     // create new sublist 
     function genList(item, subTree, dig = false) {
       logme('Running genList()'); 
-      var lastItem, newID, newList; 
-      newID = 'tree-' + subTree;
+      var lastItem, parentItem, subTreeSplit, subTreeSlice, parentID, parentTree, newID, newList; 
+      newID = 'tree-' + subTree; 
+      logme('newID: ' + newID); 
       newList = '<ul id="' + newID +'" class="subtree"></ul>'; 
+      logme(newList); 
 
-      if ( dig ) {
-        lastItem = $(postNav).children('li').last().children('ul').last().children('li').last(); 
+      if ( dig ) { 
+        subTreeSplit = subTree.split('-'); 
+        logme('subTreeSplit: ' + subTreeSplit) 
+        if ( subTreeSplit.length > 1 ) {
+          subTreeSlice = subTreeSplit.slice(0, -1); 
+          parentID = subTreeSlice.join('-'); 
+        } else {
+          parentID = subTreeSplit; 
+        }
+        logme('parentID: ' + parentID); 
+        parentTree = '#tree-' + parentID; 
+        logme('parentTree: ' + parentTree); 
+        // lastItem = $(postNav).children('li').last().children('ul').last().children('li').last(); 
+        lastItem = $(parentTree); 
+        logme('lastItem on dig.');
+        logme(lastItem); 
       } else {
         lastItem = $(postNav).children('li').last(); 
+        logme('lastItem no dig.');
+        logme(lastItem); 
         if ( ! lastItem.hasClass('tree') ) {
           lastItem.addClass('tree'); 
         }
