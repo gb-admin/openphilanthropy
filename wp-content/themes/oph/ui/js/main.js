@@ -1628,7 +1628,7 @@ jQuery(function($) {
   });
 
   // Add class to assist the styling of dynamically imported tables
-  $("body.single-research, body.single-grants").find("table:not(.table)").each(function() {
+  $("body.single-research, body.single-grants, body.page-template-table-of-contents, body.page-template").find("table:not(.table)").each(function() {
   	let $table = $(this);
   	$table.addClass("table-imported"); 
     if ( $table.parent(".scroll-box").length < 1 ) {
