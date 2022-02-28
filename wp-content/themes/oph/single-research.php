@@ -79,7 +79,17 @@
 
 	$footnotes = get_field( 'footnotes' ); 
 
-	$displayAuthor = get_post_meta($post->ID, 'custom_author', true);
+	//Set up array of authors with included Name & URL to profile page
+	$authors = array();
+	$author_meta = get_post_meta($post->ID, 'custom_author', true);
+	$authors_remove_and = str_replace('and ', '', $author_meta);
+	$authors_array = explode (", ", $authors_remove_and);
+
+	foreach( $authors_array as $a ):
+		$post_obj = get_page_by_title( $a, 'OBJECT', 'team' );
+		$url = '/about/team/' . $post_obj->post_name;
+		$authors[] = array('name' => $a, 'slug' => $url);	
+	endforeach;
 
 	$hidePub = get_field( 'hide_pubDate' ); 
 ?>
@@ -135,7 +145,29 @@
 				<div class="entry-content">
 					<div class='author-date-meta'>
 						<?php if ( !$hidePub ) { ?>
-						<span class='publish-date'>Published: <?= get_the_date("F Y"); ?> </span><?php } if( !$hidePub && !empty($displayAuthor) ) { echo '<span> | </span>'; } if ( !empty($displayAuthor) ){?><span class='author'> by <?php echo $displayAuthor; ?></span> <?php } ?> 
+						<span class='publish-date'>Published: <?= get_the_date("F Y"); ?> </span><?php } if( !$hidePub && !empty($author_meta) ) { echo '<span> | </span>'; } 
+						if ( !empty($author_meta) ){
+							$numAuthors = count($authors);
+							$i = 0;
+							echo 'by ';
+							foreach( $authors as $a ){
+								//add and before last author 
+								if(++$i === $numAuthors && $numAuthors > 1){
+									echo 'and ';
+								}
+								//Display author link, or name only if no page found
+								if( $a['slug'] ){
+									echo '<a href="' . $a['slug'] . '">' . $a['name'] . '</a>';
+								}else{
+									echo $a['name'];
+								}
+								//Insert commas, except last
+								if($i !== $numAuthors && $numAuthors > 1){
+									echo ', ';
+								}
+							}
+
+						 } ?> 
 					</div>
 					<?php the_content(); ?>
 				</div>
