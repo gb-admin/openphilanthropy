@@ -253,9 +253,10 @@
 										<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
 											<?php
 												$name = $focus_area[0]->name;
-												$slug = $focus_area[0]->slug; ?>
+												$slug = $focus_area[0]->slug; 
+												$url = esc_url( add_query_arg( 'focus-area', $slug ) ); ?>
 
-												<a href="/focus/<?= $slug ?>" class="focus-area-link"><?= $name ?></a>
+												<a href="<?= $url ?>" class="focus-area-link"><?= $name ?></a>
 										<?php endif; ?>
 									</h5>
 
