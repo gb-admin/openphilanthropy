@@ -251,7 +251,11 @@
 
 									<h5 class="block-feed-post__focus-area">
 										<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
-											<?php echo $focus_area[0]->name; ?>
+											<?php
+												$name = $focus_area[0]->name;
+												$slug = $focus_area[0]->slug; ?>
+
+												<a href="/focus/<?= $slug ?>" class="focus-area-link"><?= $name ?></a>
 										<?php endif; ?>
 									</h5>
 
