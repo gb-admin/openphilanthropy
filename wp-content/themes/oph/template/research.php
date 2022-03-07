@@ -219,8 +219,11 @@
 								<h5 class='block-feed-post__content_type'>
 									<?php if ($research_content_type) : ?>
 									<ul class="research-content-type">
-										<?php foreach($research_content_type as $term) : ?>
-										<li><a href="<?= get_term_link( $term ); ?>"><?php _e( $term->name ); ?></a></li>
+										<?php foreach($research_content_type as $term) : 
+											$slug = $term->slug; 
+											$url = esc_url( add_query_arg( 'content-type', $slug ) ); ?>
+
+										<li><a href="<?= $url ?>"><?php _e( $term->name ); ?></a></li>
 										<?php endforeach; ?>
 									</ul>
 									<?php endif; ?>
