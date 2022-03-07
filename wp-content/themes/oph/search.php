@@ -34,8 +34,17 @@
 							$search_description = excerpt( $search_excerpt );
 						?>
 
+						<?php 
+						$linkExternally = get_field('externally_link'); 
+
+						if( $linkExternally ){
+							$url = get_field('external_url'); 
+						}else{
+							$url = get_permalink();
+						} ?>
+
 						<article id="post--<?php the_ID(); ?>">
-							<h4><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h4>
+							<h4><a href="<?= $url ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h4>
 
 							<p><?php echo $search_description; ?></p>
 
