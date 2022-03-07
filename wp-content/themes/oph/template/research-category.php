@@ -202,7 +202,7 @@
 							<div class="block-feed-post__eyebrow"> 
 								<p>
 									<?php if ( !$hidePub ) { 
-										echo get_the_date( 'F Y', $research->ID ); 
+										echo get_the_date( 'F d, Y', $research->ID ); 
 									} ?>
 								</p>
 							</div>

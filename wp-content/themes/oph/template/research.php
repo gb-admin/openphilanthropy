@@ -203,7 +203,7 @@
 
 									<h5 class="block-feed-post__date">
 										<?php if ( !$hidePub ) { 
-											echo get_the_date( 'F Y', $research->ID ); 
+											echo get_the_date( 'F d, Y', $research->ID ); 
 										} ?>
 									</h5>
 
