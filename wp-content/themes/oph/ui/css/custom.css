@@ -118,6 +118,7 @@ h5.block-feed-post__grant-amount {
 .grant-intro {
   border-top: 2px solid #cdd2de;
   margin-bottom: 0;
+  padding: 1.25rem 0;
 }
 
 .grant-intro:last-child {
@@ -877,7 +878,14 @@ body.single-research table.table-imported > *:first-child > tr:first-child td {
 }
 
 body.single-research table.table-imported > *:first-child > tr:first-child td a,
-table.table-imported thead th a {
+table.table-imported thead th a,
+body.single-research
+  table.table-imported
+  > *:first-child
+  > tr:first-child
+  td
+  a:hover,
+table.table-imported thead th a:hover {
   color: #fff;
 }
 
