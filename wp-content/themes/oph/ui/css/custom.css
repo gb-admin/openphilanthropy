@@ -117,8 +117,11 @@ h5.block-feed-post__grant-amount {
 
 .grant-intro {
   border-top: 2px solid #cdd2de;
+  margin-bottom: 0;
+}
+
+.grant-intro:last-child {
   border-bottom: 2px solid #cdd2de;
-  padding: 1rem 0;
   margin-bottom: 1rem;
 }
 
@@ -345,7 +348,7 @@ button.button-view-list {
 }
 
 .entry-content a {
-  color: #263046;
+  color: #6e7ca0;
   text-decoration: underline;
 }
 .entry-content a:hover,
@@ -591,6 +594,7 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 }
 
 .block-feed-post--container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -630,7 +634,6 @@ ul.block-feed-title-head li h6.sorting.rev::after {
 }
 .entry-content blockquote p {
   font-size: 16px;
-  font-style: italic;
   font-weight: 400;
   line-height: 26px;
 }
@@ -873,8 +876,79 @@ body.single-research table.table-imported > *:first-child > tr:first-child td {
   vertical-align: top;
 }
 
+body.single-research table.table-imported > *:first-child > tr:first-child td a,
+table.table-imported thead th a {
+  color: #fff;
+}
+
 body.logged-in.admin-bar #header {
   top: 32px;
 }
 
+.block-feed-title-head {
+  padding: 0 20px 5px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 114px;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.list-team {
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  div.page-header {
+    height: auto;
+    max-height: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .list-statistics .header-number {
+    line-height: 1;
+    display: inline-flex;
+    margin-top: -0.25em;
+  }
+
+  .list-statistics > li h4 {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.entry-content li ol,
+.entry-content li ul,
+.entry-content ol:last-child li ol,
+.entry-content ul:last-child li ul {
+  margin-top: 7px;
+  margin-bottom: 28px;
+}
+
+small {
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+.table th,
+table.table-imported th,
+.table td,
+table.table-imported td {
+  vertical-align: middle;
+}
+
+table.table-imported td p:not(:first-child) {
+  margin-top: 1em;
+}
+
+.entry-content a.see-footnote sup {
+  font-size: 100%;
+}
+
+.entry-content table.vertical-scroll {
+  max-height: 600px;
+  overflow: auto;
+  display: block;
+}
 /* END CSS ADDED BY CHAD */
