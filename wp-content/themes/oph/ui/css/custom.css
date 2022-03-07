@@ -894,6 +894,10 @@ body.logged-in.admin-bar #header {
   z-index: 999;
 }
 
+body.logged-in.admin-bar .block-feed-title-head {
+  top: 145px;
+}
+
 .list-team {
   justify-content: center;
 }
