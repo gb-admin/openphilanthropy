@@ -217,7 +217,6 @@
 
 							$related_eyebrow_copy = $primary_term_name;
 							$related_eyebrow_link = '/research?focus-area=' . $primary_term_slug;
-							$related_link = get_permalink( $related->ID );
 							$related_post_type = get_post_type( $related->ID );
 							$related_title = $related->post_title;
 
@@ -235,6 +234,14 @@
 							);
 
 							$related_description = excerpt( $related_excerpt );
+
+							$linkExternally = get_field('externally_link', $related->ID); 
+
+							if( $linkExternally ){
+								$related_link = get_field('external_url', $related->ID); 
+							}else{
+								$related_link = get_permalink( $related->ID );
+							}
 						?>
 
 						<li>
