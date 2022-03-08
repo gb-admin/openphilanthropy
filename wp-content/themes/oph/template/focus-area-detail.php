@@ -413,13 +413,7 @@
 											</h5>
 
 											<h4>
-												<?php 
-												if( isset( $_GET['dev'] ) ){
-													echo '<pre>' . var_export($related_link, true) . '</pre>';
-												}else{
-													echo '<a href="' . $related_link . '">' . $related_title . '</a>';
-												}
-												 ?>
+												<?php echo '<a href="' . $related_link . '">' . $related_title . '</a>'; ?>
 											</h4>
 
 											<div class="single-related-posts__description">
