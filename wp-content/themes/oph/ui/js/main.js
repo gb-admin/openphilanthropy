@@ -465,8 +465,8 @@ jQuery(function ($) {
     );
 
     element.each(function () {
-      console.log($(this));
       var a = $(this).html().trim().replace("&nbsp;", " ").split(" ");
+      console.log(a);
 
       if (a.length > 1) {
         a[a.length - 2] += "&nbsp;" + a[a.length - 1];
@@ -483,7 +483,6 @@ jQuery(function ($) {
     $(
       ".entry-content p, .entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6"
     ).each(function () {
-      console.log($(this));
       var html = $.trim($(this).html());
 
       if (html == "" || html == " " || html == "&nbsp;") {
