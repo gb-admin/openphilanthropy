@@ -36,7 +36,7 @@
 	$order_query = 'desc';
 
 	$tax_query = array(
-		'relation' => 'or'
+		'relation' => 'and'
 	);
 
 	$orderby_query = 'date';
