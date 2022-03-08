@@ -968,7 +968,7 @@ blockquote b {
   font-weight: bold;
 }
 
-ul.list-related-posts > li > h4 {
+ul.list-related-posts > li > h3 {
   margin-top: 28px;
   text-align: left;
   font-size: 20px;
