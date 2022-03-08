@@ -412,9 +412,9 @@
 												<a href="<?php echo $related_eyebrow_link_url; ?>"><?php echo $related_eyebrow_copy; ?></a>
 											</h5>
 
-											<h4>
+											<h3>
 												<a href="<?php echo esc_url($related_link); ?>"><?= $related_title ?></a>
-											</h4>
+											</h3>
 
 											<div class="single-related-posts__description">
 												<p><?php echo $related_description; ?></p> 
