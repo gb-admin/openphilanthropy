@@ -377,6 +377,7 @@
 												$related_link = get_field('external_url', $related->ID);
 											}
 
+											// This code causes page not to load when no focus area is set for the post. These vars are never used though, only declared. 
 											//$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
 											//$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
 
