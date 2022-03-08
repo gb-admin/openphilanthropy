@@ -466,7 +466,6 @@ jQuery(function ($) {
 
     element.each(function () {
       var a = $(this).html().trim().replace("&nbsp;", " ").split(" ");
-      console.log(a);
 
       if (a.length > 1) {
         a[a.length - 2] += "&nbsp;" + a[a.length - 1];
