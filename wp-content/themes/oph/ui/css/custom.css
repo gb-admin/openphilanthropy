@@ -963,4 +963,8 @@ table.table-imported td p:not(:first-child) {
   overflow: auto;
   display: block;
 }
+
+blockquote b {
+  font-weight: bold;
+}
 /* END CSS ADDED BY CHAD */
