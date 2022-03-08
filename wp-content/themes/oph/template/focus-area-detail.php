@@ -543,7 +543,7 @@
 
 						$grants_made_query = new WP_Query( array(
 							'post_type' => 'grants',
-							'posts_per_page' => 50,
+							'posts_per_page' => -1,
 							'order' => 'desc',
 							'orderby' => 'date',
 							'tax_query' => array(
