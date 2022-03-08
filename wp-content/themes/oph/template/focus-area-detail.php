@@ -377,8 +377,8 @@
 												$related_link = get_field('external_url', $related->ID);
 											}
 
-											$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
-											$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
+											//$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
+											//$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
 
 											$related_eyebrow_copy = '';
 											$related_eyebrow_link_url = '';
