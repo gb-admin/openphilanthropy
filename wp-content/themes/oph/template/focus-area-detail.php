@@ -369,7 +369,8 @@
 
 										<?php
 											$related_link = get_permalink( $related->ID );
-											$related_title = $related->post_title;
+											//$related_title = $related->post_title;
+											$related_title = get_the_title( $related->ID );
 
 											$related_linkExternally = get_field('externally_link', $related->ID); 
 
