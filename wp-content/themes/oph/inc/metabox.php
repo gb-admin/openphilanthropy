@@ -80,3 +80,13 @@ function oph_save_custom_author_metabox( $post_id, $post ) {
 // }
 
 /** End of custom author metabox **/ 
+
+
+/**
+ * Remove Custom Fields meta box
+ */
+add_action( 'admin_menu' , 'oph_remove_post_metabox' );
+function oph_remove_post_metabox() {
+    remove_meta_box( 'commentstatusdiv' , 'research' , 'normal' );
+    remove_meta_box( 'commentsdiv' , 'research' , 'normal' ); 
+}
