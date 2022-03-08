@@ -417,7 +417,7 @@
 											</h5>
 
 											<h4>
-												<a href="<?php echo esc_url($related_link); ?>"><?php echo $related_title; ?></a>
+												<?php echo '<a href="' . $related_link . '">' . $related_title . '</a>'; ?>
 											</h4>
 
 											<div class="single-related-posts__description">
