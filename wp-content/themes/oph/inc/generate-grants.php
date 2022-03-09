@@ -42,6 +42,7 @@ function generate_grants_csv() {
       setup_postdata($post);
       // Grant 
       $grant_name = get_the_title();
+      $grant_name = html_entity_decode($grant_name);
       // Organization Name(s) 
       $org_terms = get_the_terms( $post->ID, 'organization-name' );
       $org_array = array();
