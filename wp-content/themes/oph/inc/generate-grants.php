@@ -65,7 +65,7 @@ function generate_grants_csv() {
       // Award Date 
       $grant_date = get_field('award_date');
       if( $grant_date ){
-        $date = DateTime::createFromFormat('m/d/Y', $grant_date);
+        $date = DateTime::createFromFormat('F j, Y', $grant_date);
         $grant_date = $date->format('F Y');
       }
 
