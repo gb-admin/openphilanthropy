@@ -62,6 +62,9 @@ function generate_grants_csv() {
       $grant_focus = implode(",", $focus_array);
       // Grant Amount 
       $grant_amount = get_field('grant_amount'); 
+      if( $grant_amount ){
+        $grant_amount = '$' . number_format($grant_amount);
+      }
       // Award Date 
       $grant_date = get_field('award_date');
       if( $grant_date ){
