@@ -57,6 +57,7 @@ function generate_grants_csv() {
 
       //Below changed to only show first focus area 
       $grant_focus = $focus_terms[0]->name;
+      $grant_focus = html_entity_decode($grant_focus);
       /*
       $focus_array = array();
       if (!empty($focus_terms)) {
