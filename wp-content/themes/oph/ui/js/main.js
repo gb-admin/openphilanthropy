@@ -1825,6 +1825,7 @@ jQuery(function ($) {
       return false;
     }
     fnOffset = footNote.offset();
+    console.log(fnOffset);
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
   });
 
