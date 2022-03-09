@@ -1815,6 +1815,10 @@ jQuery(function ($) {
     sourceTag = $(this).attr("id");
     footNote = $('a.footnote-label[href$="' + sourceTag + '"]');
 
+    console.log("source: ", source);
+    console.log("sourceTag: ", sourceTag);
+    console.log("footNote: ", footNote);
+
     // If the footnotes is collapsed and the target footnote look up exists -> open quickly
     if (!$(".footnotes").is(":visible") && footNote) {
       expandFootnotes($("#toggle-footnotes"));
@@ -1824,7 +1828,7 @@ jQuery(function ($) {
       console.log("footnote id " + sourceTag + " not found");
       return false;
     }
-    console.log(footNote);
+
     fnOffset = footNote.offset();
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
   });
