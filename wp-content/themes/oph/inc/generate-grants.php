@@ -51,8 +51,12 @@ function generate_grants_csv() {
         }
       }
       $grant_org = implode(",", $org_array); 
-      // Focus Area(s) 
+      // Focus Area(s)  
       $focus_terms = get_the_terms( $post->ID, 'focus-area' ); 
+
+      //Below changed to only show first focus area 
+      $grant_focus = $focus_terms[0]->name;
+      /*
       $focus_array = array();
       if (!empty($focus_terms)) {
         foreach ( $focus_terms as $term ) {
@@ -60,6 +64,8 @@ function generate_grants_csv() {
         }
       }
       $grant_focus = implode(",", $focus_array);
+      */
+
       // Grant Amount 
       $grant_amount = get_field('grant_amount'); 
       if( $grant_amount ){
