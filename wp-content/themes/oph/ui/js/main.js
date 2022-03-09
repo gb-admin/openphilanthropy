@@ -1824,8 +1824,8 @@ jQuery(function ($) {
       console.log("footnote id " + sourceTag + " not found");
       return false;
     }
+    console.log(footNote);
     fnOffset = footNote.offset();
-    console.log(fnOffset);
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
   });
 
