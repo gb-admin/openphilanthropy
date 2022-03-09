@@ -63,9 +63,11 @@ function generate_grants_csv() {
       // Grant Amount 
       $grant_amount = get_field('grant_amount'); 
       // Award Date 
-      $date_string = get_field('award_date');
-      $date = DateTime::createFromFormat('Ymd', $date_string);
-      $grant_date = $date->format('F Y');
+      $grant_date = get_field('award_date');
+      if( $grant_date ){
+        $date = DateTime::createFromFormat('Ymd', $grant_date);
+        $grant_date = $date->format('F Y');
+      }
 
       fputcsv($file, array($grant_name, $grant_org, $grant_focus, $grant_amount, $grant_date)); 
     }
