@@ -106,6 +106,7 @@
 
 										if ( $c['section_number'] ) {
 											$p++;
+											$nested_section_number = 1;
 											$sub_section_id = 'content-' . $k . '-' . $p;
 											$sub_section_class = ' numbered-section';
 										}else if( $c['nested_section'] ){
@@ -116,7 +117,16 @@
 									<div class="section-content<?= $sub_section_class ?>">
 										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
 											<h4 id="<?php echo $sub_section_id; ?>">
-												<?php if ( $c['section_number'] ) { echo $sub_sections[ $p - 1 ] . ' ' . $c['title']; } else { echo $c['title']; }; ?>
+
+												<?php 
+												if ( $c['section_number'] ) { 
+													echo $sub_sections[ $p - 1 ] . ' ' . $c['title']; 
+												} else if( $c['nested_section'] ){
+													echo $sub_sections[ $p - 1 ] . '.' . $nested_section_number . ' ' . $c['title'];
+												} else { 
+													echo $c['title']; 
+												}; ?>
+
 											</h4>
 										<?php endif; ?>
 
@@ -124,7 +134,9 @@
 											<?php echo $c['entry']; ?>
 										</div>
 									</div>
-								<?php endforeach; ?>
+								<?php 
+							$nested_section_number++;
+							endforeach; ?>
 							</div>
 						<?php endif; ?>
 					<?php endforeach; ?>
