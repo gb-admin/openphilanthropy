@@ -252,8 +252,19 @@
 									<h5 class="block-feed-post__focus-area">
 										<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
 											<?php
-												$name = $focus_area[0]->name;
-												$slug = $focus_area[0]->slug; 
+												
+												// Get primary focus area
+												foreach( $focus_area as $term ){
+													if( get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true) == $term->term_id ){
+														$primary_focus_area = $term;
+													}
+												}
+
+												//temp 
+												if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
+
+												$name = $primary_focus_area->name;
+												$slug = $primary_focus_area->slug; 
 												$url = esc_url( add_query_arg( 'focus-area', $slug ) ); ?>
 
 												<a href="<?= $url ?>" class="focus-area-link"><?= $name ?></a>
