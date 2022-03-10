@@ -208,13 +208,15 @@
 								$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 								
 								$focus_area = get_the_terms( $post->ID, 'focus-area' );
-								// Set primary focus area
+								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
+
 								foreach( $focus_area as $term ){
-									if( get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true) == $term->term_id ){
+									//Set primary term. Primary should not show GHW, LT, or OA as primary, even if set in backend.
+									if( $primary_term == $term->term_id && !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
 										$primary_focus_area = $term;
 									}
 								}
-								//temp 
+								//Check if term is not set. Useful for when only one area for post is set as GHW, LT, or OA
 								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
 
 								if ( ! $post_thumbnail && ! is_wp_error( $primary_focus_area ) ) {
