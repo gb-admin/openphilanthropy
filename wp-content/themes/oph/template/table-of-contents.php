@@ -102,17 +102,24 @@
 
 									<?php
 										$sub_section_id = '';
+										$sub_section_class = '';
 
 										if ( $c['section_number'] ) {
 											$p++;
 
 											$sub_section_id = 'content-' . $k . '-' . $p;
 										}
+
+										if( !$c['section_number'] && $c['nested_section'] ){
+											$sub_section_class = ' nested-section';
+										}
 									?>
 
-									<div class="section-content">
+									<div class="section-content<?= $sub_section_class ?>">
 										<?php if ( isset( $c['title'] ) && $c['title'] != '' ) : $n = $n + 1; ?>
-											<h4 id="<?php echo $sub_section_id; ?>"><?php if ( $c['section_number'] ) { echo $sub_sections[ $p - 1 ] . ' ' . $c['title']; } else { echo $c['title']; }; ?></h4>
+											<h4 id="<?php echo $sub_section_id; ?>">
+												<?php if ( $c['section_number'] ) { echo $sub_sections[ $p - 1 ] . ' ' . $c['title']; } else { echo $c['title']; }; ?>
+											</h4>
 										<?php endif; ?>
 
 										<div class="section-content__entry">
