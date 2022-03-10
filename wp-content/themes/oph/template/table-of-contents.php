@@ -106,7 +106,7 @@
 
 										if ( $c['section_number'] ) {
 											$p++;
-											$nested_section_number = 1;
+											$nested_section_number = 0;
 											$sub_section_id = 'content-' . $k . '-' . $p;
 											$sub_section_class = ' numbered-section';
 										}else if( $c['nested_section'] ){
