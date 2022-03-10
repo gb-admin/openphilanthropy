@@ -48,7 +48,19 @@
 								?> 
 								<li>
 									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">
-										<?php if ( ($parentID != 0) && ($grandparentID != 0) ) { ?> Portfolio Area: <?php } else { ?> Focus Area: <?php } echo $term->name; ?></a>
+										<?php 
+											if( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' ){
+												echo 'Category: ';
+											}
+											else if ( ($parentID != 0) && ($grandparentID != 0) ) {
+												echo 'Portfolio Area: ';
+											}
+											else {
+												echo 'Focus Area: ';
+											} 
+											
+											echo $term->name; ?>
+									</a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
