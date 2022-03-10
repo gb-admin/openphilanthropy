@@ -217,6 +217,8 @@
 									}
 								}
 
+								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
+
 								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
 								if( sizeof($focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
 									foreach( $focus_area as $term ){
