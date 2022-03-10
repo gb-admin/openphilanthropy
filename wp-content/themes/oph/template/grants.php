@@ -217,12 +217,12 @@
 								//temp 
 								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
 
-								if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
-									$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+								if ( ! $post_thumbnail && ! is_wp_error( $primary_focus_area ) ) {
+									$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $primary_focus_area->term_id )['sizes']['lg'];
 								}
 
 								if ( ! $post_thumbnail ) {
-									$post_thumbnail = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+									$post_thumbnail = get_field( 'category_image', 'focus-area_' . $primary_focus_area->term_id )['sizes']['lg'];
 								}
 							?>
 
