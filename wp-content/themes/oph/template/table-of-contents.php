@@ -106,11 +106,9 @@
 
 										if ( $c['section_number'] ) {
 											$p++;
-
 											$sub_section_id = 'content-' . $k . '-' . $p;
-										}
-
-										if( !$c['section_number'] && $c['nested_section'] ){
+											$sub_section_class = ' numbered-section';
+										}else if( $c['nested_section'] ){
 											$sub_section_class = ' nested-section';
 										}
 									?>
