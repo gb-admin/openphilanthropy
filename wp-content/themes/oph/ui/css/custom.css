@@ -975,4 +975,8 @@ ul.list-related-posts > li > h3 {
   line-height: 28px;
   font-weight: 800;
 }
+
+.section-content.nested-section {
+  padding-left: 2rem;
+}
 /* END CSS ADDED BY CHAD */
