@@ -478,6 +478,10 @@ jQuery(function ($) {
   /**
    * Remove empty element
    */
+
+  //This is causing formatting issues on posts. Removing temporarily
+
+  /*
   $(document).ready(function () {
     $(
       ".entry-content p, .entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6"
@@ -488,7 +492,7 @@ jQuery(function ($) {
         $(this).remove();
       }
     });
-  });
+  }); */
 
   /**
    * Replace Tag
