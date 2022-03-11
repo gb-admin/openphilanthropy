@@ -944,7 +944,7 @@ small {
 }
 
 .table th,
-table.table-imported th,
+table.table-imported thead th,
 .table td,
 table.table-imported td {
   vertical-align: middle;
