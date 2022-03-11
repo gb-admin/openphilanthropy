@@ -950,6 +950,10 @@ table.table-imported td {
   vertical-align: middle;
 }
 
+table.table-imported thead th {
+  border: 1px solid white;
+}
+
 table.table-imported td p:not(:first-child) {
   margin-top: 1em;
 }
