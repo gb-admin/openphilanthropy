@@ -145,7 +145,7 @@
 				<div class="entry-content">
 					<div class='author-date-meta'>
 						<?php if ( !$hidePub ) { ?>
-						<span class='publish-date'>Published: <?= get_the_date("F Y"); ?> </span><?php } if( !$hidePub && !empty($author_meta) ) { echo '<span> | </span>'; } 
+						<span class='publish-date'>Published: <?= get_the_date("F d, Y"); ?> </span><?php } if( !$hidePub && !empty($author_meta) ) { echo '<span> | </span>'; } 
 						if ( !empty($author_meta) ){
 							$numAuthors = count($authors);
 							$i = 0;
