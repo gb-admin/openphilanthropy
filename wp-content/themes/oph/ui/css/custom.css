@@ -988,4 +988,15 @@ ul.list-related-posts > li > h3 {
   display: block;
   margin: 0 auto;
 }
+
+@media only screen and (min-width: 768px) {
+  .pagenav-aside {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 32px;
+    padding-right: 18px;
+    max-height: calc(100vh - 138px);
+  }
+}
+
 /* END CSS ADDED BY CHAD */
