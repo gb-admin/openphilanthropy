@@ -983,4 +983,9 @@ ul.list-related-posts > li > h3 {
 .section-content.nested-section {
   padding-left: 2rem;
 }
+
+.entry-content img.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
 /* END CSS ADDED BY CHAD */
