@@ -213,7 +213,7 @@
 								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
 
 								//temp debug
-								if( (isset($_GET['dev'])) && $postCount == 1 ){
+								if( (isset($_GET['dev'])) && $postCount == 22 ){
 									echo '<pre>' . var_export($focus_area, true) . '</pre>';
 								}
 
