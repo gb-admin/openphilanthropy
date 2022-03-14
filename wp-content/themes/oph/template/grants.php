@@ -212,6 +212,11 @@
 								$focus_area = get_the_terms( $post->ID, 'focus-area' );
 								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
 
+								//temp debug
+								if( (isset($_GET['dev'])) && $postCount == 1 ){
+									echo '<pre>' . var_export($focus_area, true) . '</pre>';
+								}
+
 								foreach( $focus_area as $term ){
 									//Set primary term.
 									if( $primary_term == $term->term_id ){
@@ -275,12 +280,6 @@
 
 									<h5 class="block-feed-post__focus-area">
 										<?php 
-										
-										//temp debug
-										if( (isset($_GET['dev'])) && $postCount == 1 ){
-											echo '<pre>' . var_export($primary_focus_area, true) . '</pre>';
-										}
-										
 										if ( $primary_focus_area && ! is_wp_error( $primary_focus_area ) ) : ?>
 											<?php
 												$name = $primary_focus_area->name;
