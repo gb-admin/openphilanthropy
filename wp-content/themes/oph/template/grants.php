@@ -195,7 +195,9 @@
 				</li>
 			</ul>
 
-			<?php if ( $grants->have_posts() ) : ?>
+			<?php 
+			$postCount = 1;
+			if ( $grants->have_posts() ) : ?>
 				<div class="block-feed block-feed--images<?php if ( $view_list ) { echo ' block-feed--list'; } ?>"> 
 					<div class="block-feed-post--container">
 						<?php while ( $grants->have_posts() ) : $grants->the_post(); ?>
@@ -272,7 +274,14 @@
 									<h6>Focus Area</h6>
 
 									<h5 class="block-feed-post__focus-area">
-										<?php if ( $primary_focus_area && ! is_wp_error( $primary_focus_area ) ) : ?>
+										<?php 
+										
+										//temp debug
+										if( (isset($_GET['dev'])) && $postCount == 1 ){
+											echo '<pre>' . var_export($primary_focus_area, true) . '</pre>';
+										}
+										
+										if ( $primary_focus_area && ! is_wp_error( $primary_focus_area ) ) : ?>
 											<?php
 												$name = $primary_focus_area->name;
 												$slug = $primary_focus_area->slug; 
@@ -299,7 +308,9 @@
 									</div>
 								</div>
 							</div>
-						<?php endwhile; wp_reset_postdata(); ?>
+						<?php 
+					$postCount++;
+					endwhile; wp_reset_postdata(); ?>
 					</div>
 					<div class="feed-footer">
 						<nav aria-label="Post Feed Pagination" class="pagination">
