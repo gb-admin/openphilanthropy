@@ -999,4 +999,8 @@ ul.list-related-posts > li > h3 {
   }
 }
 
+.entry-content div:not([class]):not([id]) {
+  margin: 0 0 1rem;
+}
+
 /* END CSS ADDED BY CHAD */
