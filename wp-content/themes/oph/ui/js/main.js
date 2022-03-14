@@ -1361,6 +1361,7 @@ jQuery(function ($) {
       logme("Running genItem()");
       var itemList = "ul#" + itemID;
       logme(itemList);
+      console.log(item);
       $(itemList).append(
         $(
           '<li><a data-goto="#' +
