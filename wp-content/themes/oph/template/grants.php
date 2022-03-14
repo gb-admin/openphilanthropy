@@ -196,7 +196,6 @@
 			</ul>
 
 			<?php 
-			$postCount = 1;
 			if ( $grants->have_posts() ) : ?>
 				<div class="block-feed block-feed--images<?php if ( $view_list ) { echo ' block-feed--list'; } ?>"> 
 					<div class="block-feed-post--container">
@@ -212,11 +211,6 @@
 								$focus_area = get_the_terms( $post->ID, 'focus-area' );
 								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
 
-								//temp debug
-								if( (isset($_GET['dev'])) && $postCount == 22 ){
-									echo '<pre>' . var_export($focus_area, true) . '</pre>';
-								}
-
 								if( $primary_term ){
 									foreach( $focus_area as $term ){
 										//Set primary term.
@@ -226,10 +220,6 @@
 									}
 								}else{
 									$primary_focus_area = $focus_area[0];
-								}
-
-								if( (isset($_GET['dev'])) && $postCount == 22 ){
-									echo '<pre>Primary set: ' . var_export($primary_focus_area, true) . '</pre>';
 								}
 
 								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
@@ -314,7 +304,6 @@
 								</div>
 							</div>
 						<?php 
-					$postCount++;
 					endwhile; wp_reset_postdata(); ?>
 					</div>
 					<div class="feed-footer">
