@@ -1361,7 +1361,7 @@ jQuery(function ($) {
       logme("Running genItem()");
       var itemList = "ul#" + itemID;
       logme(itemList);
-      console.log(item);
+      console.log(item.find("*:not(em)").contents().unwrap());
       $(itemList).append(
         $(
           '<li><a data-goto="#' +
