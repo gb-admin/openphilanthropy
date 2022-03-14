@@ -217,14 +217,20 @@
 									echo '<pre>' . var_export($focus_area, true) . '</pre>';
 								}
 
-								foreach( $focus_area as $term ){
-									//Set primary term.
-									if( $primary_term == $term->term_id ){
-										$primary_focus_area = $term;
+								if( $primary_term ){
+									foreach( $focus_area as $term ){
+										//Set primary term.
+										if( $primary_term == $term->term_id ){
+											$primary_focus_area = $term;
+										}
 									}
+								}else{
+									$primary_focus_area = $focus_area[0];
 								}
 
-								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
+								if( (isset($_GET['dev'])) && $postCount == 22 ){
+									echo '<pre>Primary set: ' . var_export($primary_focus_area, true) . '</pre>';
+								}
 
 								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
 								if( sizeof($focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
