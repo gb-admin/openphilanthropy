@@ -958,7 +958,8 @@ table.table-imported td p:not(:first-child) {
   margin-top: 1em;
 }
 
-.entry-content a.see-footnote sup {
+.entry-content a.see-footnote sup,
+.entry-content sup a.see-footnote {
   font-size: 100%;
 }
 
