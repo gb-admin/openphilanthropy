@@ -637,6 +637,7 @@ ul.block-feed-title-head li h6.sorting.rev::after {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
+  margin-bottom: 0; 
 }
 .entry-content blockquote p:last-of-type {
   margin-bottom: 0;
