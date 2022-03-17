@@ -1835,7 +1835,24 @@ jQuery(function ($) {
 
     fnOffset = footNote.offset();
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
-  });
+  }); 
+
+  var scrollLabel;
+  scrollLabel = $(".footnote-label"); 
+
+  $(scrollLabel).click(function (e) {
+    e.preventDefault();
+
+    var source, sourceLink, hashLink, hashID, footLabel, fnOffset;
+    source = $(this);
+    sourceLink = $(this).attr("href").split("#"); 
+    hashLink = sourceLink[1];
+    footLabel = $('a#' + hashLink );
+
+    fnOffset = footLabel.offset();
+    $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
+  }); 
+
 
   // Scroll on Footer Button View
   console.log("Waiting to scroll...");
