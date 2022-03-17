@@ -11,9 +11,29 @@
 	$focus_area_image = '';
 
 	$terms_focus_area = get_the_terms( $post->ID, 'focus-area' );
+	$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
 
-	if ( ! is_wp_error( $terms_focus_area ) ) {
-		$focus_area_image = get_field( 'category_image', 'focus-area_' . $terms_focus_area[0]->term_id );
+	foreach( $terms_focus_area as $term ){
+		//Set primary term.
+		if( $primary_term == $term->term_id ){
+			$primary_focus_area = $term;
+		}
+	}
+
+	if( !$primary_focus_area ){ $primary_focus_area = $terms_focus_area[0]; } 
+
+	//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
+	if( sizeof($terms_focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
+		foreach( $terms_focus_area as $term ){
+			if( !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
+				$primary_focus_area = $term;
+				break;
+			}
+		}
+	}
+
+	if ( ! is_wp_error( $primary_focus_area ) ) {
+		$focus_area_image = get_field( 'category_image', 'focus-area_' . $primary_focus_area->term_id );
 	}
 
 	if ( ! $page_header_image && $focus_area_image ) {

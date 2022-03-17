@@ -164,7 +164,13 @@
 							if ( $research_post ) {
 								$research_content_type = get_the_terms( $research_post->ID, 'content-type' );
 
-								$research_link = get_permalink( $research_post->ID );
+								$linkExternally = get_field('externally_link', $research_post->ID); 
+								if( $linkExternally ){
+									$research_link = get_field('external_url', $research_post->ID); 
+								}else{
+									$research_link = get_permalink( $research_post->ID );
+								}
+
 								$research_title = get_the_title( $research_post->ID );
 
 								$research_excerpt_source = get_the_excerpt( $research_post->ID );

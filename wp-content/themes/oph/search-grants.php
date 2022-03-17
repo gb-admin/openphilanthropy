@@ -115,12 +115,33 @@
 						<?php
 							$grant_amount = get_field( 'grant_amount' );
 
-							$focus_area = get_the_terms( $post->ID, 'focus-area' );
 							$organization_name = get_the_terms( $post->ID, 'organization-name' );
 							$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 
+							$focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
+
+								foreach( $focus_area as $term ){
+									//Set primary term. 
+									if( $primary_term == $term->term_id ){
+										$primary_focus_area = $term;
+									}
+								}
+
+								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
+
+								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
+								if( sizeof($focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
+									foreach( $focus_area as $term ){
+										if( !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
+											$primary_focus_area = $term;
+											break;
+										}
+									}
+								}
+
 							if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
-								$post_thumbnail = get_field( 'category_image', 'focus-area_' . $focus_area[0]->term_id )['sizes']['lg'];
+								$post_thumbnail = get_field( 'category_image', 'focus-area_' . $primary_focus_area )['sizes']['lg'];
 							}
 						?>
 
@@ -158,9 +179,9 @@
 
 								<h6>Focus Area</h6>
 
-								<?php if ( $focus_area && ! is_wp_error( $focus_area ) ) : ?>
+								<?php if ( $primary_focus_area && ! is_wp_error( $primary_focus_area ) ) : ?>
 									<h5 class="block-feed-post__focus-area">
-										<a href="?focus-area=<?php echo $focus_area[0]->slug; ?>#categories"><?php echo $focus_area[0]->name; ?></a>
+										<a href="?focus-area=<?php echo $primary_focus_area->slug; ?>#categories"><?php echo $primary_focus_area->name; ?></a>
 									</h5>
 								<?php endif; ?>
 

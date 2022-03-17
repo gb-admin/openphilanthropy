@@ -42,6 +42,7 @@ function generate_grants_csv() {
       setup_postdata($post);
       // Grant 
       $grant_name = get_the_title();
+      $grant_name = html_entity_decode($grant_name);
       // Organization Name(s) 
       $org_terms = get_the_terms( $post->ID, 'organization-name' );
       $org_array = array();
@@ -51,8 +52,13 @@ function generate_grants_csv() {
         }
       }
       $grant_org = implode(",", $org_array); 
-      // Focus Area(s) 
+      // Focus Area(s)  
       $focus_terms = get_the_terms( $post->ID, 'focus-area' ); 
+
+      //Below changed to only show first focus area 
+      $grant_focus = $focus_terms[0]->name;
+      $grant_focus = html_entity_decode($grant_focus);
+      /*
       $focus_array = array();
       if (!empty($focus_terms)) {
         foreach ( $focus_terms as $term ) {
@@ -60,10 +66,19 @@ function generate_grants_csv() {
         }
       }
       $grant_focus = implode(",", $focus_array);
+      */
+
       // Grant Amount 
       $grant_amount = get_field('grant_amount'); 
+      if( $grant_amount ){
+        $grant_amount = '$' . number_format($grant_amount);
+      }
       // Award Date 
       $grant_date = get_field('award_date');
+      if( $grant_date ){
+        $date = DateTime::createFromFormat('F j, Y', $grant_date);
+        $grant_date = $date->format('F Y');
+      }
 
       fputcsv($file, array($grant_name, $grant_org, $grant_focus, $grant_amount, $grant_date)); 
     }

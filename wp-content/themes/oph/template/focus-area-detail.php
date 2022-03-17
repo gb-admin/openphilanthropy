@@ -377,8 +377,9 @@
 												$related_link = get_field('external_url', $related->ID);
 											}
 
-											$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
-											$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
+											// This code causes page not to load when no focus area is set for the post. These vars are never used though, only declared. 
+											//$research_focus_area = get_the_terms( $related->ID, 'focus-area' )[0];
+											//$first_parent_term = get_term_top_most_parent($research_focus_area,'focus-area');
 
 											$related_eyebrow_copy = '';
 											$related_eyebrow_link_url = '';
@@ -411,16 +412,16 @@
 												<a href="<?php echo $related_eyebrow_link_url; ?>"><?php echo $related_eyebrow_copy; ?></a>
 											</h5>
 
-											<h4>
-												<a href="<?php echo $related_link; ?>"><?php echo $related_title; ?></a>
-											</h4>
+											<h3>
+												<a href="<?php echo esc_url($related_link); ?>"><?= $related_title ?></a>
+											</h3>
 
 											<div class="single-related-posts__description">
 												<p><?php echo $related_description; ?></p> 
 											</div>
 
 											<div class="single-related-posts__link">
-												<a href="<?php echo $related_link; ?>">
+												<a href="<?php echo esc_url($related_link); ?>">
 													Read more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
 												</a>
 											</div>
