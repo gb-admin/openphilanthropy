@@ -82,8 +82,10 @@
 	//Set up array of authors with included Name & URL to profile page
 	$authors = array();
 	$author_meta = get_post_meta($post->ID, 'custom_author', true);
-	$authors_remove_and = str_replace('and ', '', $author_meta);
+	$authors_remove_and = str_replace(' and ', ', ', $author_meta);
+	$authors_remove_and = str_replace(',,', ',', $authors_remove_and);
 	$authors_array = explode (", ", $authors_remove_and);
+	echo '<pre>' . var_export($authors_array, true) . '</pre>';
 
 	foreach( $authors_array as $a ):
 		$post_obj = get_page_by_title( $a, 'OBJECT', 'team' );
@@ -153,7 +155,7 @@
 							foreach( $authors as $a ){
 								//add and before last author 
 								if(++$i === $numAuthors && $numAuthors > 1){
-									echo 'and ';
+									echo ' and ';
 								}
 								//Display author link, or name only if no page found
 								if( $a['slug'] ){
@@ -162,7 +164,7 @@
 									echo $a['name'];
 								}
 								//Insert commas, except last
-								if($i !== $numAuthors && $numAuthors > 1){
+								if($i !== $numAuthors && $numAuthors > 2){
 									echo ', ';
 								}
 							}
