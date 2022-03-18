@@ -85,7 +85,6 @@
 	$authors_remove_and = str_replace(' and ', ', ', $author_meta);
 	$authors_remove_and = str_replace(',,', ',', $authors_remove_and);
 	$authors_array = explode (", ", $authors_remove_and);
-	echo '<pre>' . var_export($authors_array, true) . '</pre>';
 
 	foreach( $authors_array as $a ):
 		$post_obj = get_page_by_title( $a, 'OBJECT', 'team' );
