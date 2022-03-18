@@ -119,26 +119,36 @@
 							$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 
 							$focus_area = get_the_terms( $post->ID, 'focus-area' );
+							$focus_area_num = sizeof($focus_area);
 							$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
 
+							if( $primary_term ){
 								foreach( $focus_area as $term ){
-									//Set primary term. 
+									//Set primary term.
 									if( $primary_term == $term->term_id ){
 										$primary_focus_area = $term;
 									}
 								}
+							}else{
+								$primary_focus_area = $focus_area[0];
+							}
 
-								if( !$primary_focus_area ){ $primary_focus_area = $focus_area[0]; }
+							$term_depth = get_ancestors( $primary_focus_area->term_id, 'focus-area', 'taxonomy' );
+							$term_depth = sizeof($term_depth);
 
-								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
-								if( sizeof($focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
-									foreach( $focus_area as $term ){
-										if( !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
-											$primary_focus_area = $term;
-											break;
-										}
+							//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
+							if( $focus_area_num > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
+								foreach( $focus_area as $term ){
+									if( !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
+										$primary_focus_area = $term;
+										break;
 									}
 								}
+							}elseif( $term_depth >= 2 ){
+								$term_parents = get_ancestors( $primary_focus_area->term_id, 'focus-area', 'taxonomy' );
+								$new_term = end($term_parents);
+								$primary_focus_area = get_term( $new_term, 'focus-area' ); 
+							}
 
 							if ( ! $post_thumbnail && ! is_wp_error( $focus_area ) ) {
 								$post_thumbnail = get_field( 'category_image', 'focus-area_' . $primary_focus_area )['sizes']['lg'];

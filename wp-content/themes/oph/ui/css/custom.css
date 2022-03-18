@@ -1004,4 +1004,10 @@ ul.list-related-posts > li > h3 {
   margin: 0 0 1rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .list-statistics > li {
+    display: flex;
+    align-items: center;
+  }
+}
 /* END CSS ADDED BY CHAD */
