@@ -1278,18 +1278,18 @@ jQuery(function ($) {
       treeGroup = content.split(" ");
       subTree = treeGroup[0];
       sliceTree = subTree.split("-");
-      logme(sliceTree);
+      // logme(sliceTree);
       // subLevel = subTree.slice(-1);
       // logme('subLevel: ' + subLevel);
       subLevel = sliceTree.slice(-1);
-      logme("new subLevel: " + subLevel);
+      // logme("new subLevel: " + subLevel);
       // surLevel = subTree.slice(0, -2);
       // logme('surLevel: ' + surLevel);
       surSlice = sliceTree.slice(0, -1);
       surLevel = surSlice.join("-");
-      logme("new surLevel: " + surLevel);
+      // logme("new surLevel: " + surLevel);
 
-      logme(subTree.length);
+      // logme(subTree.length);
 
       if (subLevel == "1") {
         if (sliceTree.length > 2) {
@@ -1304,7 +1304,7 @@ jQuery(function ($) {
 
     // create new sublist
     function genList(item, subTree, dig = false) {
-      logme("Running genList()");
+      // logme("Running genList()");
       var lastItem,
         parentItem,
         subTreeSplit,
@@ -1314,30 +1314,23 @@ jQuery(function ($) {
         newID,
         newList;
       newID = "tree-" + subTree;
-      logme("newID: " + newID);
+      // logme("newID: " + newID);
       newList = '<ul id="' + newID + '" class="subtree"></ul>';
-      logme(newList);
+      // logme(newList);
 
       if (dig) {
-        subTreeSplit = subTree.split("-");
-        logme("subTreeSplit: " + subTreeSplit);
-        if (subTreeSplit.length > 1) {
-          subTreeSlice = subTreeSplit.slice(0, -1);
-          parentID = subTreeSlice.join("-");
-        } else {
-          parentID = subTreeSplit;
-        }
-        logme("parentID: " + parentID);
+        parentID = getParent(subTree); 
+        // logme("parentID: " + parentID);
         parentTree = "#tree-" + parentID;
-        logme("parentTree: " + parentTree);
+        // logme("parentTree: " + parentTree);
         // lastItem = $(postNav).children('li').last().children('ul').last().children('li').last();
         lastItem = $(parentTree);
-        logme("lastItem on dig.");
-        logme(lastItem);
+        // logme("lastItem on dig.");
+        // logme(lastItem);
       } else {
         lastItem = $(postNav).children("li").last();
-        logme("lastItem no dig.");
-        logme(lastItem);
+        // logme("lastItem no dig.");
+        // logme(lastItem);
         if (!lastItem.hasClass("tree")) {
           lastItem.addClass("tree");
         }
@@ -1349,18 +1342,21 @@ jQuery(function ($) {
 
     // get current sublist
     function getList(item, subTree) {
-      logme("Running getList()");
-      var listID = "tree-" + subTree.slice(0, -2);
-      logme("subTree: " + subTree);
-      logme("listID: " + listID);
+      // logme("Running getList()");
+      var childItem, genTree, listID; 
+      genTree = getParent(subTree); 
+      // logme("genTree: " + genTree);
+      listID = "tree-" + genTree;
+      // logme("subTree: " + subTree);
+      // logme("listID: " + listID);
       genItem(item, listID);
     }
 
     // generate list item
     function genItem(item, itemID) {
-      logme("Running genItem()");
+      // logme("Running genItem()");
       var itemList = "ul#" + itemID;
-      logme(itemList);
+      // logme(itemList);
       $(itemList).append(
         $(
           '<li><a data-goto="#' +
@@ -1396,6 +1392,21 @@ jQuery(function ($) {
             "</option>"
         )
       );
+    } 
+
+    // get parent item ID 
+    function getParent(child){ 
+      // logme("Running getParent()");
+      var split, slice, parent;
+      split = child.split("-"); 
+
+      if (split.length > 1) {
+        slice = split.slice(0, -1);
+        parent = slice.join("-");
+      } else { 
+        parent = split;
+      } 
+      return parent; 
     }
 
     // get each alpha, all betas, and begin navgen
@@ -1413,12 +1424,13 @@ jQuery(function ($) {
           logme(this);
         }
       });
-    });
+    }); 
 
     // Hide Navigation title if there are not sub-headings
     if ($(".header-anchor").length) {
       tocHeader.show();
-    }
+    } 
+
   });
 
   // Show ToC Subtrees
