@@ -39,7 +39,14 @@
 		'post_type' => 'careers',
 		'posts_per_page' => -1,
 		'post__in'	=> get_display_order_post_ids(),
-		'orderby' => 'post__in'
+		'orderby' => 'post__in', 
+		'meta_query' => array(
+				array(
+					'key' => 'closed', 
+					'value' => 1, 
+					'compare' => '!='
+				)
+		)
 	) );
 ?>
 
