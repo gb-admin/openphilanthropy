@@ -1232,7 +1232,7 @@ jQuery(function ($) {
   $(document).ready(function () {
     var alpha, postNav, mobilePostNav, tocHeader, sources;
 
-    alpha = $(".content-single .entry-content h2");
+    alpha = $(".content-single .entry-content").find("h2");
     postNav = $(".content-single .aside-post-navigation ul");
     mobilePostNav = $(".aside-post-navigation-mobile select");
     tocHeader = $(".content-single__aside > h3");
@@ -1249,16 +1249,18 @@ jQuery(function ($) {
         .toLowerCase()
         .replace(/\s+/g, "-")
         .replace(/[^0-9a-z-]/gi, "");
+        // logme("Anchor text: " + anchorsText); 
       anchorsAway(item, anchorsText, type);
     }
 
     // apply anchor links
     function anchorsAway(item, anchor, type) {
-      if (!$(item).attr("id")) {
-        $(item).addClass(type).attr("id", anchor);
-      } else {
-        $(item).addClass(type);
-      }
+      // if (!$(item).attr("id")) {
+      //   $(item).addClass(type).attr("id", anchor);
+      // } else {
+      //   $(item).addClass(type);
+      // } 
+      $(item).addClass(type).attr("id", anchor);
       sortTopLevel(item);
     }
 
@@ -1412,7 +1414,7 @@ jQuery(function ($) {
     // get each alpha, all betas, and begin navgen
     $(alpha).each(function () {
       anchorsMade(this, "header-anchor");
-      logme(this);
+      // logme(this);
 
       var beta = $(this).nextUntil(alpha, "h4");
 
