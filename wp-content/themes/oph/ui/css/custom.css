@@ -723,8 +723,9 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   .block-feed-post__body
   .block-feed-post__content_type
   ul.research-content-type {
-  margin-top: -24px;
-  white-space: pre-line;
+  /* margin-top: -24px; */
+  white-space: pre-line; 
+  line-height: 0; 
 }
 .block-feed.block-feed--research
   .block-feed-post
@@ -734,7 +735,7 @@ body.home header.is-scrolled .sitewide-search-button svg path {
   li {
   background-color: #fff;
   border-radius: 14px;
-  display: inline-block;
+  display: block;
   margin-bottom: 10px;
   padding: 2px 13px;
 }
@@ -900,6 +901,11 @@ body.logged-in.admin-bar #header {
   top: 114px;
   background-color: #fff;
   z-index: 999;
+} 
+@media screen and (min-width: 1440px) {
+  .block-feed-title-head {
+    padding-left: 86px; 
+  }
 }
 
 body.logged-in.admin-bar .block-feed-title-head {
@@ -1011,3 +1017,165 @@ ul.list-related-posts > li > h3 {
   }
 }
 /* END CSS ADDED BY CHAD */
+
+/* .selection-dropdown {
+  background-color: #374261; 
+  height: 43px; 
+  overflow: hidden; 
+} 
+.selection-dropdown.active {
+  height: 173px; 
+  overflow-y: scroll; 
+} */
+
+.selection-dropdown { 
+  color: #FFF; 
+  font-size: 16px; 
+  margin-bottom: 0; 
+  overflow: hidden; 
+  cursor: pointer; 
+  width: 100%; 
+} 
+
+.selection-prompt { 
+  align-items: center; 
+  background-color: #374261; 
+  border-radius: 999px; 
+  display: flex; 
+  height: 43px; 
+  justify-content: space-between; 
+  padding: 0 16px; 
+  position: relative; 
+  transition-duration: .25s; 
+  width: 100%; 
+}
+.selection-prompt:hover, 
+.selection-prompt:focus {
+  background-color: #445277; 
+} 
+.selection-dropdown.active .selection-prompt::before {
+  background-color: #374261; 
+  clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+  content: ""; 
+  display: block; 
+  height: 13px; 
+  position: absolute; 
+  right: 16px; 
+  bottom: -17px; 
+  width: 23px; 
+}
+.selection-prompt span.indicator { 
+  align-items: center; 
+  display: flex; 
+} 
+.selection-prompt span.indicator svg {
+  height: 13px; 
+  width: 23px; 
+} 
+.selection-dropdown.active .selection-prompt span.indicator svg { 
+  transform: rotate(180deg); 
+} 
+
+.selection-options {
+  background-color: #374261; 
+  border-radius: 12px; 
+  max-height: 0; 
+  overflow: hidden; 
+} 
+.selection-dropdown.active .selection-options {
+  margin-top: 16px; 
+  max-height: 173px; 
+} 
+
+.selection-options input, 
+.selection-options label { 
+  cursor: pointer; 
+} 
+
+.selection-options label { 
+  border-bottom: 1px solid #FFF; 
+  font-size: 14px; 
+  line-height: 18px; 
+  padding: 12px 16px; 
+  padding-left: 40px; 
+  position: relative; 
+  width: 100%; 
+} 
+.selection-options label::before {
+  background-color: #FFF; 
+  content: ""; 
+  display: inline-block; 
+  height: 15px; 
+  left: 16px; 
+  position: absolute; 
+  top: 12px; 
+  width: 15px; 
+}
+.selection-options label:hover, 
+.selection-options label:focus { 
+  background-color: #445277; 
+} 
+.selection-options label:last-of-type { 
+  border-bottom: none; 
+} 
+
+.selection-options label[data-depth='level-2'] { 
+  padding-left: 50px; 
+} 
+.selection-options label[data-depth='level-2']::before { 
+  left: 26px; 
+} 
+.selection-options label[data-depth='level-3'] { 
+  padding-left: 60px; 
+} 
+.selection-options label[data-depth='level-3']::before { 
+  left: 36px; 
+} 
+
+.selection-options input[type='text'].selection-search {
+  background: none; 
+  border-bottom: 1px solid #FFF; 
+  color: #FFF; 
+  cursor: auto; 
+  font-size: 14px; 
+  padding: 9px 16px 10px; 
+  width: 100%; 
+} 
+.selection-options input[type='text'].selection-search::placeholder { 
+  color: #FFF; 
+} 
+.selection-options input[type='text'].selection-search:focus {
+  outline: none; 
+} 
+
+.selection-options .options-wrapper {
+  max-height: 129px; 
+  overflow-y: scroll; 
+} 
+
+.selection-options label input[type="checkbox"] { 
+  display: none; 
+} 
+
+.selection-options label span.checked-box {
+  background-color: #263046; 
+  display: none; 
+  height: 11px; 
+  left: 18px; 
+  position: absolute; 
+  top: 14px; 
+  width: 11px; 
+} 
+.selection-options label[data-depth='level-2'] span.checked-box { 
+  left: 28px; 
+} 
+.selection-options label[data-depth='level-3'] span.checked-box { 
+  left: 38px; 
+} 
+.selection-options label input[type="checkbox"]:checked + span.checked-box {
+  display: block; 
+} 
+
+.page-header-categories .clear-categories { 
+  display: flex; 
+} 
