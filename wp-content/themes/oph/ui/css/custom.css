@@ -1179,3 +1179,12 @@ ul.list-related-posts > li > h3 {
 .page-header-categories .clear-categories { 
   display: flex; 
 } 
+
+.content-single .entry-content figure {
+  text-align: center; 
+}
+.content-single .entry-content p img { 
+  display: block;
+  margin: 0 auto;
+} 
+
