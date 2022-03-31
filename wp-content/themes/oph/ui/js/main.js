@@ -149,13 +149,15 @@ jQuery(function ($) {
       templateSelection: select2CopyClasses,
     });
 
-    var sidebarSelect = $(".sidebar-filter select").select2({
+    var sidebarSelect = $(".sidebar-filter select").select2({ 
       dropdownCssClass: "sidebar-filter-dropdown",
       searchInputPlaceholder: "Type here to search ...",
       minimumResultsForSearch: 5,
       templateResult: select2CopyClasses,
       templateSelection: select2CopyClasses,
-      // allowClear: true
+      // closeOnSelect: false,
+      // allowClear: true,
+      // multiple: true,
     });
 
     $(sidebarSelect).on("select2:select", function (e) {
@@ -1068,165 +1070,166 @@ jQuery(function ($) {
    * Delete URL parameter.
    */
 
-  function deleteParam(url, key, value) {
-    let params = url.searchParams.getAll(key);
+  // function deleteParam(url, key, value) {
+  //   let params = url.searchParams.getAll(key);
 
-    var index = params.indexOf(value);
+  //   var index = params.indexOf(value);
 
-    if (index > -1) {
-      params.splice(index, 1);
-    }
+  //   if (index > -1) {
+  //     params.splice(index, 1);
+  //   }
 
-    url.searchParams.delete(key);
+  //   url.searchParams.delete(key);
 
-    params.forEach(function (param) {
-      url.searchParams.append(key, param);
-    });
-  }
+  //   params.forEach(function (param) {
+  //     url.searchParams.append(key, param);
+  //   });
+  // }
 
   /**
    * Sidebar filters - with select values.
    */
 
-  var url = new URL(window.location.href);
-  window.sidebarFilterUrl = ""; // Used to store the current URL for the sidebar filters.
+  // var url = new URL(window.location.href);
+  // window.sidebarFilterUrl = ""; // Used to store the current URL for the sidebar filters.
 
-  $(".sidebar-filter select").on("change", function () {
-    var category = $(this).find(":selected").attr("data-category"),
-      filter = $(this).attr("data-filter"),
-      filterAll = url.searchParams.getAll(filter),
-      filterAnchor = $(this).closest("nav").attr("data-filter-anchor"),
-      hash = url.href.split("#")[1];
+  // $(".sidebar-filter select").on("change", function () {
+  //   var category = $(this).find(":selected").attr("data-category"),
+  //     filter = $(this).attr("data-filter"),
+  //     filterAll = url.searchParams.getAll(filter),
+  //     filterAnchor = $(this).closest("nav").attr("data-filter-anchor"),
+  //     hash = url.href.split("#")[1];
 
-    if (category && filter) {
-      /**
-       * Add parameter or delete if exists.
-       */
-      if ($(this).attr("data-select-multiple") == "false") {
-        url.searchParams.delete(filter);
-        url.searchParams.append(filter, category);
-      } else if (filterAll.indexOf(category) > -1) {
-        deleteParam(url, filter, category);
-      } else {
-        url.searchParams.append(filter, category);
-      }
+  //   if (category && filter) {
+  //     /**
+  //      * Add parameter or delete if exists.
+  //      */
+  //     if ($(this).attr("data-select-multiple") == "false") {
+  //       url.searchParams.delete(filter);
+  //       url.searchParams.append(filter, category);
+  //     } else if (filterAll.indexOf(category) > -1) {
+  //       deleteParam(url, filter, category);
+  //     } else {
+  //       url.searchParams.append(filter, category);
+  //     }
 
-      if ($(".block-feed.block-feed--list").length) {
-        url.searchParams.set("view-list", "true");
-      } else {
-        url.searchParams.set("view-list", "false");
-      }
+  //     if ($(".block-feed.block-feed--list").length) {
+  //       url.searchParams.set("view-list", "true");
+  //     } else {
+  //       url.searchParams.set("view-list", "false");
+  //     }
 
-      /**
-       * Use .split() to get everything before '#'
-       * then append filter anchor.
-       */
-      if (filterAnchor) {
-        url.href = url.href.split("#")[0] + "#" + filterAnchor;
-      }
+  //     /**
+  //      * Use .split() to get everything before '#'
+  //      * then append filter anchor.
+  //      */
+  //     if (filterAnchor) {
+  //       url.href = url.href.split("#")[0] + "#" + filterAnchor;
+  //     }
 
-      window.sidebarFilterUrl = url.href;
-    }
-  });
+  //     window.sidebarFilterUrl = url.href;
+  //   }
+  // });
 
-  $(".sidebar-filter a.sidebar-filter__submit").on("click", function (e) {
-    e.preventDefault();
-    window.location.replace(window.sidebarFilterUrl);
-  });
+  // $(".sidebar-filter a.sidebar-filter__submit").on("click", function (e) {
+  //   e.preventDefault();
+  //   window.location.replace(window.sidebarFilterUrl);
+  // });
 
-  var closeIcon = $(
-    '<svg aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.857 6.506L1.571.221.157 1.635 6.443 7.92 0 14.363l1.414 1.415 6.443-6.443 6.442 6.442 1.415-1.414L9.27 7.92l6.285-6.285L14.142.221 7.857 6.506z"/></svg>'
-  );
+  // var closeIcon = $(
+  //   '<svg aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.857 6.506L1.571.221.157 1.635 6.443 7.92 0 14.363l1.414 1.415 6.443-6.443 6.442 6.442 1.415-1.414L9.27 7.92l6.285-6.285L14.142.221 7.857 6.506z"/></svg>'
+  // );
 
-  $(document).ready(function () {
-    var urlParams = getParams();
+  // $(document).ready(function () {
+  //   var urlParams = getParams();
 
-    for (var param in urlParams) {
-      if (Array.isArray(urlParams[param])) {
-        for (var i = 0; i < urlParams[param].length; i++) {
-          var urlCategoryRemoved = new URL(window.location.href),
-            categoryText = $(
-              '[data-filter="' +
-                param +
-                '"] [data-category="' +
-                urlParams[param][i] +
-                '"]:first'
-            ).text();
+  //   for (var param in urlParams) {
+  //     if (Array.isArray(urlParams[param])) {
+  //       for (var i = 0; i < urlParams[param].length; i++) {
+  //         var urlCategoryRemoved = new URL(window.location.href),
+  //           categoryText = $(
+  //             '[data-filter="' +
+  //               param +
+  //               '"] [data-category="' +
+  //               urlParams[param][i] +
+  //               '"]:first'
+  //           ).text();
 
-          if (!categoryText) {
-            categoryText = urlParams[param][i];
-          }
+  //         if (!categoryText) {
+  //           categoryText = urlParams[param][i];
+  //         }
 
-          deleteParam(urlCategoryRemoved, param, urlParams[param][i]);
+  //         deleteParam(urlCategoryRemoved, param, urlParams[param][i]);
 
-          if ($(".block-feed.block-feed--list").length) {
-            urlCategoryRemoved.searchParams.append("view-list", "true");
-          } else {
-            urlCategoryRemoved.searchParams.delete("view-list");
-          }
+  //         if ($(".block-feed.block-feed--list").length) {
+  //           urlCategoryRemoved.searchParams.append("view-list", "true");
+  //         } else {
+  //           urlCategoryRemoved.searchParams.delete("view-list");
+  //         }
 
-          if (param != "items" && param != "sort" && param != "view-list") {
-            $("#filter-categories-list").append(
-              $(
-                '<li data-category="' +
-                  param +
-                  '"><a href="' +
-                  urlCategoryRemoved.href +
-                  '">' +
-                  categoryText +
-                  "</a></li>"
-              )
-            );
-          }
-        }
-      } else {
-        var urlCategoryRemoved = new URL(window.location.href),
-          categoryText = $(
-            '[data-filter="' +
-              param +
-              '"] [data-category="' +
-              urlParams[param] +
-              '"]:first'
-          ).text();
+  //         // if (param != "items" && param != "sort" && param != "view-list") {
+  //         //   $("#filter-categories-list").append(
+  //         //     $(
+  //         //       '<li data-category="' +
+  //         //         param +
+  //         //         '"><a href="' +
+  //         //         urlCategoryRemoved.href +
+  //         //         '">' +
+  //         //         categoryText +
+  //         //         "</a></li>"
+  //         //     )
+  //         //   );
+  //         // }
+  //       }
+  //     } else {
+  //       // var urlCategoryRemoved = new URL(window.location.href),
+  //       //   categoryText = $(
+  //       //     '[data-filter="' +
+  //       //       param +
+  //       //       '"] [data-category="' +
+  //       //       urlParams[param] +
+  //       //       '"]:first'
+  //       //   ).text();
 
-        if (!categoryText) {
-          categoryText = urlParams[param];
-        }
+  //       // if (!categoryText) {
+  //       //   categoryText = urlParams[param];
+  //       // }
 
-        deleteParam(urlCategoryRemoved, param, urlParams[param]);
+  //       // deleteParam(urlCategoryRemoved, param, urlParams[param]);
 
-        if ($(".block-feed.block-feed--list").length) {
-          urlCategoryRemoved.searchParams.append("view-list", "true");
-        } else {
-          urlCategoryRemoved.searchParams.delete("view-list");
-        }
+  //       // if ($(".block-feed.block-feed--list").length) {
+  //       //   urlCategoryRemoved.searchParams.append("view-list", "true");
+  //       // } else {
+  //       //   urlCategoryRemoved.searchParams.delete("view-list");
+  //       // }
 
-        if (param != "items" && param != "sort" && param != "view-list") {
-          $("#filter-categories-list").append(
-            $(
-              '<li data-category="' +
-                param +
-                '"><a href="' +
-                urlCategoryRemoved.href +
-                '">' +
-                categoryText +
-                "</a></li>"
-            )
-          );
-        }
-      }
-    }
+  //       // if (param != "items" && param != "sort" && param != "view-list") { 
+  //       //   var displayText = categoryText.replace(/-/g, " "); 
+  //       //   $("#filter-categories-list").append(
+  //       //     $(
+  //       //       '<li data-category="' +
+  //       //         param +
+  //       //         '"><a href="' +
+  //       //         urlCategoryRemoved.href +
+  //       //         '">' +
+  //       //         displayText +
+  //       //         "</a></li>"
+  //       //     )
+  //       //   );
+  //       // }
+  //     }
+  //   }
 
-    if ($("#filter-categories-list li").length > 0) {
-      $(".page-header-categories").addClass("has-categories");
-    }
+  //   // if ($("#filter-categories-list li").length > 0) {
+  //   //   $(".page-header-categories").addClass("has-categories");
+  //   // }
 
-    $("#filter-categories-list > li > a").append(closeIcon);
+  //   // $("#filter-categories-list > li > a").append(closeIcon);
 
-    if (Object.keys(urlParams).length > 0) {
-      $(".page-header-categories").addClass("is-active");
-    }
-  });
+  //   // if (Object.keys(urlParams).length > 0) {
+  //   //   $(".page-header-categories").addClass("is-active");
+  //   // }
+  // });
 
   // Create Table of Contents
   $(document).ready(function () {
@@ -2011,11 +2014,77 @@ jQuery(function ($) {
         $(feed).addClass("cubed");
       }
     }
-  });
-});
+  }); 
+
+  /**
+   * I'm pretty sure everything in this repo is made up, and the points 
+   * don't matter. 
+   * 
+   * Newly-build Sidebar Nav 
+   */ 
+  $(document).ready(function(){ 
+    console.log('Ada online.'); 
+
+    // toggle hiding on each dropdown 
+    $('.selection-prompt').click(function(){ 
+      var wrappers, wrap, state; 
+      wrappers = $('.selection-dropdown'); 
+      wrap = $(this).parent('.selection-dropdown'); 
+      state = $(wrap).hasClass('active'); 
+
+      if ( state ) {
+        $(wrap).removeClass('active'); 
+      } else {
+        $(wrappers).removeClass('active'); 
+        $(wrap).addClass('active'); 
+      }
+    }); 
+    // sub-section searches 
+    $('.selection-search').on('keyup keypress', function(e) { 
+      var keyCode = e.keyCode || e.which;
+      // disallow form submission on 'enter' key when focusing a 
+      // dropdown's search field 
+      if (keyCode === 13) { 
+        e.preventDefault();
+        return false;
+      } else {
+      // filter results 
+        var value, labels; 
+        value = $(this).val().toLowerCase(); 
+        labels = $(this).siblings('.options-wrapper').children('label.selection-label'); 
+
+        $(labels).filter(function() { 
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1); 
+        });
+      }
+    }); 
+    // rearrage for hierarchy 
+    function find_parents(selectionID) { 
+      var set, options; 
+      set = $(selectionID).children('.selection-options').children('.options-wrapper'); 
+      options = $(set).children('.selection-label'); 
+
+      // this will only work while `orderby` => `parents` 
+      $(options).each(function() { 
+        var parentID; 
+        parentID = $(this).attr('data-parent'); 
+
+        if ( parentID != '0') { 
+          var parentAttr, parentItem; 
+          parentAttr = '.selection-label[data-termid=' + parentID + ']';
+          parentItem = $(this).siblings(parentAttr); 
+          $(this).insertAfter(parentItem); 
+        }
+      }); 
+    } 
+    find_parents('#filter-focus-area'); 
+    find_parents('#filter-content-type'); 
+  }); 
+}); 
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate
 
 // window.onclick = e => {
 //   console.log(e.target);  // to get the element
 // }
+
