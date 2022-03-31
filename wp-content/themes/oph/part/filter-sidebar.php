@@ -88,23 +88,22 @@
 				<span class="sidebar-filter-hide-button-text">Hide Options</span> <span class="sidebar-filter-hide-icon"></span>
 			</button>
 		</div>
-
+		<div class="sidebar-filter__search">
+			<!-- search bar --> 
+			<?php
+				if ( $post_type ) {
+					if ( $post_type == 'grants' ) {
+						get_template_part( 'searchform', 'grants' );
+					} elseif ( $post_type == 'research' ) {
+						get_template_part( 'searchform', 'research' );
+					}
+				} else {
+					get_template_part( 'searchform' );
+				}
+			?>
+		</div>
 		<form  method="GET" class="sidebar-filter__content">
 			<div aria-label="Sidebar Filter Options" data-filter-anchor="categories">
-				<div class="sidebar-filter__search">
-					<!-- search bar --> 
-					<?php
-						// if ( $post_type ) {
-						// 	if ( $post_type == 'grants' ) {
-						// 		get_template_part( 'searchform', 'grants' );
-						// 	} elseif ( $post_type == 'research' ) {
-						// 		get_template_part( 'searchform', 'research' );
-						// 	}
-						// } else {
-						// 	get_template_part( 'searchform' );
-						// }
-					?>
-				</div>
 				<div class="sidebar-filter__option"> 
 					<!-- filters --> 
 					<?php foreach ( $sidebar_filter as $filter ) : ?> 
