@@ -306,7 +306,8 @@ button.button-view-list {
 }
 .content table.table-imported,
 .content-single table.table-imported {
-  table-layout: auto !important;
+  table-layout: auto !important; 
+  min-width: 100%; 
 }
 
 @media screen and (min-width: 768px) {
