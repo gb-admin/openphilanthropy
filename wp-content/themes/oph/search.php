@@ -49,7 +49,7 @@
 							<p><?php echo $search_description; ?></p>
 
 							<div class="search-results__link">
-								<a href="<?php the_permalink(); ?>">Read More</a>
+								<a href="<?php echo $url; ?>">Read More</a>
 							</div>
 						</article>
 					<?php endwhile; ?>
