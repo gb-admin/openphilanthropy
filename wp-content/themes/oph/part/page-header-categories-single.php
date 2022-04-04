@@ -38,27 +38,15 @@
 						<?php if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) ) : ?>
 							<?php foreach ( $terms_focus_area as $term ) : ?>
 								<?php 
-								$parentID = $term->parent; 
-								// echo 'ParentID = ' . $parentID; 
-								if ( $parentID != 0 ) {
-									$grandparent = get_term( $parentID, 'focus-area' ); 
-									$grandparentID = $grandparent->parent; 
-									// echo 'GrandparentID = ' . $grandparentID; 
-								}
+								$ancestors = get_ancestors($term->term_id, 'focus-area', 'taxonomy'); 
+								$depth = count($ancestors); 
 								?> 
 								<li>
 									<a href="/<?php echo $post_type; ?>?focus-area=<?php echo $term->slug; ?>">
 										<?php 
-											if( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' ){
-												echo 'Category: ';
-											}
-											else if ( ($parentID != 0) && ($grandparentID != 0) ) {
-												echo 'Portfolio Area: ';
-											}
-											else {
-												echo 'Focus Area: ';
-											} 
-											
+											if( $depth == 0 ) { echo 'Category: '; } 
+											else if ( $depth == 1 ) { echo 'Focus Area: '; }
+											else { echo 'Portfolio Area: '; } 
 											echo $term->name; ?>
 									</a>
 								</li>
