@@ -2080,6 +2080,14 @@ jQuery(function ($) {
     find_parents('#filter-focus-area'); 
     find_parents('#filter-content-type'); 
   }); 
+
+  // Strip &nbsp; from page headers 
+  $(document).ready(function() {
+    var oldhtml = $('.page-header__main h1').html();
+    var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
+
+    $('.page-header__main h1').html(newhtml);
+  });
 }); 
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate

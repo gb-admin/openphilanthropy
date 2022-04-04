@@ -116,7 +116,36 @@
 
 						<?php
 							$post_content_type = get_the_terms( $post->ID, 'content-type' );
-							$post_focus_area = get_the_terms( $post->ID, 'focus-area' );
+							
+							$post_focus_area = get_the_terms( $post->ID, 'focus-area' ); 
+							if ( $post_focus_area ) {
+								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true); 
+
+								$focus_only = array(); 
+								foreach( $post_focus_area as $area ){ 
+								  $ancestors = get_ancestors($area->term_id, 'focus-area', 'taxonomy'); 
+								  $depth = count($ancestors); 
+								  if ( $depth == 1 ) { 
+								    $focus_only[] = $area; 
+								  } elseif ( $depth == 0 ) {
+								    $post_category = $area; 
+								  }
+								} 
+
+								$post_focus = count($focus_only);                 
+								if ( $post_focus == 1 ) { 
+								  $primary_focus_area = $focus_only[0]; 
+								} elseif ( $post_focus > 1 ) { 
+								  foreach ( $focus_only as $focus ) { 
+								    if ( $primary_term == $focus->term_id ) {
+								      $primary_focus_area = $focus; 
+								    } 
+								  } 
+								} else { 
+								  $primary_focus_area = $post_category; 
+								} 
+							} 
+
 							$linkExternally = get_field('externally_link'); 
 							$externalURL = get_field('external_url'); 
 						?>
@@ -136,7 +165,7 @@
 
 							<?php if ( $post_focus_area ) : ?>
 								<h5>
-									<a href="?focus-area=<?php echo $post_focus_area[0]->slug; ?>#categories"><?php echo $post_focus_area[0]->name; ?></a>
+									<a href="/research?focus-area=<?php echo $primary_focus_area->slug; ?>#categories"><?php echo $primary_focus_area->name; ?></a>
 								</h5>
 							<?php endif; ?>
 
