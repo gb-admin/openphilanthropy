@@ -208,37 +208,32 @@
 								$organization_name = get_the_terms( $post->ID, 'organization-name' );
 								$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
 								
-								$focus_area = get_the_terms( $post->ID, 'focus-area' );
-								$focus_area_num = sizeof($focus_area);
-								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
+								$focus_area = get_the_terms( $post->ID, 'focus-area' ); 
+								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true); 
 
-								if( $primary_term ){
-									foreach( $focus_area as $term ){
-										//Set primary term.
-										if( $primary_term == $term->term_id ){
-											$primary_focus_area = $term;
-										}
+								$focus_only = array(); 
+								foreach( $focus_area as $area ){ 
+									$ancestors = get_ancestors($area->term_id, 'focus-area', 'taxonomy'); 
+									$depth = count($ancestors);	
+									if ( $depth == 1 ) { 
+										$focus_only[] = $area; 
+									} elseif ( $depth == 0 ) {
+										$post_category = $area; 
 									}
-								}else{
-									$primary_focus_area = $focus_area[0];
-								}
+								} 
 
-								$term_depth = get_ancestors( $primary_focus_area->term_id, 'focus-area', 'taxonomy' );
-								$term_depth = sizeof($term_depth);
-
-								//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
-								if( $focus_area_num > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
-									foreach( $focus_area as $term ){
-										if( !( $term->slug == 'global-health-wellbeing' || $term->slug == 'longtermism' || $term->slug == 'other-areas' ) ){
-											$primary_focus_area = $term;
-											break;
-										}
-									}
-								}elseif( $term_depth >= 2 ){
-									$term_parents = get_ancestors( $primary_focus_area->term_id, 'focus-area', 'taxonomy' );
-									$new_term = end($term_parents);
-									$primary_focus_area = get_term( $new_term, 'focus-area' ); 
-								}
+								$post_focus = count($focus_only); 								
+								if ( $post_focus == 1 ) { 
+									$primary_focus_area = $focus_only[0]; 
+								} elseif ( $post_focus > 1 ) { 
+									foreach ( $focus_only as $focus ) { 
+										if ( $primary_term == $focus->term_id ) {
+											$primary_focus_area = $focus; 
+										} 
+									} 
+								} else { 
+									$primary_focus_area = $post_category; 
+								} 
 
 								if ( ! $post_thumbnail && ! is_wp_error( $primary_focus_area ) ) {
 									$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $primary_focus_area->term_id )['sizes']['lg'];
