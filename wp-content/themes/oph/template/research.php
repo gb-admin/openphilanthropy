@@ -169,8 +169,34 @@
 							$sortDate = get_the_date( 'Y-m-d', $research->ID ); 
 							$sortFocus = ''; 
 							if ( $research_focus_area ) {
-								$sortFocus = $research_focus_area[0]->name; 
+								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true); 
+
+								$focus_only = array(); 
+								foreach( $research_focus_area as $area ){ 
+								  $ancestors = get_ancestors($area->term_id, 'focus-area', 'taxonomy'); 
+								  $depth = count($ancestors); 
+								  if ( $depth == 1 ) { 
+								    $focus_only[] = $area; 
+								  } elseif ( $depth == 0 ) {
+								    $post_category = $area; 
+								  }
+								} 
+
+								$post_focus = count($focus_only);                 
+								if ( $post_focus == 1 ) { 
+								  $primary_focus_area = $focus_only[0]; 
+								} elseif ( $post_focus > 1 ) { 
+								  foreach ( $focus_only as $focus ) { 
+								    if ( $primary_term == $focus->term_id ) {
+								      $primary_focus_area = $focus; 
+								    } 
+								  } 
+								} else { 
+								  $primary_focus_area = $post_category; 
+								} 
+								$sortFocus = $primary_focus_area->name;  
 							} 
+
 							$sortContent = ''; 
 							if ($research_content_type) {
 								$sortContent = $research_content_type[0]->name; 
@@ -211,7 +237,7 @@
 
 								<h5 class="block-feed-post__category">
 									<?php if ( $research_focus_area ) : ?>
-									<a href="?focus-area=<?php echo $research_focus_area[0]->slug; ?>#categories"><?php echo $research_focus_area[0]->name; ?></a>
+									<a href="?focus-area=<?php echo $primary_focus_area->slug; ?>#categories"><?php echo $primary_focus_area->name; ?></a>
 									<?php endif; ?>
 								</h5>
 
