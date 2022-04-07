@@ -79,6 +79,9 @@
 				} elseif ( $value == 'recent' ) {
 					$order_query = 'desc';
 					$orderby_query = 'date';
+				} elseif ( $value == 'oldest-to-newest' ) {
+					$order_query = 'asc';
+					$orderby_query = 'date';
 				}
 			}
 		} elseif ( $key == 'yr' ) {
