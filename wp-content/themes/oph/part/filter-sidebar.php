@@ -129,6 +129,7 @@
 							    	    name="amount"
 							    	    value="Less than $100,000" 
 							    	    <?php if ( in_array( 'less-than-1hundthous', $params['amount'] ) ) { echo 'checked'; } ?> />
+							    	    <span class="checked-box"></span>
 							    	  	Less than $100,000
 							    	</label> 
 							    	<label 
@@ -140,7 +141,8 @@
 							    	    id="between-1hundthous-1mil" 
 							    	    name="amount"
 							    	    value="Between $100,000 and $1,000,000" 
-							    	    <?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'checked'; } ?> />
+							    	    <?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'checked'; } ?> /> 
+							    	    <span class="checked-box"></span>
 							    	  	Between $100,000 and $1,000,000
 							    	</label> 
 							    	<label 
@@ -153,6 +155,7 @@
 							    	    name="amount"
 							    	    value="Greater than $1,000,000" 
 							    	    <?php if ( in_array( 'greater-than-1mil', $params['amount'] ) ) { echo 'checked'; } ?> />
+							    	    <span class="checked-box"></span>
 							    	  	Greater than $1,000,000
 							    	</label> 
 							    </div>
