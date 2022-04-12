@@ -149,7 +149,7 @@
 	array_push( $meta_query, $amount_meta_query );
 	array_push( $meta_query, $date_meta_query );
 
-	$grants = new WP_Query( array(
+	$args = array(
 		'post_type' => 'grants',
 		'posts_per_page' => $posts_per_page,
 		'order' => $order_query,
@@ -159,7 +159,13 @@
 		'meta_query' => $meta_query,
 		'tax_query' => $tax_query,
 		'meta_key' => $meta_key
-	) );
+	);
+
+	if ( isset($params['q'][0]) ) {
+		$args['s']= $params['q'][0]; 
+	} 
+
+	$grants = new WP_Query( $args );
 
 	$grants_posts = $grants->posts;
 ?>
