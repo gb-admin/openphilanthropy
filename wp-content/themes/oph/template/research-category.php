@@ -21,10 +21,10 @@
 		$content_type_taxonomy = $content_type->taxonomy;
 	}
 
-	$view_list = false;
+	$view_list = true; // this is the default view
 
-	if ( ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'true' ) || ( empty(count($_GET)) ) ) {
-		$view_list = true;
+	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
+		$view_list = false;
 	}
 
 	$featured_research = get_field( 'featured_research' );
@@ -130,18 +130,18 @@
 	);
 
 	if ( isset($params['author'][0]) ) {
-		
 		$args['meta_query'][] = array(
 			'key'     => 'custom_author',
 			'value'   => $params['author'],
 			'compare' => 'IN'
 		);
-		$research = new WP_Query($args);
-	
-	} else {
-		$research = new WP_Query($args);
-	}
+	} 
 
+	if ( isset($params['q'][0]) ) {
+		$args['s']= $params['q'][0]; 
+	} 
+
+	$research = new WP_Query($args); 
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>

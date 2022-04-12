@@ -1189,3 +1189,32 @@ ul.list-related-posts > li > h3 {
   margin: 0 auto;
 } 
 
+
+/* Sidebar Search */ 
+.sidebar-filter .sidebar-filter__search input[type="search"] {
+  align-items: center;
+  background-color: #263046;
+  border: 2px solid #6e7ca0; 
+  border-color: #6e7ca0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: initial;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 400;
+  height: 42px;
+  justify-content: center;
+  line-height: 1.375;
+  margin: 0;
+  outline: 0;
+  padding: 3px 16px 0;
+  position: relative;
+  text-align: left;
+  transition: all 0.25s ease-out;
+  vertical-align: middle;
+  width: 100%;
+  z-index: 10;
+}
+.sidebar-filter .sidebar-filter__search input[type="search"]::placeholder {
+  color: #FFF; 
+}

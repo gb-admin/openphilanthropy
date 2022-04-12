@@ -79,6 +79,10 @@
 	$sort_authors = array_unique( $sort_authors ); 
 	sort( $sort_authors ); 
 
+	if ( isset($params['q'][0]) ) {
+		$search_query= $params['q'][0]; 
+	} 
+
 ?>
 
 <div class="sidebar-filter">
@@ -88,21 +92,11 @@
 				<span class="sidebar-filter-hide-button-text">Hide Options</span> <span class="sidebar-filter-hide-icon"></span>
 			</button>
 		</div>
-		<div class="sidebar-filter__search">
-			<!-- search bar --> 
-			<?php
-				if ( $post_type ) {
-					if ( $post_type == 'grants' ) {
-						get_template_part( 'searchform', 'grants' );
-					} elseif ( $post_type == 'research' ) {
-						get_template_part( 'searchform', 'research' );
-					}
-				} else {
-					get_template_part( 'searchform' );
-				}
-			?>
-		</div>
 		<form  method="GET" class="sidebar-filter__content">
+			<div class="sidebar-filter__search">
+				<!-- search bar --> 
+				<input class="selection-query" type="search" name="q" placeholder="Search" value="<?php echo $search_query; ?>">
+			</div>
 			<div aria-label="Sidebar Filter Options" data-filter-anchor="categories">
 				<div class="sidebar-filter__option"> 
 					<!-- filters --> 
@@ -127,7 +121,7 @@
 							    	    data-category="less-than-1hundthous" 
 							    	    id="less-than-1hundthous" 
 							    	    name="amount"
-							    	    value="Less than $100,000" 
+							    	    value="less-than-1hundthous" 
 							    	    <?php if ( in_array( 'less-than-1hundthous', $params['amount'] ) ) { echo 'checked'; } ?> />
 							    	    <span class="checked-box"></span>
 							    	  	Less than $100,000
@@ -140,7 +134,7 @@
 							    	    data-category="between-1hundthous-1mil" 
 							    	    id="between-1hundthous-1mil" 
 							    	    name="amount"
-							    	    value="Between $100,000 and $1,000,000" 
+							    	    value="between-1hundthous-1mil" 
 							    	    <?php if ( in_array( 'between-1hundthous-1mil', $params['amount'] ) ) { echo 'checked'; } ?> /> 
 							    	    <span class="checked-box"></span>
 							    	  	Between $100,000 and $1,000,000
@@ -153,7 +147,7 @@
 							    	    data-category="greater-than-1mil" 
 							    	    id="greater-than-1mil" 
 							    	    name="amount"
-							    	    value="Greater than $1,000,000" 
+							    	    value="greater-than-1mil" 
 							    	    <?php if ( in_array( 'greater-than-1mil', $params['amount'] ) ) { echo 'checked'; } ?> />
 							    	    <span class="checked-box"></span>
 							    	  	Greater than $1,000,000
@@ -293,7 +287,7 @@
 									    <input type="text" class="selection-search" placeholder="Type here to search... " /> 
 									    <div class="options-wrapper"> 
 									    <?php 
-									      generate_filters('year', $research_years ); 
+									      generate_filters('yr', $research_years ); 
 									    ?>
 									    </div>
 									  </div>
