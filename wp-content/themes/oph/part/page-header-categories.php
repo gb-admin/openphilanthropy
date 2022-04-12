@@ -17,7 +17,7 @@ $ignore = array("items", "sort", "view-list");
 $params = get_url_params(); 
 
 foreach( $params as $p => $val ) { 
-	if ( !in_array($p, $ignore) && !empty($p) ) { 
+	if ( !in_array($p, $ignore) && !empty($p) && !empty($val[0]) ) { 
 		$filters[$p] = $val;
 	}
 } 
@@ -39,6 +39,19 @@ if ( !empty($filters) ) {
 								$term = get_term_by('slug', $tax_slug, $tax_type); 
 								if ( empty( $term ) ) {
 									$term_name = $tax_slug; 
+									if ( $key == 'amount' ) { 
+										switch ( $term_name ) {
+											case 'less-than-1hundthous':
+												$term_name = 'Less than $100,000'; 
+												break;
+											case 'between-1hundthous-1mil':
+												$term_name = 'Between $100,000 and $1,000,000'; 
+												break;
+											case 'greater-than-1mil':
+												$term_name = 'Greater than $1,000,000'; 
+												break;
+										}
+									}
 								} else {
 									$term_name = $term->name;
 								}
