@@ -148,11 +148,25 @@
 					</div>
 				<?php endif; ?>
 
-				<div class="careers-signup-form">
-					<h3>Sign up for job alerts</h3>
+				<?php 
+				global $wpdb; 
+				$jobs = $wpdb->get_var( 
+					$wpdb->prepare(
+						"SELECT `is_active` 
+						FROM `wp_gf_form` 
+						WHERE `title` = 'Careers Alerts'"
+					)
+				); 
+				
+				if ( $jobs ) { ?> 
+					<div class="careers-signup-form">
+						<h3>Sign up for job alerts</h3>
 
-					<?php echo do_shortcode( '[gravityforms id="1"]' ); ?>
-				</div>
+						<?php echo do_shortcode( '[gravityforms id="1"]' ); ?>
+					</div>
+				<?php
+				}
+				?>
 
 				<?php if ( have_rows( 'careers_content' ) ) : ?>
 					<div class="flexible-content-careers">
