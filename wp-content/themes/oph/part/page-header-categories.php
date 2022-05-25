@@ -55,7 +55,7 @@ if ( !empty($filters) ) {
 								} else {
 									$term_name = $term->name;
 								}
-								$query = $tax_type . '=' . $tax_slug; 
+								$query = $tax_type . '=' . str_replace(' ', '+', $tax_slug); 
 								$escURL = str_replace($query, '', $theURL); 
 								?>
 								<li data-category="<?php echo $tax_type; ?>">
