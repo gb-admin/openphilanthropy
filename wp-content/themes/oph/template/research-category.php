@@ -151,8 +151,6 @@
 
 <?php get_template_part( 'part/page', 'header-categories' ); ?> 
 
-<?php var_dump($args); ?> 
-
 <div class="feed-section">
 	<?php get_template_part( 'part/feed', 'options' ); ?>
 
