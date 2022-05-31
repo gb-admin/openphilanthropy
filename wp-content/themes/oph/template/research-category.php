@@ -1,152 +1,155 @@
 <?php
-	/**
-	 * Template Name: Research Category
-	 */
+  /**
+   * Template Name: Research Category
+   */
 
-	the_post();
+  the_post();
 
-	get_header();
+  get_header();
 
-	$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+  $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
-	$params = get_url_params();
+  $params = get_url_params();
 
-	$content_type = get_field( 'content_type' );
+  $content_type = get_field( 'content_type' );
 
-	$content_type_slug = '';
-	$content_type_taxonomy = '';
+  $content_type_slug = '';
+  $content_type_taxonomy = '';
 
-	if ( $content_type && $content_type->slug ) {
-		$content_type_slug = $content_type->slug;
-		$content_type_taxonomy = $content_type->taxonomy;
-	}
+  if ( $content_type && $content_type->slug ) {
+    $content_type_slug = $content_type->slug;
+    $content_type_taxonomy = $content_type->taxonomy;
+  }
 
-	$view_list = true; // this is the default view
+  $view_list = true; // this is the default view
 
-	if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
-		$view_list = false;
-	}
+  if ( isset( $params['view-list'][0] ) && $params['view-list'][0] == 'false' ) {
+    $view_list = false;
+  }
 
-	$featured_research = get_field( 'featured_research' );
+  $featured_research = get_field( 'featured_research' );
 
-	$featured_research_id = [];
+  $featured_research_id = [];
 
-	if ( $featured_research ) {
-		array_push( $featured_research_id, $featured_research->ID );
-	}
+  if ( $featured_research ) {
+    array_push( $featured_research_id, $featured_research->ID );
+  }
 
-	$amount_meta_query = array(
-		'relation' => 'or'
-	);
+  $amount_meta_query = array(
+    'relation' => 'or'
+  );
 
-	$date_query = array(
-		'relation' => 'or'
-	);
+  $date_query = array(
+    'relation' => 'or'
+  );
 
-	$order_query = 'desc';
+  $order_query = 'desc';
 
-	$tax_query = array(
-		'relation' => 'and',
-		array(
-			'taxonomy' => $content_type_taxonomy,
-			'field' => 'slug',
-			'terms' => $content_type_slug
-		)
-	);
+  $tax_query = array(
+    'relation' => 'and',
+    array(
+      'taxonomy' => $content_type_taxonomy,
+      'field' => 'slug',
+      'terms' => $content_type_slug
+    )
+  ); 
 
-	$orderby_query = 'date';
-	$meta_key = '';
-	$param_amount_meta_query = '';
-	$posts_per_page = 9;
-	$taxonomy = '';
+  $post_type_taxonomies = get_object_taxonomies( 'research' ); 
 
-	foreach ( $params as $key => $param ) {
-		if ( $key == 'items' ) {
-			foreach ( $param as $value ) {
-				if ( $value == '25' ) {
-					$posts_per_page = 25;
-				} elseif ( $value == '50' ) {
-					$posts_per_page = 50;
-				} elseif ( $value == '100' ) {
-					$posts_per_page = 100;
-				}
-			}
-		} elseif ( $key == 'sort' ) {
-			foreach ( $param as $value ) {
-				if ( $value == 'a-z' ) {
-					$order_query = 'asc';
-					$orderby_query = 'title';
-				} elseif ( $value == 'recent' ) {
-					$order_query = 'desc';
-					$orderby_query = 'date';
-				} elseif ( $value == 'oldest-to-newest' ) {
-					$order_query = 'asc';
-					$orderby_query = 'date';
-				}
-			}
-		} elseif ( $key == 'yr' ) {
-			foreach ( $param as $value ) {
-				$param_date_query = array(
-					'year' => $value
-				);
+  $orderby_query = 'date';
+  $meta_key = '';
+  $param_amount_meta_query = '';
+  $posts_per_page = 9;
+  $taxonomy = '';
 
-				array_push( $date_query, $param_date_query );
-			}
-		} else {
+  foreach ( $params as $key => $param ) { 
+    if ( $key == 'items' ) {
+      foreach ( $param as $value ) {
+        if ( $value == '25' ) {
+          $posts_per_page = 25;
+        } elseif ( $value == '50' ) {
+          $posts_per_page = 50;
+        } elseif ( $value == '100' ) {
+          $posts_per_page = 100;
+        }
+      }
+    } elseif ( $key == 'sort' ) {
+      foreach ( $param as $value ) {
+        if ( $value == 'a-z' ) {
+          $order_query = 'asc';
+          $orderby_query = 'title';
+        } elseif ( $value == 'recent' ) {
+          $order_query = 'desc';
+          $orderby_query = 'date';
+        } elseif ( $value == 'oldest-to-newest' ) {
+          $order_query = 'asc';
+          $orderby_query = 'date';
+        }
+      }
+    } elseif ( $key == 'yr' ) {
+      foreach ( $param as $value ) {
+        $param_date_query = array(
+          'year' => $value
+        );
 
-			// Get taxonomy by $key
-			$taxonomy = get_taxonomy( $key );
+        array_push( $date_query, $param_date_query );
+      }
+    } else {
 
-			// Check if get taxonomy with post type prepended in case it was rewrite
-			if ( ! $taxonomy ) {
-				$taxonomy = get_taxonomy( 'research-' . $key );
-			}
-		}
+      // Get taxonomy by $key
+      $taxonomy = get_taxonomy( $key ); 
 
-		if ( $taxonomy ) {
-			foreach ( $param as $value ) {
-				$param_query = array(
-					'taxonomy' => $taxonomy->name,
-					'terms' => $value,
-					'field' => 'slug'
-				);
+      // Check if get taxonomy with post type prepended in case it was rewrite
+      // if ( ! $taxonomy ) {
+      //   $taxonomy = get_taxonomy( 'research-' . $key );
+      // }
+    }
 
-				array_push( $tax_query, $param_query );
-			}
-		}
-	}
+    if ( $taxonomy ) {
+      foreach ( $param as $value ) { 
+      	if ( term_exists($value, $taxonomy->name) ) { 
+      		$param_query = array(
+      		  'taxonomy' => $taxonomy->name,
+      		  'terms' => $value,
+      		  'field' => 'slug'
+      		);
+      		array_push( $tax_query, $param_query );
+      	} 
+      }
+    }
+  } 
 
-	$args = array(
-		'post_type' => 'research',
-		'posts_per_page' => $posts_per_page,
-		'order' => $order_query,
-		'orderby' => $orderby_query,
-		'paged' => $paged,
-		'post__not_in' => $featured_research_id,
-		'date_query' => $date_query,
-		'meta_query' => $amount_meta_query,
-		'tax_query' => $tax_query,
-		'meta_key' => $meta_key
-	);
+  $args = array(
+    'post_type' => 'research',
+    'posts_per_page' => $posts_per_page,
+    'order' => $order_query,
+    'orderby' => $orderby_query,
+    'paged' => $paged,
+    'post__not_in' => $featured_research_id,
+    'date_query' => $date_query,
+    'meta_query' => $amount_meta_query,
+    'tax_query' => $tax_query,
+    'meta_key' => $meta_key
+  );
 
-	if ( isset($params['author'][0]) ) {
-		$args['meta_query'][] = array(
-			'key'     => 'custom_author',
-			'value'   => $params['author'],
-			'compare' => 'IN'
-		);
-	} 
+  if ( isset($params['author'][0]) ) {
+    $args['meta_query'][] = array(
+      'key'     => 'custom_author',
+      'value'   => $params['author'],
+      'compare' => 'IN'
+    );
+  } 
 
-	if ( isset($params['q'][0]) ) {
-		$args['s']= $params['q'][0]; 
-	} 
+  if ( isset($params['q'][0]) ) {
+    $args['s']= $params['q'][0]; 
+  } 
 
-	$research = new WP_Query($args); 
+  $research = new WP_Query($args); 
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
 
-<?php get_template_part( 'part/page', 'header-categories' ); ?>
+<?php get_template_part( 'part/page', 'header-categories' ); ?> 
 
 <div class="feed-section">
 	<?php get_template_part( 'part/feed', 'options' ); ?>
