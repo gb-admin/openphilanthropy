@@ -135,13 +135,14 @@
 
 		if ( $taxonomy ) {
 			foreach ( $param as $value ) {
-				$param_query = array(
-					'taxonomy' => $taxonomy->name,
-					'terms' => $value,
-					'field' => 'slug'
-				);
-
-				array_push( $tax_query, $param_query );
+				if ( term_exists($value, $taxonomy->name) ) { 
+					$param_query = array(
+					  'taxonomy' => $taxonomy->name,
+					  'terms' => $value,
+					  'field' => 'slug'
+					);
+					array_push( $tax_query, $param_query );
+				} 
 			}
 		}
 	}
