@@ -82,13 +82,14 @@
 
 		if ( $taxonomy ) {
 			foreach ( $param as $value ) {
-				$param_query = array(
-					'taxonomy' => $taxonomy->name,
-					'terms' => $value,
-					'field' => 'slug'
-				);
-
-				array_push( $tax_query, $param_query );
+				if ( term_exists($value, $taxonomy->name) ) { 
+      		$param_query = array(
+      		  'taxonomy' => $taxonomy->name,
+      		  'terms' => $value,
+      		  'field' => 'slug'
+      		);
+      		array_push( $tax_query, $param_query );
+      	} 
 			}
 		}
 	}
@@ -123,7 +124,7 @@
 
 <?php get_template_part( 'part/page', 'header' ); ?>
 
-<?php get_template_part( 'part/page', 'header-categories' ); ?>
+<?php get_template_part( 'part/page', 'header-categories' ); ?> 
 
 <div class="feed-section">
 	<?php get_template_part( 'part/feed', 'options', array( 'post_type' => 'research' ) ); ?>
