@@ -105,17 +105,21 @@
       // }
     }
 
-    if ( $taxonomy ) {
+    if ( $taxonomy ) { 
+    	$focus_query = array(
+			  'relation' => 'or'
+			);
       foreach ( $param as $value ) { 
       	if ( term_exists($value, $taxonomy->name) ) { 
       		$param_query = array(
       		  'taxonomy' => $taxonomy->name,
       		  'terms' => $value,
       		  'field' => 'slug'
-      		);
-      		array_push( $tax_query, $param_query );
+      		); 
+      		array_push( $focus_query, $param_query );
       	} 
-      }
+      } 
+      array_push( $tax_query, $focus_query ); 
     }
   } 
 
@@ -130,7 +134,7 @@
     'meta_query' => $amount_meta_query,
     'tax_query' => $tax_query,
     'meta_key' => $meta_key
-  );
+  ); 
 
   if ( isset($params['author'][0]) ) {
     $args['meta_query'][] = array(
@@ -143,7 +147,6 @@
   if ( isset($params['q'][0]) ) {
     $args['s']= $params['q'][0]; 
   } 
-
   $research = new WP_Query($args); 
 ?>
 
