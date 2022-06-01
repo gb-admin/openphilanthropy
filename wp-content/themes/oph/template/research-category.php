@@ -149,7 +149,6 @@
     $args['s']= $params['q'][0]; 
   } 
   $research = new WP_Query($args); 
-  var_dump($tax_query);
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
