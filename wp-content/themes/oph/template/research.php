@@ -75,22 +75,26 @@
 			$taxonomy = get_taxonomy( $key );
 
 			// Check if get taxonomy with post type prepended in case it was rewrite
-			if ( ! $taxonomy ) {
-				$taxonomy = get_taxonomy( 'research-' . $key );
-			}
+			// if ( ! $taxonomy ) {
+			// 	$taxonomy = get_taxonomy( 'research-' . $key );
+			// }
 		}
 
-		if ( $taxonomy ) {
+		if ( $taxonomy ) { 
+    	$focus_query = array(
+			  'relation' => 'or'
+			);
 			foreach ( $param as $value ) {
 				if ( term_exists($value, $taxonomy->name) ) { 
       		$param_query = array(
       		  'taxonomy' => $taxonomy->name,
       		  'terms' => $value,
       		  'field' => 'slug'
-      		);
-      		array_push( $tax_query, $param_query );
+      		); 
+      		array_push( $focus_query, $param_query ); 
       	} 
-			}
+			} 
+			array_push( $tax_query, $focus_query ); 
 		}
 	}
 
