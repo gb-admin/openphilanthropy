@@ -36,15 +36,24 @@
 	$meta_query = array(
 		'relation' => 'and',
 		'order_clause' => array(
-            'key' => 'award_date',
-            'type' => 'date'
+      'key' => 'award_date',
+      'type' => 'date'
 		)
 	);
 
 	$order_query = 'desc';
 
 	$tax_query = array(
-		'relation' => 'or'
+		'relation' => 'and'
+	); 
+	$org_query = array(
+	  'relation' => 'or'
+	); 
+	$focus_query = array(
+	  'relation' => 'or'
+	); 
+	$funding_query = array(
+	  'relation' => 'or'
 	);
 
 	$orderby_query = 'meta_value';
@@ -128,25 +137,38 @@
 			$taxonomy = get_taxonomy( $key );
 
 			// Check if get taxonomy with post type prepended in case it was rewrite
-			if ( ! $taxonomy ) {
-				$taxonomy = get_taxonomy( 'grants-' . $key );
-			}
+			// if ( ! $taxonomy ) {
+			// 	$taxonomy = get_taxonomy( 'grants-' . $key );
+			// }
 		}
 
-		if ( $taxonomy ) {
+		if ( $taxonomy ) { 
 			foreach ( $param as $value ) {
 				if ( term_exists($value, $taxonomy->name) ) { 
 					$param_query = array(
 					  'taxonomy' => $taxonomy->name,
 					  'terms' => $value,
 					  'field' => 'slug'
-					);
-					array_push( $tax_query, $param_query );
+					); 
+					switch ( $taxonomy->name ) { 
+						case 'focus-area': 
+							array_push( $focus_query, $param_query ); 
+							break; 
+						case 'organization-name': 
+							array_push( $org_query, $param_query ); 
+							break;
+						case 'funding-type': 
+							array_push( $funding_query, $param_query ); 
+							break;
+					} 
 				} 
-			}
+			} 
 		}
 	}
 
+	array_push( $tax_query, $org_query ); 
+	array_push( $tax_query, $focus_query ); 
+	array_push( $tax_query, $funding_query ); 
 	array_push( $meta_query, $amount_meta_query );
 	array_push( $meta_query, $date_meta_query );
 

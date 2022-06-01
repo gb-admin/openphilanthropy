@@ -54,6 +54,10 @@
     )
   ); 
 
+  $focus_query = array(
+	  'relation' => 'or'
+	);
+
   $post_type_taxonomies = get_object_taxonomies( 'research' ); 
 
   $orderby_query = 'date';
@@ -106,9 +110,6 @@
     }
 
     if ( $taxonomy ) { 
-    	$focus_query = array(
-			  'relation' => 'or'
-			);
       foreach ( $param as $value ) { 
       	if ( term_exists($value, $taxonomy->name) ) { 
       		$param_query = array(
@@ -119,9 +120,9 @@
       		array_push( $focus_query, $param_query );
       	} 
       } 
-      array_push( $tax_query, $focus_query ); 
     }
   } 
+  array_push( $tax_query, $focus_query ); 
 
   $args = array(
     'post_type' => 'research',
@@ -148,6 +149,7 @@
     $args['s']= $params['q'][0]; 
   } 
   $research = new WP_Query($args); 
+  var_dump($tax_query);
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
