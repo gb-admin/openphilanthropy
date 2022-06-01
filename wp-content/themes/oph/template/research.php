@@ -31,6 +31,10 @@
 		'relation' => 'and'
 	);
 
+	$focus_query = array(
+	  'relation' => 'or'
+	);
+
 	$orderby_query = 'date';
 	$meta_key = '';
 	$param_amount_meta_query = '';
@@ -81,9 +85,6 @@
 		}
 
 		if ( $taxonomy ) { 
-    	$focus_query = array(
-			  'relation' => 'or'
-			);
 			foreach ( $param as $value ) {
 				if ( term_exists($value, $taxonomy->name) ) { 
       		$param_query = array(
@@ -94,9 +95,10 @@
       		array_push( $focus_query, $param_query ); 
       	} 
 			} 
-			array_push( $tax_query, $focus_query ); 
 		}
 	}
+
+	array_push( $tax_query, $focus_query ); 
 
 	$args = array(
 		'post_type' => 'research',
