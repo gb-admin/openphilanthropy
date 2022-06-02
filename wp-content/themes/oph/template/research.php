@@ -28,12 +28,14 @@
 	$order_query = 'desc';
 
 	$tax_query = array(
-		'relation' => 'and'
-	);
-
+			'relation' => 'and'
+		); 
+	$content_query = array(
+	  'relation' => 'or'
+	); 
 	$focus_query = array(
 	  'relation' => 'or'
-	);
+	); 
 
 	$orderby_query = 'date';
 	$meta_key = '';
@@ -92,13 +94,21 @@
       		  'terms' => $value,
       		  'field' => 'slug'
       		); 
-      		array_push( $focus_query, $param_query ); 
+      		switch ( $taxonomy->name ) { 
+						case 'focus-area': 
+							array_push( $focus_query, $param_query ); 
+							break; 
+						case 'content-type': 
+							array_push( $content_query, $param_query ); 
+							break;
+					}
       	} 
 			} 
 		}
 	}
 
 	array_push( $tax_query, $focus_query ); 
+	array_push( $tax_query, $content_query ); 
 
 	$args = array(
 		'post_type' => 'research',
@@ -125,7 +135,8 @@
 		$args['s']= $params['q'][0]; 
 	} 
 
-	$research = new WP_Query($args);
+	$research = new WP_Query($args); 
+	var_dump($tax_query); 
 ?>
 
 <?php get_template_part( 'part/page', 'header' ); ?>
