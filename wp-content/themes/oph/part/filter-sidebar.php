@@ -83,6 +83,11 @@
 		$search_query= $params['q'][0]; 
 	} 
 
+	$return_url = ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on' ? 'https' : 'http' ) . '://' .  $_SERVER['HTTP_HOST']; 
+	$return_url = $return_url . $_SERVER["REQUEST_URI"]; 
+	$return_url = explode("?", $return_url)[0]; 
+	$return_url = explode("page", $return_url)[0]; 
+
 ?>
 
 <div class="sidebar-filter">
@@ -92,7 +97,7 @@
 				<span class="sidebar-filter-hide-button-text">Hide Options</span> <span class="sidebar-filter-hide-icon"></span>
 			</button>
 		</div>
-		<form  method="GET" class="sidebar-filter__content">
+		<form  method="GET" class="sidebar-filter__content" action="<?php echo $return_url; ?>">
 			<div class="sidebar-filter__search">
 				<!-- search bar --> 
 				<input class="selection-query" type="search" name="q" placeholder="Search" value="<?php echo $search_query; ?>">
