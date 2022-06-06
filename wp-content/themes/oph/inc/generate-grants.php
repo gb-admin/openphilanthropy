@@ -58,8 +58,15 @@ function generate_grants_csv() {
       // Focus Area(s)  
       $focus_terms = get_the_terms( $post->ID, 'focus-area' ); 
 
-      //Below changed to only show first focus area 
-      $grant_focus = $focus_terms[0]->name;
+      if ( !empty($focus_terms) ) { 
+        $grant_focus = $focus_terms[0]->name; 
+
+        foreach ( $focus_terms as $term ) {
+          if( $term->name == 'Science for Global Health' || $term->name == 'Transformative Basic Science' || $term->name == 'South Asian Air Quality' ) { 
+            $grant_focus = $term->name; 
+          } 
+        } 
+      } 
       $grant_focus = html_entity_decode($grant_focus);
       /*
       $focus_array = array();
