@@ -34,7 +34,10 @@ function generate_grants_csv() {
     header('Pragma: no-cache');
     header('Expires: 0');
 
-    $file = fopen('php://output', 'w');
+    $file = fopen('php://output', 'w'); 
+
+    // making the CSV work with the ever-cranky excel 
+    fputs($file, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 
     fputcsv($file, array('Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date'));
 
@@ -81,6 +84,8 @@ function generate_grants_csv() {
       }
 
       fputcsv($file, array($grant_name, $grant_org, $grant_focus, $grant_amount, $grant_date)); 
+
+
     }
     exit();
   }
