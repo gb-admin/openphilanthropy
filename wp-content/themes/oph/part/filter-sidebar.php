@@ -194,7 +194,12 @@
 							      <input type="text" class="selection-search" placeholder="Type here to search... " /> 
 							      <div class="options-wrapper"> 
 										<?php 
+										if ( is_page('research/research-reports') ) {
+											$report_contents = array('cause-investigations', 'medium-investigations', 'shallow-investigations'); 
+											generate_filters('content-type', $content_type , true, $report_contents); 
+										} else {
 											generate_filters('content-type', $content_type , true);  
+										}
 										?>
 										</div>
 									</div>
