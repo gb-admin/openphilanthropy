@@ -3,6 +3,13 @@
 			<?php
 				$url_facebook = get_field( 'url_facebook', 'options' );
 				$url_twitter = get_field( 'url_twitter', 'options' );
+				$mailing_address = get_field( 'mailing_address', 'options' );
+				$footer_email = get_field( 'footer_email', 'options' );
+				$media_email = get_field( 'media_email', 'options' );
+				$anonymous_feedback = get_field( 'anonymous_feedback', 'options' );
+				$mailing_list = get_field( 'mailing_list', 'options' ); 
+				$mailing_list_title = $mailing_list['title']; 
+				$mailing_list_url = $mailing_list['url']; 
 			?>
 
 			<footer id="footer">
@@ -41,27 +48,26 @@
 								<h6>Mailing Address</h6>
 
 								<address>
-									182 Howard Street #225<br>
-									San Francisco, CA 94105
+									<?php echo $mailing_address; ?> 
 								</address>
 
 								<h6>Email</h6>
 
-								<a href="mailto:info@openphilanthropy.org">info@openphilanthropy.org</a>
+								<a href="mailto:<?php echo $footer_email; ?>"><?php echo $footer_email; ?></a>
 
 								<h6>Media Inquiries</h6>
 
-								<a href="mailto:media@openphilanthropy.org">media@openphilanthropy.org</a>
+								<a href="mailto:<?php echo $media_email; ?>"><?php echo $media_email; ?></a>
 								
 								<h6>Anonymous Feedback</h6>
 
-								<a href="https://forms.gle/yRDgkvNAM5pKQWH48">Feedback Form</a>
+								<a href="<?php echo $anonymous_feedback; ?>">Feedback Form</a>
 							</div>
 
 							<div class="footer-grid__cell footer-cell-social">
 								<h4>Sign Up to Follow Our Work</h4>
 
-								<a href="https://openphilanthropy.us12.list-manage.com/subscribe?u=5f851555ed522f52a8cc7157f&id=204e32798b" title="Join Our Mailing List" class="button">Join Our Mailing List</a> 
+								<a href="<?php echo $mailing_list_url; ?>" title="<?php echo $mailing_list_title; ?>" class="button"><?php echo $mailing_list_title; ?></a> 
 
 								<?php if ( $url_facebook || $url_twitter ) : ?>
 									<div class="social-media">

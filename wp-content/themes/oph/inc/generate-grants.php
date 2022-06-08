@@ -34,7 +34,10 @@ function generate_grants_csv() {
     header('Pragma: no-cache');
     header('Expires: 0');
 
-    $file = fopen('php://output', 'w');
+    $file = fopen('php://output', 'w'); 
+
+    // making the CSV work with the ever-cranky excel 
+    fputs($file, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 
     fputcsv($file, array('Grant', 'Organization Name', 'Focus Area', 'Amount', 'Date'));
 
@@ -55,8 +58,15 @@ function generate_grants_csv() {
       // Focus Area(s)  
       $focus_terms = get_the_terms( $post->ID, 'focus-area' ); 
 
-      //Below changed to only show first focus area 
-      $grant_focus = $focus_terms[0]->name;
+      if ( !empty($focus_terms) ) { 
+        $grant_focus = $focus_terms[0]->name; 
+
+        foreach ( $focus_terms as $term ) {
+          if( $term->name == 'Science for Global Health' || $term->name == 'Transformative Basic Science' || $term->name == 'South Asian Air Quality' ) { 
+            $grant_focus = $term->name; 
+          } 
+        } 
+      } 
       $grant_focus = html_entity_decode($grant_focus);
       /*
       $focus_array = array();
@@ -81,6 +91,8 @@ function generate_grants_csv() {
       }
 
       fputcsv($file, array($grant_name, $grant_org, $grant_focus, $grant_amount, $grant_date)); 
+
+
     }
     exit();
   }

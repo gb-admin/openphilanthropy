@@ -154,7 +154,7 @@
 							'orderby'        => 'meta_value',
 							'meta_key'       => 'award_date',
 							'meta_type'      => 'DATE',
-							'post__in'       => $grants_preview_id,
+							// 'post__in'       => $grants_preview_id,
 							'tax_query'      => array(
 								array(
 									'taxonomy' => $focus_area->taxonomy,
@@ -337,7 +337,7 @@
 							'posts_per_page' => 3,
 							'order' => 'desc',
 							'orderby' => 'date',
-							'post__in' => $research_preview_id,
+							// 'post__in' => $research_preview_id,
 							'tax_query' => $tax_query
 						) );
 
