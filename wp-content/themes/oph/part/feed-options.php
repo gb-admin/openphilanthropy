@@ -6,8 +6,8 @@
 	}
 
 	$sort_params = [
-		'high-to-low'      => 'High to lowest',
 		'a-z'              => 'A - Z',
+		'high-to-low'      => 'Highest to lowest',
 		'recent'           => 'Newest to oldest',
 		'oldest-to-newest' => 'Oldest to newest'
 	]; 
@@ -24,14 +24,14 @@
 				</button>
 
 				<ul class="dropdown-content">
+					<li>
+						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories"><?= $sort_params['a-z']; ?></a> 
+					</li>
 					<?php if ( is_page_template( 'template/grants.php' ) ) : ?>
 						<li>
 							<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
 						</li>
 					<?php endif; ?>
-					<li>
-						<a href="<?php echo esc_url( add_query_arg( 'sort', 'a-z' ) ); ?>#categories"><?= $sort_params['a-z']; ?></a> 
-					</li>
 					<li>
 						<a href="<?php echo esc_url( add_query_arg( 'sort', 'recent' ) ); ?>#categories"><?= $sort_params['recent']; ?></a>
 					</li>
