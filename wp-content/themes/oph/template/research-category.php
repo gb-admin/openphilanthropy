@@ -176,7 +176,7 @@
 				</li>
 				<?php if ( is_page('blog-posts') || is_page('notable-lessons') ) : ?>
 				<li>
-					<h6 class="feed-sorter" data-sort="author">Author</h6>
+					<h6 class="feed-sorter" data-sort="author">Authors</h6>
 				</li>
 				<?php endif; ?>
 			</ul>
