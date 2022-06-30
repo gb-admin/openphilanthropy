@@ -6,8 +6,8 @@
  * $tax, boolean 
 */
 function generate_filters( $slug, $type, $tax = false, $allowed = false ) { 
-  $params = get_url_params(); 
-  $slug = $slug . '[]';
+  $params = get_url_params();
+  $slug = $slug;
   foreach ( $type as $i ) { 
     if ( !empty( $i ) ) {
       if ( $tax ) {
@@ -29,7 +29,13 @@ function generate_filters( $slug, $type, $tax = false, $allowed = false ) {
               id="<?php echo $i->name; ?>" 
               name="<?php echo $slug; ?>[]"
               value="<?php echo $i->slug; ?>" 
-              <?php if ( $params[$slug] && in_array( $i->slug, $params[$slug] ) ) { echo 'checked'; } ?> /> 
+              <?php
+              foreach($params as $param) {
+                if ( in_array( $i->slug, $param )) {
+                  echo 'checked';
+                }
+              }
+              ?> />
             <span class="checked-box"></span>
             <?php echo $i->name; ?>
           </label> 
@@ -48,7 +54,7 @@ function generate_filters( $slug, $type, $tax = false, $allowed = false ) {
               data-category="<?php echo $i->slug; ?>" 
               data-termID="<?php echo $i->term_id ?>" 
               id="<?php echo $i->name; ?>" 
-              name="<?php echo $slug; ?>[]"
+              name="<?php echo $slug; ?>"
               value="<?php echo $i->slug; ?>" 
               <?php if ( $params[$slug] && in_array( $i->slug, $params[$slug] ) ) { echo 'checked'; } ?> /> 
             <span class="checked-box"></span>
@@ -66,7 +72,7 @@ function generate_filters( $slug, $type, $tax = false, $allowed = false ) {
               class="selection-input" 
               data-category="<?php echo $i; ?>" 
               id="<?php echo $i; ?>" 
-              name="<?php echo $slug; ?>[]"
+              name="<?php echo $slug; ?>"
               value="<?php echo $i; ?>" 
               <?php if ( $params[$slug] && in_array( $i, $params[$slug] ) ) { echo 'checked'; } ?> /> 
             <span class="checked-box"></span>
