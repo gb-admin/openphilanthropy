@@ -7,6 +7,7 @@
 */
 function generate_filters( $slug, $type, $tax = false, $allowed = false ) { 
   $params = get_url_params(); 
+  $slug = $slug . '[]';
   foreach ( $type as $i ) { 
     if ( !empty( $i ) ) {
       if ( $tax ) {
