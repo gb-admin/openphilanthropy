@@ -56,13 +56,7 @@ function generate_filters( $slug, $type, $tax = false, $allowed = false ) {
               id="<?php echo $i->name; ?>" 
               name="<?php echo $slug; ?>"
               value="<?php echo $i->slug; ?>" 
-              <?php
-              foreach($params as $param) {
-                if ( in_array( $i->slug, $param )) {
-                  echo 'checked';
-                }
-              }
-              ?> /> 
+              <?php if ( $params[$slug] && in_array( $i->slug, $params[$slug] ) ) { echo 'checked'; } ?> /> 
             <span class="checked-box"></span>
             <?php echo $i->name; ?>
           </label> 
@@ -80,13 +74,7 @@ function generate_filters( $slug, $type, $tax = false, $allowed = false ) {
               id="<?php echo $i; ?>" 
               name="<?php echo $slug; ?>"
               value="<?php echo $i; ?>" 
-              <?php
-              foreach($params as $param) {
-                if ( in_array( $i->slug, $param )) {
-                  echo 'checked';
-                }
-              }
-              ?> />
+              <?php if ( $params[$slug] && in_array( $i, $params[$slug] ) ) { echo 'checked'; } ?> /> 
             <span class="checked-box"></span>
             <?php echo $i; ?> 
           </label> 
