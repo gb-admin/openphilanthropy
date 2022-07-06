@@ -1,26 +1,25 @@
-name: Deploy!
+name: Deploy! to OpenPhil
 on:
   push:
     branches:
       - main
-      - stag
-      - dev
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Sync project files
-        uses: actions/checkout@v2 # https://github.com/marketplace/actions/checkout
+        uses: actions/checkout@v2 
+        # https://github.com/marketplace/actions/checkout
 
       - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.4.1 # https://github.com/marketplace/actions/webfactory-ssh-agent
+        uses: webfactory/ssh-agent@v0.4.1 
+        # https://github.com/marketplace/actions/webfactory-ssh-agent
         with:
           ssh-private-key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Add host key
-        run: ssh-keyscan -t rsa git.wpengine.com >> ~/.ssh/known_hosts
+        run: ssh-keyscan -t rsa 23.239.28.254 >> ~/.ssh/known_hosts
 
       - name: Setup WP CLI
         run: |
@@ -28,12 +27,14 @@ jobs:
           curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x wp-cli.phar
           sudo mv wp-cli.phar /usr/local/bin/wp
-      - name: Setup Node & NVM # https://github.com/marketplace/actions/setup-node-js-environment
+      - name: Setup Node & NVM 
+      # https://github.com/marketplace/actions/setup-node-js-environment
         uses: actions/setup-node@v1
         with:
           node-version: "14"
 
-      - name: Setup PHP w/ Composer # https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP w/ Composer 
+      # https://github.com/marketplace/actions/setup-php-action
         uses: shivammathur/setup-php@v2
         with:
           php-version: "7.2"
@@ -56,12 +57,4 @@ jobs:
 
       - name: Push to Prod
         if: endsWith(github.ref, 'main')
-        run: git push git@git.wpengine.com:production/openphilprod.git -f
-
-      - name: Push to Stag
-        if: endsWith(github.ref, 'stag')
-        run: git push git@git.wpengine.com:production/openphilstag.git -f
-
-      - name: Push to Dev
-        if: endsWith(github.ref, 'dev')
-        run: git push git@git.wpengine.com:production/openphildev.git -f
+        run: git push gb@23.239.28.254:~/openphilanthropy/.git -f
