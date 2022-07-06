@@ -23,7 +23,7 @@
   ],
   "require": {
     "advanced-custom-fields/advanced-custom-fields-pro": "^5.9",
-    "deliciousbrains-plugin/wp-migrate-db-pro": "2.1.2",
+    "deliciousbrains-plugin/wp-migrate-db-pro": "2.1.2"
   },
   "require-dev": {
     "wp-coding-standards/wpcs": "^2.3"
