@@ -58,4 +58,4 @@ jobs:
 
       - name: Push to Prod
         if: endsWith(github.ref, 'main')
-        run: git push gb@23.239.28.254:~/openphilanthropy/.git -f
+        run: git push gb@23.239.28.254:~/openphilanthropy.git -f
