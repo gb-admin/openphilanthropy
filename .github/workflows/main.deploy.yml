@@ -44,6 +44,7 @@ jobs:
         run: |
           composer config --auth http-basic.satis.mizner.io ${{ secrets.SATIS_USER }} ${{ secrets.SATIS_PASS }}
           composer config --auth http-basic.composer.deliciousbrains.com ${{ secrets.DELICIOUSBRAINS_USER }} ${{ secrets.DELICIOUSBRAINS_PASS }}
+          composer config --no-plugins allow-plugins.composer/installers true
           composer install --no-dev
           composer run-script install-wordpress
       - name: Run git commands
