@@ -55,6 +55,6 @@ jobs:
           git commit -m "commit before deploy"
           git fetch --unshallow
 
-      - name: Push to Stag
-        if: endsWith(github.ref, 'stag')
+      - name: Push to Prod
+        if: endsWith(github.ref, 'main')
         run: git push gb@23.239.28.254:~/openphilanthropy/.git -f
