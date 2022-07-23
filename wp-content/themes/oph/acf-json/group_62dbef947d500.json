@@ -5,7 +5,7 @@
         {
             "key": "field_62dbefc8fbe10",
             "label": "Title",
-            "name": "title",
+            "name": "custom_title",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -24,7 +24,7 @@
         {
             "key": "field_62dbefd2fbe11",
             "label": "Description",
-            "name": "description",
+            "name": "custom_description",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -44,7 +44,7 @@
         {
             "key": "field_62dbefeafbe12",
             "label": "Link",
-            "name": "link",
+            "name": "custom_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -59,7 +59,7 @@
         {
             "key": "field_62dbefa9fbe0e",
             "label": "Eyebrow Copy",
-            "name": "eyebrow_copy",
+            "name": "custom_eyebrow_copy",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -78,7 +78,7 @@
         {
             "key": "field_62dbefbafbe0f",
             "label": "Eyebrow Link",
-            "name": "eyebrow_link",
+            "name": "custom_eyebrow_link",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -115,5 +115,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1658581092
+    "modified": 1658582323
 }
