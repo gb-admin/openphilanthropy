@@ -894,6 +894,15 @@ button,
   p {
     margin-bottom: 0;
   }
+
+  ol {
+
+    li {
+      display: list-item;
+      list-style-position: inside;
+      list-style-type: arabic;
+    }
+  }
 }
 
 .hero {
