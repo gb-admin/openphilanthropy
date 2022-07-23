@@ -11,7 +11,7 @@
 		'relation' => 'or'
 	);
 
-	$terms_focus_area = get_the_terms( $post->ID, 'focus-area' );
+	$terms_focus_area = get_the_terms( get_the_ID(), 'focus-area' );
 
 	if ( $terms_focus_area && ! is_wp_error( $terms_focus_area ) && isset( $terms_focus_area[0] ) ) {
 		$primary_term = $terms_focus_area[0];
@@ -33,48 +33,6 @@
 
 			array_push( $tax_query, $focus_area_query );
 		}
-	}
-
-	$related_posts = get_field( 'related_posts' );
-
-	if ( ! $related_posts ) {
-		$related_posts = [];
-	}
-
-	$related_posts_id = array( get_the_ID() );
-
-	if ( ! empty( $related_posts ) ) {
-		foreach ( $related_posts as $i ) {
-			array_push( $related_posts_id, $i->ID );
-		}
-
-		$related_posts_count = count( $related_posts );
-	}
-
-	$related_query_posts = [];
-
-	$related_query = new WP_Query( array(
-		'post_type' => 'research',
-		'posts_per_page' => 3,
-		'order' => 'desc',
-		'orderby' => 'date',
-		'post__not_in' => $related_posts_id,
-		'tax_query' => $tax_query
-	) );
-
-	if ( ! empty( $related_query ) && isset( $related_query->posts ) ) {
-		$related_query_posts = $related_query->posts;
-	}
-
-	$related_posts = array_merge( $related_posts, $related_query_posts );
-
-	/**
-	 * Limit related posts to 3 if back filled.
-	 */
-	if ( isset( $related_posts_count ) && $related_posts_count > 3 ) {
-		$related_posts = array_slice( $related_posts, 0, 4 );
-	} else {
-		$related_posts = array_slice( $related_posts, 0, 3 );
 	}
 
 	$footnotes = get_field( 'footnotes' ); 
@@ -198,7 +156,9 @@
 	</div>
 </div>
 
-<?php if ( $related_posts ) : ?>
+<?php
+$related_posts = get_field('related_items');
+if ( $related_posts ) : ?>
 	<div class="single-related-posts" id="related-posts">
 		<div class="wrap">
 			<div class="single-related-posts__main">
@@ -212,19 +172,22 @@
 					<?php foreach ( $related_posts as $related ) : ?>
 
 						<?php
-							if ( ! isset( $related->ID ) && isset( $related['post'][0] ) ) {
+							$related_id = $related['related_item'];
+							$type = $related['type'];
+						
+							if ( ! isset( $related_id ) && isset( $related['post'][0] ) ) {
 								$related = $related['post'][0];
 							}
 
-							$related_eyebrow_copy = $primary_term_name;
-							$related_eyebrow_link = '/research?focus-area=' . $primary_term_slug;
-							$related_post_type = get_post_type( $related->ID );
-							$related_title = $related->post_title;
+							$related_eyebrow_copy = $type == 'custom' && $related['eyebrow_copy'] ? $related['eyebrow_copy'] : $primary_term_name;
+							$related_eyebrow_link = $type == 'custom' && $related['eyebrow_copy'] ? $related['eyebrow_link']['url'] : '/research?focus-area=' . $primary_term_slug;
+							$related_post_type = get_post_type( $related_id );
+							$related_title = $type == 'custom' && $related['title'] ? $related['title'] : get_the_title($related_id);
 
-							if ( has_excerpt( $related->ID ) ) {
-								$related_excerpt_source = get_the_excerpt( $related->ID );
+							if ( has_excerpt( $related_id ) ) {
+								$related_excerpt_source = get_the_excerpt( $related_id );
 							} else {
-								$related_excerpt_source = get_post_field( 'post_content', $related->ID );
+								$related_excerpt_source = get_post_field( 'post_content', $related_id );
 							}
 
 							$related_excerpt = array(
@@ -234,15 +197,17 @@
 								'source' => $related_excerpt_source
 							);
 
-							$related_description = excerpt( $related_excerpt );
+							$related_description = $type == 'custom' && $related['description'] ? $related['description'] : '<p>' . excerpt( $related_excerpt ) . '</p>';
 
-							$linkExternally = get_field('externally_link', $related->ID); 
+							$linkExternally = get_field('externally_link', $related_id); 
 
 							if( $linkExternally ){
-								$related_link = get_field('external_url', $related->ID); 
+								$related_link = get_field('external_url', $related_id); 
 							}else{
-								$related_link = get_permalink( $related->ID );
+								$related_link = get_permalink( $related_id );
 							}
+
+							$related_link = $type == 'custom' && $related['link'] ? $related['link']['url'] : $related_link;
 						?>
 
 						<li>
@@ -255,7 +220,7 @@
 							</h4>
 
 							<div class="single-related-posts__description">
-								<p><?php echo $related_description; ?></p> 
+								<?php echo $related_description; ?>
 							</div>
 
 							<div class="single-related-posts__link">
