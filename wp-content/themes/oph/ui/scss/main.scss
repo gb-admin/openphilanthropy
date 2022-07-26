@@ -7064,6 +7064,7 @@ body.single-research {
   text-transform: capitalize;
 }
 
+// Print CSS
 @media print {
 
   #header {
@@ -7122,5 +7123,90 @@ body.single-research {
   .cta-button,
   #footer {
     display: none;
+  }
+}
+
+// Footnotes Plugin
+.footnotes_reference_container {
+  border-top: 2px solid #cdd2de;
+  margin-top: 40px;
+  opacity: .7;
+  padding-top: 40px;
+
+  .footnote_container_prepare {
+    padding: 0 0 20px !important;
+
+    >p {
+      display: inline-block;
+      margin: 0 !important;
+      transition: .3s;
+
+      &:hover {
+        color: #6e7ca0;
+      }
+
+      span {
+        font-size: 16px !important;
+        font-weight: 800;
+        line-height: 22px;
+
+        svg {
+          transform-origin: center;
+        }
+      }
+
+      &.open {
+
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+.footnotes_table {
+
+  &,
+  tbody {
+    display: block;
+  }
+
+  tr {
+    display: block;
+  }
+
+  th,
+  td {
+    display: inline;
+    font-size: 12px;
+    line-height: 22px;
+    padding: 0 !important;
+    width: auto;
+  }
+
+  .footnote_backlink {
+    color: #000;
+
+    &:after {
+      content: '.';
+    }
+
+    .footnote_index_arrow {
+      display: none;
+    }
+  }
+
+  .footnote_plugin_text {
+
+    a {
+      color: #000;
+      font-weight: 800;
+      transition: all 0.15s ease-out;
+
+      &:hover {
+        color: #6e7ca0;
+      }
+    }
   }
 }

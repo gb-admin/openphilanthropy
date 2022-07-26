@@ -1712,7 +1712,7 @@ jQuery(function ($) {
   });
 
   // Adds smooth scroll to anchor tags
-  $('a[href*="#"]:not([href="#"]):not([href$="#categories"])').on(
+  $('a[href*="#"]:not([href="#"]):not([href$="#categories"]):not(.footnote_hard_link)').on(
     "click",
     function () {
       if (
@@ -2112,6 +2112,28 @@ jQuery(function ($) {
 
     $('.page-header__main h1').html(newhtml);
   });
+
+  // Footnotes Plugin custom js
+  var footnotes = $('.footnotes_reference_container > div:last-child'),
+    footnotesToggle = $('.footnote_container_prepare p');
+
+  $('.footnote_reference_container_collapse_button').html('<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.1123 9.71249L12.4996 15.2875L6.8877 9.71249" stroke="#445277" stroke-width="1.49661"></path></svg>')
+
+  footnotesToggle.find('span').on('click', function () {
+
+    if (footnotesToggle.hasClass('open')) {
+      footnotesToggle.removeClass('open')
+      footnotesToggle.find('span:nth-child(1)').text('Expand Footnotes');
+    } else {
+      footnotesToggle.addClass('open')
+      footnotesToggle.find('span:nth-child(1)').text('Collapse Footnotes');
+    }
+  });
+
+  $('.footnote_hard_link').on('click', function () {
+    $('.footnote_container_prepare p').addClass('open');
+    footnotesToggle.find('span:nth-child(1)').text('Collapse Footnotes');
+  });
 });
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate
@@ -2119,4 +2141,3 @@ jQuery(function ($) {
 // window.onclick = e => {
 //   console.log(e.target);  // to get the element
 // }
-
