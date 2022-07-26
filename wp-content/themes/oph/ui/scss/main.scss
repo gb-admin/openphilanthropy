@@ -7063,3 +7063,150 @@ body.single-research {
 .page-header-categories a {
   text-transform: capitalize;
 }
+
+// Print CSS
+@media print {
+
+  #header {
+
+    #primary,
+    #accessory-toggle {
+      display: none;
+    }
+
+    .logo {
+      margin: 0 auto 0 0;
+    }
+  }
+
+  .page-header {
+    background-color: transparent;
+    background-image: none;
+    padding: 20px 0;
+
+    h1 {
+      color: #6e7ca0;
+      margin: 0;
+    }
+
+    .page-header__image,
+    .button-group {
+      display: none;
+    }
+  }
+
+  #main .page-header>.wrap,
+  #main .hero .page-header>.hero-dots-wrap,
+  .hero #main .page-header>.hero-dots-wrap,
+  #main .hero .page-header>.hero-wrap,
+  .hero #main .page-header>.hero-wrap {
+    width: 100%;
+  }
+
+  .content-single__aside {
+    display: none;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  #toggle-footnotes {
+    display: none;
+  }
+
+  .footnotes {
+    display: block !important;
+  }
+
+  .single-related-posts,
+  .cta-button,
+  #footer {
+    display: none;
+  }
+}
+
+// Footnotes Plugin
+.footnotes_reference_container {
+  border-top: 2px solid #cdd2de;
+  margin-top: 40px;
+  opacity: .7;
+  padding-top: 40px;
+
+  .footnote_container_prepare {
+    padding: 0 0 20px !important;
+
+    >p {
+      display: inline-block;
+      margin: 0 !important;
+      transition: .3s;
+
+      &:hover {
+        color: #6e7ca0;
+      }
+
+      span {
+        font-size: 16px !important;
+        font-weight: 800;
+        line-height: 22px;
+
+        svg {
+          transform-origin: center;
+        }
+      }
+
+      &.open {
+
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+.footnotes_table {
+
+  &,
+  tbody {
+    display: block;
+  }
+
+  tr {
+    display: block;
+  }
+
+  th,
+  td {
+    display: inline;
+    font-size: 12px;
+    line-height: 22px;
+    padding: 0 !important;
+    width: auto;
+  }
+
+  .footnote_backlink {
+    color: #000;
+
+    &:after {
+      content: '.';
+    }
+
+    .footnote_index_arrow {
+      display: none;
+    }
+  }
+
+  .footnote_plugin_text {
+
+    a {
+      color: #000;
+      font-weight: 800;
+      transition: all 0.15s ease-out;
+
+      &:hover {
+        color: #6e7ca0;
+      }
+    }
+  }
+}
