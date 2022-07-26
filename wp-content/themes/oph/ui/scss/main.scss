@@ -7084,6 +7084,10 @@ body.single-research {
     background-image: none;
     padding: 20px 0;
 
+    .page-header__main {
+      max-width: 100%;
+    }
+
     h1 {
       color: #6e7ca0;
       margin: 0;
@@ -7101,6 +7105,19 @@ body.single-research {
   #main .hero .page-header>.hero-wrap,
   .hero #main .page-header>.hero-wrap {
     width: 100%;
+  }
+
+  .single-header-categories .single-header-categories__content {
+    padding: 0;
+  }
+
+  .single-header-categories ul li a {
+    margin-bottom: 10px;
+    padding: 0;
+  }
+
+  .content-single {
+    padding: 0;
   }
 
   .content-single__aside {
