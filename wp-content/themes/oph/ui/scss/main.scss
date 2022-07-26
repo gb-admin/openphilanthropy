@@ -7067,7 +7067,14 @@ body.single-research {
 // Print CSS
 @media print {
 
+  body.logged-in.admin-bar #header {
+    top: 0;
+  }
+
   #header {
+    height: auto !important;
+    margin-bottom: 30px;
+    position: static;
 
     #primary,
     #accessory-toggle {
@@ -7077,6 +7084,10 @@ body.single-research {
     .logo {
       margin: 0 auto 0 0;
     }
+  }
+
+  #header+#page {
+    padding-top: 0;
   }
 
   .page-header {
@@ -7091,6 +7102,7 @@ body.single-research {
     h1 {
       color: #6e7ca0;
       margin: 0;
+      padding-bottom: 20px;
     }
 
     .page-header__image,
@@ -7107,8 +7119,12 @@ body.single-research {
     width: 100%;
   }
 
-  .single-header-categories .single-header-categories__content {
-    padding: 0;
+  .single-header-categories {
+    padding: 0 8px;
+
+    .single-header-categories__content {
+      padding: 0;
+    }
   }
 
   .single-header-categories ul li a {
@@ -7117,6 +7133,10 @@ body.single-research {
   }
 
   .content-single {
+    padding: 0;
+  }
+
+  div.page-header {
     padding: 0;
   }
 
