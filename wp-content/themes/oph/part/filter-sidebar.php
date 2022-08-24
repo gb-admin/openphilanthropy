@@ -322,12 +322,6 @@ $return_url = explode("page", $return_url)[0];
 						?>
 					</div>
 				<?php endif; ?>
-
-				<?php if (is_page('blog-posts')) : ?>
-					<div class="subscribe-link">
-						<a class="button" href="http://eepurl.com/dwVRpX" target="_blank"><?php _e('Subscribe to our Blog', 'oph'); ?></a>
-					</div>
-				<?php endif; ?>
 			</div>
 		</form>
 
