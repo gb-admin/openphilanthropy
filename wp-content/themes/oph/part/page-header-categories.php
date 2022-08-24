@@ -61,17 +61,21 @@ if (!empty($filters)) {
 								} else {
 									$term_name = $term->name;
 								}
+
 								$query = $tax_type . '=' . str_replace(' ', '+', $tax_slug);
-								$query = str_replace('[]', '%5B%5D', $query);
+								$query = str_replace('[', '%5B', $query);
+								$query = str_replace(']', '%5D', $query);
 								$param_url = explode("/?", $_SERVER["REQUEST_URI"])[1];
+								// $param_url = str_replace('%5B0%5D', '%5B%5D', $param_url);
 								$esc_query = str_replace($query, '', $param_url);
 								// var_dump($return_url); 
 								// var_dump($esc_query); 
 								// $esc_query = str_replace('&&', '&', $esc_query); 
+								$temp_term = get_term_by('slug', $term_name);
 
 						?>
 								<li data-category="<?php echo $tax_type; ?>">
-									<a href="<?php echo $return_url . '?' . $esc_query; ?>"><?php echo $term_name; ?> <svg aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+									<a href="<?php echo $return_url . '?' . $esc_query; ?>"><?php echo ucwords(str_replace('-', ' ', $term_name)); ?> <svg aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 											<path d="M7.857 6.506L1.571.221.157 1.635 6.443 7.92 0 14.363l1.414 1.415 6.443-6.443 6.442 6.442 1.415-1.414L9.27 7.92l6.285-6.285L14.142.221 7.857 6.506z" />
 										</svg></a>
 								</li>
