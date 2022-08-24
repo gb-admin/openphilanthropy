@@ -179,7 +179,7 @@ $research = new WP_Query($args);
 				</li>
 				<?php if (is_page('blog-posts') || is_page('notable-lessons') || is_page('research-reports')) : ?>
 					<li>
-						<h6 class="feed-sorter" data-sort="author">Authors</h6>
+						<h6 class="feed-sorter" data-sort="author">Author(s)</h6>
 					</li>
 				<?php endif; ?>
 			</ul>
