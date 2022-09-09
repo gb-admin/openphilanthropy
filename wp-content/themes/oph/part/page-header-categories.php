@@ -62,12 +62,15 @@ if (!empty($filters)) {
 									$term_name = $term->name;
 								}
 
-								$query = $tax_type . '=' . str_replace(' ', '+', $tax_slug);
-								$query = str_replace('[', '%5B', $query);
-								$query = str_replace(']', '%5D', $query);
+								$query = $tax_type . '=' . $tax_slug;
+								// $query = str_replace('[', '%5B', $query);
+								// $query = str_replace(']', '%5D', $query);
+								// echo $query . '<br/>';
 								$param_url = explode("/?", $_SERVER["REQUEST_URI"])[1];
-								// $param_url = str_replace('%5B0%5D', '%5B%5D', $param_url);
-								$esc_query = str_replace($query, '', $param_url);
+								// $param_url = str_replace('%20', '+', $param_url);
+								// echo urldecode($param_url) . '<br/>';
+								$esc_query = str_replace($query, '', urldecode($param_url));
+								// echo 'esc_query: ' . $esc_query . '<br/>';
 								// var_dump($return_url); 
 								// var_dump($esc_query); 
 								// $esc_query = str_replace('&&', '&', $esc_query); 
