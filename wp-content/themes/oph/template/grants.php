@@ -120,7 +120,7 @@
 					$orderby_query = 'meta_value';
 				}
 			}
-		} elseif ( $key == 'yr' ) {
+		} elseif ( str_contains($key, 'yr') ) {
 			foreach ( $param as $value ) {
 				$param_date_query = array(
 					'key' => 'award_date',

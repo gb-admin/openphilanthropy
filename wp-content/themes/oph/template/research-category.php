@@ -91,7 +91,7 @@ foreach ($params as $key => $param) {
 				$orderby_query = 'date';
 			}
 		}
-	} elseif ($key == 'yr') {
+	} elseif ( str_contains($key, 'yr') ) {
 		foreach ($param as $value) {
 			$param_date_query = array(
 				'year' => $value
