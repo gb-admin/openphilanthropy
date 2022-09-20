@@ -100,29 +100,27 @@ foreach ($params as $key => $param) {
 			array_push($date_query, $param_date_query);
 		}
 	} elseif (str_contains($key, 'focus-area')) {
-
 		$key = 'focus-area';
 		$taxonomy = get_taxonomy($key);
 	} elseif (str_contains($key, 'content-type')) {
-
 		$key = 'content-type';
 		$taxonomy = get_taxonomy($key);
 	} else {
 		$taxonomy = get_taxonomy($key);
 	}
 
-	// if ($taxonomy) {
-	foreach ($param as $value) {
-		if (term_exists($value, $taxonomy->name)) {
-			$param_query = array(
-				'taxonomy' => $taxonomy->name,
-				'terms' => $value,
-				'field' => 'slug'
-			);
-			array_push($focus_query, $param_query);
+	if ($taxonomy) {
+		foreach ($param as $value) {
+			if (term_exists($value, $taxonomy->name)) {
+				$param_query = array(
+					'taxonomy' => $taxonomy->name,
+					'terms' => $value,
+					'field' => 'slug'
+				);
+				array_push($focus_query, $param_query);
+			}
 		}
 	}
-	// }
 }
 array_push($tax_query, $focus_query);
 
