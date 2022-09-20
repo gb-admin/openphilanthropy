@@ -91,7 +91,7 @@ foreach ($params as $key => $param) {
 				$orderby_query = 'date';
 			}
 		}
-	} elseif ( str_contains($key, 'yr') ) {
+	} elseif (str_contains($key, 'yr')) {
 		foreach ($param as $value) {
 			$param_date_query = array(
 				'year' => $value
@@ -99,29 +99,30 @@ foreach ($params as $key => $param) {
 
 			array_push($date_query, $param_date_query);
 		}
-	} else {
+	} elseif (str_contains($key, 'focus-area')) {
 
-		// Get taxonomy by $key
+		$key = 'focus-area';
 		$taxonomy = get_taxonomy($key);
+	} elseif (str_contains($key, 'content-type')) {
 
-		// Check if get taxonomy with post type prepended in case it was rewrite
-		// if ( ! $taxonomy ) {
-		//   $taxonomy = get_taxonomy( 'research-' . $key );
-		// }
+		$key = 'content-type';
+		$taxonomy = get_taxonomy($key);
+	} else {
+		$taxonomy = get_taxonomy($key);
 	}
 
-	if ($taxonomy) {
-		foreach ($param as $value) {
-			if (term_exists($value, $taxonomy->name)) {
-				$param_query = array(
-					'taxonomy' => $taxonomy->name,
-					'terms' => $value,
-					'field' => 'slug'
-				);
-				array_push($focus_query, $param_query);
-			}
+	// if ($taxonomy) {
+	foreach ($param as $value) {
+		if (term_exists($value, $taxonomy->name)) {
+			$param_query = array(
+				'taxonomy' => $taxonomy->name,
+				'terms' => $value,
+				'field' => 'slug'
+			);
+			array_push($focus_query, $param_query);
 		}
 	}
+	// }
 }
 array_push($tax_query, $focus_query);
 
@@ -138,12 +139,14 @@ $args = array(
 	'meta_key' => $meta_key
 );
 
-if (isset($params['author'][0])) {
-	$args['meta_query'][] = array(
-		'key'     => 'custom_author',
-		'value'   => $params['author'],
-		'compare' => 'IN'
-	);
+foreach ($params as $key => $param) {
+	if (str_contains($key, 'author')) {
+		$args['meta_query'][] = array(
+			'key'     => 'custom_author',
+			'value'   => $params[$key],
+			'compare' => 'IN'
+		);
+	}
 }
 
 if (isset($params['q'][0])) {
@@ -185,9 +188,7 @@ $research = new WP_Query($args);
 			</ul>
 
 			<?php if ($research->have_posts()) : ?>
-				<div class="block-feed<?php if ($view_list) {
-											echo ' block-feed--list';
-										} ?> block-feed--research">
+				<div class="block-feed<?php echo $view_list ? ' block-feed--list' : ''; ?> block-feed--research">
 					<div class="block-feed-post--container">
 						<?php while ($research->have_posts()) : $research->the_post(); ?>
 
@@ -241,8 +242,8 @@ $research = new WP_Query($args);
 																																			} else {
 																																				echo 'data-sort-date=""';
 																																			} ?> data-sort-focus="<?php echo $sortFocus; ?>" <?php if (is_page('blog-posts') || is_page('notable-lessons')) {
-																																																																								echo 'data-sort-author="' . $sortAuthor . '"';
-																																																																							} ?>>
+																																																	echo 'data-sort-author="' . $sortAuthor . '"';
+																																																} ?>>
 								<div class="block-feed-post__eyebrow">
 									<p>
 										<?php if (!$hidePub) {
