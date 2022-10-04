@@ -126,13 +126,15 @@ $args = array(
 	'meta_key' => $meta_key
 );
 
-if (isset($params['author'][0])) {
-	$args['meta_query'][] = array(
-		'key'     => 'custom_author',
-		'value'   => $params['author'],
-		'compare' => 'IN'
-	);
-}
+foreach ($params as $key => $param) :
+	if (str_contains($key, 'author')) {
+		$args['meta_query'][] = array(
+			'key'     => 'custom_author',
+			'value'   => $param,
+			'compare' => 'IN'
+		);
+	}
+endforeach;
 
 if (isset($params['q'][0])) {
 	$args['s'] = $params['q'][0];
