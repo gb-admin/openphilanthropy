@@ -65,4 +65,3 @@ jobs:
       - name: Push to Dev
         if: endsWith(github.ref, 'dev')
         run: git push git@git.wpengine.com:production/openphildev.git -f
-        
