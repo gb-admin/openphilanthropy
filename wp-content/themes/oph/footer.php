@@ -8,8 +8,8 @@
 				$media_email = get_field( 'media_email', 'options' );
 				$anonymous_feedback = get_field( 'anonymous_feedback', 'options' );
 				$mailing_list = get_field( 'mailing_list', 'options' ); 
-				$mailing_list_title = $mailing_list['title']; 
-				$mailing_list_url = $mailing_list['url']; 
+				$mailing_list_title = $mailing_list['title'] ?? ''; 
+				$mailing_list_url = $mailing_list['url'] ?? ''; 
 			?>
 
 			<footer id="footer">

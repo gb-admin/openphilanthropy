@@ -18,6 +18,14 @@ if (isset($params['view-list'][0]) && $params['view-list'][0] == 'false') {
 	$view_list = false;
 }
 
+$featured_research = get_field('featured_research');
+
+$featured_research_id = [];
+
+if ($featured_research) {
+        array_push($featured_research_id, $featured_research->ID);
+}
+
 $amount_meta_query = array(
 	'relation' => 'or'
 );

@@ -83,4 +83,7 @@ add_filter( 'template_include', 'custom_search_template' );
  * @param $form
  * @return mixed
  */
-add_filter("gform_confirmation_anchor", create_function("","return true;"));
+add_filter("gform_confirmation_anchor", "gform_confirmation_anchor");
+function gform_confirmation_anchor() {
+  return true;
+}

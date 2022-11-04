@@ -7,7 +7,7 @@ if (isset($args['post_type'])) {
 // get sidebar fields 
 $sidebar_filter = get_field('sidebar_filter');
 // get URL params for filtering 
-$params = get_url_params();
+$params = get_url_params() ?? []; 
 
 // setup grants posts 
 $grants = '';
@@ -100,7 +100,7 @@ $return_url = explode("page", $return_url)[0];
 		<form method="GET" class="sidebar-filter__content" action="<?php echo $return_url; ?>">
 			<div class="sidebar-filter__search">
 				<!-- search bar -->
-				<input class="selection-query" type="search" name="q" placeholder="Search" value="<?php echo $search_query; ?>">
+				<input class="selection-query" type="search" name="q" placeholder="Search" value="<?php if( isset($search_query) ) { echo $search_query; } ?>">
 			</div>
 			<div aria-label="Sidebar Filter Options" data-filter-anchor="categories">
 				<div class="sidebar-filter__option">
@@ -121,21 +121,21 @@ $return_url = explode("page", $return_url)[0];
 									<!-- <input type="text" class="selection-search" placeholder="Type here to search... " />  -->
 									<div class="options-wrapper">
 										<label for="less-than-1hundthous" class="selection-label">
-											<input type="checkbox" class="selection-input" data-category="less-than-1hundthous" id="less-than-1hundthous" name="amount" value="less-than-1hundthous" <?php if (in_array('less-than-1hundthous', $params['amount'])) {
+											<input type="checkbox" class="selection-input" data-category="less-than-1hundthous" id="less-than-1hundthous" name="amount" value="less-than-1hundthous" <?php  if (isset($params['amount']) && 'less-than-1hundthous' === $params['amount']) {
 																																																			echo 'checked';
 																																																		} ?> />
 											<span class="checked-box"></span>
 											Less than $100,000
 										</label>
 										<label for="between-1hundthous-1mil" class="selection-label">
-											<input type="checkbox" class="selection-input" data-category="between-1hundthous-1mil" id="between-1hundthous-1mil" name="amount" value="between-1hundthous-1mil" <?php if (in_array('between-1hundthous-1mil', $params['amount'])) {
+											<input type="checkbox" class="selection-input" data-category="between-1hundthous-1mil" id="between-1hundthous-1mil" name="amount" value="between-1hundthous-1mil" <?php if (isset($params['amount']) && 'between-1hundthous-1mil' === $params['amount']) {
 																																																					echo 'checked';
 																																																				} ?> />
 											<span class="checked-box"></span>
 											Between $100,000 and $1,000,000
 										</label>
 										<label for="greater-than-1mil" class="selection-label">
-											<input type="checkbox" class="selection-input" data-category="greater-than-1mil" id="greater-than-1mil" name="amount" value="greater-than-1mil" <?php if (in_array('greater-than-1mil', $params['amount'])) {
+											<input type="checkbox" class="selection-input" data-category="greater-than-1mil" id="greater-than-1mil" name="amount" value="greater-than-1mil" <?php if (isset($params['amount']) && 'greater-than-1mil' === $params['amount']) {
 																																																echo 'checked';
 																																															} ?> />
 											<span class="checked-box"></span>

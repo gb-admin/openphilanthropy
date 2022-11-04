@@ -22,7 +22,7 @@
 		}
 	}
 
-	if( !$primary_focus_area ){ $primary_focus_area = $terms_focus_area[0]; } 
+	if( !isset($primary_focus_area) ){ $primary_focus_area = $terms_focus_area[0] ?? (object)[]; } 
 
 	//Get next term if more than one term is selected and primary is set as GHB, LT, or OA
 	if( $terms_focus_area && sizeof($terms_focus_area) > 1 && ( $primary_focus_area->slug == 'global-health-wellbeing' || $primary_focus_area->slug == 'longtermism' || $primary_focus_area->slug == 'other-areas' ) ){
@@ -34,7 +34,7 @@
 		}
 	}
 
-	if ( ! is_wp_error( $primary_focus_area ) ) {
+	if ( ! is_wp_error( $primary_focus_area ) && isset($primary_focus_area->term_id) ) {
 		$focus_area_image = get_field( 'category_image', 'focus-area_' . $primary_focus_area->term_id );
 	}
 
@@ -77,12 +77,12 @@
 				<?php if ( $page_header_button ) { ?>
 					<div class="button-group">
 						<?php foreach ( $page_header_button as $i ) : ?>
-							<?php if ( $i['link']['url'] ) : ?>
+							<?php if ( isset($i['link']['url']) ) : ?>
 								<a class="button" href="<?php echo $i['link']['url']; ?>"<?php if ( $i['link']['target'] == '_blank' ) { echo ' target="_blank"'; } ?>><?php echo $i['link']['title']; ?></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-				<?php } elseif ( $orgSite ) {  ?> 
+				<?php } elseif ( isset($orgSite) ) {  ?> 
 					<div class="button-group">						
 						<a class="button" href="<?php echo $orgSite; ?>" target="_blank">Organization Site</a> 
 					</div>

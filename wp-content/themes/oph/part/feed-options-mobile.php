@@ -17,7 +17,7 @@ $sort_params = [
 				</button>
 
 				<ul class="dropdown-content">
-					<?php if ( ! $is_research_page ) : ?>
+					<?php if ( isset($is_research_page) && !$is_research_page ) : ?>
 						<li>
 							<a href="<?php echo esc_url( add_query_arg( 'sort', 'high-to-low' ) ); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
 						</li>
