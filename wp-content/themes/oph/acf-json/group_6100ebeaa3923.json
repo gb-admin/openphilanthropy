@@ -72,6 +72,13 @@
                 "operator": "==",
                 "value": "careers"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template\/table-of-contents-new.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -82,5 +89,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1644881255
+    "modified": 1662731243
 }

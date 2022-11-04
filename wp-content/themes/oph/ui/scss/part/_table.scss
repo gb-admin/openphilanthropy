@@ -51,7 +51,7 @@ table.table-imported {
 	border: 1px solid $periwinkle-3;
 	display: table;
 
-	thead th {
+	thead tr:nth-child(1) th {
 		background-color: $periwinkle-3;
 		color: white;
 		border-right: 1px solid white;
@@ -62,9 +62,8 @@ table.table-imported {
 		}
 	}
 
-	tbody {
-		tr:nth-child(even) {
+	thead tr:nth-child(even),
+  tbody tr:nth-child(even) {
 			background-color: $periwinkle-5;
 		}
-	}
 }

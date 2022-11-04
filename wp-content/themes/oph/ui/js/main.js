@@ -149,7 +149,7 @@ jQuery(function ($) {
       templateSelection: select2CopyClasses,
     });
 
-    var sidebarSelect = $(".sidebar-filter select").select2({ 
+    var sidebarSelect = $(".sidebar-filter select").select2({
       dropdownCssClass: "sidebar-filter-dropdown",
       searchInputPlaceholder: "Type here to search ...",
       minimumResultsForSearch: 5,
@@ -1252,7 +1252,7 @@ jQuery(function ($) {
         .toLowerCase()
         .replace(/\s+/g, "-")
         .replace(/[^0-9a-z-]/gi, "");
-        // logme("Anchor text: " + anchorsText); 
+      // logme("Anchor text: " + anchorsText); 
       anchorsAway(item, anchorsText, type);
     }
 
@@ -1324,7 +1324,7 @@ jQuery(function ($) {
       // logme(newList);
 
       if (dig) {
-        parentID = getParent(subTree); 
+        parentID = getParent(subTree);
         // logme("parentID: " + parentID);
         parentTree = "#tree-" + parentID;
         // logme("parentTree: " + parentTree);
@@ -1348,8 +1348,8 @@ jQuery(function ($) {
     // get current sublist
     function getList(item, subTree) {
       // logme("Running getList()");
-      var childItem, genTree, listID; 
-      genTree = getParent(subTree); 
+      var childItem, genTree, listID;
+      genTree = getParent(subTree);
       // logme("genTree: " + genTree);
       listID = "tree-" + genTree;
       // logme("subTree: " + subTree);
@@ -1365,12 +1365,12 @@ jQuery(function ($) {
       $(itemList).append(
         $(
           '<li><a data-goto="#' +
-            $(item).attr("id") +
-            '" href="#' +
-            $(item).attr("id") +
-            '"><span>' +
-            $(item).text() +
-            "</span></a></li>"
+          $(item).attr("id") +
+          '" href="#' +
+          $(item).attr("id") +
+          '"><span>' +
+          $(item).text() +
+          "</span></a></li>"
         )
       );
     }
@@ -1380,38 +1380,38 @@ jQuery(function ($) {
       postNav.append(
         $(
           '<li><div class="treetop"><a data-goto="#' +
-            $(item).attr("id") +
-            '" href="#' +
-            $(item).attr("id") +
-            '"><span>' +
-            $(item).text() +
-            '</span></a><span class="foliage"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span></div></li>'
+          $(item).attr("id") +
+          '" href="#' +
+          $(item).attr("id") +
+          '"><span>' +
+          $(item).text() +
+          '</span></a><span class="foliage"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.28 7.16"><g><g><polygon class="cls-1" points="1.05 7.16 0 6.1 6.14 0 12.28 6.1 11.22 7.16 6.14 2.11 1.05 7.16"/></g></g></svg></span></div></li>'
         )
       );
       mobilePostNav.append(
         $(
           '<option value="' +
-            $(item).attr("id") +
-            '">' +
-            $(item).text() +
-            "</option>"
+          $(item).attr("id") +
+          '">' +
+          $(item).text() +
+          "</option>"
         )
       );
-    } 
+    }
 
     // get parent item ID 
-    function getParent(child){ 
+    function getParent(child) {
       // logme("Running getParent()");
       var split, slice, parent;
-      split = child.split("-"); 
+      split = child.split("-");
 
       if (split.length > 1) {
         slice = split.slice(0, -1);
         parent = slice.join("-");
-      } else { 
+      } else {
         parent = split;
-      } 
-      return parent; 
+      }
+      return parent;
     }
 
     // get each alpha, all betas, and begin navgen
@@ -1429,12 +1429,12 @@ jQuery(function ($) {
           logme(this);
         }
       });
-    }); 
+    });
 
     // Hide Navigation title if there are not sub-headings
     if ($(".header-anchor").length) {
       tocHeader.show();
-    } 
+    }
 
   });
 
@@ -1526,8 +1526,8 @@ jQuery(function ($) {
       appendParent.append(
         $(
           '<span class="keep-together">&nbsp;<a class="bucket-description-link" href="' +
-            bucketDescriptionHref +
-            '"></a></span>'
+          bucketDescriptionHref +
+          '"></a></span>'
         )
       );
 
@@ -1644,12 +1644,12 @@ jQuery(function ($) {
 
       try {
         linkUrl = new URL($(this).attr("href"));
-      } catch (e) {}
+      } catch (e) { }
 
       if (!linkUrl) {
         try {
           linkUrl = new URL(linkBaseUrl + $(this).attr("href"));
-        } catch (e) {}
+        } catch (e) { }
       }
 
       if (linkUrl) {
@@ -1712,12 +1712,12 @@ jQuery(function ($) {
   });
 
   // Adds smooth scroll to anchor tags
-  $('a[href*="#"]:not([href="#"]):not([href$="#categories"])').on(
+  $('a[href*="#"]:not([href="#"]):not([href$="#categories"]):not(.footnote_hard_link)').on(
     "click",
     function () {
       if (
         location.pathname.replace(/^\//, "") ==
-          this.pathname.replace(/^\//, "") &&
+        this.pathname.replace(/^\//, "") &&
         location.hostname == this.hostname
       ) {
         var stickyHeaderHeight = $(".header-content").outerHeight();
@@ -1852,23 +1852,47 @@ jQuery(function ($) {
 
     fnOffset = footNote.offset();
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
-  }); 
+  });
+
+  // Imported Footnotes Scroll 
+  var scrollNoteAlt = $(".entry-content a[href^='#']");
+
+  scrollNoteAlt.click(function (e) {
+    e.preventDefault();
+    var href = $(this).attr('href'),
+      footnote = $('li' + href),
+      idOffset;
+
+    console.log(href);
+    console.log(footnote);
+
+    // If the footnotes is collapsed and the target footnote look up exists -> open quickly
+    if (!$(".footnotes").is(":visible")) {
+      expandFootnotes($("#toggle-footnotes"));
+    }
+
+    setTimeout(function () {
+      idOffset = footnote.offset().top - 140;
+
+      $("html, body").animate({ scrollTop: idOffset }, 750);
+    }, 10);
+  });
 
   var scrollLabel;
-  scrollLabel = $(".footnote-label"); 
+  scrollLabel = $(".footnote-label");
 
   $(scrollLabel).click(function (e) {
     e.preventDefault();
 
     var source, sourceLink, hashLink, hashID, footLabel, fnOffset;
     source = $(this);
-    sourceLink = $(this).attr("href").split("#"); 
+    sourceLink = $(this).attr("href").split("#");
     hashLink = sourceLink[1];
-    footLabel = $('a#' + hashLink );
+    footLabel = $('a#' + hashLink);
 
     fnOffset = footLabel.offset();
     $("html, body").animate({ scrollTop: fnOffset.top - 140 }, 750);
-  }); 
+  });
 
 
   // Scroll on Footer Button View
@@ -2014,85 +2038,106 @@ jQuery(function ($) {
         $(feed).addClass("cubed");
       }
     }
-  }); 
+  });
 
   /**
    * I'm pretty sure everything in this repo is made up, and the points 
    * don't matter. 
    * 
    * Newly-build Sidebar Nav 
-   */ 
-  $(document).ready(function(){ 
-    console.log('Ada online.'); 
+   */
+  $(document).ready(function () {
+    console.log('Ada online.');
 
     // toggle hiding on each dropdown 
-    $('.selection-prompt').click(function(){ 
-      var wrappers, wrap, state; 
-      wrappers = $('.selection-dropdown'); 
-      wrap = $(this).parent('.selection-dropdown'); 
-      state = $(wrap).hasClass('active'); 
+    $('.selection-prompt').click(function () {
+      var wrappers, wrap, state;
+      wrappers = $('.selection-dropdown');
+      wrap = $(this).parent('.selection-dropdown');
+      state = $(wrap).hasClass('active');
 
-      if ( state ) {
-        $(wrap).removeClass('active'); 
+      if (state) {
+        $(wrap).removeClass('active');
       } else {
-        $(wrappers).removeClass('active'); 
-        $(wrap).addClass('active'); 
+        $(wrappers).removeClass('active');
+        $(wrap).addClass('active');
       }
-    }); 
+    });
     // sub-section searches 
-    $('.selection-search').on('keyup keypress', function(e) { 
+    $('.selection-search').on('keyup keypress', function (e) {
       var keyCode = e.keyCode || e.which;
       // disallow form submission on 'enter' key when focusing a 
       // dropdown's search field 
-      if (keyCode === 13) { 
+      if (keyCode === 13) {
         e.preventDefault();
         return false;
       } else {
-      // filter results 
-        var value, labels; 
-        value = $(this).val().toLowerCase(); 
-        labels = $(this).siblings('.options-wrapper').children('label.selection-label'); 
+        // filter results 
+        var value, labels;
+        value = $(this).val().toLowerCase();
+        labels = $(this).siblings('.options-wrapper').children('label.selection-label');
 
-        $(labels).filter(function() { 
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1); 
+        $(labels).filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       }
-    }); 
+    });
     // rearrage for hierarchy 
-    function find_parents(selectionID) { 
-      var set, options; 
-      set = $(selectionID).children('.selection-options').children('.options-wrapper'); 
-      options = $(set).children('.selection-label'); 
+    function find_parents(selectionID) {
+      var set, options;
+      set = $(selectionID).children('.selection-options').children('.options-wrapper');
+      options = $(set).children('.selection-label');
 
       // this will only work while `orderby` => `parents` 
-      $(options).each(function() { 
-        var parentID; 
-        parentID = $(this).attr('data-parent'); 
+      $(options).each(function () {
+        var parentID;
+        parentID = $(this).attr('data-parent');
 
-        if ( parentID != '0') { 
-          var parentAttr, parentItem; 
+        if (parentID != '0') {
+          var parentAttr, parentItem;
           parentAttr = '.selection-label[data-termid=' + parentID + ']';
-          parentItem = $(this).siblings(parentAttr); 
-          $(this).insertAfter(parentItem); 
+          parentItem = $(this).siblings(parentAttr);
+          $(this).insertAfter(parentItem);
         }
-      }); 
-    } 
-    find_parents('#filter-focus-area'); 
-    find_parents('#filter-content-type'); 
-  }); 
+      });
+    }
+    find_parents('#filter-focus-area');
+    find_parents('#filter-content-type');
+  });
 
   // Strip &nbsp; from page headers 
-  $(document).ready(function() {
+  $(document).ready(function () {
     var oldhtml = $('.page-header__main h1').html();
     var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
 
     $('.page-header__main h1').html(newhtml);
   });
-}); 
+
+  // Footnotes Plugin custom js
+  var footnotes = $('.footnotes_reference_container > div:last-child'),
+    footnotesToggle = $('.footnote_container_prepare p');
+
+  $('.footnote_reference_container_collapse_button').html('<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.1123 9.71249L12.4996 15.2875L6.8877 9.71249" stroke="#445277" stroke-width="1.49661"></path></svg>')
+
+  footnotesToggle.find('span').on('click', function () {
+
+    if (footnotesToggle.hasClass('open')) {
+      footnotesToggle.removeClass('open')
+      footnotesToggle.find('span:nth-child(1)').text('Expand Footnotes');
+    } else {
+      footnotesToggle.addClass('open')
+      footnotesToggle.find('span:nth-child(1)').text('Collapse Footnotes');
+    }
+  });
+
+  $('.footnote_hard_link').on('click', function () {
+    $('.footnote_container_prepare p').addClass('open');
+    footnotesToggle.find('span:nth-child(1)').text('Collapse Footnotes');
+  });
+});
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate
 
 // window.onclick = e => {
 //   console.log(e.target);  // to get the element
 // }
-

@@ -120,7 +120,7 @@
 					$orderby_query = 'meta_value';
 				}
 			}
-		} elseif ( $key == 'yr' ) {
+		} elseif ( str_contains($key, 'yr') ) {
 			foreach ( $param as $value ) {
 				$param_date_query = array(
 					'key' => 'award_date',
@@ -131,15 +131,17 @@
 
 				array_push( $date_meta_query, $param_date_query );
 			}
+		} elseif (str_contains($key, 'organization-name')) {
+			$key = 'organization-name';
+			$taxonomy = get_taxonomy($key);
+		} elseif (str_contains($key, 'focus-area')) {
+			$key = 'focus-area';
+			$taxonomy = get_taxonomy($key);
+		} elseif (str_contains($key, 'funding-type')) {
+			$key = 'funding-type';
+			$taxonomy = get_taxonomy($key);
 		} else {
-
-			// Get taxonomy by $key
 			$taxonomy = get_taxonomy( $key );
-
-			// Check if get taxonomy with post type prepended in case it was rewrite
-			// if ( ! $taxonomy ) {
-			// 	$taxonomy = get_taxonomy( 'grants-' . $key );
-			// }
 		}
 
 		if ( $taxonomy ) { 

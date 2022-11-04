@@ -22,12 +22,12 @@
 						<a href='javascript:void(0);' id='toggle-footnotes'
 						>
 							<span class='expand'>
-								Expand Footer 
+								Expand Footnotes 
 								<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M18.1123 9.71249L12.4996 15.2875L6.8877 9.71249" stroke="#445277" stroke-width="1.49661"/></svg>
 							</span>
 							<span class='collapse'>
-								Collapse Footer <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+								Collapse Footnotes <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M6.8877 15.2875L12.5004 9.71248L18.1123 15.2875" stroke="#445277" stroke-width="1.49661"/>
 </svg>
 							</span>
