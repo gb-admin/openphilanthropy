@@ -261,7 +261,7 @@ body {
   font-family: $sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 30px;
 }
 
 a {
@@ -375,7 +375,43 @@ button,
 .button {
   @extend %button;
 }
-
+.entry-content a.content-button,
+a.content-button {
+  text-decoration: none !important;
+  margin: 0;
+  padding: 8px 22px 6px;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  background: none;
+  border: 2px solid $periwinkle-3;
+  border-radius: 999px;
+  box-shadow: none;
+  color: $periwinkle-3;
+  font-family: $sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.375;
+  text-align: center;
+  text-indent: 0;
+  text-transform: uppercase;
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  position: relative;
+  z-index: 10;
+  vertical-align: middle;
+  transition: $smooth;
+  &:focus,
+  &:hover {
+    background: $periwinkle-3;
+    color: #fff;
+  }
+}
 .button--secondary {
   background-color: $periwinkle-2;
   border-color: $periwinkle-2;
@@ -908,6 +944,7 @@ button,
 .hero {
   color: #fff;
   position: relative;
+  filter: brightness(0.83);
 
   &::before {
     content: "";
@@ -1786,6 +1823,10 @@ button,
     ul {
       @extend %list;
       margin: 28px 0;
+    }
+    li ul {
+      @extend %list;
+      margin: 14px 0;
     }
 
     > :last-child {
@@ -4210,7 +4251,7 @@ button,
       width: calc(33.33333% - 24px);
 
       > :last-child {
-        padding-bottom: 60px;
+      /*  padding-bottom: 60px; */
       }
     }
   }
@@ -4225,7 +4266,7 @@ button,
 
     >li {
       > :last-child {
-        padding-bottom: 100px;
+      /*  padding-bottom: 100px; */
       }
     }
   }
