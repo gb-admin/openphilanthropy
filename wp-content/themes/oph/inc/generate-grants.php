@@ -13,7 +13,7 @@ function generate_grants_csv() {
 
   // nonce value set in filter-sidebar.php 
   if ( !wp_verify_nonce( $_REQUEST['nonce'], "generate_grants_csv_nonce")) {
-    exit("Oh no you don't.");
+    exit("This page currently isn't working. We'd be grateful if you could contact webrequests@openphilanthropy.org to let us know you encountered this error. Thanks!");
   }   
 
   $grants_args = array(
