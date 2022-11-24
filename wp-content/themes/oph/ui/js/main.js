@@ -1858,25 +1858,25 @@ jQuery(function ($) {
   var scrollNoteAlt = $(".entry-content a[href^='#']");
 
   scrollNoteAlt.click(function (e) {
-    e.preventDefault();
-    var href = $(this).attr('href'),
-      footnote = $('li' + href),
-      idOffset;
+    if(document.getElementsByClassName("entry-footnotes").length > 0) {
+      e.preventDefault();
+      var href = $(this).attr('href'),
+        footnote = $('li' + href),
+        idOffset;
 
-    console.log(href);
-    console.log(footnote);
+      console.log(href);
+      console.log(footnote);
 
-    // If the footnotes is collapsed and the target footnote look up exists -> open quickly
-    if (!$(".footnotes").is(":visible")) {
-      expandFootnotes($("#toggle-footnotes"));
+      // If the footnotes is collapsed and the target footnote look up exists -> open quickly
+      if (!$(".footnotes").is(":visible")) {
+        expandFootnotes($("#toggle-footnotes"));
+      }
+      setTimeout(function () {
+        idOffset = footnote.offset().top - 140;
+        $("html, body").animate({ scrollTop: idOffset }, 750);
+      }, 10);
     }
-
-    setTimeout(function () {
-      idOffset = footnote.offset().top - 140;
-
-      $("html, body").animate({ scrollTop: idOffset }, 750);
-    }, 10);
-  });
+});
 
   var scrollLabel;
   scrollLabel = $(".footnote-label");
