@@ -38,7 +38,7 @@
 				<?php if ( $page_header_button ) : ?>
 					<div class="button-group">
 						<?php foreach ( $page_header_button as $i ) : ?>
-							<?php if ( $i['link']['url'] ) : ?>
+							<?php if ( isset($i['link']['url']) ) : ?>
 								<a class="button" href="<?php echo $i['link']['url']; ?>"<?php if ( $i['link']['target'] == '_blank' ) { echo ' target="_blank"'; } ?>><?php echo $i['link']['title']; ?></a>
 							<?php endif; ?>
 						<?php endforeach; ?>
