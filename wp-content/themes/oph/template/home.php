@@ -91,7 +91,7 @@ $homepage_research_title = get_field('homepage_research_title');
 								<?php if ($grant_image) : ?>
 									<div class="bucket-image">
 										<div class="bucket-image__bg">
-											<img src="<?php echo $grant_image; ?>" height="150" width="150" alt="<?php echo $focus_area; ?>">
+											<img src="<?php echo $grant_image; ?>" alt="<?php echo $focus_area; ?>">
 										</div>
 									</div>
 								<?php endif; ?>
