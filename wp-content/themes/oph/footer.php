@@ -65,9 +65,11 @@
 							</div>
 
 							<div class="footer-grid__cell footer-cell-social">
-								<h4>Follow Our Work</h4>
-
-								<a href="<?php echo $mailing_list_url; ?>" title="<?php echo $mailing_list_title; ?>" class="button"><?php echo $mailing_list_title; ?></a> 
+								<?php if ( !empty($mailing_list_url) || !empty($mailing_list_title) ) : ?>
+									<h4>Follow Our Work</h4>
+	
+									<a href="<?php echo $mailing_list_url; ?>" title="<?php echo $mailing_list_title; ?>" class="button"><?php echo $mailing_list_title; ?></a>  
+								<?php endif; ?>
 
 								<?php if ( !empty($url_facebook) || !empty($url_twitter) ) : ?>
 									<div class="social-media">
@@ -93,8 +95,8 @@
 
 								<p class="copyright">
 									<span>&copy; Open Philanthropy 2022</span><br />
-									<span><em>This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-Noncommercial-Share-alike 4.0 International License.</a></em></span><br />
-									<span><em>If you'd like to translate this content into another language, please <a href="https://www.openphilanthropy.org/contact-us/">get in touch</a>; we may be interested in sharing or <a href="https://forum.effectivealtruism.org/posts/CqYHPLCJaFdLn8gp6/open-phil-is-seeking-bilingual-people-to-help-translate-ea" target="_blank">funding</a> your work.</em></span>
+									<span><em>This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-Noncommercial-Share-alike 4.0&nbsp;International License.</a></em></span><br />
+									<span><em>If you'd like to translate this content into another language, please <a href="https://www.openphilanthropy.org/contact-us/">get in touch</a>!</em></span>
 								</p>
 							</div>
 						</div>

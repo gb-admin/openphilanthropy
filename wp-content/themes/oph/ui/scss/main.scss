@@ -900,6 +900,10 @@ a.content-button {
 
 .copyright {
   color: #a6a9aa;
+  line-height: 24px;
+  br {
+    margin-bottom: 14px;
+  }
 }
 
 #toggle-footnotes {
@@ -6377,7 +6381,7 @@ a.content-button {
   }
 
   .copyright {
-    margin: 24px 0;
+   /*  margin: 24px 0; */
 
     &:last-child {
       margin-bottom: 0;
@@ -6442,7 +6446,8 @@ a.content-button {
     padding: 80px 0 84px;
 
     .copyright {
-      margin-top: 38px;
+   /* reinstate this margin if the footer mailing list button is enabled */
+   /*   margin-top: 38px; */
     }
   }
 
