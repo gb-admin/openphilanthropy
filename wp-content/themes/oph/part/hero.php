@@ -7,8 +7,8 @@
         // Uncomment them to choose one random slide.
         // Multi-slide version will only work if more than one image is uploaded
         // the the "Hero" field.
-        $random_image[] = $hero_image[array_rand($hero_image)];
-        $hero_image = $random_image;
+       // $random_image[] = $hero_image[array_rand($hero_image)];
+       // $hero_image = $random_image;
 ?>
 
 <div class="hero">
@@ -17,7 +17,7 @@
 			<div class="hero-image<?php if ( count( $hero_image ) > 0 ) { echo ' hero-image-slider'; } ?>">
 				<?php foreach ( $hero_image as $i ) : ?>
 					<div class="hero-slider__image">
-						<img src="<?php echo $i['image']['sizes']['xl']; ?>" alt="">
+						<img data-lazy="<?php echo $i['image']['sizes']['xl']; ?>" alt="">
 					</div>
 				<?php endforeach; ?>
 			</div>

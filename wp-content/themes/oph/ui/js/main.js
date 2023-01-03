@@ -821,6 +821,7 @@ jQuery(function ($) {
   $(".hero-image-slider").slick({
     appendDots: $(".hero-dots"),
     arrows: false,
+    lazyLoad: 'ondemand',
     dots: true,
     rows: 0,
     speed: 500,
