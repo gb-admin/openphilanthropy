@@ -901,8 +901,9 @@ a.content-button {
 .copyright {
   color: #a6a9aa;
   line-height: 24px;
-  br {
+  span.br {
     margin-bottom: 14px;
+    display: block;
   }
 }
 
