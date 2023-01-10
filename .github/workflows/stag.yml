@@ -1,0 +1,19 @@
+name: Deploy! Stag (WP Engine) 
+on:
+  push:
+    branches:
+     - stag
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+    steps: 
+    - uses: actions/checkout@v2
+    - name: GitHub Action Deploy to WP Engine
+      uses: wpengine/github-action-wpe-site-deploy@v3.0
+      with:
+        # Deploy vars 
+        WPE_SSHG_KEY_PRIVATE: ${{ secrets.PRIVATE_KEY }} 
+        WPE_ENV: openphilstag 
+        # Deploy Options
+        FLAGS: -zvr --exclude=".*" 
+        CACHE_CLEAR: TRUE 
