@@ -159,10 +159,10 @@
 									<?php echo date("F Y", strtotime($award_date)); ?>	
 								</h5>
 							<?php endif; ?>
-
-							<div class="block-feed-post__head">
 								<?php if ( $post_thumbnail ) : ?>
+							<div class="block-feed-post__head">
 									<a href="<?php echo the_permalink(); ?>">
+
 										<img src="<?php echo $post_thumbnail; ?>" alt="">
 									</a>
 								<?php endif; ?>
@@ -203,11 +203,6 @@
 									<?php echo get_the_date( 'F j, Y', $grants->ID ); ?>
 								</h5>
 
-								<div class="block-feed-post__link">
-									<a href="<?php echo the_permalink(); ?>">
-										Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2"/></svg>
-									</a>
-								</div>
 							</div>
 						</div>
 					<?php endwhile; ?>
