@@ -2109,9 +2109,11 @@ jQuery(function ($) {
   // Strip &nbsp; from page headers 
   $(document).ready(function () {
     var oldhtml = $('.page-header__main h1').html();
-    var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
-
-    $('.page-header__main h1').html(newhtml);
+    // The above markup is missing from the front front page so we check oldhtml is defined.
+    if (typeof oldhtml !== 'undefined') {
+      var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
+      $('.page-header__main h1').html(newhtml);
+    }
   });
 
   // Footnotes Plugin custom js
