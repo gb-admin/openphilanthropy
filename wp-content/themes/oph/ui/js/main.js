@@ -2137,6 +2137,19 @@ jQuery(function ($) {
   });
 });
 
+
+// ToC Links
+$(document).on('click', '.tree a', function (e) {
+  var href = $(this).attr('href');
+  history.replaceState(undefined, undefined, href)
+});
+$(window).on('load', function () {
+  var hash = window.location.hash;
+  if (hash) {
+    $('.tree [href="' + hash + '"]').trigger('click');
+  }
+});
+
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate
 
 // window.onclick = e => {
