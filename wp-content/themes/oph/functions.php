@@ -1,4 +1,15 @@
 <?php
+/**
+ * Create constant to define theme versions.
+ * This was added becuase the constant is used in inc/customizer.php, following the code of the _S starter theme.
+ *  With the constant undeinfed it was triggering an error. 
+ * It may be useful to keep it.
+ */
+if ( ! defined( '_S_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( '_S_VERSION', '1.0.0' );
+}
+
 if ( ! function_exists( 'oph_setup' ) ) {
 	function oph_setup() {
 		load_theme_textdomain( 'oph', get_template_directory() . '/languages' );
