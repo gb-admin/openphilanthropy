@@ -98,3 +98,8 @@ add_filter("gform_confirmation_anchor", "gform_confirmation_anchor");
 function gform_confirmation_anchor() {
   return true;
 }
+
+/**
+ * Disable xmlrpc.
+ */
+add_filter('xmlrpc_enabled', '__return_false');
