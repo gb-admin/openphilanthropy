@@ -3,15 +3,21 @@
 	$hero_entry = get_field( 'hero_entry' );
 	$hero_heading = get_field( 'hero_heading' );
 	$hero_image = get_field( 'hero_image' );
+        // Comment out the following two lines to revert to a mutli-slide slideshow,
+        // Uncomment them to choose one random slide.
+        // Multi-slide version will only work if more than one image is uploaded
+        // the the "Hero" field.
+       // $random_image[] = $hero_image[array_rand($hero_image)];
+       // $hero_image = $random_image;
 ?>
 
 <div class="hero">
 	<?php if ( $hero_image ) : ?>
 		<div class="hero-image-wrap">
-			<div class="hero-image<?php if ( count( $hero_image ) > 1 ) { echo ' hero-image-slider'; } ?>">
+			<div class="hero-image<?php if ( count( $hero_image ) > 0 ) { echo ' hero-image-slider'; } ?>">
 				<?php foreach ( $hero_image as $i ) : ?>
 					<div class="hero-slider__image">
-						<img src="<?php echo $i['image']['sizes']['xl']; ?>" alt="">
+						<img data-lazy="<?php echo $i['image']['sizes']['xl']; ?>" alt="">
 					</div>
 				<?php endforeach; ?>
 			</div>
@@ -47,7 +53,7 @@
 			</div>
 
 			<?php if ( $hero_image ) : ?>
-				<div class="hero__content-caption<?php if ( count( $hero_image ) > 1 ) { echo ' hero-caption-slider'; } ?>">
+				<div class="hero__content-caption<?php if ( count( $hero_image ) > 0 ) { echo ' hero-caption-slider'; } ?>">
 					<?php foreach ( $hero_image as $i ) : ?>
 						<p>
 							<?php echo $i['caption']; ?>
@@ -58,7 +64,7 @@
 		</div>
 
 		<?php if ( $hero_image ) : ?>
-			<div class="hero-photo-credit <?php if ( count( $hero_image ) > 1 ) { echo ' hero-photo-credit-slider'; } ?>">
+			<div class="hero-photo-credit <?php if ( count( $hero_image ) > 0 ) { echo ' hero-photo-credit-slider'; } ?>">
 				<?php foreach ( $hero_image as $i ) : ?>
 					<h6><?php echo $i['credit']; ?></h6>
 				<?php endforeach; ?>

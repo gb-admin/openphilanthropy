@@ -18,6 +18,14 @@ if (isset($params['view-list'][0]) && $params['view-list'][0] == 'false') {
 	$view_list = false;
 }
 
+$featured_research = get_field('featured_research');
+
+$featured_research_id = [];
+
+if ($featured_research) {
+        array_push($featured_research_id, $featured_research->ID);
+}
+
 $amount_meta_query = array(
 	'relation' => 'or'
 );
@@ -278,13 +286,6 @@ $research = new WP_Query($args);
 										<?php endif; ?>
 									</h5>
 
-									<div class="block-feed-post__link">
-										<a href="<?php echo the_permalink(); ?>">
-											Learn more <svg viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M15.352 1l7.395 7.5-7.395 7.5M1 8.397l21.748.103" stroke="#6e7ca0" stroke-width="2" />
-											</svg>
-										</a>
-									</div>
 								</div>
 							</div>
 						<?php endwhile;

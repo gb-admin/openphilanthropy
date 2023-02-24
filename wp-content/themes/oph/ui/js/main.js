@@ -821,6 +821,7 @@ jQuery(function ($) {
   $(".hero-image-slider").slick({
     appendDots: $(".hero-dots"),
     arrows: false,
+    lazyLoad: 'ondemand',
     dots: true,
     rows: 0,
     speed: 500,
@@ -1725,7 +1726,7 @@ jQuery(function ($) {
         var target = $(this.hash);
         target = target.length
           ? target
-          : $("[name=" + this.hash.slice(1) + "]");
+          : $("[name=' + this.hash.slice(1) + ']");
 
         if (target.length) {
           $("html,body").animate(
@@ -1858,25 +1859,25 @@ jQuery(function ($) {
   var scrollNoteAlt = $(".entry-content a[href^='#']");
 
   scrollNoteAlt.click(function (e) {
-    e.preventDefault();
-    var href = $(this).attr('href'),
-      footnote = $('li' + href),
-      idOffset;
+    if(document.getElementsByClassName("entry-footnotes").length > 0) {
+      e.preventDefault();
+      var href = $(this).attr('href'),
+        footnote = $('li' + href),
+        idOffset;
 
-    console.log(href);
-    console.log(footnote);
+      console.log(href);
+      console.log(footnote);
 
-    // If the footnotes is collapsed and the target footnote look up exists -> open quickly
-    if (!$(".footnotes").is(":visible")) {
-      expandFootnotes($("#toggle-footnotes"));
+      // If the footnotes is collapsed and the target footnote look up exists -> open quickly
+      if (!$(".footnotes").is(":visible")) {
+        expandFootnotes($("#toggle-footnotes"));
+      }
+      setTimeout(function () {
+        idOffset = footnote.offset().top - 140;
+        $("html, body").animate({ scrollTop: idOffset }, 750);
+      }, 10);
     }
-
-    setTimeout(function () {
-      idOffset = footnote.offset().top - 140;
-
-      $("html, body").animate({ scrollTop: idOffset }, 750);
-    }, 10);
-  });
+});
 
   var scrollLabel;
   scrollLabel = $(".footnote-label");
@@ -2108,9 +2109,11 @@ jQuery(function ($) {
   // Strip &nbsp; from page headers 
   $(document).ready(function () {
     var oldhtml = $('.page-header__main h1').html();
-    var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
-
-    $('.page-header__main h1').html(newhtml);
+    // The above markup is missing from the front front page so we check oldhtml is defined.
+    if (typeof oldhtml !== 'undefined') {
+      var newhtml = oldhtml.replace(/&nbsp;/g, ' ');
+      $('.page-header__main h1').html(newhtml);
+    }
   });
 
   // Footnotes Plugin custom js
@@ -2148,6 +2151,7 @@ jQuery(function ($) {
   });
 
 });
+
 
 // reverse append isn't working, and I'm not sure I know how to fix it , alos probbaly need to add back in the ability to swap the css for the arrow indcator, sicne it will ned to rortate
 

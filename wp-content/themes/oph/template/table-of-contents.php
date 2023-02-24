@@ -61,7 +61,7 @@
 											<?php foreach ( $i['sub_sections'] as $n => $c ) : $n = $n + 1; ?>
 												<li>
 													<h5>
-														<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php echo $c['title']; ?>"><?php echo $k . '.' . $n . ' ' . $c; ?></a>
+														<a data-goto="#content-<?php echo $k . '-' . $n; ?>" href="#content-<?php echo $k . '-' . $n; ?>" title="<?php if( isset($c['title']) ) { echo $c['title']; } ?>"><?php echo $k . '.' . $n . ' ' . $c; ?></a>
 													</h5>
 												</li>
 											<?php endforeach; ?>
@@ -135,7 +135,7 @@
 										</div>
 									</div>
 								<?php 
-							$nested_section_number++;
+							if( isset($nested_section_number) ) { $nested_section_number++; }
 							endforeach; ?>
 							</div>
 						<?php endif; ?>

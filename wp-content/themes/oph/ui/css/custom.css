@@ -350,12 +350,14 @@ button.button-view-list {
 }
 
 .entry-content a {
-  color: #6e7ca0;
+ /* color: #6e7ca0; */
+  color: #445277;
   text-decoration: underline;
 }
 .entry-content a:hover,
 .entry-content a:focus {
-  color: #445277;
+  color: #263046;
+/*  color: #445277; */
 }
 
 .entry-content a.see-footnote {
@@ -942,7 +944,7 @@ body.logged-in.admin-bar .block-feed-title-head {
 .entry-content ol:last-child li ol,
 .entry-content ul:last-child li ul {
   margin-top: 7px;
-  margin-bottom: 28px;
+  margin-bottom: 7px;
 }
 
 small {
@@ -1159,14 +1161,24 @@ ul.list-related-posts > li > h3 {
 } 
 
 .selection-options label span.checked-box {
-  background-color: #263046; 
+ /*  background-color: #263046; */
   display: none; 
   height: 11px; 
   left: 18px; 
   position: absolute; 
   top: 14px; 
-  width: 11px; 
+  width: 11px;
+  color: #000; 
 } 
+span.checked-box:after {
+  content: "\D7";
+  font-size: 35px;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: -6px;
+  top: -1.5px;
+}
 .selection-options label[data-depth='level-2'] span.checked-box { 
   left: 28px; 
 } 

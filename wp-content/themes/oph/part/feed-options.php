@@ -11,7 +11,6 @@ $sort_params = [
 	'recent'           => 'Newest to oldest',
 	'oldest-to-newest' => 'Oldest to newest'
 ];
-$sorted = $sort_params[$_GET['sort']];
 ?>
 
 <div class="feed-options-bar">

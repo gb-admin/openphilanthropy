@@ -1,4 +1,15 @@
 <?php
+/**
+ * Create constant to define theme versions.
+ * This was added becuase the constant is used in inc/customizer.php, following the code of the _S starter theme.
+ *  With the constant undeinfed it was triggering an error. 
+ * It may be useful to keep it.
+ */
+if ( ! defined( '_S_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( '_S_VERSION', '1.0.0' );
+}
+
 if ( ! function_exists( 'oph_setup' ) ) {
 	function oph_setup() {
 		load_theme_textdomain( 'oph', get_template_directory() . '/languages' );
@@ -83,4 +94,12 @@ add_filter( 'template_include', 'custom_search_template' );
  * @param $form
  * @return mixed
  */
-add_filter("gform_confirmation_anchor", create_function("","return true;"));
+add_filter("gform_confirmation_anchor", "gform_confirmation_anchor");
+function gform_confirmation_anchor() {
+  return true;
+}
+
+/**
+ * Disable xmlrpc.
+ */
+add_filter('xmlrpc_enabled', '__return_false');
