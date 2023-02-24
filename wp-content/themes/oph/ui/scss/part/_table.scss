@@ -46,7 +46,7 @@ $root: 1rem !default;
 }
 
 // Targets import post contents (class added via js)
-table.table-imported {
+table.table-imported:not(.footnotes_table) {
 	@extend .table;
 	border: 1px solid $periwinkle-3;
 	display: table;
