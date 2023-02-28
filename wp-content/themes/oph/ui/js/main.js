@@ -2139,14 +2139,14 @@ jQuery(function ($) {
   });
 
   // ToC Links
-  $(document).on('click', '.tree a', function (e) {
+  $(document).on('click', '#post-navigation-list li a', function (e) {
     var href = $(this).attr('href');
     history.replaceState(undefined, undefined, href)
   });
   $(window).on('load', function () {
     var hash = window.location.hash;
     if (hash) {
-      $('.tree [href="' + hash + '"]').trigger('click');
+      $('#post-navigation-list li [href="' + hash + '"]').trigger('click');
     }
   });
 
