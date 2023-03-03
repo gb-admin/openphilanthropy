@@ -979,8 +979,8 @@ a.content-button {
     background: rgba(110, 124, 160, .9);
     font-size: 18px;
     line-height: 24px;
-    display: flex;
-    flex-direction: column-reverse;
+    display: flex !important;
+    flex-direction: column;
     pointer-events: auto;
 
     h1 {
