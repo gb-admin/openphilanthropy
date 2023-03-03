@@ -1230,3 +1230,6 @@ span.checked-box:after {
 .sidebar-filter .sidebar-filter__search input[type="search"]::placeholder {
   color: #FFF; 
 }
+.quote-slideshow .slick-slide {
+  height: unset;
+}
