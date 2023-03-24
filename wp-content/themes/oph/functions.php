@@ -1,4 +1,4 @@
-`<?php
+<?php
 /**
  * Create constant to define theme versions.
  * This was added becuase the constant is used in inc/customizer.php, following the code of the _S starter theme.
