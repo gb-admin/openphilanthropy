@@ -40,20 +40,19 @@
 						?>
 
 						<article class="team-item">
+								<div class="team-item-header">
 								<?php if ( isset($team_image) ) : ?>
 									<?php // echo $team_image; ?>
 								<?php endif; ?>
-								<h4><?php echo the_title(); ?></h4>
+								<h4><a href="<?php echo get_permalink(); ?>"><?php echo the_title(); ?></a></h4>
 								<?php if ( isset($team_title) ) : ?>
-									<h6><?php echo $team_title; ?></h6>
+								<h6><?php echo $team_title; ?></h6>
 								<?php endif; ?>
+								</div>
 								<?php if ( isset($team_content) ) : ?>
-									<aside><?php echo $team_content; ?></aside>	
+									<details><summary> </summary><p><?php echo $team_content; ?></p></details>	
 								<?php endif; ?>
-							<a href="<?php echo get_permalink(); ?>">
-								<div aria-hidden="true" class="grid-team__icon"><svg viewBox="0 0 36 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.55 1L34 8.5 26.55 16M0 8.5h34" stroke="#6e7ca0" stroke-width="2"/></svg></div>
-							</a>
-						</article>
+ 						</article>
 					<?php endwhile; wp_reset_postdata(); ?>
 				</div>
 			<?php endif; ?>

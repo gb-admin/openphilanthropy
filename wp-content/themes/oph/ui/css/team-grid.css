@@ -1,3 +1,21 @@
+.page-template-team .mfp-inline-holder .mfp-content,
+.page-template-team-modal .mfp-inline-holder .mfp-content {
+  background: white;
+  width: 90%;
+  padding: 1em;
+  max-width: 500px;
+  box-shadow: 2px 2px 2px grey;
+  border: 1px solid grey;
+}
+.page-template-team .mfp-inline-holder .mfp-close,
+.page-template-team-modal .mfp-inline-holder .mfp-close {
+  font-size: 32px;
+}
+.team-item .open-popup-link {
+  color: gray;
+  font-size: 25px;
+  margin: 0px 5px -5px -25px;
+}
 .team-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -9,8 +27,12 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    grid-column-gap: 20px;
+    grid-column-gap: 10px;
     grid-row-gap: 30px;
+  }
+  .page-template-team .mfp-inline-holder .mfp-content {
+    width: 80%;
+    padding: 2em 2em 1em;
   }
 }
 
@@ -19,39 +41,57 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-    grid-column-gap: 30px;
+    grid-column-gap: 20px;
     grid-row-gap: 30px;
   }
 }
 
 .team-grid article {
   text-align: center;
+  min-height: 105px;
 }
 
 .team-grid article aside {
   display: none;
+  text-align: center;
 }
 
 .team-grid article:hover aside {
   display: block;
 }
 
-.team-grid h4 {
+.team-item-header {
+  position: relative;
+  height: 95px;
+}
+
+.team-grid h4,
+.team-grid a h4 {
   margin: 12px 0 4px;
   color: #445277;
   font-size: 20px;
   font-weight: 800;
   line-height: 28px;
 }
+.team-grid a:hover,
+.team-grid a:focus {
+  text-decoration: underline;
+}
+.team-grid a.open-popup-link:hover,
+.team-grid a.open-popup-link:focus {
+  text-decoration: none;
+}
 
 .team-grid h6 {
-  margin: 0 0 8px;
+  margin: 0 auto 8px;
   color: #000;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 1px;
   line-height: 24px;
   text-transform: uppercase;
+  max-width: 100%;
+  padding: 0 20px;
 }
 
 .team-grid svg {
@@ -75,4 +115,51 @@
   left: 0;
   position: relative;
   right: 0;
+}
+
+.team-item {
+  position: relative;
+}
+.team-item details {
+    position: relative;
+    text-align: left;
+}
+.team-item details p {
+  position: relative;
+  text-align: left;
+  z-index: 999;
+  background: white;
+  padding: 0.5em 5px 0.5em 5px;
+}
+.team-item summary {
+  position: absolute;
+  list-style: none;
+  margin-top: -24px;
+}
+.team-item summary::-webkit-details-marker {display: none; }
+
+/* By using [open] we can define different styles when the disclosure widget is open */
+.team-item details[open] summary::before { 
+    content:"–"; 
+    color: grey; 
+    position: absolute;
+    top: -72px;
+    left: 20px;
+    width: 32px;
+    height: 28px;
+    font-size: 32px;
+}
+.team-item details summary::before {
+    content: "+";
+    color: grey;
+    position: absolute;
+    top: -70px;
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    font-size: 28px;
+}
+.cta-button {
+  z-index: 0;
+  position: relative;
 }
