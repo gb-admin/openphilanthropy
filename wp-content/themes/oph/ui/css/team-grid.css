@@ -62,7 +62,7 @@
 
 .team-item-header {
   position: relative;
-  height: 95px;
+  height: 96px;
 }
 
 .team-grid h4,
@@ -88,12 +88,16 @@
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 1px;
-  line-height: 24px;
+  line-height: 22px;
   text-transform: uppercase;
   max-width: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
 }
-
+@media only screen and (max-width: 350px) {
+  .team-grid h6 {
+    letter-spacing: 0;
+  }
+}
 .team-grid svg {
   width: 35px;
   height: 16px;
@@ -140,24 +144,24 @@
 
 /* By using [open] we can define different styles when the disclosure widget is open */
 .team-item details[open] summary::before { 
-    content:"–"; 
+    content:""; 
     color: grey; 
     position: absolute;
-    top: -72px;
-    left: 20px;
-    width: 32px;
-    height: 28px;
-    font-size: 32px;
+    top: -70px;
+    left: 0px;
+    width: 26px;
+    height: 26px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/></svg>');
 }
 .team-item details summary::before {
-    content: "+";
+    content: "";
     color: grey;
     position: absolute;
     top: -70px;
-    left: 20px;
-    width: 32px;
-    height: 32px;
-    font-size: 28px;
+    left: 0px;
+    width: 26px;
+    height: 26px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
 }
 .cta-button {
   z-index: 0;
