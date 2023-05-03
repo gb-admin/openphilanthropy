@@ -517,7 +517,23 @@
 											<li class="<?php if ( strlen( $number ) > 4 ) { echo ' is-large-number'; } ?>">
 												<h4>
 													<span class="header-number">
-														<?php if ( $statistic == 'million-given' ) { echo '$';} ?><?php echo $number; ?></span> 
+														<?php if ( $statistic == 'million-given' || strpos($number, '$') !== false) { echo '$';} 
+															// Here we have to round down numbers which appear as a strin, and the string may contain a dollar sign.															
+															$number = ltrim( $number, '$');
+															$number_val = floatval($number);
+															if (strpos(strtolower($title), 'grants') !== false && $number_val > 50)
+															{
+																echo floor($number_val / 10) * 10 . "+";
+															}
+															else if ($number_val >= 100 && strpos(strtolower($title), "million") !== false) {
+																echo floor($number_val / 10) * 10 . "+";
+															} else if (strpos(strtolower($title), "million") !== false) {
+																echo floor($number_val) . "+";
+															} else {
+																echo floor($number_val);
+															}
+														?>
+													</span> 
 														<?php echo $title; ?> 
 												</h4>
 											</li>

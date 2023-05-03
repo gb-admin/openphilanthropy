@@ -1233,3 +1233,9 @@ span.checked-box:after {
 .quote-slideshow .slick-slide {
   height: unset;
 }
+.more-than {
+  font-size: 16px;
+  white-space: nowrap;
+  display: inline-flex;
+  position: absolute;
+}
