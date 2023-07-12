@@ -1239,3 +1239,9 @@ span.checked-box:after {
   display: inline-flex;
   position: absolute;
 }
+/* Add arrows to footnotes */
+.footnote-label::before {
+  content: "\1F819";
+  font-weight: bold;
+  margin-right: 2px;
+}
