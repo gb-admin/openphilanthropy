@@ -370,8 +370,9 @@ button.button-view-list {
 
 .content-single .entry-footnotes .footnotes p,
 .content-footnotes .footnotes p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 22px;
+  margin-bottom: 8px;
 }
 .content-single .entry-footnotes .footnotes p a.footnote-label,
 .content-footnotes .footnotes p a.footnote-label {
