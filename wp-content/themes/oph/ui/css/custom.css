@@ -376,8 +376,7 @@ button.button-view-list {
 }
 .content-single .entry-footnotes .footnotes p a.footnote-label,
 .content-footnotes .footnotes p a.footnote-label {
-  font-size: 85%;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 100%;
   margin-right: 4px;
   vertical-align: text-top;
@@ -1241,8 +1240,9 @@ span.checked-box:after {
   position: absolute;
 }
 /* Add arrows to footnotes */
-.footnote-label::before {
+/* .footnote-label::before {
   content: "\1F819";
   font-weight: bold;
   margin-right: 2px;
 }
+*/
