@@ -108,4 +108,4 @@ add_filter('xmlrpc_enabled', '__return_false');
 /**
  * Allow use of core custom fields alongside ACF.
  */
-add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+// add_filter('acf/settings/remove_wp_meta_box', '__return_false');
