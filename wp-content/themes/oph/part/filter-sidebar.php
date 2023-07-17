@@ -92,11 +92,11 @@ $return_url = explode("page", $return_url)[0];
 
 <div class="sidebar-filter">
 	<div class="sidebar-filter__main">
-		<div class="sidebar-filter-hide">
+	<!-- the hide button takes up too much height	<div class="sidebar-filter-hide">
 			<button class="sidebar-filter-hide-button">
 				<span class="sidebar-filter-hide-button-text">Hide Options</span> <span class="sidebar-filter-hide-icon"></span>
 			</button>
-		</div>
+		</div> -->
 		<form method="GET" class="sidebar-filter__content" action="<?php echo $return_url; ?>">
 			<div class="sidebar-filter__search">
 				<!-- search bar -->
@@ -240,6 +240,7 @@ $return_url = explode("page", $return_url)[0];
 						<?php elseif ($filter['filter'] == 'organization-name') : ?>
 							<!-- filter: organization name -->
 							<?php if ($organization_name) : ?>
+							<!-- removed to make more space	
 								<div id="filter-organization-name" class="selection-dropdown">
 									<div class="selection-prompt">
 										<span>Organization Name</span>
@@ -257,7 +258,7 @@ $return_url = explode("page", $return_url)[0];
 											?>
 										</div>
 									</div>
-								</div>
+								</div> --> 
 							<?php endif; ?>
 						<?php elseif ($filter['filter'] == 'year') : ?>
 							<!-- filter: year -->
