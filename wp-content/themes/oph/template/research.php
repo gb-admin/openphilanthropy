@@ -197,30 +197,24 @@ $research = new WP_Query($args);
 							$sortFocus = '';
 							if ($research_focus_area) {
 								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
+							        $focus_area = get_the_terms( $post->ID, 'focus-area' );
+                                                                $primary_term = 0;
+                                                                $primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true);
+                                                                // Make sure $primary_focus_area is not empty.
+                                                                $primay_focus_area = new stdClass();
 
-								$focus_only = array();
-								foreach ($research_focus_area as $area) {
-									$ancestors = get_ancestors($area->term_id, 'focus-area', 'taxonomy');
-									$depth = count($ancestors);
-									if ($depth == 1) {
-										$focus_only[] = $area;
-									} elseif ($depth == 0) {
-										$post_category = $area;
-									}
-								}
+                                                                $focus_only = array();
+                                                                foreach( $focus_area as $area ){
+                                                                        $focus_only[] = $area;
+                                                                }
+                                                                $primary_focus_area = $focus_only[0];
 
-								$post_focus = count($focus_only);
-								if ($post_focus == 1) {
-									$primary_focus_area = $focus_only[0];
-								} elseif ($post_focus > 1) {
-									foreach ($focus_only as $focus) {
-										if ($primary_term == $focus->term_id) {
-											$primary_focus_area = $focus;
-										}
-									}
-								} else {
-									$primary_focus_area = $post_category;
-								}
+                                                                foreach ( $focus_only as $focus ) {
+                                                                        if ( $primary_term == $focus->term_id) {
+                                                                                $primary_focus_area = $focus;
+                                                                        }
+                                                                }
+
 								$sortFocus = $primary_focus_area->name;
 							}
 

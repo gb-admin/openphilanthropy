@@ -36,8 +36,8 @@
 	$meta_query = array(
 		'relation' => 'and',
 		'order_clause' => array(
-      'key' => 'award_date',
-      'type' => 'date'
+	          'key' => 'award_date',
+      		  'type' => 'date'
 		)
 	);
 
@@ -238,34 +238,24 @@
 
 								$organization_name = get_the_terms( $post->ID, 'organization-name' );
 								$post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'lg' );
-								
+
 								$focus_area = get_the_terms( $post->ID, 'focus-area' ); 
+								$primary_term = 0;
 								$primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_focus-area', true); 
+								// Make sure $primary_focus_area is not empty.
+								$primay_focus_area = new stdClass();
 
 								$focus_only = array(); 
 								foreach( $focus_area as $area ){ 
-									$ancestors = get_ancestors($area->term_id, 'focus-area', 'taxonomy'); 
-									$depth = count($ancestors);	
-									if ( $depth == 1 ) { 
-										$focus_only[] = $area; 
-									} elseif ( $depth == 0 ) {
-										$post_category = $area; 
+									$focus_only[] = $area; 
+								} 
+								$primary_focus_area = $focus_only[0]; 
+
+								foreach ( $focus_only as $focus ) { 
+									if ( $primary_term == $focus->term_id) {
+										$primary_focus_area = $focus; 
 									}
-								} 
-
-								$post_focus = count($focus_only); 								
-								if ( $post_focus == 1 ) { 
-									$primary_focus_area = $focus_only[0]; 
-								} elseif ( $post_focus > 1 ) { 
-									foreach ( $focus_only as $focus ) { 
-										if ( $primary_term == $focus->term_id ) {
-											$primary_focus_area = $focus; 
-										} 
-									} 
-								} else { 
-									$primary_focus_area = $post_category; 
-								} 
-
+								}
 								if ( ! $post_thumbnail && ! is_wp_error( $primary_focus_area ) ) {
 									$post_thumbnail = get_field( 'category_tile_image', 'focus-area_' . $primary_focus_area->term_id )['sizes']['lg'];
 								}
@@ -309,13 +299,13 @@
 
 									<h5 class="block-feed-post__focus-area">
 										<?php 
-										if ( $primary_focus_area && ! is_wp_error( $primary_focus_area ) ) : ?>
+										if ( $primary_focus_area && !is_wp_error( $primary_focus_area ) ) : ?>
 											<?php
 												$name = $primary_focus_area->name;
 												$slug = $primary_focus_area->slug; 
 												$url = esc_url( add_query_arg( 'focus-area', $slug ) ); ?>
 
-												<a href="<?= $url ?>" class="focus-area-link"><?= $name ?></a>
+												<a href="<?php echo $url; ?>" class="focus-area-link"><?php echo $name; ?></a>
 										<?php endif; ?>
 									</h5>
 
@@ -365,7 +355,7 @@
 						</div>
 					</div>
 				</div>
-			<?php else : ?>
+			 <?php else : ?>
 				<h3 style="padding: 36px 0; text-align: center;">No posts found matching criteria.</h3>
 			<?php endif; ?>
 		</div>
