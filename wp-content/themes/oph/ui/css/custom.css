@@ -376,7 +376,7 @@ button.button-view-list {
 }
 .content-single .entry-footnotes .footnotes p a.footnote-label,
 .content-footnotes .footnotes p a.footnote-label {
-  font-weight: 700;
+  font-weight: 400;
   line-height: 100%;
   margin-right: 4px;
   vertical-align: text-top;
@@ -1246,3 +1246,14 @@ span.checked-box:after {
   margin-right: 2px;
 }
 */
+a.backlink-arrow {
+  color: #000;
+  text-decoration: none;
+  font-weight: 800;
+  transition: all 0.15s ease-out;
+  font-size: 14px;
+}
+
+a.backlink-arrow:hover {
+  color: #6e7ca0;
+}

@@ -2042,6 +2042,34 @@ jQuery(function ($) {
   });
 
   /**
+  * Add up arrows after footnotes.
+  */
+  var backlinks = document.querySelectorAll('.footnote-label');
+
+  if(backlinks != null) {
+    for (let i = 0; i < backlinks.length; i++) {
+      let link = document.createElement("a");
+      link.href = backlinks[i].href;
+      link.classList.add("backlink-arrow");
+      link.innerText="↑";
+      backlinks[i].parentNode.append(link);
+    }
+  }
+
+  var tableBacklinks = document.querySelectorAll('.footnote_backlink');
+  var text=document.querySelectorAll('.footnote_plugin_text');
+
+  if(tableBacklinks != null) {
+    for (let i = 0; i < tableBacklinks.length; i++) {
+      let link = document.createElement("a");
+      link.href = tableBacklinks[i].href;
+      link.classList.add("backlink-arrow");
+      link.innerText="↑";
+      text[i].parentNode.append(link);
+    }
+  }
+
+  /**
    * I'm pretty sure everything in this repo is made up, and the points 
    * don't matter. 
    * 
