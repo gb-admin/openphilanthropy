@@ -2051,7 +2051,7 @@ jQuery(function ($) {
       let link = document.createElement("a");
       link.href = backlinks[i].href;
       link.classList.add("backlink-arrow");
-      link.innerText="↑";
+      link.appendChild(document.createElement("img")).src="/wp-content/themes/oph/ui/img/corner-arrow.png";
       backlinks[i].parentNode.append(link);
     }
   }
@@ -2064,7 +2064,7 @@ jQuery(function ($) {
       let link = document.createElement("a");
       link.href = tableBacklinks[i].href;
       link.classList.add("backlink-arrow");
-      link.innerText="↑";
+      link.appendChild(document.createElement("img")).src="/wp-content/themes/oph/ui/img/corner-arrow.png";
       text[i].parentNode.append(link);
     }
   }

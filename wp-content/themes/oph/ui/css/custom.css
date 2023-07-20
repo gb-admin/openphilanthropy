@@ -1257,3 +1257,9 @@ a.backlink-arrow {
 a.backlink-arrow:hover {
   color: #6e7ca0;
 }
+
+a.backlink-arrow img {
+  width: 14px;
+  height: auto;
+  margin: 1px 2px;
+}
