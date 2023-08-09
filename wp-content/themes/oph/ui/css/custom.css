@@ -549,7 +549,7 @@ ul.block-feed-title-head li h6::after {
 }
 ul.block-feed-title-head li h6:hover::after,
 ul.block-feed-title-head li h6.sorting::after {
-  display: inline-block;
+  display: none;
 }
 ul.block-feed-title-head li h6.sorting.rev::after {
   transform: rotate(180deg);
