@@ -110,6 +110,11 @@
 				} elseif ( $value == 'high-to-low' ) {
 					$meta_key = 'grant_amount';
 					$orderby_query = 'meta_value_num';
+					$order_query = 'desc';
+				} elseif ( $value == 'low-to-high' ) {
+					$meta_key = 'grant_amount';
+					$orderby_query = 'meta_value_num';
+					$order_query = 'asc';
 				} elseif ( $value == 'recent' ) {
 					$meta_key = 'award_date';
 					$order_query = 'desc';

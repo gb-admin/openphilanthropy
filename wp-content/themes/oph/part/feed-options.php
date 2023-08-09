@@ -8,6 +8,7 @@ if (isset($args['post_type'])) {
 $sort_params = [
 	'a-z'              => 'A - Z',
 	'high-to-low'      => 'Highest to lowest',
+	'low-to-high'      => 'Lowest to highest',
 	'recent'           => 'Newest to oldest',
 	'oldest-to-newest' => 'Oldest to newest'
 ];
@@ -27,12 +28,17 @@ $sort_params = [
 				</button>
 
 				<ul class="dropdown-content">
-					<li>
-						<a href="<?php echo esc_url(add_query_arg('sort', 'a-z')); ?>#categories"><?= $sort_params['a-z']; ?></a>
-					</li>
+					<?php if (is_page_template('template/research.php')) : ?>
+						<li>
+							<a href="<?php echo esc_url(add_query_arg('sort', 'a-z')); ?>#categories"><?= $sort_params['a-z']; ?></a>
+						</li>
+					<?php endif; ?>
 					<?php if (is_page_template('template/grants.php')) : ?>
 						<li>
 							<a href="<?php echo esc_url(add_query_arg('sort', 'high-to-low')); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
+						</li>
+						<li>
+							<a href="<?php echo esc_url(add_query_arg('sort', 'low-to-high')); ?>#categories"><?= $sort_params['low-to-high']; ?></a>
 						</li>
 					<?php endif; ?>
 					<li>
