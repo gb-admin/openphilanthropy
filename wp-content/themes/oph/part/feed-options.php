@@ -28,11 +28,6 @@ $sort_params = [
 				</button>
 
 				<ul class="dropdown-content">
-					<?php if (is_page_template('template/research.php')) : ?>
-						<li>
-							<a href="<?php echo esc_url(add_query_arg('sort', 'a-z')); ?>#categories"><?= $sort_params['a-z']; ?></a>
-						</li>
-					<?php endif; ?>
 					<?php if (is_page_template('template/grants.php')) : ?>
 						<li>
 							<a href="<?php echo esc_url(add_query_arg('sort', 'high-to-low')); ?>#categories"><?= $sort_params['high-to-low']; ?></a>
