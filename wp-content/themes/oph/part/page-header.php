@@ -84,7 +84,7 @@
 					</div>
 				<?php } elseif ( isset($orgSite) ) {  ?> 
 					<div class="button-group">						
-						<a class="button" href="<?php echo $orgSite; ?>" target="_blank">Organization Site</a> 
+						<a class="button" href="<?php echo $orgSite; ?>" target="_blank">Visit Grantee Site</a> 
 					</div>
 				<?php } ?>
 			</div>
