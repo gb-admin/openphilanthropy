@@ -16,7 +16,19 @@
 
 	$team = new WP_Query( array(
 		'post_type' => 'team',
-		'posts_per_page' => -1
+		'posts_per_page' => -1,
+		'meta_query' => array(
+		  'relation' => 'OR',
+                  array(
+                    'key'     => 'teampage_exclusion',
+                    'compare' => 'NOT EXISTS',
+                  ),
+                  array(
+                    'key'     => 'teampage_exclusion',
+                    'value'   => '1',
+		    'compare' => '!=',
+                  ),
+		),
 	) );
 
 	// Clean up as to not affect other posts
