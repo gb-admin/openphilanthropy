@@ -1263,3 +1263,12 @@ a.backlink-arrow img {
   height: auto;
   margin: 1px 2px;
 }
+/* This is a hack becuase TOCs from unnumbered headings are generating repeat entires on desktop */
+.subtree + .subtree {
+  display: none;
+}
+
+.page-template-team a {
+  color: #445277;
+  text-decoration: underline;
+}
