@@ -1234,13 +1234,13 @@ jQuery(function ($) {
 
   // Create Table of Contents
   $(document).ready(function () {
-    var alpha, postNav, mobilePostNav, tocHeader, sources;
+    var alpha, postNav, postNavSingle,  mobilePostNav, tocHeader, sources;
 
     alpha = $(".content-single .entry-content").find("h2");
     postNav = $(".content-single .aside-post-navigation ul");
     mobilePostNav = $(".aside-post-navigation-mobile select");
     tocHeader = $(".content-single__aside > h3");
-
+    
     // log to the console for me
     function logme(data) {
       console.log(data);
@@ -1254,7 +1254,7 @@ jQuery(function ($) {
         .replace(/\s+/g, "-")
         .replace(/[^0-9a-z-]/gi, "");
       // logme("Anchor text: " + anchorsText); 
-      anchorsAway(item, anchorsText, type);
+      anchorsAway(item, "id-" + anchorsText, type);
     }
 
     // apply anchor links
@@ -1284,20 +1284,22 @@ jQuery(function ($) {
       treeGroup = content.split(" ");
       subTree = treeGroup[0];
       sliceTree = subTree.split("-");
-      // logme(sliceTree);
+       logme("sliceTree: " + sliceTree);
       // subLevel = subTree.slice(-1);
-      // logme('subLevel: ' + subLevel);
+       logme('subLevel: ' + subLevel);
       subLevel = sliceTree.slice(-1);
-      // logme("new subLevel: " + subLevel);
+       logme("new subLevel: " + subLevel);
       // surLevel = subTree.slice(0, -2);
-      // logme('surLevel: ' + surLevel);
+       logme('surLevel: ' + surLevel);
       surSlice = sliceTree.slice(0, -1);
       surLevel = surSlice.join("-");
-      // logme("new surLevel: " + surLevel);
+       logme("new surLevel: " + surLevel);
 
       // logme(subTree.length);
 
-      if (subLevel == "1") {
+      if (isNaN(subLevel)) {
+          genList(item, surLevel);
+      } else if (subLevel == "1") {
         if (sliceTree.length > 2) {
           genList(item, surLevel, true);
         } else {
@@ -1335,8 +1337,8 @@ jQuery(function ($) {
         // logme(lastItem);
       } else {
         lastItem = $(postNav).children("li").last();
-        // logme("lastItem no dig.");
-        // logme(lastItem);
+         logme("lastItem no dig.");
+         logme(lastItem);
         if (!lastItem.hasClass("tree")) {
           lastItem.addClass("tree");
         }
@@ -1421,15 +1423,10 @@ jQuery(function ($) {
       // logme(this);
 
       var beta = $(this).nextUntil(alpha, "h4");
-
-      $(beta).each(function () {
+     $(beta).each(function () {
         var val = $(this).text();
-
-        if (val.match(/^\d/)) {
-          anchorsMade(this, "sub-anchor");
-          logme(this);
-        }
-      });
+        anchorsMade(this, "sub-anchor");
+       });
     });
 
     // Hide Navigation title if there are not sub-headings
