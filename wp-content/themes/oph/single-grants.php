@@ -42,11 +42,15 @@ if (!$related_posts) {
 	$related_posts = [];
 }
 
+
 $related_posts_id = array(get_the_ID());
 
 if (!empty($related_posts)) {
 	foreach ($related_posts as $i) {
-		array_push($related_posts_id, $i->ID);
+		// Sometimes we have a two-dimensional array, we only want ints.
+		 if(is_numeric($i->ID)) {
+			array_push($related_posts_id, $i->ID);
+		 }
 	}
 
 	$related_posts_count = count($related_posts);
